@@ -69,6 +69,7 @@ export const zAppSchema = zCreateAppSchema.extend({
   slug: z.string().min(1, "Slug不能为空"),
   name: z.string().min(1, "名称不能为空"),
   description: z.string().min(1, "描述不能为空"),
+  descriptionZh: z.string().optional().nullable(),
   longDescription: z.string().optional().nullable(),
   type: zAppTypeEnum,
   icon: z.string().optional().nullable(),

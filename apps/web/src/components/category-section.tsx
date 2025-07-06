@@ -1,12 +1,13 @@
 "use client";
 
-import { AppGrid } from "@/components/web/app-grid";
-import { Container } from "@/components/web/container";
-import { SectionHeader } from "@/components/web/section-header";
 import { Alert, AlertDescription, AlertTitle } from "@repo/ui/components/ui/alert";
 import { Button } from "@repo/ui/components/ui/button";
 import { Skeleton } from "@repo/ui/components/ui/skeleton";
 import { AlertCircle, RefreshCw } from "lucide-react";
+
+import { AppGrid } from "@/components/web/app-grid";
+import { Container } from "@/components/web/container";
+import { SectionHeader } from "@/components/web/section-header";
 import { trpc } from "@/lib/trpc/client";
 
 interface CategorySectionProps {

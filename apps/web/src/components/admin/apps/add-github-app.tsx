@@ -1,12 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { toast } from "sonner";
-import { z } from "zod";
-
+import { Alert, AlertDescription } from "@repo/ui/components/ui/alert";
 import { Button } from "@repo/ui/components/ui/button";
 import {
   Dialog,
@@ -17,13 +12,18 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@repo/ui/components/ui/dialog";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "@repo/ui/components/ui/form";
 import { Input } from "@repo/ui/components/ui/input";
 import { Label } from "@repo/ui/components/ui/label";
-import { Form, FormControl, FormField, FormItem, FormMessage } from "@repo/ui/components/ui/form";
-import { Github, Loader2, AlertCircle } from "lucide-react";
-import { trpc } from "@/lib/trpc/client";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@repo/ui/components/ui/select";
-import { Alert, AlertDescription } from "@repo/ui/components/ui/alert";
+import { AlertCircle,Github, Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { z } from "zod";
+
+import { trpc } from "@/lib/trpc/client";
 
 const formSchema = z.object({
   gitHubURL: z.string().url("请输入有效的URL").startsWith("https://github.com/", "必须是GitHub仓库地址"),

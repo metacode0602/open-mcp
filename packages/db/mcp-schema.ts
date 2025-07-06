@@ -863,6 +863,20 @@ export const snapshotsRelations = relations(snapshots, ({ one }) => ({
   }),
 }));
 
+export const snapshotsWeeklyRelations = relations(snapshotsWeekly, ({ one }) => ({
+  repo: one(repos, {
+    fields: [snapshotsWeekly.repoId],
+    references: [repos.id],
+  }),
+}));
+
+export const snapshotsMonthlyRelations = relations(snapshotsMonthly, ({ one }) => ({
+  repo: one(repos, {
+    fields: [snapshotsMonthly.repoId],
+    references: [repos.id],
+  }),
+}));
+
 /**
  * github代码仓库表，用于存储github代码仓库的基本信息。
  */
@@ -929,6 +943,8 @@ export const repos = pgTable(
 export const reposRelations = relations(repos, ({ many, one }) => ({
   apps: many(apps),
   snapshots: many(snapshots),
+  snapshotsWeekly: many(snapshotsWeekly),
+  snapshotsMonthly: many(snapshotsMonthly),
   hallOfFameMember: many(hallOfFameToRepos),
 }));
 

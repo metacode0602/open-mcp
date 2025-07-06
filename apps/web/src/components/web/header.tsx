@@ -1,11 +1,11 @@
 "use client"
 
+import { Button } from "@repo/ui/components/ui/button"
 import { ShieldCheck, User } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
 import { ThemeToggle } from "@/components/theme-toggle"
-import { Button } from "@repo/ui/components/ui/button"
 import { Container } from "@/components/web/container"
 import { LogoIcon } from "@/components/web/logo-icon"
 import { useSession } from "@/hooks/auth-hooks"

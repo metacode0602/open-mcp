@@ -1,11 +1,5 @@
 "use client";
 
-import { ArrowLeft, Edit, Power, Tags } from "lucide-react";
-import Link from "next/link";
-import { useParams } from "next/navigation";
-import { useState } from "react";
-
-import { AdminPageHeader } from "@/components/admin/admin-page-header";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -26,7 +20,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@repo/ui/components/ui/card";
+import { ArrowLeft, Edit, Power, Tags } from "lucide-react";
+import Link from "next/link";
+import { useParams } from "next/navigation";
+import { useState } from "react";
 import { toast } from "sonner";
+
+import { AdminPageHeader } from "@/components/admin/admin-page-header";
 import { trpc } from "@/lib/trpc/client";
 
 export default function TagDetailPage() {

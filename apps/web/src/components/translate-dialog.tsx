@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { MarkdownReadonly } from '@repo/ui/components/markdown/markdown-readonly';
 import { Button } from '@repo/ui/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@repo/ui/components/ui/dialog';
 import { Loader2 } from 'lucide-react';
-import { MarkdownReadonly } from '@repo/ui/components/markdown/markdown-readonly';
-import { translateText } from '@/lib/utils/translation';
+import { useState } from 'react';
 import { toast } from "sonner";
+
+import { translateText } from '@/lib/utils/translation';
 
 interface TranslateDialogProps {
   content: string;

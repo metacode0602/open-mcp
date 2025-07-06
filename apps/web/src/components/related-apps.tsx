@@ -1,12 +1,12 @@
 "use client"
 
+import { McpApp } from "@repo/db/types";
+import { Button } from "@repo/ui/components/ui/button"
 import { ArrowRight } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
-import { Button } from "@repo/ui/components/ui/button"
 import { trpc } from "@/lib/trpc/client";
-import { McpApp } from "@repo/db/types";
 import { getAssetUrl } from "@/lib/utils"
 interface RelatedAppsProps {
   currentApp: McpApp

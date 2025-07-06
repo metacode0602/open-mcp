@@ -33,12 +33,23 @@ export const mcpRankingsRouter = router({
   // 获取今日排行
   getTodayRankingApps: publicProcedure
     .query(async () => {
-      const periodKey = formatPeriodKey('daily');
-      const ranking = await rankingsDataAccess.findOne({
+      const today = new Date();
+      const periodKey = formatPeriodKey('daily', today);
+
+      let ranking = await rankingsDataAccess.findOne({
         type: "daily",
         source: "github",
         periodKey,
       });
+
+      // 如果排行不存在，尝试从快照数据计算
+      if (!ranking) {
+        console.info("今日排行不存在，尝试从快照数据计算");
+        const calculatedRanking = await rankingsDataAccess.calculateDailyRankingFromSnapshots(today);
+        if (calculatedRanking) {
+          ranking = calculatedRanking;
+        }
+      }
 
       if (!ranking) {
         return [];
@@ -54,11 +65,20 @@ export const mcpRankingsRouter = router({
       yesterday.setDate(yesterday.getDate() - 1);
       const periodKey = formatPeriodKey('daily', yesterday);
 
-      const ranking = await rankingsDataAccess.findOne({
+      let ranking = await rankingsDataAccess.findOne({
         type: "daily",
         source: "github",
         periodKey,
       });
+
+      // 如果排行不存在，尝试从快照数据计算
+      if (!ranking) {
+        console.info("昨日排行不存在，尝试从快照数据计算");
+        const calculatedRanking = await rankingsDataAccess.calculateDailyRankingFromSnapshots(yesterday);
+        if (calculatedRanking) {
+          ranking = calculatedRanking;
+        }
+      }
 
       if (!ranking) {
         return [];
@@ -73,11 +93,20 @@ export const mcpRankingsRouter = router({
       const today = new Date();
       const periodKey = formatPeriodKey('weekly', today);
 
-      const ranking = await rankingsDataAccess.findOne({
+      let ranking = await rankingsDataAccess.findOne({
         type: "weekly",
         source: "github",
         periodKey,
       });
+
+      // 如果排行不存在，尝试从快照数据计算
+      if (!ranking) {
+        console.info("本周排行不存在，尝试从快照数据计算");
+        const calculatedRanking = await rankingsDataAccess.calculateWeeklyRankingFromSnapshots(today);
+        if (calculatedRanking) {
+          ranking = calculatedRanking;
+        }
+      }
 
       if (!ranking) {
         return [];
@@ -92,11 +121,20 @@ export const mcpRankingsRouter = router({
       const today = new Date();
       const periodKey = formatPeriodKey('monthly', today);
 
-      const ranking = await rankingsDataAccess.findOne({
+      let ranking = await rankingsDataAccess.findOne({
         type: "monthly",
         source: "github",
         periodKey,
       });
+
+      // 如果排行不存在，尝试从快照数据计算
+      if (!ranking) {
+        console.info("本月排行不存在，尝试从快照数据计算");
+        const calculatedRanking = await rankingsDataAccess.calculateMonthlyRankingFromSnapshots(today);
+        if (calculatedRanking) {
+          ranking = calculatedRanking;
+        }
+      }
 
       if (!ranking) {
         return [];
@@ -117,11 +155,40 @@ export const mcpRankingsRouter = router({
       const date = createDateFromParams(input.year, input.month, input.day);
       const periodKey = formatPeriodKey(input.type, date);
 
-      const ranking = await rankingsDataAccess.findOne({
+      let ranking = await rankingsDataAccess.findOne({
         type: input.type,
         source: "github",
         periodKey,
       });
+
+      // 如果排行不存在，尝试从快照数据计算
+      if (!ranking) {
+        console.info(`历史排行不存在，尝试从快照数据计算: ${input.type} ${periodKey}`);
+
+        switch (input.type) {
+          case 'daily':
+            const dailyRanking = await rankingsDataAccess.calculateDailyRankingFromSnapshots(date);
+            if (dailyRanking) {
+              ranking = dailyRanking;
+            }
+            break;
+          case 'weekly':
+            const weeklyRanking = await rankingsDataAccess.calculateWeeklyRankingFromSnapshots(date);
+            if (weeklyRanking) {
+              ranking = weeklyRanking;
+            }
+            break;
+          case 'monthly':
+            const monthlyRanking = await rankingsDataAccess.calculateMonthlyRankingFromSnapshots(date);
+            if (monthlyRanking) {
+              ranking = monthlyRanking;
+            }
+            break;
+          case 'yearly':
+            // 年排行暂时不支持从快照计算
+            break;
+        }
+      }
 
       if (!ranking) {
         return [];

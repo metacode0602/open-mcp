@@ -1,14 +1,7 @@
 "use client"
 
-import type React from "react"
-
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Bug, FileText, HelpCircle, Info, Lightbulb, Loader2, Sparkles, Upload, X } from "lucide-react"
-import { useState } from "react"
-import { useForm } from "react-hook-form"
-import type { z } from "zod"
-import Image from "next/image"
-
+import { type McpApp, zCreateSuggestionFormSchema } from "@repo/db/types"
 import { Button } from "@repo/ui/components/ui/button"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@repo/ui/components/ui/dialog"
 import {
@@ -23,10 +16,16 @@ import {
 import { Input } from "@repo/ui/components/ui/input"
 import { RadioGroup, RadioGroupItem } from "@repo/ui/components/ui/radio-group"
 import { Textarea } from "@repo/ui/components/ui/textarea"
-import { trpc } from "@/lib/trpc/client"
-import { type McpApp, zCreateSuggestionFormSchema } from "@repo/db/types"
+import { Bug, FileText, HelpCircle, Info, Lightbulb, Loader2, Sparkles, Upload, X } from "lucide-react"
+import Image from "next/image"
+import type React from "react"
+import { useState } from "react"
+import { useForm } from "react-hook-form"
 import { toast } from "sonner"
+import type { z } from "zod"
+
 import { AuthCheckWrapper } from "@/components/auth/auth-check-wrapper"
+import { trpc } from "@/lib/trpc/client"
 
 interface SuggestionDialogProps {
   app: McpApp

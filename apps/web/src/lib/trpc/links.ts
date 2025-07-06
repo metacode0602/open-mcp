@@ -1,6 +1,7 @@
 "use client";
 import { httpBatchLink, loggerLink } from "@trpc/client";
 import superjson from "superjson";
+
 import { authClient } from "@/lib/auth-client";
 
 /**

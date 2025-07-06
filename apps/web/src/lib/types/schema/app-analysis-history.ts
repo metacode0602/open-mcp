@@ -1,4 +1,5 @@
 import { z } from "zod";
+
 import { searchSchema } from "./common";
 
 // 应用分析历史记录创建

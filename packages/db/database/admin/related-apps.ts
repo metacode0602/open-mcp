@@ -63,7 +63,7 @@ export const relatedAppDataAccess = {
       limit,
       offset,
       with: {
-        app: true,
+        // app: true,
         relatedApp: true,
       },
     });

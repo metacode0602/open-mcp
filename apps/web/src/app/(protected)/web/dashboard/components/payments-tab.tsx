@@ -1,12 +1,13 @@
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@repo/ui/components/ui/card";
 import { Badge } from "@repo/ui/components/ui/badge";
 import { Button } from "@repo/ui/components/ui/button";
-import { CreditCard } from "lucide-react";
-import { trpc } from "@/lib/trpc/client";
-import { PaymentStatusBadge } from "@/components/payment-status-badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@repo/ui/components/ui/card";
 import { Skeleton } from "@repo/ui/components/ui/skeleton";
+import { CreditCard } from "lucide-react";
+
+import { PaymentStatusBadge } from "@/components/payment-status-badge";
+import { trpc } from "@/lib/trpc/client";
 
 export function PaymentsTab() {
   const { data: payments, isLoading } = trpc.mcpDashboard.getPayments.useQuery();

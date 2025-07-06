@@ -1,5 +1,5 @@
-import type { ComponentProps } from "react"
 import { cn } from "@repo/ui/lib/utils"
+import type { ComponentProps } from "react"
 
 export const Ping = ({ className, ...props }: ComponentProps<"div">) => {
   return (

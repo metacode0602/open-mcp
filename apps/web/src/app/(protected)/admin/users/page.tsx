@@ -1,19 +1,6 @@
 "use client"
 
-import {
-  Filter,
-  Mail,
-  MoreHorizontal,
-  Plus,
-  Search,
-  Shield,
-  User,
-} from "lucide-react"
-import Link from "next/link"
-import { useState } from "react"
-
-import { AdminPageHeader } from "@/components/admin/admin-page-header"
-import { AdminTablePagination } from "@/components/admin/admin-table-pagination"
+import { UserRole } from "@repo/db/types"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -43,6 +30,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@repo/ui/components/ui/select"
+import { Skeleton } from "@repo/ui/components/ui/skeleton"
 import {
   Table,
   TableBody,
@@ -51,10 +39,22 @@ import {
   TableHeader,
   TableRow,
 } from "@repo/ui/components/ui/table"
-import { Skeleton } from "@repo/ui/components/ui/skeleton"
+import {
+  Filter,
+  Mail,
+  MoreHorizontal,
+  Plus,
+  Search,
+  Shield,
+  User,
+} from "lucide-react"
+import Link from "next/link"
+import { useState } from "react"
 import { toast } from "sonner"
+
+import { AdminPageHeader } from "@/components/admin/admin-page-header"
+import { AdminTablePagination } from "@/components/admin/admin-table-pagination"
 import { trpc } from "@/lib/trpc/client"
-import { UserRole } from "@repo/db/types"
 
 export default function AdminUsersPage() {
   const [searchQuery, setSearchQuery] = useState("")

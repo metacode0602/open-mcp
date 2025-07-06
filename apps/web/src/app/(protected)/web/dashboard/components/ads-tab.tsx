@@ -1,14 +1,15 @@
 "use client";
 
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@repo/ui/components/ui/card";
 import { Badge } from "@repo/ui/components/ui/badge";
 import { Button } from "@repo/ui/components/ui/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@repo/ui/components/ui/card";
+import { Progress } from "@repo/ui/components/ui/progress";
+import { Skeleton } from "@repo/ui/components/ui/skeleton";
 import { AlertCircle, ArrowRight, BarChart, Calendar, Plus, Settings } from "lucide-react";
 import Link from "next/link";
-import { trpc } from "@/lib/trpc/client";
-import { Progress } from "@repo/ui/components/ui/progress";
+
 import { AdStatusBadge } from "@/components/ad-status-badge";
-import { Skeleton } from "@repo/ui/components/ui/skeleton";
+import { trpc } from "@/lib/trpc/client";
 
 export function AdsTab() {
   const { data: ads, isLoading } = trpc.mcpDashboard.getAds.useQuery();

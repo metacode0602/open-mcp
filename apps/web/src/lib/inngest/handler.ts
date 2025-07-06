@@ -1,8 +1,8 @@
 
-import { appAnalysisHistoryDataAccess, rankingsDataAccess, appSubmissionData } from '@repo/db/database/admin';
+import { slugifyText } from '@repo/db';
+import { appAnalysisHistoryDataAccess, appSubmissionData,rankingsDataAccess } from '@repo/db/database/admin';
 import { CreateAppSubmission } from '@repo/db/types';
 import { GithubRepoEndEvent, inngest } from '@repo/trpc';
-import { slugifyText } from '@repo/db';
 
 // 添加 sleep 工具函数
 const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));

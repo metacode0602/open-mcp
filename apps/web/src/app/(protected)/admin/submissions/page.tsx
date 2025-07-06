@@ -1,7 +1,6 @@
 
-import { SubmissionsList } from "@/components/admin/submissions/submissions-list";
-
 import { AdminPageHeader } from "@/components/admin/admin-page-header";
+import { SubmissionsList } from "@/components/admin/submissions/submissions-list";
 export default function SubmissionsPage() {
 	return (
 		<div className="space-y-6">

@@ -1,16 +1,17 @@
 "use client";
 
-import { use, useState } from "react";
-import { Container } from "@/components/web/container";
-import { PageHeader } from "@/components/web/page-header";
-import { AppGrid } from "@/components/web/app-grid";
-import { LoadMoreButton } from "@/components/web/load-more-button";
-import { SearchBar } from "@/components/search-bar";
-import { trpc } from "@/lib/trpc/client";
-import { Skeleton } from "@repo/ui/components/ui/skeleton";
 import { Alert, AlertDescription, AlertTitle } from "@repo/ui/components/ui/alert";
-import { AlertCircle, RefreshCw } from "lucide-react";
 import { Button } from "@repo/ui/components/ui/button";
+import { Skeleton } from "@repo/ui/components/ui/skeleton";
+import { AlertCircle, RefreshCw } from "lucide-react";
+import { use, useState } from "react";
+
+import { SearchBar } from "@/components/search-bar";
+import { AppGrid } from "@/components/web/app-grid";
+import { Container } from "@/components/web/container";
+import { LoadMoreButton } from "@/components/web/load-more-button";
+import { PageHeader } from "@/components/web/page-header";
+import { trpc } from "@/lib/trpc/client";
 
 export default function TagPage({ params }: { params: Promise<{ tag: string }> }) {
   const { tag } = use(params);

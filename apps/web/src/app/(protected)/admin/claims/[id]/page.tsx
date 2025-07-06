@@ -1,11 +1,5 @@
 "use client";
 
-import { ArrowLeft, CheckCircle, XCircle } from "lucide-react";
-import Link from "next/link";
-import { useParams } from "next/navigation";
-
-import { AdminPageHeader } from "@/components/admin/admin-page-header";
-import { trpc } from "@/lib/trpc/client";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -27,6 +21,12 @@ import {
   CardTitle,
 } from "@repo/ui/components/ui/card";
 import { Skeleton } from "@repo/ui/components/ui/skeleton";
+import { ArrowLeft, CheckCircle, XCircle } from "lucide-react";
+import Link from "next/link";
+import { useParams } from "next/navigation";
+
+import { AdminPageHeader } from "@/components/admin/admin-page-header";
+import { trpc } from "@/lib/trpc/client";
 import { getAssetUrl } from "@/lib/utils";
 
 export default function ClaimDetailPage() {

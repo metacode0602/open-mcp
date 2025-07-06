@@ -1,0 +1,78 @@
+{
+  "event_type": "repo_updated",
+  "timestamp": "2025-07-05T04:56:55.497Z",
+  "data": {
+    "id": "J9igqCa6SgcVptH4Cq_Pu",
+    "full_name": "ibelick/zola",
+    "name": "zola",
+    "owner": "ibelick",
+    "owner_id": 14288396,
+    "description": "Open chat interface for all your models.",
+    "description_zh": "为所有模型打开聊天界面。",
+    "homepage": "https://zola.chat",
+    "stars": 914,
+    "forks": 157,
+    "contributor_count": 13,
+    "mentionable_users_count": 11,
+    "watchers_count": 10,
+    "pull_requests_count": 187,
+    "releases_count": 0,
+    "commit_count": 170,
+    "topics": [
+      "ai",
+      "chat",
+      "multi-model",
+      "nextjs",
+      "open-source",
+      "shadcn-ui",
+      "supabase",
+      "typescript",
+      "prompt-kit"
+    ],
+    "languages": [
+      {
+        "name": "TypeScript"
+      },
+      {
+        "name": "CSS"
+      },
+      {
+        "name": "Dockerfile"
+      },
+      {
+        "name": "JavaScript"
+      }
+    ],
+    "license_spdx_id": "Apache-2.0",
+    "default_branch": "main",
+    "created_at": "2025-04-02T07:57:31.000Z",
+    "pushed_at": "2025-07-01T16:48:10.000Z",
+    "last_commit": "2025-07-01T16:48:08.000Z",
+    "added_at": "2025-06-29T02:41:46.482Z",
+    "archived": false,
+    "icon_url": "https://zenly.oss-cn-hangzhou.aliyuncs.com/mcp/repos/ibelick/zola/icon/1751640151819.png",
+    "open_graph_image_url": "https://opengraph.githubassets.com/c3c8ccfe152fb118c65568bb2a0e8ed7e2135cac57e0e516e8bb042d7c67ed03/ibelick/zola",
+    "open_graph_image_oss_url": "https://zenly.oss-cn-hangzhou.aliyuncs.com/mcp/repos/ibelick/zola/og-image/1751640177699.png",
+    "uses_custom_open_graph_image": false,
+    "readme_content": "# Zola\n\n[zola.chat](https://zola.chat)\n\n**Zola** is the open-source chat interface for all your models.\n\n![zola cover](https://zenly.oss-cn-hangzhou.aliyuncs.com/mcp/repos/ibelick/zola/readme-images/1751640148581.jpg)\n\n## Features\n\n- Multi-model support: OpenAI, Mistral, Claude, Gemini, Ollama (local models)\n- Bring your own API key (BYOK) support via OpenRouter\n- File uploads\n- Clean, responsive UI with light/dark themes\n- Built with Tailwind CSS, shadcn/ui, and prompt-kit\n- Open-source and self-hostable\n- Customizable: user system prompt, multiple layout options\n- Local AI with Ollama: Run models locally with automatic model detection\n- Full MCP support (wip)\n\n## Quick Start\n\n### Option 1: With OpenAI (Cloud)\n\n```bash\ngit clone https://github.com/ibelick/zola.git\ncd zola\nnpm install\necho \"OPENAI_API_KEY=your-key\" > .env.local\nnpm run dev\n```\n\n### Option 2: With Ollama (Local)\n\n```bash\n# Install and start Ollama\ncurl -fsSL https://ollama.ai/install.sh | sh\nollama pull llama3.2  # or any model you prefer\n\n# Clone and run Zola\ngit clone https://github.com/ibelick/zola.git\ncd zola\nnpm install\nnpm run dev\n```\n\nZola will automatically detect your local Ollama models!\n\n### Option 3: Docker with Ollama\n\n```bash\ngit clone https://github.com/ibelick/zola.git\ncd zola\ndocker-compose -f docker-compose.ollama.yml up\n```\n\n[![Deploy with Vercel](https://zenly.oss-cn-hangzhou.aliyuncs.com/mcp/repos/ibelick/zola/readme-images/1751640150361.svg)](https://vercel.com/new/clone?repository-url=https://github.com/ibelick/zola)\n\nTo unlock features like auth, file uploads, see [INSTALL.md](https://github.com/ibelick/zola/blob/main/INSTALL.md).\n\n## Built with\n\n- [prompt-kit](https://prompt-kit.com/) — AI components\n- [shadcn/ui](https://ui.shadcn.com) — core components\n- [motion-primitives](https://motion-primitives.com) — animated components\n- [vercel ai sdk](https://vercel.com/blog/introducing-the-vercel-ai-sdk) — model integration, AI features\n- [supabase](https://supabase.com) — auth and storage\n\n## Sponsors\n\n<a href=\"https://vercel.com/oss\">\n  <img alt=\"Vercel OSS Program\" src=\"https://zenly.oss-cn-hangzhou.aliyuncs.com/mcp/repos/ibelick/zola/readme-images/1751640151515.svg\" />\n</a>\n\n## License\n\nApache License 2.0\n\n## Notes\n\nThis is a beta release. The codebase is evolving and may change.\n",
+    "readme_content_zh": "# Zola\n\n[zola.chat](https://zola.chat)\n\n**Zola** 是适用于所有模型的开放源代码聊天界面。\n\n![zola cover](https://zenly.oss-cn-hangzhou.aliyuncs.com/mcp/repos/ibelick/zola/readme-images/1751640148581.jpg)\n\n## 功能\n\n- 支持多模型：OpenAI、Mistral、Claude、Gemini、Ollama（本地模型）\n- 通过 OpenRouter 支持自带 API 密钥（BYOK）\n- 文件上传\n- 简洁响应式 UI，支持亮色/暗色主题\n- 基于 Tailwind CSS、shadcn/ui 和 prompt-kit 构建\n- 开源且可自托管\n- 可定制：用户系统提示、多种布局选项\n- 本地 AI（Ollama）：自动检测模型，本地运行模型\n- 完整 MCP 支持（wip）\n\n## 快速上手\n\n### 选项 1：使用 OpenAI（云端）\n\n```bash\ngit clone https://github.com/ibelick/zola.git\ncd zola\nnpm install\necho \"OPENAI_API_KEY=your-key\" > .env.local\nnpm run dev\n```\n\n### 选项 2：使用 Ollama（本地）\n\n```bash\n# 安装并启动 Ollama\ncurl -fsSL https://ollama.ai/install.sh | sh\nollama pull llama3.2  # 或您喜欢的任何模型\n\n# 克隆并运行 Zola\ngit clone https://github.com/ibelick/zola.git\ncd zola\nnpm install\nnpm run dev\n```\n\nZola 将自动检测您的本地 Ollama 模型！\n\n### 选项 3：使用 Ollama 的 Docker\n\n```bash\ngit clone https://github.com/ibelick/zola.git\ncd zola\ndocker-compose -f docker-compose.ollama.yml up\n```\n\n[![使用 Vercel 部署](https://zenly.oss-cn-hangzhou.aliyuncs.com/mcp/repos/ibelick/zola/readme-images/1751640150361.svg)](https://vercel.com/new/clone?repository-url=https://github.com/ibelick/zola)\n\n要解锁认证、文件上传等功能，请参阅 [INSTALL.md](https://github.com/ibelick/zola/blob/main/INSTALL.md)。\n\n## 技术栈\n\n- [prompt-kit](https://prompt-kit.com/) — AI 组件\n- [shadcn/ui](https://ui.shadcn.com) — 核心组件\n- [motion-primitives](https://motion-primitives.com) — 动画组件\n- [vercel ai sdk](https://vercel.com/blog/introducing-the-vercel-ai-sdk) — 模型集成、AI 功能\n- [supabase](https://supabase.com) — 认证和存储\n\n## 赞助商\n\n<a href=\"https://vercel.com/oss\">\n  <img alt=\"Vercel OSS Program\" src=\"https://zenly.oss-cn-hangzhou.aliyuncs.com/mcp/repos/ibelick/zola/readme-images/1751640151515.svg\" />\n</a>\n\n## 许可证\n\nApache License 2.0\n\n## 注意事项\n\n这是一个测试版本。代码库仍在发展中，可能发生变化。",
+    "latest_release_name": "",
+    "latest_release_tag_name": "",
+    "latest_release_url": "",
+    "latest_release_description": "",
+    "latest_release_description_zh": null,
+    "processing_status": {
+      "icon_processed": false,
+      "description_translated": false,
+      "readme_translated": false,
+      "og_image_processed": false,
+      "release_note_translated": false
+    },
+    "meta": {
+      "task_name": "update-github-data",
+      "processed_at": "2025-07-05T04:56:55.497Z",
+      "processing_time_ms": 4508,
+      "success": true
+    }
+  }
+}

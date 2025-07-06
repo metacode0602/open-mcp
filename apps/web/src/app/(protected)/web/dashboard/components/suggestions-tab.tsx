@@ -1,15 +1,16 @@
 "use client";
 
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@repo/ui/components/ui/card";
 import { Badge } from "@repo/ui/components/ui/badge";
 import { Button } from "@repo/ui/components/ui/button";
-import { ArrowRight, Lightbulb } from "lucide-react";
-import Link from "next/link";
-import { trpc } from "@/lib/trpc/client";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@repo/ui/components/ui/card";
 import { Skeleton } from "@repo/ui/components/ui/skeleton";
-import { DetailDialog } from "@/components/detail-dialog";
-import { useState } from "react";
+import { ArrowRight, Lightbulb } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+
+import { DetailDialog } from "@/components/detail-dialog";
+import { trpc } from "@/lib/trpc/client";
 import { getAssetUrl } from "@/lib/utils";
 
 export function SuggestionsTab() {

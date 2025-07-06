@@ -1,15 +1,15 @@
 "use client"
 
-import { Suspense } from "react"
-import { useEffect, useState } from "react"
-import Link from "next/link"
-import { useSearchParams } from "next/navigation"
-import { AlertCircle, CheckCircle2, Loader2 } from "lucide-react"
-
-import { trpc } from "@/lib/trpc/client"
 import { Alert, AlertDescription, AlertTitle } from "@repo/ui/components/ui/alert"
 import { Button } from "@repo/ui/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@repo/ui/components/ui/card"
+import { AlertCircle, CheckCircle2, Loader2 } from "lucide-react"
+import Link from "next/link"
+import { useSearchParams } from "next/navigation"
+import { Suspense } from "react"
+import { useEffect, useState } from "react"
+
+import { trpc } from "@/lib/trpc/client"
 
 function UnsubscribeContent() {
   const searchParams = useSearchParams()

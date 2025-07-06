@@ -1,7 +1,6 @@
 "use client"
 
-import { Row } from "@tanstack/react-table"
-import { useRouter } from "next/navigation"
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@repo/ui/components/ui/alert-dialog"
 import { Button } from "@repo/ui/components/ui/button"
 import {
   DropdownMenu,
@@ -10,12 +9,15 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@repo/ui/components/ui/dropdown-menu"
-import { toast } from "sonner"
-import { MoreHorizontal, Pencil, Trash, Eye } from "lucide-react"
+import { Row } from "@tanstack/react-table"
+import { Eye,MoreHorizontal, Pencil, Trash } from "lucide-react"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
-import { EditRankingDialog } from "./edit-ranking-dialog"
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@repo/ui/components/ui/alert-dialog"
+import { toast } from "sonner"
+
 import { trpc } from "@/lib/trpc/client"
+
+import { EditRankingDialog } from "./edit-ranking-dialog"
 
 interface Ranking {
   id: string

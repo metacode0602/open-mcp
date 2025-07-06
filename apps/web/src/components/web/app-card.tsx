@@ -1,12 +1,13 @@
 "use client"
 
-import Image from "next/image"
-import Link from "next/link"
-
+import type { McpApp } from "@repo/db/types"
 import { Badge } from "@repo/ui/components/ui/badge"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@repo/ui/components/ui/card"
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@repo/ui/components/ui/hover-card"
-import type { McpApp } from "@repo/db/types"
+import { Eye, GitFork, Star } from "lucide-react"
+import Image from "next/image"
+import Link from "next/link"
+
 import { formatDate } from "@/lib/utils"
 import { getAssetUrl } from "@/lib/utils"
 
@@ -53,10 +54,10 @@ export function AppCard({ app, selectedTag, onTagClick }: AppCardProps) {
         <CardContent className="flex-1 p-4 pt-0">
           <HoverCard>
             <HoverCardTrigger asChild>
-              <CardDescription className="line-clamp-2 cursor-pointer">{app.description}</CardDescription>
+              <CardDescription className="line-clamp-2 cursor-pointer">{app.descriptionZh || app.description}</CardDescription>
             </HoverCardTrigger>
             <HoverCardContent className="w-80">
-              <div className="text-sm text-muted-foreground">{app.description}</div>
+              <div className="text-sm text-muted-foreground">{app.descriptionZh || app.description}</div>
             </HoverCardContent>
           </HoverCard>
           <div className="flex-wrap gap-1 mt-3">

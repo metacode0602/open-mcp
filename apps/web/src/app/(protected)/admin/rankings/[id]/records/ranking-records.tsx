@@ -1,18 +1,20 @@
 "use client"
-import { useEffect, useState } from "react"
-import Link from "next/link"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@repo/ui/components/ui/table"
-import { Button } from "@repo/ui/components/ui/button"
 import { Badge } from "@repo/ui/components/ui/badge"
-import { Input } from "@repo/ui/components/ui/input"
+import { Button } from "@repo/ui/components/ui/button"
 import { Checkbox } from "@repo/ui/components/ui/checkbox"
-import { ArrowLeft, Download, Search, Edit, Trash2, Plus } from "lucide-react"
+import { Input } from "@repo/ui/components/ui/input"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@repo/ui/components/ui/table"
 import { format } from "date-fns"
-import { EditRecordDialog } from "./components/edit-record-dialog"
-import { DeleteRecordDialog } from "./components/delete-record-dialog"
-import { AddRecordsDialog } from "./components/add-records-dialog"
-import { trpc } from "@/lib/trpc/client"
+import { ArrowLeft, Download, Edit, Plus,Search, Trash2 } from "lucide-react"
+import Link from "next/link"
+import { useEffect, useState } from "react"
 import { toast } from "sonner"
+
+import { trpc } from "@/lib/trpc/client"
+
+import { AddRecordsDialog } from "./components/add-records-dialog"
+import { DeleteRecordDialog } from "./components/delete-record-dialog"
+import { EditRecordDialog } from "./components/edit-record-dialog"
 
 interface RankingRecord {
   id: string

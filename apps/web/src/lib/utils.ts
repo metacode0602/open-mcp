@@ -30,8 +30,11 @@ export const formatDate = (dateString?: string | Date | null) => {
 
 export const getAssetUrl = (assetId?: string | null) => {
   if (assetId) {
-    return `/api/assets/${assetId}`;
-
+    if (assetId.startsWith("http")) {
+      return assetId;
+    } else {
+      return `/api/assets/${assetId}`;
+    }
   }
   return "/placeholder.svg";
 }

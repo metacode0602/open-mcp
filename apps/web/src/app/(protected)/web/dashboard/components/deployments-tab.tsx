@@ -1,11 +1,12 @@
 "use client";
 
-import { Card, CardContent, CardFooter, CardHeader } from "@repo/ui/components/ui/card";
 import { Button } from "@repo/ui/components/ui/button";
+import { Card, CardContent, CardFooter, CardHeader } from "@repo/ui/components/ui/card";
+import { Skeleton } from "@repo/ui/components/ui/skeleton";
 import { Server } from "lucide-react";
 import Link from "next/link";
+
 import { trpc } from "@/lib/trpc/client";
-import { Skeleton } from "@repo/ui/components/ui/skeleton";
 
 export function DeploymentsTab() {
   const { data: services, isLoading } = trpc.mcpDashboard.getDeployedServices.useQuery();

@@ -1,6 +1,6 @@
-import { ColumnDef } from "@tanstack/react-table";
+import { App, AppStatus, AppType } from "@repo/db/types";
+import { Badge } from "@repo/ui/components/ui/badge";
 import { Button } from "@repo/ui/components/ui/button";
-import { ArrowUpDown, Eye, MoreHorizontal, Pencil } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,14 +9,15 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@repo/ui/components/ui/dropdown-menu";
-import { Badge } from "@repo/ui/components/ui/badge";
-import Link from "next/link";
-import { App, AppStatus, AppType } from "@repo/db/types";
-import { getAssetUrl } from "@/lib/utils";
-import { Package, Laptop, Server, BrainCircuit, CheckCircle2, XCircle, Clock, Archive } from "lucide-react";
-import { toast } from "sonner";
-import { trpc } from "@/lib/trpc/client";
+import { ColumnDef } from "@tanstack/react-table";
 import { TRPCClientErrorLike } from '@trpc/client';
+import { ArrowUpDown, Eye, MoreHorizontal, Pencil } from "lucide-react";
+import { Archive,BrainCircuit, CheckCircle2, Clock, Laptop, Package, Server, XCircle } from "lucide-react";
+import Link from "next/link";
+import { toast } from "sonner";
+
+import { trpc } from "@/lib/trpc/client";
+import { getAssetUrl } from "@/lib/utils";
 
 export const columns: ColumnDef<App>[] = [
   {

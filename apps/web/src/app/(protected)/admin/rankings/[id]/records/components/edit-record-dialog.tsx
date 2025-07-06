@@ -1,5 +1,6 @@
 "use client"
-import { useState } from "react"
+import { RankingRecord } from "@repo/db/types"
+import { Button } from "@repo/ui/components/ui/button"
 import {
   Dialog,
   DialogContent,
@@ -8,12 +9,12 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@repo/ui/components/ui/dialog"
-import { Button } from "@repo/ui/components/ui/button"
 import { Input } from "@repo/ui/components/ui/input"
 import { Label } from "@repo/ui/components/ui/label"
-import { trpc } from "@/lib/trpc/client"
-import { RankingRecord } from "@repo/db/types"
 import { Loader2 } from "lucide-react"
+import { useState } from "react"
+
+import { trpc } from "@/lib/trpc/client"
 
 interface EditRecordDialogProps {
   open: boolean

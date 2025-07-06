@@ -1,12 +1,14 @@
 "use client"
 
-import { ColumnDef } from "@tanstack/react-table"
+import { Ranking } from "@repo/db/types"
 import { Badge } from "@repo/ui/components/ui/badge"
-import { DataTableColumnHeader } from "@/components/admin/data-table-column-header"
-import { DataTableRowActions } from "./data-table-row-actions"
+import { ColumnDef } from "@tanstack/react-table"
 import { formatDistanceToNow } from "date-fns"
 import { zhCN } from "date-fns/locale"
-import { Ranking } from "@repo/db/types"
+
+import { DataTableColumnHeader } from "@/components/admin/data-table-column-header"
+
+import { DataTableRowActions } from "./data-table-row-actions"
 
 export const columns: ColumnDef<Ranking>[] = [
   {

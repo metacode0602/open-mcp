@@ -1,10 +1,5 @@
 "use client";
 
-import { ArrowLeft, Edit, FolderTree, Power, Trash2 } from "lucide-react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-
-import { AdminPageHeader } from "@/components/admin/admin-page-header";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -26,9 +21,14 @@ import {
   CardTitle,
 } from "@repo/ui/components/ui/card";
 import { Skeleton } from "@repo/ui/components/ui/skeleton";
-import { toast } from "sonner";
-import { trpc } from "@/lib/trpc/client";
+import { ArrowLeft, Edit, FolderTree, Power, Trash2 } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { use } from "react";
+import { toast } from "sonner";
+
+import { AdminPageHeader } from "@/components/admin/admin-page-header";
+import { trpc } from "@/lib/trpc/client";
 
 export default function CategoryDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const router = useRouter();

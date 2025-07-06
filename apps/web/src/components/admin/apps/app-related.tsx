@@ -1,5 +1,6 @@
 "use client";
 
+import { App, RelatedApp } from "@repo/db/types";
 import { Badge } from "@repo/ui/components/ui/badge";
 import { Button } from "@repo/ui/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@repo/ui/components/ui/card";
@@ -7,12 +8,12 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Input } from "@repo/ui/components/ui/input";
 import { Label } from "@repo/ui/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@repo/ui/components/ui/select";
-import { trpc } from "@/lib/trpc/client";
 import { Link2, Plus, Search, Star, Trash2 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
+
+import { trpc } from "@/lib/trpc/client";
 import { getAssetUrl } from "@/lib/utils";
-import { App, RelatedApp } from "@repo/db/types";
 
 interface AppRelatedProps {
   appId: string;

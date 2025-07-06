@@ -1,10 +1,10 @@
-// const isProd = process.env.NODE_ENV === "production";
+const isProd = process.env.NODE_ENV === "production";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "standalone",
-  reactStrictMode: true,
-  // assetPrefix: isProd ? "https://zenly.oss-cn-hangzhou.aliyuncs.com/mcp" : "",
+  reactStrictMode: false,
+  assetPrefix: isProd ? "https://zenly.oss-cn-hangzhou.aliyuncs.com/mcp" : "",
   images: {
     remotePatterns: [
       {
@@ -25,17 +25,11 @@ const nextConfig = {
       },
       {
         protocol: "http",
-        hostname: "localhost",
-      },
+        hostname: "localhost"
+      }
     ],
   },
-  transpilePackages: [
-    "@repo/ui",
-    "@repo/db",
-    "@repo/email",
-    "@repo/github",
-    "@repo/trpc",
-  ],
-};
+  transpilePackages: ["@repo/ui", "@repo/db", "@repo/email", "@repo/github", "@repo/trpc"],
+}
 
-export default nextConfig;
+export default nextConfig

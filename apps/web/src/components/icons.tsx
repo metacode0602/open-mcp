@@ -1,6 +1,6 @@
+import { Tag } from "lucide-react";
 import type { SVGProps } from "react"
 import React from "react";
-import { Tag } from "lucide-react";
 
 import { SvgSprite } from "@/components/svg-sprite";
 

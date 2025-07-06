@@ -1,23 +1,24 @@
 "use client"
 
+import { McpApp } from "@repo/db/types"
 import { Badge } from "@repo/ui/components/ui/badge"
 import { Button } from "@repo/ui/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@repo/ui/components/ui/card"
+import { AnimatePresence,motion } from "framer-motion"
 import { ArrowRight, ChevronLeft, ChevronRight, Star } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { useState, useCallback, useEffect } from "react"
+import { useCallback, useEffect,useState } from "react"
+
 import { trpc } from "@/lib/trpc/client"
-import { McpApp } from "@repo/db/types"
 import { getAssetUrl } from "@/lib/utils"
-import { motion, AnimatePresence } from "framer-motion"
 
 interface RecommendedAppsProps {
   currentApp: McpApp
   limit?: number
 }
 
-const useCarousel = (items: McpApp[], itemsPerPage: number) => {
+const useCarousel = (items: any[], itemsPerPage: number) => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const totalPages = Math.ceil(items.length / itemsPerPage)
 
@@ -71,7 +72,7 @@ export function RecommendedApps({ currentApp, limit = 6 }: RecommendedAppsProps)
     appId: currentApp.id,
   })
 
-  const { currentIndex, totalPages, handlePrevious, handleNext, visibleItems } = useCarousel(recommendedApps as unknown as McpApp[], 3)
+  const { currentIndex, totalPages, handlePrevious, handleNext, visibleItems } = useCarousel(recommendedApps, 3)
 
   if (isLoading) {
     return (

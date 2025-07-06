@@ -3,10 +3,11 @@ import { Avatar, AvatarFallback, AvatarImage } from "@repo/ui/components/ui/avat
 import { Badge } from "@repo/ui/components/ui/badge";
 import { Button } from "@repo/ui/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@repo/ui/components/ui/card";
+import { CheckCircle, ExternalLink, XCircle } from "lucide-react";
 import { toast } from "sonner";
+
 import { trpc } from "@/lib/trpc/client";
 import { formatDate } from "@/lib/utils";
-import { CheckCircle, ExternalLink, XCircle } from "lucide-react";
 
 interface AppOwnershipProps {
   appId: string;

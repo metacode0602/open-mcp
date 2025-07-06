@@ -1,10 +1,8 @@
 "use client"
 
-import { useState } from "react"
+import { Ranking } from "@repo/db/types"
 import { Button } from "@repo/ui/components/ui/button"
-import { Plus, Search, RefreshCw } from "lucide-react"
 import { Input } from "@repo/ui/components/ui/input"
-import { Skeleton } from "@repo/ui/components/ui/skeleton"
 import {
   Select,
   SelectContent,
@@ -12,11 +10,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@repo/ui/components/ui/select"
+import { Skeleton } from "@repo/ui/components/ui/skeleton"
+import { Plus, RefreshCw,Search } from "lucide-react"
+import { useState } from "react"
+
 import { DataTable } from "@/components/admin/data-table"
-import { columns } from "./components/columns"
 import { trpc } from "@/lib/trpc/client"
+
+import { columns } from "./components/columns"
 import { CreateRankingDialog } from "./components/create-ranking-dialog"
-import { Ranking } from "@repo/db/types"
 
 export type RankingSource = "github" | "openmcp" | "producthunt"
 export type RankingType = "daily" | "weekly" | "monthly" | "yearly"

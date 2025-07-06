@@ -1,8 +1,9 @@
 "use client";
 
-import { BarChart, Calendar, Server, Shield } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@repo/ui/components/ui/card";
 import { Skeleton } from "@repo/ui/components/ui/skeleton";
+import { BarChart, Calendar, Server, Shield } from "lucide-react";
+
 import { trpc } from "@/lib/trpc/client";
 
 export function StatsCard() {

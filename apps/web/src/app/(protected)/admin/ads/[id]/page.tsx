@@ -1,10 +1,5 @@
 "use client";
 
-import { ArrowLeft, BarChart, Edit, Power } from "lucide-react";
-import Link from "next/link";
-import { use, useCallback, useEffect, useState } from "react";
-
-import { AdminPageHeader } from "@/components/admin/admin-page-header";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -25,10 +20,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@repo/ui/components/ui/card";
+import { ArrowLeft, BarChart, Edit, Power } from "lucide-react";
+import Link from "next/link";
+import { use, useCallback, useEffect, useState } from "react";
+import { toast } from "sonner";
+
+import { AdminPageHeader } from "@/components/admin/admin-page-header";
+import { ImagePreview } from "@/components/image-preview";
 import { trpc } from "@/lib/trpc/client";
 import { formatDate, getAssetUrl } from "@/lib/utils";
-import { toast } from "sonner";
-import { ImagePreview } from "@/components/image-preview";
 
 export default function AdDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);

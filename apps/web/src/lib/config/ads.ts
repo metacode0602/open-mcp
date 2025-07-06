@@ -1,4 +1,4 @@
-import { Ads, AdsType } from "@repo/db/types"
+import { AdsType } from "@repo/db/types"
 
 export type AdSpot = {
   label: string

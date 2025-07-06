@@ -1,14 +1,14 @@
 
-export * from "./schema/payments";
-export * from "./schema/invoices";
-export * from "./schema/recommendations";
-export * from "./schema/app-submissions";
 export * from "./schema/app-analysis-history";
-export * from "./schema/email-subscriptions";
 export * from "./schema/app-rss";
-export * from "./schema/rss-items";
-export * from "./schema/related-apps";
+export * from "./schema/app-submissions";
+export * from "./schema/email-subscriptions";
+export * from "./schema/invoices";
+export * from "./schema/payments";
 export * from "./schema/recommendation-apps";
+export * from "./schema/recommendations";
+export * from "./schema/related-apps";
+export * from "./schema/rss-items";
 // 通用 schema
 export * from "./schema/common";
 

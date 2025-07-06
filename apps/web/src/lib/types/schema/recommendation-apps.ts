@@ -1,4 +1,5 @@
 import { z } from "zod";
+
 import { searchSchema } from "./common";
 
 // 推荐应用关联创建

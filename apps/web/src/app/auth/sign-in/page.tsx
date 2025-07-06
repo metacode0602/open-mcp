@@ -1,4 +1,5 @@
 import { authViewPaths } from "@daveyplate/better-auth-ui/server"
+
 import { AuthView } from "./view"
 export const dynamic = "force-dynamic";
 

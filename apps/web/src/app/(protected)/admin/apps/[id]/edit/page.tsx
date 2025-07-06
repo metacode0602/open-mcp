@@ -1,9 +1,8 @@
+import { Button } from "@repo/ui/components/ui/button";
 import { ArrowLeft, Edit, Eye } from "lucide-react";
 import Link from "next/link";
 
 import { AdminPageHeader } from "@/components/admin/admin-page-header";
-import { Button } from "@repo/ui/components/ui/button";
-
 import { AppEditForm } from "@/components/admin/apps/app-edit-form";
 
 export const dynamic = "force-dynamic";

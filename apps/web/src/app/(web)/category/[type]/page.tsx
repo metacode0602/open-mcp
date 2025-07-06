@@ -1,10 +1,11 @@
 "use client";
 
-import { use, useState } from "react";
 import { notFound, useRouter, useSearchParams } from "next/navigation";
+import { use, useState } from "react";
+
+import { CategoryList } from "@/components/category-list";
 import { CategoryShowcase } from "@/components/category-showcase";
 import { TagFilter } from "@/components/tag-filter";
-import { CategoryList } from "@/components/category-list";
 import { Container } from "@/components/web/container";
 import { PageHeader } from "@/components/web/page-header";
 

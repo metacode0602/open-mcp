@@ -1,14 +1,5 @@
 "use client";
 
-import type React from "react";
-
-import { ArrowLeft } from "lucide-react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { use, useEffect, useState } from "react";
-
-import { AdminPageHeader } from "@/components/admin/admin-page-header";
-import { FormFileUpload } from "@/components/file-uploader";
 import { Button } from "@repo/ui/components/ui/button";
 import { Card, CardContent } from "@repo/ui/components/ui/card";
 import { Input } from "@repo/ui/components/ui/input";
@@ -16,7 +7,15 @@ import { Label } from "@repo/ui/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@repo/ui/components/ui/select";
 import { Skeleton } from "@repo/ui/components/ui/skeleton";
 import { Textarea } from "@repo/ui/components/ui/textarea";
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import type React from "react";
+import { use, useEffect, useState } from "react";
 import { toast } from "sonner";
+
+import { AdminPageHeader } from "@/components/admin/admin-page-header";
+import { FormFileUpload } from "@/components/file-uploader";
 import { trpc } from "@/lib/trpc/client";
 
 export default function AdEditPage({ params }: { params: Promise<{ id: string }> }) {

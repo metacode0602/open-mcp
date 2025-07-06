@@ -1,7 +1,6 @@
 "use client"
 import { Card, CardContent } from "@repo/ui/components/ui/card"
 import { cn } from "@repo/ui/lib/utils"
-
 import { Database, FileText, Globe, MessageSquare, Table2 } from "lucide-react"
 
 interface ServerScenarioFilterProps {

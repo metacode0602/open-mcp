@@ -1,0 +1,65 @@
+{
+  "event_type": "repo_updated",
+  "timestamp": "2025-07-04T15:52:43.146Z",
+  "data": {
+    "id": "BA66sk6DnWecPTtwHrUmv",
+    "full_name": "docsify001/gaokao-consulting",
+    "name": "gaokao-consulting",
+    "owner": "docsify001",
+    "owner_id": 204655951,
+    "description": "通过AI为用户提供高考咨询",
+    "description_zh": "通过AI为用户提供高考咨询",
+    "homepage": "",
+    "stars": 0,
+    "forks": 0,
+    "contributor_count": 2,
+    "mentionable_users_count": 3,
+    "watchers_count": 0,
+    "pull_requests_count": 1,
+    "releases_count": 0,
+    "commit_count": 94,
+    "topics": [],
+    "languages": [
+      {
+        "name": "TypeScript"
+      },
+      {
+        "name": "CSS"
+      },
+      {
+        "name": "JavaScript"
+      }
+    ],
+    "license_spdx_id": "",
+    "default_branch": "main",
+    "created_at": "2025-07-02T01:07:29.000Z",
+    "pushed_at": "2025-07-02T01:08:49.000Z",
+    "last_commit": "2025-07-01T08:01:21.000Z",
+    "added_at": "2025-07-02T06:02:15.481Z",
+    "archived": false,
+    "icon_url": "https://zenly.oss-cn-hangzhou.aliyuncs.com/mcp/repos/docsify001/gaokao-consulting/icon/1751436146233.png",
+    "open_graph_image_url": "https://opengraph.githubassets.com/64bbc2f22304063330d747afc4c27ce856b35a8157916a31a83daa59ed41b009/docsify001/gaokao-consulting",
+    "open_graph_image_oss_url": "https://zenly.oss-cn-hangzhou.aliyuncs.com/mcp/repos/docsify001/gaokao-consulting/og-image/1751436147704.png",
+    "uses_custom_open_graph_image": false,
+    "readme_content": "# Better Auth Next.js Starter (App Router)\n\n高考报名AI咨询，采用Nextjs15、Better Auth、Supabase/postgresql、OpenAI实现。包括落地页和AI对话咨询。\n\n## Installation\n\nFirst, create a PostgreSQL Database then configure your environment variables.\n\nYou can generate a `BETTER_AUTH_SECRET`.\n\n```bash\nopenssl rand -hex 32\n```\n\n```bash\nBETTER_AUTH_SECRET=\"\"\nDATABASE_URL=\"\"\n```\n\nThen generate your schema and perform migrations with drizzle-kit.\n\n```bash\nnpx @better-auth/cli generate\nnpx drizzle-kit generate\nnpx drizzle-kit migrate\n```\n\n- Twitter: [@daveycodez](https://x.com/daveycodez)\n\n☕️ [Buy me a coffee](https://buymeacoffee.com/daveycodez)\n\n## Features:\n\n[Better Auth](https://better-auth.com)\n\n[Better Auth UI](https://better-auth-ui.com)\n\n[shadcn/ui](https://ui.shadcn.com)\n\n[TailwindCSS](https://tailwindcss.com)\n\n[Drizzle ORM](https://orm.drizzle.team)\n\n[PostgreSQL](https://postgresql.org)\n\n[Biome](https://biomejs.dev)\n\n[Next.js](https://nextjs.org)\n\n[Turborepo](https://turbo.build)\n\n## Next.js\n\nThis is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).\n\n## Getting Started\n\nFirst, run the development server:\n\n```bash\nnpm run dev\n# or\nyarn dev\n# or\npnpm dev\n# or\nbun dev\n```\n\nOpen [http://localhost:3000](http://localhost:3000) with your browser to see the result.\n\nYou can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.\n\nThis project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.\n\n## Learn More\n\nTo learn more about Next.js, take a look at the following resources:\n\n- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.\n- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.\n\nYou can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!\n\n## Deploy on Vercel\n\nThe easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.\n\nCheck out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.\n",
+    "readme_content_zh": "# Better Auth Next.js Starter (App Router)\n\n高考报名AI咨询，采用Nextjs15、Better Auth、Supabase/postgresql、OpenAI实现。包括落地页和AI对话咨询。\n\n## Installation\n\nFirst, create a PostgreSQL Database then configure your environment variables.\n\nYou can generate a `BETTER_AUTH_SECRET`.\n\n```bash\nopenssl rand -hex 32\n```\n\n```bash\nBETTER_AUTH_SECRET=\"\"\nDATABASE_URL=\"\"\n```\n\nThen generate your schema and perform migrations with drizzle-kit.\n\n```bash\nnpx @better-auth/cli generate\nnpx drizzle-kit generate\nnpx drizzle-kit migrate\n```\n\n- Twitter: [@daveycodez](https://x.com/daveycodez)\n\n☕️ [Buy me a coffee](https://buymeacoffee.com/daveycodez)\n\n## Features:\n\n[Better Auth](https://better-auth.com)\n\n[Better Auth UI](https://better-auth-ui.com)\n\n[shadcn/ui](https://ui.shadcn.com)\n\n[TailwindCSS](https://tailwindcss.com)\n\n[Drizzle ORM](https://orm.drizzle.team)\n\n[PostgreSQL](https://postgresql.org)\n\n[Biome](https://biomejs.dev)\n\n[Next.js](https://nextjs.org)\n\n[Turborepo](https://turbo.build)\n\n## Next.js\n\nThis is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).\n\n## Getting Started\n\nFirst, run the development server:\n\n```bash\nnpm run dev\n# or\nyarn dev\n# or\npnpm dev\n# or\nbun dev\n```\n\nOpen [http://localhost:3000](http://localhost:3000) with your browser to see the result.\n\nYou can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.\n\nThis project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.\n\n## Learn More\n\nTo learn more about Next.js, take a look at the following resources:\n\n- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.\n- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.\n\nYou can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!\n\n## Deploy on Vercel\n\nThe easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.\n\nCheck out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.\n",
+    "latest_release_name": "",
+    "latest_release_tag_name": "",
+    "latest_release_url": "",
+    "latest_release_description": "",
+    "latest_release_description_zh": null,
+    "processing_status": {
+      "icon_processed": false,
+      "description_translated": false,
+      "readme_translated": false,
+      "og_image_processed": false,
+      "release_note_translated": false
+    },
+    "meta": {
+      "task_name": "update-github-data",
+      "processed_at": "2025-07-04T15:52:43.146Z",
+      "processing_time_ms": 4783,
+      "success": true
+    }
+  }
+}

@@ -1,18 +1,6 @@
 "use client"
 
 import {
-  Filter,
-  MoreHorizontal,
-  Plus,
-  Search,
-  Tag,
-} from "lucide-react"
-import Link from "next/link"
-import { useState } from "react"
-
-import { AdminPageHeader } from "@/components/admin/admin-page-header"
-import { AdminTablePagination } from "@/components/admin/admin-table-pagination"
-import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
@@ -42,7 +30,19 @@ import {
   TableHeader,
   TableRow,
 } from "@repo/ui/components/ui/table"
+import {
+  Filter,
+  MoreHorizontal,
+  Plus,
+  Search,
+  Tag,
+} from "lucide-react"
+import Link from "next/link"
+import { useState } from "react"
 import { toast } from "sonner"
+
+import { AdminPageHeader } from "@/components/admin/admin-page-header"
+import { AdminTablePagination } from "@/components/admin/admin-table-pagination"
 import { trpc } from "@/lib/trpc/client"
 
 export default function AdminTagsPage() {

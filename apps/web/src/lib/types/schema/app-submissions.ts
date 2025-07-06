@@ -1,4 +1,5 @@
 import { z } from "zod";
+
 import { searchSchema } from "./common";
 
 // 应用提交状态枚举

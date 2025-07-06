@@ -1,9 +1,10 @@
 "use client"
 
-import { ShieldCheck } from "lucide-react"
-import Link from "next/link"
 import { UserButton } from "@daveyplate/better-auth-ui"
 import { Button } from "@repo/ui/components/ui/button"
+import { ShieldCheck } from "lucide-react"
+import Link from "next/link"
+
 import { LogoIcon } from "@/components/web/logo-icon"
 export function MainNav() {
 

@@ -1,6 +1,6 @@
-import { X } from "lucide-react";
 import { Button } from "@repo/ui/components/ui/button";
 import { Dialog, DialogContent } from "@repo/ui/components/ui/dialog";
+import { X } from "lucide-react";
 
 interface ImagePreviewProps {
   src: string;

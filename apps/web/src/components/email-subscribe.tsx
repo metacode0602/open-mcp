@@ -1,11 +1,12 @@
 "use client"
 
-import type React from "react"
-import { Send } from "lucide-react"
-import { useState } from "react"
 import { Button } from "@repo/ui/components/ui/button"
 import { Input } from "@repo/ui/components/ui/input"
+import { Send } from "lucide-react"
+import type React from "react"
+import { useState } from "react"
 import { toast } from "sonner"
+
 import { trpc } from "@/lib/trpc/client"
 
 interface EmailSubscribeProps {

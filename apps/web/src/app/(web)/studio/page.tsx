@@ -1,15 +1,15 @@
+import { Badge } from "@repo/ui/components/ui/badge"
+import { Button } from "@repo/ui/components/ui/button"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@repo/ui/components/ui/card"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@repo/ui/components/ui/tabs"
 import { CheckCircle, Database, Download, Github, Laptop, Server } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
-import { Badge } from "@repo/ui/components/ui/badge"
-import { Button } from "@repo/ui/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@repo/ui/components/ui/card"
 import { Container } from "@/components/web/container"
 import { LogoIcon } from "@/components/web/logo-icon"
 import { PageHeader } from "@/components/web/page-header"
 import { Section } from "@/components/web/section"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@repo/ui/components/ui/tabs"
 
 export default function StudioPage() {
   return (

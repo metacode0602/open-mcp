@@ -1,5 +1,6 @@
-import { authClient } from "@/lib/auth-client"
 import { createAuthHooks } from "@daveyplate/better-auth-tanstack"
+
+import { authClient } from "@/lib/auth-client"
 
 export const authHooks = createAuthHooks(authClient) as ReturnType<typeof createAuthHooks>
 

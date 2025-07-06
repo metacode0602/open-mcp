@@ -5,15 +5,12 @@ import { snapshots, snapshotsMonthly, snapshotsWeekly, apps } from "../../schema
 export const snapshotsDataAccess = {
   /**
    * 获取指定应用过去一年中的stars数据，按月分组
-   * 返回一个数组，每个元素包含year, month, stars
+   * 返回一个数组，每个元素包含year, month, stars, delta
    */
   findStarsByAppIdOfLastYear: async (repoId: string): Promise<{ year: number; month: number; stars: number; delta: number }[]> => {
     if (!repoId || repoId.trim() === "") {
       return [];
     }
-
-    // 计算一年前的日期
-    const now = new Date();
 
     // 查询过去一年的月度快照数据
     const monthlySnapshotsData = await db
@@ -23,19 +20,15 @@ export const snapshotsDataAccess = {
         stars: snapshotsMonthly.stars,
       })
       .from(snapshotsMonthly)
-      .where(
-        and(
-          eq(snapshotsMonthly.repoId, repoId),
-          // gte(snapshotsMonthly.createdAt, oneYearAgo),
-          // lte(snapshotsMonthly.createdAt, now)
-        )
-      )
-      .orderBy(desc(snapshotsMonthly.year), desc(snapshotsMonthly.month)).limit(12);
+      .where(eq(snapshotsMonthly.repoId, repoId))
+      .orderBy(asc(snapshotsMonthly.year), asc(snapshotsMonthly.month))
+      .limit(12);
 
     // 转换为数组并计算delta
     const result = monthlySnapshotsData
       .map((item, index, array) => {
-        const delta = index > 0 ? (array[index - 1]?.stars ?? 0) - (item.stars ?? 0) : 0;
+        // 计算delta：当前月的stars减去上个月的stars
+        const delta = index > 0 ? (item.stars ?? 0) - (array[index - 1]?.stars ?? 0) : 0;
         return {
           year: item.year,
           month: item.month,
@@ -43,6 +36,7 @@ export const snapshotsDataAccess = {
           delta,
         };
       });
+
     console.info("[snapshots.ts] [findStarsByAppIdOfLastYear] result", result, monthlySnapshotsData);
     return result;
   },
@@ -59,16 +53,6 @@ export const snapshotsDataAccess = {
     const now = new Date();
     const currentYear = now.getFullYear();
     const currentMonth = now.getMonth() + 1; // getMonth() 返回 0-11
-
-    // // 计算昨天的日期
-    // const yesterday = new Date(now);
-    // yesterday.setDate(yesterday.getDate() - 1);
-
-
-    // // 计算上周的日期
-    // const lastWeek = new Date(now);
-    // lastWeek.setDate(lastWeek.getDate() - 7);
-
 
     // 计算上月的日期
     const lastMonth = new Date(now);
@@ -91,8 +75,8 @@ export const snapshotsDataAccess = {
           eq(snapshots.month, currentMonth),
         )
       )
-      .orderBy(desc(snapshots.year), desc(snapshots.month), desc(snapshots.day)).limit(2);
-
+      .orderBy(desc(snapshots.year), desc(snapshots.month), desc(snapshots.day))
+      .limit(2);
 
     // 获取最近2周数据
     const current2WeekSnapshot = await db
@@ -104,8 +88,8 @@ export const snapshotsDataAccess = {
           eq(snapshotsWeekly.year, currentYear),
         )
       )
-      .orderBy(desc(snapshotsWeekly.year), desc(snapshotsWeekly.week)).limit(2);
-
+      .orderBy(desc(snapshotsWeekly.year), desc(snapshotsWeekly.week))
+      .limit(2);
 
     // 获取上月数据
     const lastMonthSnapshot = await db
@@ -135,17 +119,18 @@ export const snapshotsDataAccess = {
       .orderBy(desc(snapshotsMonthly.createdAt))
       .limit(1);
 
-    const todayStars = last2DaysSnapshot.length == 2 ? (last2DaysSnapshot[1]?.stars ?? 0) : last2DaysSnapshot.length == 1 ? (last2DaysSnapshot[0]?.stars ?? 0) : 0;
-    const yesterdayStars = last2DaysSnapshot.length == 2 ? (last2DaysSnapshot[0]?.stars ?? 0) : last2DaysSnapshot.length == 1 ? (last2DaysSnapshot[0]?.stars ?? 0) : 0;
-    const currentWeekStars = current2WeekSnapshot.length == 2 ? (current2WeekSnapshot[1]?.stars ?? 0) : current2WeekSnapshot.length == 1 ? (current2WeekSnapshot[0]?.stars ?? 0) : 0;
-    const lastWeekStars = current2WeekSnapshot.length == 2 ? (current2WeekSnapshot[0]?.stars ?? 0) : current2WeekSnapshot.length == 1 ? (current2WeekSnapshot[0]?.stars ?? 0) : 0;
+    // 计算各个时间段的增长
+    const todayStars = last2DaysSnapshot.length >= 1 ? (last2DaysSnapshot[0]?.stars ?? 0) : 0;
+    const yesterdayStars = last2DaysSnapshot.length >= 2 ? (last2DaysSnapshot[1]?.stars ?? 0) : 0;
+    const currentWeekStars = current2WeekSnapshot.length >= 1 ? (current2WeekSnapshot[0]?.stars ?? 0) : 0;
+    const lastWeekStars = current2WeekSnapshot.length >= 2 ? (current2WeekSnapshot[1]?.stars ?? 0) : 0;
     const lastMonthStars = lastMonthSnapshot[0]?.stars ?? 0;
     const lastYearLastMonthStars = lastYearLastMonthSnapshot[0]?.stars ?? 0;
 
     return {
       daily: todayStars - yesterdayStars, // 今日与昨日数据之差
       weekly: currentWeekStars - lastWeekStars, // 本周与上周数据之差
-      monthly: yesterdayStars - lastMonthStars, // 昨日与上月数据之差
+      monthly: todayStars - lastMonthStars, // 今日与上月数据之差
       yearly: todayStars - lastYearLastMonthStars, // 今日与去年最后一个月数据之差
     };
   },

@@ -1,8 +1,8 @@
 "use client"
 
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@repo/ui/components/ui/dialog"
 import Image from "next/image"
 import { toast } from "sonner"
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@repo/ui/components/ui/dialog"
 
 interface WechatQRCodeDialogProps {
   open: boolean

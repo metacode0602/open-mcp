@@ -1,6 +1,6 @@
-import { ColumnDef } from "@tanstack/react-table"
+import { Recommendation } from "@repo/db/types"
+import { Badge } from "@repo/ui/components/ui/badge"
 import { Button } from "@repo/ui/components/ui/button"
-import { ArrowUpDown, Eye, MoreHorizontal, Pencil } from "lucide-react"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,9 +9,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@repo/ui/components/ui/dropdown-menu"
-import { Badge } from "@repo/ui/components/ui/badge"
+import { ColumnDef } from "@tanstack/react-table"
+import { ArrowUpDown, Eye, MoreHorizontal, Pencil } from "lucide-react"
 import Link from "next/link"
-import { Recommendation } from "@repo/db/types"
 
 export const columns: ColumnDef<Recommendation>[] = [
   {

@@ -1,11 +1,12 @@
 "use client"
 
+import { useRouter, useSearchParams } from "next/navigation"
+import { useState } from "react"
+
 import { CategoryShowcase } from "@/components/category-showcase"
 import { SearchBar } from "@/components/search-bar"
 import { Container } from "@/components/web/container"
 import { PageHeader } from "@/components/web/page-header"
-import { useRouter, useSearchParams } from "next/navigation"
-import { useState } from "react"
 
 export default function CategoryPage() {
   const validTypes = ["client", "server", "application"]

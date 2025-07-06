@@ -1,0 +1,80 @@
+{
+  "event_type": "repo_updated",
+  "timestamp": "2025-07-05T06:59:56.838Z",
+  "data": {
+    "id": "Q1XIvqBabCDPhHUQNu4H1",
+    "full_name": "11cafe/local-manus",
+    "name": "local-manus",
+    "owner": "11cafe",
+    "owner_id": 152708197,
+    "description": "AI agent, local alternative for Manus, specializing in marketing.",
+    "description_zh": "AI agent, local alternative for Manus, specializing in marketing.\n\n翻译结果：\nAI代理，Manus的本地替代方案，专注于营销。",
+    "homepage": "",
+    "stars": 52,
+    "forks": 12,
+    "contributor_count": 0,
+    "mentionable_users_count": 3,
+    "watchers_count": 5,
+    "pull_requests_count": 3,
+    "releases_count": 1,
+    "commit_count": 119,
+    "topics": [
+      "agent",
+      "aiagent",
+      "manus",
+      "marketing",
+      "playwright",
+      "ai",
+      "aitools"
+    ],
+    "languages": [
+      {
+        "name": "TypeScript"
+      },
+      {
+        "name": "Python"
+      },
+      {
+        "name": "JavaScript"
+      },
+      {
+        "name": "CSS"
+      },
+      {
+        "name": "HTML"
+      }
+    ],
+    "license_spdx_id": "",
+    "default_branch": "main",
+    "created_at": "2025-04-07T14:08:13.000Z",
+    "pushed_at": "2025-06-16T03:31:44.000Z",
+    "last_commit": "2025-06-16T03:31:44.000Z",
+    "added_at": "2025-07-05T06:58:33.024Z",
+    "archived": false,
+    "icon_url": "https://zenly.oss-cn-hangzhou.aliyuncs.com/mcp/repos/11cafe/local-manus/icon/1751698752440.png",
+    "open_graph_image_url": "https://repository-images.githubusercontent.com/962010672/7d4b9fca-7ca7-481d-bc99-8d38d38f18ac",
+    "open_graph_image_oss_url": "https://zenly.oss-cn-hangzhou.aliyuncs.com/mcp/repos/11cafe/local-manus/og-image/1751698791680.png",
+    "uses_custom_open_graph_image": true,
+    "readme_content": "# 🧠 LocalManus – Your AI Marketing Agent & Copilot\r\n\r\nMeet **Jaaz**, your all-in-one AI-powered marketing assistant. A fully **local** **desktop app** that runs for **free** — no cloud lock-in, no monthly fees. Think of it as the \"Cursor\" for marketers and content creators: an always-on team that helps you 10x your productivity and supercharge product growth 📈\r\n\r\n\r\n---\r\n\r\n[中文](https://github.com/11cafe/local-manus/blob/main/README-zh.md)\r\n\r\n## ✨ Key Features\r\n\r\n**🤖 AI Marketing Content Copilot in Editor**\r\n\r\n* Smart auto-complete & edit suggestions, generate entire posts from a **single image or video**\r\n\r\n**🔁 1-Click Cross-Posting**\r\n\r\n* Publish to multiple platforms at once (e.g., Twitter, Medium, LinkedIn), supports ***almost any site*** by AI browser automation\r\n* AI smartly adapts and optimizes your content to match each platform’s tone, format\r\n* Track performance and view analytics across posts\r\n\r\n**💬 AI “ReplyGuy”**\r\n\r\n* Automatically find best places to mention your product, like Reddit posts, etc.\r\n* Generate & post replies that **naturally mention your product**\r\n* Prompting you to review before submitting (optional, can turn off)\r\n\r\n**🖼️ \\[Upcoming] Image & Video Enhancements**\r\n\r\n* Add stylized text overlays (like you see on Tiktok/CapCut)\r\n* Auto-generate illustrative images for your content\r\n\r\n\r\n<img width=\"900\" alt=\"Screenshot 2025-05-11 at 11 28 29 PM\" src=\"https://zenly.oss-cn-hangzhou.aliyuncs.com/mcp/repos/11cafe/local-manus/readme-images/1751698724690.png\" />\r\n\r\n---\r\n\r\n* Available for **macOS** and **Windows**\r\n* Bring your own AI: use Claude, OpenAI, Gemini via API key, or run locally with [Ollama](https://github.com/ollama/ollama) for **100% free** usage\r\n\r\n---\r\n\r\n## Security\r\n\r\n* **You can choose to require sensitive actions always require your confirmation**: logins, posts, replies, etc.\r\n* You can choose to only sign-in dedicated marketing accounts that doesn't contain any sensitive info – no access to personal data or credit cards\r\n* All actions taken by AI are strictly recorded in history, as both text and screenshot images. You can manually search the records to identify any security risks\r\n* Future plan: add a smart safeguard system to detect and block risky behavior\r\n\r\n## Screenshots\r\n\r\n#### ✨1Click Cross Posting marketing content to multiple platforms, image, text, video supported!\r\n\r\n<img width=\"700\" alt=\"cross-posting-dropdown\" src=\"https://zenly.oss-cn-hangzhou.aliyuncs.com/mcp/repos/11cafe/local-manus/readme-images/1751698729633.png\" />\r\n\r\n\r\n\r\n#### ✍️AI powered content editor, auto complete your writing\r\n\r\n<img width=\"700\" alt=\"auto-complete\" src=\"https://zenly.oss-cn-hangzhou.aliyuncs.com/mcp/repos/11cafe/local-manus/readme-images/1751698733027.png\" />\r\n\r\n\r\n#### 🌐AI will prompt you to login to your account, simply by opening the browser and do a regular login to the website you want to post to. You only need to do this once since it will remember you\r\n\r\n<img width=\"700\" alt=\"Screenshot 2025-05-11 at 10 53 19 PM\" src=\"https://zenly.oss-cn-hangzhou.aliyuncs.com/mcp/repos/11cafe/local-manus/readme-images/1751698736291.png\" />\r\n\r\n\r\nFor exmple, click in \"open browser\" link in AI's prompt message will open up the login page of Instagram, do your normal login there and it will remember you\r\n\r\n<img width=\"400\" alt=\"Screenshot 2025-05-11 at 11 59 24 PM\" src=\"https://zenly.oss-cn-hangzhou.aliyuncs.com/mcp/repos/11cafe/local-manus/readme-images/1751698740021.png\" />\r\n\r\n#### AI \"replyguy\" - automatic find relevant posts about your product area, generate replies to mention your product naturally under the post, like Replyguy.com (but Free!)\r\n\r\nYou can choose which post to reply to, simply by clicking AI provided options:\r\n\r\n<img width=\"700\" alt=\"replyguy\" src=\"https://zenly.oss-cn-hangzhou.aliyuncs.com/mcp/repos/11cafe/local-manus/readme-images/1751698745867.png\" />\r\n\r\nAnd it can ask you to review the reply content before submitting the reply:\r\n\r\n<img width=\"500\" alt=\"replyguy-confirm-reply-content\" src=\"https://zenly.oss-cn-hangzhou.aliyuncs.com/mcp/repos/11cafe/local-manus/readme-images/1751698749960.png\" />\r\n\r\n\r\n\r\n## Development\r\n\r\n`cd react && npm i`\r\n`cd react && npm run dev`\r\n`cd server && python main.py`\r\n",
+    "readme_content_zh": "# 🧠 LocalManus – 您的AI营销代理与协作者\n\n欢迎认识 **Jaaz**，您的全能AI营销助手。一个完全 **本地** 的 **桌面应用**，免费运行——无需云端锁定，无月度费用。把它想象成营销人员和内容创作者的“光标”：一个始终在线的团队，帮助您提升10倍生产力，加速产品增长 📈\n\n\n---\n\n\n[中文](https://github.com/11cafe/local-manus/blob/main/README-zh.md)\n\n## ✨ 核心功能\n\n**🤖 编辑器中的AI营销内容协作者**\n\n* 智能自动补全与编辑建议，从 **单张图片或视频** 生成整篇文章\n\n**🔁 一键跨平台发布**\n\n* 同时发布到多个平台（例如，Twitter、Medium、LinkedIn），通过AI浏览器自动化支持 ***几乎所有网站***\n* AI智能地调整并优化您的内容，以匹配每个平台的语气、格式\n* 跟踪表现并查看跨文章的统计数据\n\n**💬 AI“回复小助手”**\n\n* 自动找到提及您产品的最佳位置，例如Reddit帖子等\n* 生成并发布自然提及您产品的回复\n* 提示您在提交前进行审核（可选，可以关闭）\n\n**🖼️ \\[即将推出] 图片与视频增强功能**\n\n* 添加风格化文本叠加层（如Tiktok/CapCut上的效果）\n* 自动为您的生成内容生成插图\n\n\n<img width=\"900\" alt=\"Screenshot 2025-05-11 at 11 28 29 PM\" src=\"https://zenly.oss-cn-hangzhou.aliyuncs.com/mcp/repos/11cafe/local-manus/readme-images/1751698724690.png\" />\n\n\n---\n\n\n* 支持 **macOS** 和 **Windows**\n* 自带AI：通过API密钥使用Claude、OpenAI、Gemini，或使用 [Ollama](https://github.com/ollama/ollama) 本地运行，实现 **100%免费** 使用\n\n---\n\n\n## 安全\n\n* **您可以选择始终需要您的确认来执行敏感操作**：登录、发布、回复等\n* 您可以选择仅登录不包含任何敏感信息的专用营销账户——无法访问个人数据或信用卡信息\n* AI执行的所有操作都会严格记录在历史记录中，包括文本和截图图像。您可以手动搜索记录以识别任何安全风险\n* 未来计划：添加智能防护系统，检测并阻止危险行为\n\n## 截图\n\n#### ✨ 一键跨平台发布营销内容，支持图片、文本、视频！\n\n<img width=\"700\" alt=\"cross-posting-dropdown\" src=\"https://zenly.oss-cn-hangzhou.aliyuncs.com/mcp/repos/11cafe/local-manus/readme-images/1751698729633.png\" />\n\n\n\n#### ✍️ AI驱动的编辑器，自动补全您的写作\n\n<img width=\"700\" alt=\"auto-complete\" src=\"https://zenly.oss-cn-hangzhou.aliyuncs.com/mcp/repos/11cafe/local-manus/readme-images/1751698733027.png\" />\n\n\n#### 🌐 AI会提示您登录您的账户，只需打开浏览器并正常登录您想要发布到的网站即可。您只需做一次，因为它会记住您\n\n<img width=\"700\" alt=\"Screenshot 2025-05-11 at 10 53 19 PM\" src=\"https://zenly.oss-cn-hangzhou.aliyuncs.com/mcp/repos/11cafe/local-manus/readme-images/1751698736291.png\" />\n\n\n例如，点击AI提示消息中的“打开浏览器”链接将打开Instagram的登录页面，您在那里进行正常登录，它将记住您\n\n<img width=\"400\" alt=\"Screenshot 2025-05-11 at 11 59 24 PM\" src=\"https://zenly.oss-cn-hangzhou.aliyuncs.com/mcp/repos/11cafe/local-manus/readme-images/1751698740021.png\" />\n\n#### AI“回复小助手” - 自动找到与您产品领域相关的帖子，在帖子下自然生成提及您产品的回复，类似于Replyguy.com（但免费！）\n\n您可以选择回复哪篇帖子，只需点击AI提供的选项即可：\n\n<img width=\"700\" alt=\"replyguy\" src=\"https://zenly.oss-cn-hangzhou.aliyuncs.com/mcp/repos/11cafe/local-manus/readme-images/1751698745867.png\" />\n\n它还可以在提交回复前提示您审核回复内容：\n\n<img width=\"500\" alt=\"replyguy-confirm-reply-content\" src=\"https://zenly.oss-cn-hangzhou.aliyuncs.com/mcp/repos/11cafe/local-manus/readme-images/1751698749960.png\" />\n\n\n\n## 开发\n\n`cd react && npm i`\n`cd react && npm run dev`\n`cd server && python main.py`",
+    "latest_release_name": "1.0.3",
+    "latest_release_tag_name": "v1.0.3",
+    "latest_release_published_at": "2025-06-01T15:44:58.000Z",
+    "latest_release_url": "https://github.com/11cafe/local-manus/releases/tag/v1.0.3",
+    "latest_release_description": "First launch AI design agent!",
+    "latest_release_description_zh": "首次发布AI设计代理！\n\n翻译结果：",
+    "processing_status": {
+      "icon_processed": true,
+      "description_translated": true,
+      "readme_translated": true,
+      "og_image_processed": true,
+      "release_note_translated": true
+    },
+    "meta": {
+      "task_name": "update-github-data",
+      "processed_at": "2025-07-05T06:59:56.838Z",
+      "processing_time_ms": 76049,
+      "success": true
+    }
+  }
+}

@@ -1,12 +1,13 @@
 "use client";
 
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@repo/ui/components/ui/card";
 import { Badge } from "@repo/ui/components/ui/badge";
 import { Button } from "@repo/ui/components/ui/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@repo/ui/components/ui/card";
+import { Skeleton } from "@repo/ui/components/ui/skeleton";
 import { ArrowRight, Plus } from "lucide-react";
 import Link from "next/link";
+
 import { trpc } from "@/lib/trpc/client";
-import { Skeleton } from "@repo/ui/components/ui/skeleton";
 
 export function AppsTab() {
   const { data: apps, isLoading } = trpc.mcpDashboard.getSubmittedApps.useQuery();

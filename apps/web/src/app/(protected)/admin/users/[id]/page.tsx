@@ -1,5 +1,20 @@
 "use client"
 
+import { Ads, App, AppSubmission, Claims, Payment, Suggestion } from "@repo/db/types"
+import { Avatar, AvatarFallback, AvatarImage } from "@repo/ui/components/ui/avatar"
+import { Badge } from "@repo/ui/components/ui/badge"
+import { Button } from "@repo/ui/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@repo/ui/components/ui/card"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@repo/ui/components/ui/dropdown-menu"
+import { Skeleton } from "@repo/ui/components/ui/skeleton"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@repo/ui/components/ui/tabs"
 import type { ColumnDef } from "@tanstack/react-table"
 import {
   ArrowLeft,
@@ -21,24 +36,9 @@ import Link from "next/link"
 import { use, useState } from "react"
 
 import { AdStatusBadge } from "@/components/ad-status-badge"
-import { PaymentStatusBadge } from "@/components/payment-status-badge"
 import { DataTable } from "@/components/admin/data-table"
 import { PageHeader } from "@/components/admin/page-header"
-import { Avatar, AvatarFallback, AvatarImage } from "@repo/ui/components/ui/avatar"
-import { Badge } from "@repo/ui/components/ui/badge"
-import { Button } from "@repo/ui/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@repo/ui/components/ui/card"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@repo/ui/components/ui/dropdown-menu"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@repo/ui/components/ui/tabs"
-import { Skeleton } from "@repo/ui/components/ui/skeleton"
-import { Ads, App, AppSubmission, Claims, Payment, Suggestion } from "@repo/db/types"
+import { PaymentStatusBadge } from "@/components/payment-status-badge"
 import { trpc } from "@/lib/trpc/client";
 import { formatDate } from "@/lib/utils"
 

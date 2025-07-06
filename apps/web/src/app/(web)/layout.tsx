@@ -1,12 +1,12 @@
+import Script from "next/script"
 import type { ReactNode } from "react"
 import type { Graph } from "schema-dts"
+import { Toaster } from "sonner"
 
 import { Footer } from "@/components/footer"
-import { Header } from "@/components/web/header"
 import { ThemeProvider } from "@/components/theme-provider"
-import { Toaster } from "sonner"
+import { Header } from "@/components/web/header"
 import { config } from "@/lib/config"
-import Script from "next/script"
 
 export default function WebLayout({
   children,

@@ -1,12 +1,12 @@
+import { db } from "@repo/db"
+import * as schema from "@repo/db/schema"
+import { sendMagicCodeEmail } from "@repo/email"
 import { betterAuth } from "better-auth"
 import { drizzleAdapter } from "better-auth/adapters/drizzle"
 import { phoneNumber } from "better-auth/plugins"
 import { admin } from "better-auth/plugins"
 import { emailOTP } from "better-auth/plugins"
 import * as tencentcloud from "tencentcloud-sdk-nodejs"
-import { sendMagicCodeEmail } from "@repo/email"
-import { db } from "@repo/db"
-import * as schema from "@repo/db/schema"
 
 const isProd = process.env.NODE_ENV === "production"
 

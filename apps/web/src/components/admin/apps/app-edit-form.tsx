@@ -1,6 +1,7 @@
 "use client";
 
-import { FormFileUpload } from "@/components/file-uploader";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { zUpdateAppSchema } from "@repo/db/types";
 import { Alert, AlertDescription, AlertTitle } from "@repo/ui/components/ui/alert";
 import { Button } from "@repo/ui/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@repo/ui/components/ui/card";
@@ -11,17 +12,17 @@ import { Skeleton } from "@repo/ui/components/ui/skeleton";
 import { Switch } from "@repo/ui/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@repo/ui/components/ui/tabs";
 import { Textarea } from "@repo/ui/components/ui/textarea";
-import { toast } from "sonner";
-import { trpc } from "@/lib/trpc/client";
-import { zodResolver } from "@hookform/resolvers/zod";
+import type { MDEditorProps } from "@uiw/react-md-editor";
 import { AlertCircle, Loader2 } from "lucide-react";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useForm, type SubmitHandler } from "react-hook-form";
+import { type SubmitHandler,useForm } from "react-hook-form";
+import { toast } from "sonner";
 import * as z from "zod";
-import { zUpdateAppSchema } from "@repo/db/types";
-import dynamic from "next/dynamic";
-import type { MDEditorProps } from "@uiw/react-md-editor";
+
+import { FormFileUpload } from "@/components/file-uploader";
+import { trpc } from "@/lib/trpc/client";
 
 // Dynamically import MDEditor to avoid SSR issues
 const MDEditor = dynamic<MDEditorProps>(() => import("@uiw/react-md-editor"), { ssr: false });

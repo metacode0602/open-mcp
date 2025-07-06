@@ -1,11 +1,3 @@
-import { redirect } from "next/navigation";
-import type { ReactNode } from "react";
-
-import { AppBreadcrumb } from "@/components/admin/app-breadcrumb";
-import { AppSidebar } from "@/components/admin/app-sidebar";
-import type { IAppSidebarProps } from "@/components/admin/app-sidebar/sidebar";
-import { UserNav } from "@/components/admin/user-nav";
-import { ThemeProvider } from "@/components/theme-provider";
 import { Separator } from "@repo/ui/components/ui/separator";
 import {
   SidebarInset,
@@ -29,8 +21,16 @@ import {
   Shield,
   Users,
 } from "lucide-react";
-import { Toaster } from "sonner";
 import { headers } from "next/headers";
+import { redirect } from "next/navigation";
+import type { ReactNode } from "react";
+import { Toaster } from "sonner";
+
+import { AppBreadcrumb } from "@/components/admin/app-breadcrumb";
+import { AppSidebar } from "@/components/admin/app-sidebar";
+import type { IAppSidebarProps } from "@/components/admin/app-sidebar/sidebar";
+import { UserNav } from "@/components/admin/user-nav";
+import { ThemeProvider } from "@/components/theme-provider";
 import { auth } from "@/lib/auth";
 
 // 模拟管理员认证检查

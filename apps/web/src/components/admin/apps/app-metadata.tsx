@@ -1,5 +1,6 @@
 "use client";
 
+import { Category } from "@repo/db/types";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -25,11 +26,11 @@ import {
 import { Input } from "@repo/ui/components/ui/input";
 import { Label } from "@repo/ui/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@repo/ui/components/ui/select";
-import { toast } from "sonner";
-import { trpc } from "@/lib/trpc/client";
 import { Folder, Plus, Tag, Trash2 } from "lucide-react";
 import { useState } from "react";
-import { Category } from "@repo/db/types";
+import { toast } from "sonner";
+
+import { trpc } from "@/lib/trpc/client";
 
 interface AppMetadataProps {
   appId: string;

@@ -1,6 +1,6 @@
+import type { ServerTool } from "@repo/db/types"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@repo/ui/components/ui/accordion"
 import { Badge } from "@repo/ui/components/ui/badge"
-import type { ServerTool } from "@repo/db/types"
 
 interface ServerToolsListProps {
   tools: ServerTool[]

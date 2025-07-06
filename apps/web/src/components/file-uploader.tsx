@@ -1,13 +1,13 @@
 "use client";
 
-import type React from "react";
-
 import { Button } from "@repo/ui/components/ui/button";
 import { cn } from "@repo/ui/lib/utils";
-import { getAssetUrl } from "@/lib/utils";
 import { Loader2, Upload, X } from "lucide-react";
+import type React from "react";
 import { useRef, useState } from "react";
 import { toast } from "sonner";
+
+import { getAssetUrl } from "@/lib/utils";
 
 export type FileUploadItem = {
   file: File;

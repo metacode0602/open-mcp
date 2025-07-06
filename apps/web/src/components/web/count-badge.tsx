@@ -1,14 +1,15 @@
 "use client"
 
-import { formatNumber } from "@/lib/utils"
-import plur from "plur"
 import { Badge } from "@repo/ui/components/ui/badge"
+import { cn } from "@repo/ui/lib/utils"
+import { Loader2 } from "lucide-react"
 import Link from "next/link"
+import plur from "plur"
+import { useEffect, useState } from "react"
+
 import { Ping } from "@/components/web/ping"
 import { trpc } from "@/lib/trpc/client"
-import { useEffect, useState } from "react"
-import { Loader2 } from "lucide-react"
-import { cn } from "@repo/ui/lib/utils"
+import { formatNumber } from "@/lib/utils"
 
 interface CountBadgeProps {
   className?: string

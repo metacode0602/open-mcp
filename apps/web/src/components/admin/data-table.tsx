@@ -1,21 +1,6 @@
 "use client"
 
-import {
-  type ColumnDef,
-  type ColumnFiltersState,
-  type SortingState,
-  type VisibilityState,
-  flexRender,
-  getCoreRowModel,
-  getFacetedRowModel,
-  getFacetedUniqueValues,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  useReactTable,
-} from "@tanstack/react-table"
-import * as React from "react"
-
+import { Skeleton } from "@repo/ui/components/ui/skeleton"
 import {
   Table,
   TableBody,
@@ -24,9 +9,23 @@ import {
   TableHeader,
   TableRow,
 } from "@repo/ui/components/ui/table"
+import {
+  type ColumnDef,
+  type ColumnFiltersState,
+  flexRender,
+  getCoreRowModel,
+  getFacetedRowModel,
+  getFacetedUniqueValues,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  type SortingState,
+  useReactTable,
+  type VisibilityState,
+} from "@tanstack/react-table"
+import * as React from "react"
 
 import { DataTablePagination } from "./data-table-pagination"
-import { Skeleton } from "@repo/ui/components/ui/skeleton"
 // import { DataTableToolbar } from "./data-table-toolbar"
 
 interface DataTableProps<TData, TValue> {

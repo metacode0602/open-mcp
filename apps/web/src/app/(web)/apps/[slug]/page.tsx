@@ -1,27 +1,27 @@
 "use client";
 
-import { AlertCircle, ExternalLink, Eye, GitCommit, GitFork, GitPullRequest, Github, Info, Package, Star, Users } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-
-import { ClaimAppDialog } from "@/components/claim-app-dialog";
-import { SuggestionDialog } from "@/components/suggestion-dialog";
-import { RecommendedApps } from "@/components/recommended-apps";
-import { RelatedApps } from "@/components/related-apps";
+import { MarkdownReadonly } from "@repo/ui/components/markdown/markdown-readonly";
 import { Badge } from "@repo/ui/components/ui/badge";
 import { Button } from "@repo/ui/components/ui/button";
-import { Container } from "@/components/web/container";
-import { PageHeader } from "@/components/web/page-header";
 import { Separator } from "@repo/ui/components/ui/separator";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@repo/ui/components/ui/tabs";
-import { MarkdownReadonly } from "@repo/ui/components/markdown/markdown-readonly";
-import { trpc } from "@/lib/trpc/client";
-import { formatDate, formatNumber, getAssetUrl } from "@/lib/utils";
 import { Skeleton } from "@repo/ui/components/ui/skeleton";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@repo/ui/components/ui/tabs";
+import { AlertCircle, ExternalLink, Eye, GitCommit, GitFork, Github, GitPullRequest, Info, Package, Star, Users } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 import { use } from "react";
+
+import { ClaimAppDialog } from "@/components/claim-app-dialog";
+import { RecommendedApps } from "@/components/recommended-apps";
+import { RelatedApps } from "@/components/related-apps";
+import { SuggestionDialog } from "@/components/suggestion-dialog";
 import { AppGitHubCard } from "@/components/web/app-github-card";
 import { AppVersionDialog } from "@/components/web/app-release-dialog";
 import { AppTagWithPopover } from "@/components/web/app-tag-popover";
+import { Container } from "@/components/web/container";
+import { PageHeader } from "@/components/web/page-header";
+import { trpc } from "@/lib/trpc/client";
+import { formatDate, formatNumber, getAssetUrl } from "@/lib/utils";
 
 const AppDetailSkeleton = () => (
   <div className="space-y-8">
@@ -144,7 +144,7 @@ export default function AppPage({ params }: { params: Promise<{ slug: string }> 
               )}
             </div>
             <div className="flex-1">
-              <p className="text-muted-foreground">{app.description}</p>
+              <p className="text-muted-foreground">{app.descriptionZh || app.description}</p>
             </div>
           </div>
 
@@ -164,67 +164,6 @@ export default function AppPage({ params }: { params: Promise<{ slug: string }> 
 
           {/* @ts-expect-error */}
           <AppGitHubCard project={app} />
-
-          <Tabs defaultValue="overview" className="mb-10 mt-10">
-            <TabsList className="mb-4">
-              <TabsTrigger value="overview">概览</TabsTrigger>
-              <TabsTrigger value="docs">文档</TabsTrigger>
-              <TabsTrigger value="readme">原文</TabsTrigger>
-              {/* {app.type === "server" && app.tools && Array.isArray(app.tools) && app.tools.length > 0 && (
-                <TabsTrigger value="tools">工具</TabsTrigger>
-              )} */}
-            </TabsList>
-
-            <TabsContent value="overview" className="space-y-6">
-              <div className="prose dark:prose-invert max-w-none">
-                <div className="prose dark:prose-invert max-w-none">
-                  <MarkdownReadonly>{app.longDescription ?? ""}</MarkdownReadonly>
-                </div>
-
-                {app.type === "client" && (
-                  <>
-                    <h3>支持的服务器</h3>
-                    <ul>
-                      {app.supportedServers?.map((server, index) => (
-                        <li key={index}>{server}</li>
-                      ))}
-                    </ul>
-                  </>
-                )}
-              </div>
-
-              <Separator />
-              {app.features && app.features.length > 0 && (
-                <div>
-                  <h2 className="text-lg font-bold mb-4">功能特性</h2>
-                  <div className="prose dark:prose-invert max-w-none">
-                    <ul className="list-disc pl-5 space-y-2">
-                      {app.features?.map((feature, index) => (
-                        <li key={index}>{feature}</li>
-                      ))}
-                    </ul>
-                  </div>
-
-                </div>
-              )}
-            </TabsContent>
-
-            <TabsContent value="docs">
-              <div className="prose dark:prose-invert max-w-none">
-                <MarkdownReadonly>{app.readme ?? ""}</MarkdownReadonly>
-              </div>
-            </TabsContent>
-            <TabsContent value="readme">
-              <div className="prose dark:prose-invert max-w-none">
-                <MarkdownReadonly>{app.readmeZh ?? ""}</MarkdownReadonly>
-              </div>
-            </TabsContent>
-            {/* {app.type === "server" && app.tools && app.tools.length > 0 && (
-              <TabsContent value="tools">
-                <ServerToolsList tools={app.tools} />
-              </TabsContent>
-            )} */}
-          </Tabs>
         </div>
 
         <div className="space-y-6">
@@ -353,6 +292,69 @@ export default function AppPage({ params }: { params: Promise<{ slug: string }> 
           </div>
         </div>
       </div>
+
+      <Tabs defaultValue="readmeZh" className="mb-10 mt-10">
+        <TabsList className="mb-4">
+          {/* <TabsTrigger value="overview">概览</TabsTrigger> */}
+          <TabsTrigger value="readmeZh">中文文档</TabsTrigger>
+          <TabsTrigger value="readme">原文</TabsTrigger>
+          {/* {app.type === "server" && app.tools && Array.isArray(app.tools) && app.tools.length > 0 && (
+                <TabsTrigger value="tools">工具</TabsTrigger>
+              )} */}
+        </TabsList>
+
+        <TabsContent value="overview" className="space-y-6">
+          <div className="prose dark:prose-invert max-w-none">
+            <MarkdownReadonly>{app.longDescription ?? ""}</MarkdownReadonly>
+
+            {app.type === "client" && (
+              <>
+                <h3>支持的服务器</h3>
+                <ul>
+                  {app.supportedServers?.map((server, index) => (
+                    <li key={index}>{server}</li>
+                  ))}
+                </ul>
+              </>
+            )}
+          </div>
+
+          <Separator />
+          {app.features && app.features.length > 0 && (
+            <div>
+              <h2 className="text-lg font-bold mb-4">功能特性</h2>
+              <div className="prose dark:prose-invert max-w-none">
+                <ul className="list-disc pl-5 space-y-2">
+                  {app.features?.map((feature, index) => (
+                    <li key={index}>{feature}</li>
+                  ))}
+                </ul>
+              </div>
+
+            </div>
+          )}
+        </TabsContent>
+
+        <TabsContent value="readme">
+          <div className="container">
+            <div className="prose dark:prose-invert max-w-none">
+              <MarkdownReadonly>{app.readme ?? ""}</MarkdownReadonly>
+            </div>
+          </div>
+        </TabsContent>
+        <TabsContent value="readmeZh">
+          <div className="container">
+            <div className="prose dark:prose-invert max-w-none">
+              <MarkdownReadonly>{app.readmeZh ?? ""}</MarkdownReadonly>
+            </div>
+          </div>
+        </TabsContent>
+        {/* {app.type === "server" && app.tools && app.tools.length > 0 && (
+              <TabsContent value="tools">
+                <ServerToolsList tools={app.tools} />
+              </TabsContent>
+            )} */}
+      </Tabs>
       {/* @ts-expect-error */}
       <RecommendedApps currentApp={app} limit={6} />
     </Container>

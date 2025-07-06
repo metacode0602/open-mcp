@@ -64,17 +64,14 @@ export const zAdsSchema = zBaseEntitySchema.extend({
     id: z.string(),
     name: z.string(),
     icon: z.string(),
-    website: z.string(),
-    type: z.enum(["client", "server", "application"]),
-    version: z.string().optional(),
+    url: z.string(),
   }),
   user: z.object({
     id: z.string(),
     name: z.string(),
     email: z.string(),
     phone: z.string(),
-  }).optional(),
-  placement: z.enum(["top", "bottom", "middle"]),
+  })
 });
 
 export type Ads = z.infer<typeof zAdsSchema>;

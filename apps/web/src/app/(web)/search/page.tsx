@@ -1,16 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Alert, AlertDescription, AlertTitle } from "@repo/ui/components/ui/alert";
+import { Button } from "@repo/ui/components/ui/button";
+import { Skeleton } from "@repo/ui/components/ui/skeleton";
+import { AlertCircle, RefreshCw } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+
 import { SearchBar } from "@/components/search-bar";
-import { Container } from "@/components/web/container";
 import { AppGrid } from "@/components/web/app-grid";
+import { Container } from "@/components/web/container";
 import { LoadMoreButton } from "@/components/web/load-more-button";
 import { trpc } from "@/lib/trpc/client";
-import { Skeleton } from "@repo/ui/components/ui/skeleton";
-import { Alert, AlertDescription, AlertTitle } from "@repo/ui/components/ui/alert";
-import { AlertCircle, RefreshCw } from "lucide-react";
-import { Button } from "@repo/ui/components/ui/button";
 
 export default function SearchPage() {
   const router = useRouter();

@@ -1,23 +1,22 @@
 "use client";
 
-import type React from "react";
-
-import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { ArrowLeft, Upload, Server, Laptop, BrainCircuit, X } from "lucide-react";
-
 import { Button } from "@repo/ui/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@repo/ui/components/ui/card";
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@repo/ui/components/ui/form";
 import { Input } from "@repo/ui/components/ui/input";
 import { Label } from "@repo/ui/components/ui/label";
 import { Textarea } from "@repo/ui/components/ui/textarea";
-import { trpc } from "@/lib/trpc/client";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@repo/ui/components/ui/form";
 import { cn } from "@repo/ui/lib/utils";
+import { ArrowLeft, BrainCircuit, Laptop, Server, Upload, X } from "lucide-react";
+import { useRouter } from "next/navigation";
+import type React from "react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { z } from "zod";
+
+import { trpc } from "@/lib/trpc/client";
 // 表单验证模式
 const formSchema = z.object({
   nickname: z.string().min(1, "昵称不能为空"),

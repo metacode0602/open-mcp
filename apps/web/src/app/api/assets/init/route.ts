@@ -1,10 +1,11 @@
-import { NextRequest } from "next/server";
 import { appsDataAccess } from "@repo/db/database/admin";
 import { categoriesDataAccess } from "@repo/db/database/admin";
-import clientData from "./client.json";
 import fs from "fs";
+import { NextRequest } from "next/server";
 import path from "path";
+
 import categoryData from "./category.json";
+import clientData from "./client.json";
 export const dynamic = "force-dynamic";
 
 

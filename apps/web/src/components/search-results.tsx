@@ -1,15 +1,15 @@
 "use client"
 
+import { McpApp } from "@repo/db/types"
+import { Badge } from "@repo/ui/components/ui/badge"
+import { Button } from "@repo/ui/components/ui/button"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@repo/ui/components/ui/card"
 import { ArrowRight, Star } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
 
-import { Badge } from "@repo/ui/components/ui/badge"
-import { Button } from "@repo/ui/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@repo/ui/components/ui/card"
 import { trpc } from "@/lib/trpc/client"
-import { McpApp } from "@repo/db/types"
 import { getAssetUrl } from "@/lib/utils"
 interface SearchResultsProps {
   query: string

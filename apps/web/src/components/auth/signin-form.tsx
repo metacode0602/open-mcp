@@ -1,13 +1,14 @@
 "use client"
 
-import { useState } from "react"
-import { useRouter, useSearchParams } from "next/navigation"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@repo/ui/components/ui/card"
-import { PhoneSignin } from "@/components/auth/phone-signin"
-import { EmailLogin } from "@/components/auth/email-signin"
 import { Button } from "@repo/ui/components/ui/button"
-import { Switch } from "@repo/ui/components/ui/switch"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@repo/ui/components/ui/card"
 import { Label } from "@repo/ui/components/ui/label"
+import { Switch } from "@repo/ui/components/ui/switch"
+import { useRouter, useSearchParams } from "next/navigation"
+import { useState } from "react"
+
+import { EmailLogin } from "@/components/auth/email-signin"
+import { PhoneSignin } from "@/components/auth/phone-signin"
 
 export type AuthMode = "phone" | "email"
 

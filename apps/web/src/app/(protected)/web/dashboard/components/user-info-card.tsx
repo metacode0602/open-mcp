@@ -1,12 +1,13 @@
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@repo/ui/components/ui/card";
 import { Button } from "@repo/ui/components/ui/button";
-import { Settings } from "lucide-react";
-import Link from "next/link";
-import Image from "next/image";
-import { trpc } from "@/lib/trpc/client";
+import { Card, CardContent, CardHeader, CardTitle } from "@repo/ui/components/ui/card";
 import { Skeleton } from "@repo/ui/components/ui/skeleton";
+import { Settings } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+
+import { trpc } from "@/lib/trpc/client";
 
 export function UserInfoCard() {
   const { data: user, isLoading, isError } = trpc.mcpDashboard.getUserInfo.useQuery();

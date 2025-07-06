@@ -1,9 +1,5 @@
 "use client"
 
-import { Check } from "lucide-react"
-import Image from "next/image"
-import { useState } from "react"
-
 import { Button } from "@repo/ui/components/ui/button"
 import {
   Dialog,
@@ -14,6 +10,9 @@ import {
   DialogTitle,
 } from "@repo/ui/components/ui/dialog"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@repo/ui/components/ui/tabs"
+import { Check } from "lucide-react"
+import Image from "next/image"
+import { useState } from "react"
 import { toast } from "sonner"
 interface PaymentDialogProps {
   open: boolean

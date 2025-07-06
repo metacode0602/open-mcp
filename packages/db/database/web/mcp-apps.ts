@@ -2,8 +2,6 @@ import { apps, appCategories, appTags, categories, tags } from "@repo/db/schema"
 import { and, count, eq, gte, like, SQL, inArray } from "drizzle-orm";
 import { db } from "../../index";
 import { AppType } from "../../types";
-import { languages } from "unique-names-generator";
-
 
 export const mcpAppsDataAccess = {
   getByTypeCategoryAndTag: async (params: { type: AppType; category?: string; tag?: string }) => {
@@ -27,6 +25,7 @@ export const mcpAppsDataAccess = {
         slug: apps.slug,
         name: apps.name,
         description: apps.description,
+        descriptionZh: apps.descriptionZh,
         type: apps.type,
         icon: apps.icon,
         website: apps.website,
@@ -188,6 +187,7 @@ export const mcpAppsDataAccess = {
         slug: apps.slug,
         name: apps.name,
         description: apps.description,
+        descriptionZh: apps.descriptionZh,
         type: apps.type,
         icon: apps.icon,
         website: apps.website,

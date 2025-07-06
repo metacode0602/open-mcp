@@ -1,9 +1,9 @@
 
 import { SearchBar } from "@/components/search-bar"
 import { Container } from "@/components/web/container"
+import { CountBadge } from "@/components/web/count-badge"
 import { LogoIcon } from "@/components/web/logo-icon"
 import { Section } from "@/components/web/section"
-import { CountBadge } from "@/components/web/count-badge"
 
 export function HeroSection() {
   return (
@@ -19,7 +19,7 @@ export function HeroSection() {
             <h1 className="text-xl font-bold tracking-tighter sm:text-2xl xl:text-3xl/none bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/60">
               一站式 AI 全聚合平台，专注于 MCP 生态系统
             </h1>
-            <p className="max-w-4xl text-muted-foreground md:text-xl mx-auto">
+            <p className="max-w-[600px] text-muted-foreground md:text-xl mx-auto">
               探索 MCP 客户端、服务器和开源应用的综合导航平台，一键部署您的 MCP 服务
             </p>
           </div>

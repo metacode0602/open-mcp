@@ -1,11 +1,8 @@
 "use client"
 
-import { Badge } from "@repo/ui/components/ui/badge"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { AlertCircle, ArrowLeft, CheckCircle, Loader2, Shield } from "lucide-react"
-import { useCallback, useEffect, useState } from "react"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
+import { type McpApp,zCreateClaimsFormSchema } from "@repo/db/types"
+import { Badge } from "@repo/ui/components/ui/badge"
 import { Button } from "@repo/ui/components/ui/button"
 import {
   Dialog,
@@ -28,10 +25,14 @@ import { Input } from "@repo/ui/components/ui/input"
 import { Progress } from "@repo/ui/components/ui/progress"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@repo/ui/components/ui/select"
 import { Textarea } from "@repo/ui/components/ui/textarea"
-import { zCreateClaimsFormSchema, type McpApp } from "@repo/db/types"
-import { trpc } from "@/lib/trpc/client"
+import { AlertCircle, ArrowLeft, CheckCircle, Loader2, Shield } from "lucide-react"
+import { useCallback, useEffect, useState } from "react"
+import { useForm } from "react-hook-form"
 import { toast } from "sonner"
+import { z } from "zod"
+
 import { AuthCheckWrapper } from "@/components/auth/auth-check-wrapper"
+import { trpc } from "@/lib/trpc/client"
 
 interface ClaimAppDialogProps {
   app: McpApp

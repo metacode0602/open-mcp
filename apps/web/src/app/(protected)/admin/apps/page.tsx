@@ -1,10 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { DataTable } from "@/components/admin/data-table";
-import { columns } from "./components/columns";
-import { trpc } from "@/lib/trpc/client";
+import { AppStatus, AppType } from "@repo/db/types";
+import { Button } from "@repo/ui/components/ui/button";
 import { Input } from "@repo/ui/components/ui/input";
 import {
   Select,
@@ -13,10 +10,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@repo/ui/components/ui/select";
-import { Button } from "@repo/ui/components/ui/button";
-import { Search, RefreshCw, Plus } from "lucide-react";
-import { AppStatus, AppType } from "@repo/db/types";
+import { Plus,RefreshCw, Search } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+
 import { AddGitHubAppButton } from "@/components/admin/apps/add-github-app";
+import { DataTable } from "@/components/admin/data-table";
+import { trpc } from "@/lib/trpc/client";
+
+import { columns } from "./components/columns";
 
 export default function AdminAppsPage() {
   const router = useRouter();
@@ -74,7 +76,7 @@ export default function AdminAppsPage() {
         <Input
           placeholder="搜索应用名称或描述"
           value={searchParams.query}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchParams(prev => ({ ...prev, query: e.target.value }))}
+          onChange={(e) => setSearchParams(prev => ({ ...prev, query: e.target.value }))}
           className="max-w-sm"
         />
         <Select

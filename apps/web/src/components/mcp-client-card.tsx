@@ -1,8 +1,7 @@
-import { Users } from "lucide-react"
-import type React from "react"
-
 import { Button } from "@repo/ui/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@repo/ui/components/ui/card"
+import { Users } from "lucide-react"
+import type React from "react"
 
 interface McpClientCardProps {
   title: string

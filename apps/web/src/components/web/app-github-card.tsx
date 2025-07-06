@@ -1,19 +1,19 @@
 "use client"
 
-import type React from "react"
-
-import { useState } from "react"
-import { TrendingUpIcon, CalendarIcon } from "lucide-react"
-import { Card, CardContent, CardHeader, CardTitle } from "@repo/ui/components/ui/card"
-import { Skeleton } from "@repo/ui/components/ui/skeleton"
-import { Button } from "@repo/ui/components/ui/button"
-import { Separator } from "@repo/ui/components/ui/separator"
-import { ChartContainer, ChartTooltip } from "@repo/ui/components/ui/chart"
-import { Bar, BarChart, XAxis, YAxis, ResponsiveContainer } from "recharts"
-import { cn } from "@repo/ui/lib/utils"
-import { formatNumber, fromNow } from "@/lib/utils"
-import { trpc } from "@/lib/trpc/client";
 import { App } from "@repo/db/types"
+import { Button } from "@repo/ui/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@repo/ui/components/ui/card"
+import { ChartContainer, ChartTooltip } from "@repo/ui/components/ui/chart"
+import { Separator } from "@repo/ui/components/ui/separator"
+import { Skeleton } from "@repo/ui/components/ui/skeleton"
+import { cn } from "@repo/ui/lib/utils"
+import { CalendarIcon,ExternalLinkIcon, TrendingUpIcon } from "lucide-react"
+import type React from "react"
+import { useState } from "react"
+import { Bar, BarChart, ResponsiveContainer,XAxis, YAxis } from "recharts"
+
+import { trpc } from "@/lib/trpc/client";
+import { formatNumber, fromNow } from "@/lib/utils"
 
 // 使用tRPC返回的数据结构
 interface MonthlyTrend {
@@ -50,15 +50,15 @@ export const AppGitHubCard = ({ project }: Props) => {
   )
 
   // 获取趋势汇总数据
-  const { data: trends } = trpc.mcpSnapshots.getProjectTrends.useQuery(
+  const { data: trends, isLoading: summaryLoading } = trpc.mcpSnapshots.getProjectTrends.useQuery(
     { repoId: project.repoId || "" },
     {
-      enabled: !!project.id,
+      enabled: !!project.repoId,
     }
   )
 
   // 计算加载状态
-  const isLoadingData = trendsLoading || (monthlyTrends === undefined)
+  const isLoadingData = trendsLoading || summaryLoading || (monthlyTrends === undefined)
 
   return (
     <Card className="w-full">
@@ -150,8 +150,9 @@ const MonthlyTrendsSection = ({ trends, project }: { trends: MonthlyTrend[]; pro
   }))
 
   const totalStars = chartData.reduce((sum, d) => sum + d.stars, 0)
+  const hasData = trends.length > 0
 
-  const handleBarClick = (data: { activePayload?: Array<{ payload: { fullData: MonthlyTrend } }> }) => {
+  const handleBarClick = (data: any) => {
     if (data && data.activePayload && data.activePayload[0]) {
       const clickedData = data.activePayload[0].payload.fullData
       setSelectedMonth(clickedData)
@@ -160,7 +161,6 @@ const MonthlyTrendsSection = ({ trends, project }: { trends: MonthlyTrend[]; pro
 
   return (
     <div className="space-y-4">
-
       {/* 选中月份的详细信息 */}
       {selectedMonth && (
         <div className="rounded-lg border bg-muted/50 p-4">
@@ -168,7 +168,7 @@ const MonthlyTrendsSection = ({ trends, project }: { trends: MonthlyTrend[]; pro
             <div className="flex items-center gap-2">
               <CalendarIcon className="h-4 w-4 text-muted-foreground" />
               <span className="font-medium">
-                {selectedMonth.year}年{getMonthName(selectedMonth.month)} - {JSON.stringify(selectedMonth)}
+                {selectedMonth.year}年{getMonthName(selectedMonth.month)}
               </span>
             </div>
             <Button variant="ghost" size="sm" onClick={() => setSelectedMonth(null)} className="h-6 w-6 p-0">
@@ -181,7 +181,7 @@ const MonthlyTrendsSection = ({ trends, project }: { trends: MonthlyTrend[]; pro
               <span className="text-lg font-semibold text-green-600">+{formatNumber(selectedMonth.delta)}</span>
               <span className="text-sm text-muted-foreground">Stars {selectedMonth.stars}</span>
             </div>
-            {totalStars > 0 && (
+            {totalStars > 0 && selectedMonth.delta > 0 && (
               <div className="text-sm text-muted-foreground">
                 占总增长的 {((selectedMonth.delta / totalStars) * 100).toFixed(1)}%
               </div>
@@ -190,65 +190,74 @@ const MonthlyTrendsSection = ({ trends, project }: { trends: MonthlyTrend[]; pro
         </div>
       )}
 
-      <ChartContainer
-        config={{
-          stars: {
-            label: "Stars",
-            color: "hsl(var(--chart-1))",
-          },
-        }}
-        className="h-[320px] w-full"
-      >
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={chartData} margin={{ top: 20, right: 10, left: 10, bottom: 0 }} onClick={handleBarClick}>
-            <XAxis
-              dataKey="displayMonth"
-              axisLine={false}
-              tickLine={false}
-              tick={{ fontSize: 11 }}
-              // angle={-45}
-              textAnchor="end"
-              height={60}
-              interval={0}
-            />
-            <YAxis
-              axisLine={false}
-              tickLine={false}
-              tick={{ fontSize: 12 }}
-              tickFormatter={(value) => formatNumber(value)}
-              width={60}
-            />
-            <ChartTooltip content={({ active, payload, label }) => {
-              if (active && payload && payload.length) {
-                const data = payload[0]?.payload.fullData
-                if (!data) return null
-                return (
-                  <div className="rounded-lg border bg-background p-3 shadow-md">
-                    <div className="font-medium">
-                      {data.year}年{getMonthName(data.month)}
-                    </div>
-                    <div className="flex items-center gap-1 text-sm">
-                      <div className="h-2 w-2 rounded-full bg-[var(--color-stars)]" />
-                      <span>Stars: +{formatNumber(data.delta)}</span>
-                    </div>
-                    <div className="text-xs text-muted-foreground mt-1">点击查看详细信息</div>
-                  </div>
-                )
-              }
-              return null
-            }}
-              cursor={{ fill: "rgba(0, 0, 0, 0.1)" }}
-            />
-            <Bar
-              dataKey="stars"
-              fill="var(--color-stars)"
-              radius={[3, 3, 0, 0]}
-              className="transition-all duration-200 hover:opacity-80 cursor-pointer"
-              maxBarSize={32}
-            />
-          </BarChart>
-        </ResponsiveContainer>
-      </ChartContainer>
+      {!hasData ? (
+        <div className="flex h-[320px] w-full items-center justify-center rounded-lg border bg-muted/50">
+          <div className="text-center">
+            <TrendingUpIcon className="mx-auto h-12 w-12 text-muted-foreground" />
+            <p className="mt-2 text-sm text-muted-foreground">暂无趋势数据</p>
+            <p className="text-xs text-muted-foreground">该项目的 Stars 数据正在收集中</p>
+          </div>
+        </div>
+      ) : (
+        <ChartContainer
+          config={{
+            stars: {
+              label: "Stars",
+              color: "hsl(var(--chart-1))",
+            },
+          }}
+          className="h-[320px] w-full"
+        >
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart data={chartData} margin={{ top: 20, right: 10, left: 10, bottom: 0 }} onClick={handleBarClick}>
+              <XAxis
+                dataKey="displayMonth"
+                axisLine={false}
+                tickLine={false}
+                tick={{ fontSize: 11 }}
+                textAnchor="end"
+                height={60}
+                interval={0}
+              />
+              <YAxis
+                axisLine={false}
+                tickLine={false}
+                tick={{ fontSize: 12 }}
+                tickFormatter={(value) => formatNumber(value)}
+                width={60}
+              />
+              <ChartTooltip
+                content={({ active, payload, label }) => {
+                  if (active && payload && payload.length) {
+                    const data = payload[0]?.payload.fullData
+                    return (
+                      <div className="rounded-lg border bg-background p-3 shadow-md">
+                        <div className="font-medium">
+                          {data.year}年{getMonthName(data.month)}
+                        </div>
+                        <div className="flex items-center gap-1 text-sm">
+                          <div className="h-2 w-2 rounded-full bg-[var(--color-stars)]" />
+                          <span>Stars: +{formatNumber(data.delta)}</span>
+                        </div>
+                        <div className="text-xs text-muted-foreground mt-1">点击查看详细信息</div>
+                      </div>
+                    )
+                  }
+                  return null
+                }}
+                cursor={{ fill: "rgba(0, 0, 0, 0.1)" }}
+              />
+              <Bar
+                dataKey="stars"
+                fill="var(--color-stars)"
+                radius={[3, 3, 0, 0]}
+                className="transition-all duration-200 hover:opacity-80 cursor-pointer"
+                maxBarSize={32}
+              />
+            </BarChart>
+          </ResponsiveContainer>
+        </ChartContainer>
+      )}
 
       {/* 年份分隔线指示器 */}
       <div className="flex items-center justify-center gap-4 text-xs text-muted-foreground">
@@ -274,6 +283,9 @@ const TrendsSummarySection = ({ trends }: { trends: TrendsSummary }) => {
     { label: "本年", value: trends.yearly, period: "年" },
   ]
 
+  // 检查是否有有效数据
+  const hasValidData = summaryItems.some(item => item.value !== 0)
+
   return (
     <div className="space-y-4">
       <div>
@@ -281,11 +293,21 @@ const TrendsSummarySection = ({ trends }: { trends: TrendsSummary }) => {
         <p className="text-sm text-muted-foreground">不同时间段的 Stars 增长统计</p>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-        {summaryItems.map((item, index) => (
-          <TrendCard key={index} {...item} />
-        ))}
-      </div>
+      {!hasValidData ? (
+        <div className="flex h-32 w-full items-center justify-center rounded-lg border bg-muted/50">
+          <div className="text-center">
+            <TrendingUpIcon className="mx-auto h-8 w-8 text-muted-foreground" />
+            <p className="mt-2 text-sm text-muted-foreground">暂无增长数据</p>
+            <p className="text-xs text-muted-foreground">该项目的增长数据正在收集中</p>
+          </div>
+        </div>
+      ) : (
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+          {summaryItems.map((item, index) => (
+            <TrendCard key={index} {...item} />
+          ))}
+        </div>
+      )}
     </div>
   )
 }
@@ -294,6 +316,7 @@ const TrendsSummarySection = ({ trends }: { trends: TrendsSummary }) => {
 const TrendCard = ({ label, value, period }: { label: string; value: number; period: string }) => {
   const isPositive = value > 0
   const isZero = value === 0
+  const isNegative = value < 0
 
   return (
     <div className="rounded-lg border p-4 text-center transition-all duration-200 hover:shadow-md">
@@ -303,7 +326,7 @@ const TrendCard = ({ label, value, period }: { label: string; value: number; per
           "text-2xl font-bold",
           isPositive && "text-green-600",
           isZero && "text-gray-500",
-          !isPositive && !isZero && "text-red-600",
+          isNegative && "text-red-600",
         )}
       >
         {isPositive && "+"}

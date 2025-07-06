@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
-
-import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "sonner";
+
 import { MainNav } from "@/app/(protected)/web/main-nav";
+import { ThemeProvider } from "@/components/theme-provider";
 
 export default async function LoginUserLayout({ children }: { children: ReactNode }) {
   return (

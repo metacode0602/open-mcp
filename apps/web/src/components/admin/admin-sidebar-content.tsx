@@ -1,4 +1,17 @@
 "use client";
+import { Button } from "@repo/ui/components/ui/button";
+import {
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuBadge,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubButton,
+  SidebarMenuSubItem,
+} from "@repo/ui/components/ui/sidebar";
 import {
   BarChart,
   CreditCard,
@@ -14,20 +27,6 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
-import { Button } from "@repo/ui/components/ui/button";
-import {
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarMenu,
-  SidebarMenuBadge,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem,
-} from "@repo/ui/components/ui/sidebar";
 
 export function AdminSidebarContent() {
   const pathname = usePathname();

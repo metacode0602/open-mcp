@@ -1,11 +1,12 @@
 "use client"
 
+import Link from "next/link"
+import { useState } from "react"
+
 import { EmailSubscribe } from "@/components/email-subscribe"
 import { Container } from "@/components/web/container"
 import { LogoIcon } from "@/components/web/logo-icon"
 import { WechatQRCodeDialog } from "@/components/wechat-qrcode-dialog"
-import Link from "next/link"
-import { useState } from "react"
 
 export function Footer() {
   const [isContactDialogOpen, setIsContactDialogOpen] = useState(false)

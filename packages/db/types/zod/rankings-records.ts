@@ -40,6 +40,7 @@ export const zRankingAppSchema = z.object({
   name: z.string(),
   slug: z.string(),
   description: z.string(),
+  descriptionZh: z.string().optional(),
   icon: z.string(),
   stars: z.number().int(),
   watchers: z.number().int(),

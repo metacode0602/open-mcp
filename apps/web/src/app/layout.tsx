@@ -1,10 +1,11 @@
-import type { Metadata, Viewport } from "next"
-import { geistMono, geistSans } from "./fonts";
-import { UmamiProvider } from "@repo/track";
 import "@repo/ui/globals.css"
 import "@/styles/custom.css"
 
+import { UmamiProvider } from "@repo/track";
+import type { Metadata, Viewport } from "next"
 import type { ReactNode } from "react"
+
+import { geistMono, geistSans } from "./fonts";
 import { Providers } from "./providers"
 
 export const metadata: Metadata = {

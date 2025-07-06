@@ -1,7 +1,9 @@
 "use client"
 
-import type React from "react"
-
+import { Badge } from "@repo/ui/components/ui/badge"
+import { Button } from "@repo/ui/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@repo/ui/components/ui/card"
+import { Tabs, TabsList, TabsTrigger } from "@repo/ui/components/ui/tabs"
 import {
   AlertCircle,
   ArrowDownRight,
@@ -16,13 +18,10 @@ import {
   Users,
 } from "lucide-react"
 import Link from "next/link"
+import type React from "react"
 import { useState } from "react"
 
 import { PageHeader } from "@/components/admin/page-header"
-import { Badge } from "@repo/ui/components/ui/badge"
-import { Button } from "@repo/ui/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@repo/ui/components/ui/card"
-import { Tabs, TabsList, TabsTrigger } from "@repo/ui/components/ui/tabs"
 import { trpc } from "@/lib/trpc/client"
 // 模拟统计数据
 const stats = {

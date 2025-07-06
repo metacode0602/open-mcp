@@ -1,7 +1,9 @@
 "use client"
 
-import type React from "react"
-
+import { Button } from "@repo/ui/components/ui/button"
+import { ScrollArea } from "@repo/ui/components/ui/scroll-area"
+import { Sheet, SheetContent, SheetTrigger } from "@repo/ui/components/ui/sheet"
+import { cn } from "@repo/ui/lib/utils"
 import {
   BarChart,
   ChevronDown,
@@ -18,13 +20,10 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import type React from "react"
 import { useState } from "react"
 
-import { Button } from "@repo/ui/components/ui/button"
 import { LogoIcon } from "@/components/web/logo-icon"
-import { ScrollArea } from "@repo/ui/components/ui/scroll-area"
-import { Sheet, SheetContent, SheetTrigger } from "@repo/ui/components/ui/sheet"
-import { cn } from "@repo/ui/lib/utils"
 
 interface SidebarNavItemProps {
   href: string

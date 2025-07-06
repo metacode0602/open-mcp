@@ -1,5 +1,6 @@
-import { OpenMCPLogo, OpenMCPStudioLogo } from "@/components/icons"
 import { cn } from "@repo/ui/lib/utils"
+
+import { OpenMCPLogo, OpenMCPStudioLogo } from "@/components/icons"
 
 interface LogoIconProps {
   type: "openmcp" | "studio"

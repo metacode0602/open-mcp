@@ -1,5 +1,6 @@
 "use client"
 
+import { Button } from "@repo/ui/components/ui/button"
 import {
   Dialog,
   DialogContent,
@@ -8,10 +9,10 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@repo/ui/components/ui/dialog"
-import { Button } from "@repo/ui/components/ui/button"
-import { toast } from "sonner"
-import { trpc } from "@/lib/trpc/client"
 import { useState } from "react"
+import { toast } from "sonner"
+
+import { trpc } from "@/lib/trpc/client"
 
 interface DeleteRecordDialogProps {
   open: boolean

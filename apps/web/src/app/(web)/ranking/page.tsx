@@ -1,12 +1,13 @@
 'use client'
 
-import Link from "next/link"
-import { Button } from "@repo/ui/components/ui/button"
-import { ChevronRight } from "lucide-react"
-import RankingAppPage from "@/components/web/rankings/ranking-app"
 import { RankingApp } from "@repo/db/types"
-import { trpc } from "@/lib/trpc/client"
+import { Button } from "@repo/ui/components/ui/button"
 import { Skeleton } from "@repo/ui/components/ui/skeleton"
+import { ChevronRight } from "lucide-react"
+import Link from "next/link"
+
+import RankingAppPage from "@/components/web/rankings/ranking-app"
+import { trpc } from "@/lib/trpc/client"
 
 // 获取当前日期格式化为 YYYY-MM-DD
 function getFormattedDate(daysAgo = 0): string {
@@ -18,7 +19,6 @@ function getFormattedDate(daysAgo = 0): string {
 export default function HomePage() {
   const today = getFormattedDate()
   const yesterday = getFormattedDate(1)
-  const lastWeekDate = getFormattedDate(7)
   const lastMonthDate = getFormattedDate(30)
 
   // Fetch data using tRPC
@@ -30,7 +30,6 @@ export default function HomePage() {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-8">产品排行榜</h1>
-
       {/* 今日排行 */}
       <RankingSection
         title="今日排行"

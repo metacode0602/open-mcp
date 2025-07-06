@@ -1,16 +1,17 @@
 "use client";
 
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@repo/ui/components/ui/card";
 import { Badge } from "@repo/ui/components/ui/badge";
 import { Button } from "@repo/ui/components/ui/button";
-import { ArrowRight, Shield } from "lucide-react";
-import Link from "next/link";
-import Image from "next/image";
-import { trpc } from "@/lib/trpc/client";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@repo/ui/components/ui/card";
 import { Skeleton } from "@repo/ui/components/ui/skeleton";
-import { getAssetUrl } from "@/lib/utils";
-import { DetailDialog } from "@/components/detail-dialog";
+import { ArrowRight, Shield } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
+
+import { DetailDialog } from "@/components/detail-dialog";
+import { trpc } from "@/lib/trpc/client";
+import { getAssetUrl } from "@/lib/utils";
 
 export function ClaimsTab() {
   const { data: claims, isLoading } = trpc.mcpDashboard.getClaims.useQuery();

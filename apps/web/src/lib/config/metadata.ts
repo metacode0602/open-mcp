@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+
 import { linksConfig } from "./links"
 import { siteConfig } from "./site"
 

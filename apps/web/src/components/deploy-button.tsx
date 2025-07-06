@@ -1,6 +1,5 @@
 "use client"
 
-import { ArrowRight, Rocket } from "lucide-react"
 import { Button } from "@repo/ui/components/ui/button"
 import {
   Popover,
@@ -8,6 +7,7 @@ import {
   PopoverTrigger,
 } from "@repo/ui/components/ui/popover"
 import { cn } from "@repo/ui/lib/utils"
+import { ArrowRight, Rocket } from "lucide-react"
 import { useState } from "react"
 
 export function DeployButton() {

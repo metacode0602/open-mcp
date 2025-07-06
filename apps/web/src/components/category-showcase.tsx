@@ -1,14 +1,15 @@
 "use client";
 
+import { McpApp } from "@repo/db/types";
+import { Alert, AlertDescription, AlertTitle } from "@repo/ui/components/ui/alert";
+import { Button } from "@repo/ui/components/ui/button";
+import { Skeleton } from "@repo/ui/components/ui/skeleton";
+import { AlertCircle, RefreshCw } from "lucide-react";
 import { useState } from "react";
+
 import { AppGrid } from "@/components/web/app-grid";
 import { LoadMoreButton } from "@/components/web/load-more-button";
 import { trpc } from "@/lib/trpc/client";
-import { Skeleton } from "@repo/ui/components/ui/skeleton";
-import { Alert, AlertDescription, AlertTitle } from "@repo/ui/components/ui/alert";
-import { AlertCircle, RefreshCw } from "lucide-react";
-import { Button } from "@repo/ui/components/ui/button";
-import { McpApp } from "@repo/db/types";
 
 interface CategoryShowcaseProps {
   category: "client" | "server" | "application";

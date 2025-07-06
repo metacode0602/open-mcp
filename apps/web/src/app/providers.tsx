@@ -2,16 +2,17 @@
 
 import { AuthQueryProvider } from "@daveyplate/better-auth-tanstack"
 import { AuthUIProviderTanstack } from "@daveyplate/better-auth-ui/tanstack"
-import { QueryClient, QueryClientProvider, isServer } from "@tanstack/react-query"
-import { ThemeProvider } from "next-themes"
+import { AppRouter } from "@repo/trpc"
+import { isServer,QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { createTRPCClient } from "@trpc/client"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { useState, type ReactNode } from "react"
-import { Toaster, toast } from "sonner"
-import { trpc } from "@/lib/trpc/client"
+import { ThemeProvider } from "next-themes"
+import { type ReactNode,useState } from "react"
+import { toast,Toaster } from "sonner"
+
 import { authClient } from "@/lib/auth-client"
-import { createTRPCClient } from "@trpc/client"
-import { AppRouter } from "@repo/trpc"
+import { trpc } from "@/lib/trpc/client"
 import { trpcLinks } from "@/lib/trpc/links"
 
 function makeQueryClient() {

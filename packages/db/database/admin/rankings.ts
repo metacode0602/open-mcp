@@ -1,6 +1,6 @@
 import { and, asc, desc, eq, like, not, or, sql } from "drizzle-orm";
 import { db } from "../../index";
-import { apps, rankingRecords, rankings } from "../../schema";
+import { apps, rankingRecords, rankings, snapshots, snapshotsWeekly, snapshotsMonthly } from "../../schema";
 import {
   CreateAppSubmission, CreateRankingRecord, formatPeriodKey, RankingApp,
   RankingType, UpdateRankingRecord, zCreateRankingSchema, zSearchRankingsSchema,
@@ -187,6 +187,7 @@ export const rankingsDataAccess = {
       name: record.app.name,
       slug: record.app.slug,
       description: record.app.description,
+      descriptionZh: record.app.descriptionZh || undefined,
       icon: record.app.icon || "",
       stars: record.app.stars || 0,
       watchers: record.app.watchers || 0,
@@ -221,6 +222,212 @@ export const rankingsDataAccess = {
         eq(rankings.status, true)
       ),
     });
+  },
+
+  /**
+ * 从快照数据计算日排行
+ */
+  calculateDailyRankingFromSnapshots: async (date: Date) => {
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+
+    // 获取指定日期的快照数据，并关联应用数据
+    const snapshotData = await db
+      .select({
+        snapshot: snapshots,
+        app: apps,
+      })
+      .from(snapshots)
+      .innerJoin(apps, eq(snapshots.repoId, apps.repoId))
+      .where(and(
+        eq(snapshots.year, year),
+        eq(snapshots.month, month),
+        eq(snapshots.day, day)
+      ))
+      .orderBy(desc(snapshots.stars))
+      .limit(30);
+
+    if (snapshotData.length === 0) {
+      return null;
+    }
+
+    // 创建或更新排行
+    const periodKey = formatPeriodKey('daily', date);
+    const rankingName = `Github 日排行 ${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+
+    const [ranking] = await db.insert(rankings).values({
+      name: rankingName,
+      type: 'daily',
+      source: 'github',
+      description: `Github Daily Rank ${periodKey}`,
+      periodKey,
+      status: true,
+    }).onConflictDoUpdate({
+      target: [rankings.type, rankings.source, rankings.periodKey],
+      set: {
+        name: rankingName,
+        updatedAt: new Date(),
+      },
+    }).returning();
+
+    if (!ranking) {
+      throw new Error("Failed to create or update ranking");
+    }
+
+    // 创建排行记录
+    const records = snapshotData
+      .filter(item => item.app) // 过滤掉没有应用的数据
+      .map((item, index) => ({
+        rankingId: ranking.id,
+        entityId: item.app!.id,
+        entityName: item.app!.name,
+        entityType: "apps" as const,
+        score: item.snapshot.stars || 0,
+        rank: index + 1,
+      }));
+
+    if (records.length > 0) {
+      await db.insert(rankingRecords).values(records).onConflictDoNothing();
+    }
+
+    return ranking;
+  },
+
+  /**
+ * 从快照数据计算周排行
+ */
+  calculateWeeklyRankingFromSnapshots: async (date: Date) => {
+    const year = date.getFullYear();
+    const week = Math.ceil((date.getTime() - new Date(year, 0, 1).getTime()) / (7 * 24 * 60 * 60 * 1000));
+
+    // 获取指定周的周快照数据，并关联应用数据
+    const snapshotData = await db
+      .select({
+        snapshot: snapshotsWeekly,
+        app: { id: apps.id, name: apps.name },
+      })
+      .from(snapshotsWeekly)
+      .innerJoin(apps, eq(snapshotsWeekly.repoId, apps.repoId))
+      .where(and(
+        eq(snapshotsWeekly.year, year),
+        eq(snapshotsWeekly.week, week)
+      ))
+      .orderBy(desc(snapshotsWeekly.stars))
+      .limit(30);
+
+    if (snapshotData.length === 0) {
+      return null;
+    }
+
+    // 创建或更新排行
+    const periodKey = formatPeriodKey('weekly', date);
+    const rankingName = `Github 周排行 ${year}-W${week}`;
+
+    const [ranking] = await db.insert(rankings).values({
+      name: rankingName,
+      type: 'weekly',
+      source: 'github',
+      description: `Github Weekly Rank ${periodKey}`,
+      periodKey,
+      status: true,
+    }).onConflictDoUpdate({
+      target: [rankings.type, rankings.source, rankings.periodKey],
+      set: {
+        name: rankingName,
+        updatedAt: new Date(),
+      },
+    }).returning();
+
+    if (!ranking) {
+      throw new Error("Failed to create or update ranking");
+    }
+
+    // 创建排行记录
+    const records = snapshotData
+      .filter(item => item.app) // 过滤掉没有应用的数据
+      .map((item, index) => ({
+        rankingId: ranking.id,
+        entityId: item.app!.id,
+        entityName: item.app!.name,
+        entityType: "apps" as const,
+        score: item.snapshot.stars || 0,
+        rank: index + 1,
+      }));
+
+    if (records.length > 0) {
+      await db.insert(rankingRecords).values(records).onConflictDoNothing();
+    }
+
+    return ranking;
+  },
+
+  /**
+ * 从快照数据计算月排行
+ */
+  calculateMonthlyRankingFromSnapshots: async (date: Date) => {
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+
+    // 获取指定月份的月快照数据，并关联应用数据
+    const snapshotData = await db
+      .select({
+        snapshot: snapshotsMonthly,
+        app: apps,
+      })
+      .from(snapshotsMonthly)
+      .innerJoin(apps, eq(snapshotsMonthly.repoId, apps.repoId))
+      .where(and(
+        eq(snapshotsMonthly.year, year),
+        eq(snapshotsMonthly.month, month)
+      ))
+      .orderBy(desc(snapshotsMonthly.stars))
+      .limit(30);
+
+    if (snapshotData.length === 0) {
+      return null;
+    }
+
+    // 创建或更新排行
+    const periodKey = formatPeriodKey('monthly', date);
+    const rankingName = `Github 月排行 ${year}-${String(month).padStart(2, '0')}`;
+
+    const [ranking] = await db.insert(rankings).values({
+      name: rankingName,
+      type: 'monthly',
+      source: 'github',
+      description: `Github Monthly Rank ${periodKey}`,
+      periodKey,
+      status: true,
+    }).onConflictDoUpdate({
+      target: [rankings.type, rankings.source, rankings.periodKey],
+      set: {
+        name: rankingName,
+        updatedAt: new Date(),
+      },
+    }).returning();
+
+    if (!ranking) {
+      throw new Error("Failed to create or update ranking");
+    }
+
+    // 创建排行记录
+    const records = snapshotData
+      .filter(item => item.app) // 过滤掉没有应用的数据
+      .map((item, index) => ({
+        rankingId: ranking.id,
+        entityId: item.app!.id,
+        entityName: item.app!.name,
+        entityType: "apps" as const,
+        score: item.snapshot.stars || 0,
+        rank: index + 1,
+      }));
+
+    if (records.length > 0) {
+      await db.insert(rankingRecords).values(records).onConflictDoNothing();
+    }
+
+    return ranking;
   },
 
   /**

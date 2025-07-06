@@ -1,9 +1,8 @@
+import { Button } from "@repo/ui/components/ui/button";
 import { ArrowLeft, Edit } from "lucide-react";
 import Link from "next/link";
 
 import { AdminPageHeader } from "@/components/admin/admin-page-header";
-import { Button } from "@repo/ui/components/ui/button";
-
 import { SubmissionDetail } from "@/components/admin/submissions/submission-detail";
 
 export const dynamic = "force-dynamic";

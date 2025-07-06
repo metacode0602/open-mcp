@@ -3,6 +3,7 @@
 import { Badge } from "@repo/ui/components/ui/badge"
 import { Button } from "@repo/ui/components/ui/button"
 import { X } from "lucide-react"
+
 import { trpc } from "@/lib/trpc/client"
 
 interface TagFilterProps {

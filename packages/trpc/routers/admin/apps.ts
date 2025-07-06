@@ -51,12 +51,14 @@ export const appsRouter = router({
       if (existingApp) {
         throw new Error("该GitHub仓库已存在对应的应用");
       }
-      if (process.env.PROD_CREATE_API_URL && process.env.PROD_CREATE_API_TOKEN) {
+      console.log("process.env.VERCEL_API_URL", process.env.VERCEL_API_URL);
+      console.log("process.env.VERCEL_TOKEN", process.env.VERCEL_TOKEN);
+      if (process.env.VERCEL_API_URL && process.env.VERCEL_TOKEN) {
         try {
-          const response = await fetch(process.env.PROD_CREATE_API_URL, {
+          const response = await fetch(process.env.VERCEL_API_URL, {
             method: "POST",
             headers: {
-              "Authorization": `Bearer ${process.env.PROD_CREATE_API_TOKEN}`,
+              "Authorization": `Bearer ${process.env.VERCEL_TOKEN}`,
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
@@ -85,8 +87,9 @@ export const appsRouter = router({
         } catch (error) {
           console.warn("Vercel API请求失败，使用默认项目ID:", error);
         }
+      } else {
+        throw new Error("Vercel API请求失败");
       }
-      throw new Error("Vercel API请求失败");
 
     } catch (error) {
       console.error("创建GitHub应用失败:", error);

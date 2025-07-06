@@ -1,17 +1,6 @@
 "use client"
 
-import type React from "react"
-
 import { zodResolver } from "@hookform/resolvers/zod"
-import { ArrowLeft, Save } from "lucide-react"
-import { useRouter } from "next/navigation"
-import { useState } from "react"
-import { type Control, useForm } from "react-hook-form"
-import { z } from "zod"
-
-import { FormFileUpload } from "@/components/file-uploader";
-import { FormSection } from "@/components/admin/form-section"
-import { PageHeader } from "@/components/admin/page-header"
 import { Button } from "@repo/ui/components/ui/button"
 import { Card, CardContent } from "@repo/ui/components/ui/card"
 import { Checkbox } from "@repo/ui/components/ui/checkbox"
@@ -20,9 +9,19 @@ import { Input } from "@repo/ui/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@repo/ui/components/ui/select"
 import { Separator } from "@repo/ui/components/ui/separator"
 import { Textarea } from "@repo/ui/components/ui/textarea"
-import { toast } from "sonner"
-import { trpc } from "@/lib/trpc/client";
+import { ArrowLeft, Save } from "lucide-react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
+import type React from "react"
+import { useState } from "react"
+import { type Control, useForm } from "react-hook-form"
+import { toast } from "sonner"
+import { z } from "zod"
+
+import { FormSection } from "@/components/admin/form-section"
+import { PageHeader } from "@/components/admin/page-header"
+import { FormFileUpload } from "@/components/file-uploader";
+import { trpc } from "@/lib/trpc/client";
 // 表单验证模式
 const formSchema = z.object({
   name: z

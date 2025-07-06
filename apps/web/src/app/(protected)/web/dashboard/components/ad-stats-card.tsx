@@ -1,12 +1,13 @@
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@repo/ui/components/ui/card";
 import { Button } from "@repo/ui/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@repo/ui/components/ui/card";
 import { Separator } from "@repo/ui/components/ui/separator";
+import { Skeleton } from "@repo/ui/components/ui/skeleton";
 import { BarChart } from "lucide-react";
 import Link from "next/link";
+
 import { trpc } from "@/lib/trpc/client";
-import { Skeleton } from "@repo/ui/components/ui/skeleton";
 
 export function AdStatsCard() {
   const { data: adStats, isLoading } = trpc.mcpDashboard.getAdStats.useQuery();

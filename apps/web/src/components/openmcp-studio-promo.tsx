@@ -1,10 +1,10 @@
+import { Badge } from "@repo/ui/components/ui/badge"
+import { Button } from "@repo/ui/components/ui/button"
+import { Card, CardContent } from "@repo/ui/components/ui/card"
 import { ArrowRight, Download } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
-import { Badge } from "@repo/ui/components/ui/badge"
-import { Button } from "@repo/ui/components/ui/button"
-import { Card, CardContent } from "@repo/ui/components/ui/card"
 import { Container } from "@/components/web/container"
 import { LogoIcon } from "@/components/web/logo-icon"
 import { Section } from "@/components/web/section"

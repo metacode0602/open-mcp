@@ -1,16 +1,18 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import Link from "next/link"
+import { Badge } from "@repo/ui/components/ui/badge"
 import { Button } from "@repo/ui/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@repo/ui/components/ui/card"
-import { Badge } from "@repo/ui/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@repo/ui/components/ui/tabs"
-import { ArrowLeft, BarChart3, Edit, RefreshCw } from "lucide-react"
-import { formatDistanceToNow, format } from "date-fns"
+import { format,formatDistanceToNow } from "date-fns"
 import { zhCN } from "date-fns/locale"
-import { EditRankingDialog } from "../components/edit-ranking-dialog"
+import { ArrowLeft, BarChart3, Edit, RefreshCw } from "lucide-react"
+import Link from "next/link"
+import { useEffect, useState } from "react"
+
 import { trpc } from "@/lib/trpc/client"
+
+import { EditRankingDialog } from "../components/edit-ranking-dialog"
 
 interface RankingDetailsProps {
   id: string

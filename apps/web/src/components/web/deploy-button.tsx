@@ -1,7 +1,7 @@
 "use client"
 
-import { ArrowRight } from "lucide-react"
 import { Button } from "@repo/ui/components/ui/button"
+import { ArrowRight } from "lucide-react"
 import { toast } from "sonner"
 
 export function DeployButton() {

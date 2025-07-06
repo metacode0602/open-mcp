@@ -1,0 +1,91 @@
+{
+  "event_type": "repo_updated",
+  "timestamp": "2025-07-04T15:52:51.884Z",
+  "data": {
+    "id": "NrhoDd4VmWH965veKpEdp",
+    "full_name": "vercel/next-forge",
+    "name": "next-forge",
+    "owner": "vercel",
+    "owner_id": 14985020,
+    "description": "Production-grade Turborepo template for Next.js apps.",
+    "description_zh": "用于 Next.js 应用的生产级 Turborepo 模板。",
+    "homepage": "https://www.next-forge.com/",
+    "stars": 6218,
+    "forks": 536,
+    "contributor_count": 60,
+    "mentionable_users_count": 136,
+    "watchers_count": 21,
+    "pull_requests_count": 383,
+    "releases_count": 349,
+    "commit_count": 1418,
+    "topics": [
+      "nextjs",
+      "prisma",
+      "react",
+      "tailwindcss",
+      "typescript",
+      "boilerplate",
+      "clerk",
+      "betterstack",
+      "dark-mode",
+      "feature-flags",
+      "neon",
+      "posthog",
+      "sentry",
+      "seo",
+      "stripe"
+    ],
+    "languages": [
+      {
+        "name": "TypeScript"
+      },
+      {
+        "name": "MDX"
+      },
+      {
+        "name": "CSS"
+      },
+      {
+        "name": "JavaScript"
+      },
+      {
+        "name": "HTML"
+      },
+      {
+        "name": "Handlebars"
+      }
+    ],
+    "license_spdx_id": "MIT",
+    "default_branch": "main",
+    "created_at": "2023-01-02T04:19:54.000Z",
+    "pushed_at": "2025-07-03T22:21:16.000Z",
+    "last_commit": "2025-06-05T18:22:01.000Z",
+    "added_at": "2025-06-29T03:02:32.537Z",
+    "archived": false,
+    "icon_url": "https://zenly.oss-cn-hangzhou.aliyuncs.com/mcp/repos/vercel/next-forge/icon/1751166168283.png",
+    "open_graph_image_url": "https://opengraph.githubassets.com/f3d2c3e0348d1d253bdc0ad62cc043a6c50307258cf946c5084ffbd7ffe6c5c2/vercel/next-forge",
+    "open_graph_image_oss_url": "https://zenly.oss-cn-hangzhou.aliyuncs.com/mcp/repos/vercel/next-forge/og-image/1751166175973.png",
+    "uses_custom_open_graph_image": false,
+    "readme_content": "# ▲ / next-forge\n\n**Production-grade Turborepo template for Next.js apps.**\n\n<div>\n  <img src=\"https://zenly.oss-cn-hangzhou.aliyuncs.com/mcp/repos/vercel/next-forge/readme-images/1751640117044.svg\" alt=\"\" />\n  <img src=\"https://zenly.oss-cn-hangzhou.aliyuncs.com/mcp/repos/vercel/next-forge/readme-images/1751640120039.svg\" alt=\"\" />\n  <img src=\"https://zenly.oss-cn-hangzhou.aliyuncs.com/mcp/repos/vercel/next-forge/readme-images/1751640121398.svg\" alt=\"\" />\n</div>\n\n## Overview\n\n[next-forge](https://github.com/vercel/next-forge) is a [Next.js](https://nextjs.org/) project boilerplate for modern web application. It is designed to be a comprehensive starting point for new apps, providing a solid, opinionated foundation with a minimal amount of configuration.\n\n## Getting Started\n\nClone the repo using:\n\n```sh\nnpx next-forge@latest init\n```\n\nThen read the [docs](https://www.next-forge.com/docs) for more information.\n\n## Contributors\n\n<a href=\"https://github.com/vercel/next-forge/graphs/contributors\">\n  <img src=\"https://zenly.oss-cn-hangzhou.aliyuncs.com/mcp/repos/vercel/next-forge/readme-images/1751640122572.svg\" />\n</a>\n\nMade with [contrib.rocks](https://contrib.rocks).\n",
+    "readme_content_zh": "# ▲ / next-forge\n\n**用于 Next.js 应用的生产级 Turborepo 模板。**\n\n<div>\n  <img src=\"https://zenly.oss-cn-hangzhou.aliyuncs.com/mcp/repos/vercel/next-forge/readme-images/1751640117044.svg\" alt=\"\" />\n  <img src=\"https://zenly.oss-cn-hangzhou.aliyuncs.com/mcp/repos/vercel/next-forge/readme-images/1751640120039.svg\" alt=\"\" />\n  <img src=\"https://zenly.oss-cn-hangzhou.aliyuncs.com/mcp/repos/vercel/next-forge/readme-images/1751640121398.svg\" alt=\"\" />\n</div>\n\n## 概述\n\n[next-forge](https://github.com/vercel/next-forge) 是一个 [Next.js](https://nextjs.org/) 项目脚手架，用于现代 Web 应用。它旨在成为新应用的全面起点，提供稳固、有明确观点的基础，且配置量极小。\n\n## 入门指南\n\n使用以下命令克隆仓库：\n\n```sh\nnpx next-forge@latest init\n```\n\n然后阅读 [文档](https://www.next-forge.com/docs) 获取更多信息。\n\n## 贡献者\n\n<a href=\"https://github.com/vercel/next-forge/graphs/contributors\">\n  <img src=\"https://zenly.oss-cn-hangzhou.aliyuncs.com/mcp/repos/vercel/next-forge/readme-images/1751640122572.svg\" />\n</a>\n\n由 [contrib.rocks](https://contrib.rocks) 联合制作。",
+    "latest_release_name": "v5.0.2",
+    "latest_release_tag_name": "v5.0.2",
+    "latest_release_published_at": "2025-06-05T18:22:08.000Z",
+    "latest_release_url": "https://github.com/vercel/next-forge/releases/tag/v5.0.2",
+    "latest_release_description": "#### ⚠️ Pushed to `main`\n\n- Update meta.json ([@haydenbleasel](https://github.com/haydenbleasel))\n\n#### Authors: 1\n\n- Hayden Bleasel ([@haydenbleasel](https://github.com/haydenbleasel))",
+    "latest_release_description_zh": "#### ⚠️ 推送到 `main`\n\n- 更新 meta.json ([@haydenbleasel](https://github.com/haydenbleasel))\n\n#### 作者：1\n\n- Hayden Bleasel ([@haydenbleasel](https://github.com/haydenbleasel))",
+    "processing_status": {
+      "icon_processed": false,
+      "description_translated": false,
+      "readme_translated": false,
+      "og_image_processed": false,
+      "release_note_translated": false
+    },
+    "meta": {
+      "task_name": "update-github-data",
+      "processed_at": "2025-07-04T15:52:51.884Z",
+      "processing_time_ms": 5413,
+      "success": true
+    }
+  }
+}

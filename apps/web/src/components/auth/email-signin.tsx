@@ -1,18 +1,19 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
-import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { z } from "zod"
+import { Alert, AlertDescription } from "@repo/ui/components/ui/alert"
 import { Button } from "@repo/ui/components/ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@repo/ui/components/ui/form"
 import { Input } from "@repo/ui/components/ui/input"
-import { Loader2, ArrowRight, CheckCircle2 } from "lucide-react"
-import { Alert, AlertDescription } from "@repo/ui/components/ui/alert"
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@repo/ui/components/ui/input-otp"
-import { authClient } from "@/lib/auth-client"
-import { toast } from "sonner"
+import { ArrowRight, CheckCircle2,Loader2 } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { useEffect,useRef, useState } from "react"
+import { useForm } from "react-hook-form"
+import { toast } from "sonner"
+import { z } from "zod"
+
+import { authClient } from "@/lib/auth-client"
 
 const emailSchema = z.object({
   email: z.string().email("请输入有效的邮箱地址"),

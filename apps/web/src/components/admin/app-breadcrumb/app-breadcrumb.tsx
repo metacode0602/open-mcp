@@ -17,6 +17,7 @@ import {
 } from "@repo/ui/components/ui/dropdown-menu";
 import type React from "react";
 import { memo, useMemo } from "react";
+
 import { useAppBreadcrumbStore } from "./app-breadcrumb-store";
 
 export const AppBreadcrumb = memo(() => {

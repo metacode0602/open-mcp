@@ -5,10 +5,10 @@ import { Badge } from "@repo/ui/components/ui/badge";
 import { Button } from "@repo/ui/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@repo/ui/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@repo/ui/components/ui/tabs";
-import { toast } from "sonner";
-import { trpc } from "@/lib/trpc/client";
 import { Calendar, Clock, Loader2, Power, Star } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
+import { toast } from "sonner";
 
 import { AppAds } from "@/components/admin/apps/app-ads";
 import { AppAnalysis } from "@/components/admin/apps/app-analysis";
@@ -17,8 +17,8 @@ import { AppMetadata } from "@/components/admin/apps/app-metadata";
 import { AppOverview } from "@/components/admin/apps/app-overview";
 import { AppOwnership } from "@/components/admin/apps/app-ownership";
 import { AppRelated } from "@/components/admin/apps/app-related";
+import { trpc } from "@/lib/trpc/client";
 import { formatDate, getAssetUrl } from "@/lib/utils";
-import Link from "next/link";
 
 interface AppDetailsProps {
   appId: string;

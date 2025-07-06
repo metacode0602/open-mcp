@@ -1,9 +1,10 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
-import { cn } from "@repo/ui/lib/utils";
-import { trpc } from "@/lib/trpc/client";
 import { Category } from "@repo/db/types";
+import { cn } from "@repo/ui/lib/utils";
+import { usePathname, useRouter } from "next/navigation";
+
+import { trpc } from "@/lib/trpc/client";
 
 interface CategoryListProps {
   categoryType: string;

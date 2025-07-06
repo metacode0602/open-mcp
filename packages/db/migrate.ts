@@ -1,12 +1,16 @@
-import { drizzle } from "drizzle-orm/vercel-postgres";
-import { sql } from "@vercel/postgres";
-import { migrate } from "drizzle-orm/vercel-postgres/migrator";
+import { drizzle } from "drizzle-orm/node-postgres";
+import { migrate } from "drizzle-orm/node-postgres/migrator";
+import { Client } from "pg";
 
-const db = drizzle(sql);
+const pool = new Client({
+  connectionString: process.env.DATABASE_URL ?? "",
+});
+
+const db = drizzle(pool);
 
 export async function migratation() {
   console.log("Migration started");
   await migrate(db, { migrationsFolder: "./drizzle" });
   console.log("Migration completed");
-  await sql.end();
+  await pool.end();
 }

@@ -1,18 +1,18 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
-import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { z } from "zod"
 import { Button } from "@repo/ui/components/ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@repo/ui/components/ui/form"
 import { Input } from "@repo/ui/components/ui/input"
-import { Loader2, ArrowRight } from "lucide-react"
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@repo/ui/components/ui/input-otp"
+import { ArrowRight,Loader2 } from "lucide-react"
+import { useRouter } from "next/navigation"
+import { useEffect,useRef, useState } from "react"
+import { useForm } from "react-hook-form"
+import { toast } from "sonner"
+import { z } from "zod"
 
 import { authClient } from "@/lib/auth-client"
-import { toast } from "sonner"
-import { useRouter } from "next/navigation"
 
 
 const phoneSchema = z.object({

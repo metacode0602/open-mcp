@@ -1,10 +1,10 @@
 import { Button } from "@repo/ui/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@repo/ui/components/ui/card";
 import { Input } from "@repo/ui/components/ui/input";
 import { createAuthClient } from "better-auth/client";
 import { phoneNumberClient } from "better-auth/client/plugins";
-import { useState } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@repo/ui/components/ui/card";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { toast } from "sonner";
 // 创建 auth 客户端
 const authClient = createAuthClient({

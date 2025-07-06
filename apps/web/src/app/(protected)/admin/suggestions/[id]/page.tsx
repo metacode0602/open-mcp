@@ -1,17 +1,6 @@
 "use client";
 
 import {
-  ArrowLeft,
-  CheckCircle,
-  User,
-  XCircle,
-} from "lucide-react";
-import Link from "next/link";
-import { useParams } from "next/navigation";
-import { useState } from "react";
-
-import { AdminPageHeader } from "@/components/admin/admin-page-header";
-import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
@@ -31,6 +20,17 @@ import {
   CardHeader,
   CardTitle,
 } from "@repo/ui/components/ui/card";
+import {
+  ArrowLeft,
+  CheckCircle,
+  User,
+  XCircle,
+} from "lucide-react";
+import Link from "next/link";
+import { useParams } from "next/navigation";
+import { useState } from "react";
+
+import { AdminPageHeader } from "@/components/admin/admin-page-header";
 
 // 模拟建议数据
 const suggestion = {

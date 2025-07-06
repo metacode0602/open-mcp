@@ -1,15 +1,7 @@
 "use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
-import { ArrowLeft, Loader2 } from "lucide-react"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
-import { use, useState, useEffect } from "react"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-
-import { FormSection } from "@/components/admin/form-section"
-import { PageHeader } from "@/components/admin/page-header"
+import { zUserRoleEnum } from "@repo/db/types"
 import { Avatar, AvatarFallback, AvatarImage } from "@repo/ui/components/ui/avatar"
 import { Button } from "@repo/ui/components/ui/button"
 import { Card, CardContent } from "@repo/ui/components/ui/card"
@@ -17,9 +9,17 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from "@repo/ui/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@repo/ui/components/ui/select"
 import { Textarea } from "@repo/ui/components/ui/textarea"
+import { ArrowLeft, Loader2 } from "lucide-react"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { use, useEffect,useState } from "react"
+import { useForm } from "react-hook-form"
 import { toast } from "sonner"
+import { z } from "zod"
+
+import { FormSection } from "@/components/admin/form-section"
+import { PageHeader } from "@/components/admin/page-header"
 import { trpc } from "@/lib/trpc/client"
-import { zUserRoleEnum } from "@repo/db/types"
 
 // 表单验证模式
 const formSchema = z.object({

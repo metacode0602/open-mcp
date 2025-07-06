@@ -1,4 +1,8 @@
 "use client";
+import { Alert, AlertDescription, AlertTitle } from "@repo/ui/components/ui/alert";
+import { Button } from "@repo/ui/components/ui/button";
+import { Skeleton } from "@repo/ui/components/ui/skeleton";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@repo/ui/components/ui/tabs";
 import {
   AlertCircle,
   BarChart,
@@ -7,18 +11,14 @@ import {
 import Link from "next/link";
 import { Suspense } from "react";
 
-import { Button } from "@repo/ui/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@repo/ui/components/ui/tabs";
-import { StatsCard } from "./components/stats-card";
 import { AdStatsCard } from "./components/ad-stats-card";
-import { AppsTab } from "./components/apps-tab";
 import { AdsTab } from "./components/ads-tab";
-import { PaymentsTab } from "./components/payments-tab";
+import { AppsTab } from "./components/apps-tab";
 import { ClaimsTab } from "./components/claims-tab";
+import { PaymentsTab } from "./components/payments-tab";
+import { StatsCard } from "./components/stats-card";
 import { SuggestionsTab } from "./components/suggestions-tab";
 import { useDashboardStore } from "./store/dashboard-store";
-import { Skeleton } from "@repo/ui/components/ui/skeleton";
-import { Alert, AlertDescription, AlertTitle } from "@repo/ui/components/ui/alert";
 
 function DashboardSkeleton() {
   return (

@@ -1,10 +1,6 @@
 "use client"
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { DataTable } from "@/components/admin/data-table"
-import { columns } from "./components/columns"
-import { trpc } from "@/lib/trpc/client"
+import { Button } from "@repo/ui/components/ui/button"
 import { Input } from "@repo/ui/components/ui/input"
 import {
   Select,
@@ -13,9 +9,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@repo/ui/components/ui/select"
-import { Button } from "@repo/ui/components/ui/button"
-import { Search, RefreshCw, Plus } from "lucide-react"
+import { Plus,RefreshCw, Search } from "lucide-react"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
+
 import { AdminPageHeader } from "@/components/admin/admin-page-header"
+import { DataTable } from "@/components/admin/data-table"
+import { trpc } from "@/lib/trpc/client"
+
+import { columns } from "./components/columns"
 
 type RecommendationType = "rank" | "popular" | "new" | "related" | "category"
 

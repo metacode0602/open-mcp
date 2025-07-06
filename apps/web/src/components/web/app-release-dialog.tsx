@@ -1,16 +1,17 @@
 "use client";
 
-import { useState } from "react";
-import { fromNow } from "@/lib/utils";
 import { MarkdownReadonly } from "@repo/ui/components/markdown/markdown-readonly";
 import { Badge } from "@repo/ui/components/ui/badge";
 import { Button } from "@repo/ui/components/ui/button";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@repo/ui/components/ui/dialog";
 import { ScrollArea } from "@repo/ui/components/ui/scroll-area";
 import { Separator } from "@repo/ui/components/ui/separator";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@repo/ui/components/ui/dialog";
 import { Skeleton } from "@repo/ui/components/ui/skeleton";
-import { TagIcon, Loader2, AlertCircle } from "lucide-react";
+import { AlertCircle,Loader2, TagIcon } from "lucide-react";
+import { useState } from "react";
+
 import { trpc } from "@/lib/trpc/client";
+import { fromNow } from "@/lib/utils";
 
 type ReleaseInfo = {
   releaseName: string,
@@ -100,7 +101,7 @@ export const AppVersionDialog = ({ repoId, appName, children }: {
       </div>
 
       <Dialog open={open} onOpenChange={handleOpenChange}>
-        <DialogContent className="max-w-2xl max-h-[80vh]">
+        <DialogContent className="max-h-[80vh] min-w-[50vw]">
           <DialogHeader>
             <DialogTitle>{appName} - 最新版本</DialogTitle>
             <DialogDescription>

@@ -1,10 +1,12 @@
 "use client"
 
-import { Suspense, use } from "react"
-import { notFound } from "next/navigation"
-import { RankingDetails } from "./ranking-details"
 import { Skeleton } from "@repo/ui/components/ui/skeleton"
+import { notFound } from "next/navigation"
+import { Suspense, use } from "react"
+
 import { trpc } from "@/lib/trpc/client"
+
+import { RankingDetails } from "./ranking-details"
 
 
 export default function RankingPage({ params }: { params: Promise<{ id: string }> }) {

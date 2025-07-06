@@ -9,6 +9,7 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { memo, useMemo } from "react";
+
 import type { IAppSidebarNavItem } from "./type";
 
 type IProps = {

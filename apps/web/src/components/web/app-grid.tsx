@@ -1,6 +1,7 @@
-import { AppCard } from "@/components/web/app-card"
 import type { McpApp } from "@repo/db/types"
 import { cn } from "@repo/ui/lib/utils"
+
+import { AppCard } from "@/components/web/app-card"
 
 interface AppGridProps {
   apps: McpApp[]

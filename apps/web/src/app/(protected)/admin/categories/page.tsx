@@ -1,18 +1,6 @@
 "use client"
 
-import {
-  Edit,
-  Eye,
-  Plus,
-  Search,
-  Trash2,
-} from "lucide-react"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
-import { useState } from "react"
-import { useDebounce } from "@repo/ui/hooks/use-debounce"
-
-import { AdminPageHeader } from "@/components/admin/admin-page-header"
+import { Category } from "@repo/db/types"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -35,9 +23,21 @@ import {
   TableHeader,
   TableRow,
 } from "@repo/ui/components/ui/table"
+import { useDebounce } from "@repo/ui/hooks/use-debounce"
+import {
+  Edit,
+  Eye,
+  Plus,
+  Search,
+  Trash2,
+} from "lucide-react"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
 import { toast } from "sonner"
+
+import { AdminPageHeader } from "@/components/admin/admin-page-header"
 import { trpc } from "@/lib/trpc/client"
-import { Category } from "@repo/db/types"
 export default function AdminCategoriesPage() {
   const router = useRouter()
   const [searchQuery, setSearchQuery] = useState("")

@@ -1,7 +1,8 @@
-import { Suspense } from "react"
-import { notFound } from "next/navigation"
-import { RankingRecords } from "./ranking-records"
 import { Skeleton } from "@repo/ui/components/ui/skeleton"
+import { notFound } from "next/navigation"
+import { Suspense } from "react"
+
+import { RankingRecords } from "./ranking-records"
 
 
 export default async function RankingRecordsPage({ params }: { params: Promise<{ id: string }> }) {
