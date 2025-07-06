@@ -27,7 +27,7 @@ Your `tailwind.config.ts` and `globals.css` are already set up to use the compon
 To use the components in your app, import them from the `ui` package.
 
 ```tsx
-import { Button } from "@repo/ui/components/button"
+import { Button } from "@repo/ui/components/button";
 ```
 
 # Open MCP
@@ -68,8 +68,8 @@ import { Button } from "@repo/ui/components/button"
 GITHUB_TOKEN=your_github_token
 
 # Vercel API配置（可选）
-VERCEL_API_URL=https://api.vercel.com/v1/projects
-VERCEL_TOKEN=your_vercel_token
+VERCEL_API_PROD_URL=https://api.vercel.com/v1/projects
+VERCEL_PROD_TOKEN=your_vercel_token
 ```
 
 #### 技术实现

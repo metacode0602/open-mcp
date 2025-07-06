@@ -7,37 +7,44 @@
 ## 功能特性
 
 ### 1. 智能URL解析
+
 - 自动从GitHub URL提取仓库信息（owner/repo）
 - 支持多种GitHub URL格式
 - URL格式验证
 
 ### 2. GitHub API集成
+
 - 使用GitHub GraphQL API获取完整仓库信息
 - 获取stars、forks、描述、语言等详细信息
 - 获取最新发布信息
 - 获取贡献者统计
 
 ### 3. 自动Slug生成
+
 - 基于仓库名自动生成URL友好的标识符
 - 格式：`owner-repo-name`
 - 自动处理特殊字符
 
 ### 4. 重复检查
+
 - 检查GitHub URL是否已存在对应应用
 - 防止重复创建相同应用
 - 基于应用名称和类型的唯一性检查
 
 ### 5. 数据库关联
+
 - 分别保存repos和apps表
 - 通过repoId关联两个表
 - 支持仓库信息的独立管理
 
 ### 6. 异常处理
+
 - 完善的错误处理和状态管理
 - 用户友好的错误提示
 - 详细的错误日志
 
 ### 7. Vercel集成（可选）
+
 - 可选的Vercel项目创建
 - 需要配置Vercel API环境变量
 - 失败时不影响主要功能
@@ -50,7 +57,7 @@
 import { AddGitHubAppButton } from "@/components/admin/apps/add-github-app";
 
 // 在管理页面中使用
-<AddGitHubAppButton />
+<AddGitHubAppButton />;
 ```
 
 ### API调用
@@ -61,7 +68,7 @@ const createFromGitHub = trpc.apps.createFromGitHub.useMutation();
 
 const result = await createFromGitHub.mutateAsync({
   gitHubURL: "https://github.com/owner/repo",
-  type: "client" // "client" | "server" | "application"
+  type: "client", // "client" | "server" | "application"
 });
 ```
 
@@ -78,13 +85,14 @@ GITHUB_TOKEN=your_github_token
 
 ```bash
 # Vercel API配置
-VERCEL_API_URL=https://api.vercel.com/v1/projects
-VERCEL_TOKEN=your_vercel_token
+VERCEL_API_PROD_URL=https://api.vercel.com/v1/projects
+VERCEL_PROD_TOKEN=your_vercel_token
 ```
 
 ## 数据库结构
 
 ### repos表
+
 存储GitHub仓库的详细信息：
 
 ```sql
@@ -102,6 +110,7 @@ CREATE TABLE repos (
 ```
 
 ### apps表
+
 存储应用信息，通过repoId关联repos表：
 
 ```sql
@@ -122,14 +131,17 @@ CREATE TABLE apps (
 ### 常见错误
 
 1. **无效的GitHub URL**
+
    - 错误：`无效的GitHub URL`
    - 解决：检查URL格式是否正确
 
 2. **仓库不存在或无访问权限**
+
    - 错误：`无法获取GitHub仓库信息，请检查仓库是否存在或访问权限`
    - 解决：检查仓库是否存在，GitHub Token是否有足够权限
 
 3. **应用已存在**
+
    - 错误：`该GitHub仓库已存在对应的应用`
    - 解决：检查是否已经创建过该应用
 
@@ -174,4 +186,4 @@ apps/web/src/components/admin/apps/
 1. **GitHub API限制**: 注意GitHub API的速率限制
 2. **权限要求**: GitHub Token需要足够的权限访问仓库信息
 3. **数据一致性**: 确保repos和apps表的数据一致性
-4. **错误恢复**: 实现错误恢复机制，避免数据不一致 
+4. **错误恢复**: 实现错误恢复机制，避免数据不一致
