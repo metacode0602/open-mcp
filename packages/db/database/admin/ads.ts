@@ -37,7 +37,19 @@ export const adsDataAccess = {
     return await db.query.ads.findFirst({
       where: eq(ads.id, id),
       with: {
-        app: true,
+        app: {
+          columns: {
+            id: true,
+            type: true,
+            version: true,
+            description: true,
+            descriptionZh: true,
+            slug: true,
+            name: true,
+            icon: true,
+            website: true,
+          },
+        },
       },
     });
   },

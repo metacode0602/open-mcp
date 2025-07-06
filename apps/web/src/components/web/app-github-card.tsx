@@ -218,26 +218,25 @@ const MonthlyTrendsSection = ({ trends, project }: { trends: MonthlyTrend[]; pro
               tickFormatter={(value) => formatNumber(value)}
               width={60}
             />
-            <ChartTooltip
-              content={({ active, payload, label }: { active: boolean, payload: Array<{ payload: { fullData: MonthlyTrend } }>, label: string }) => {
-                if (active && payload && payload.length) {
-                  const data = payload[0]?.payload.fullData
-                  if (!data) return null
-                  return (
-                    <div className="rounded-lg border bg-background p-3 shadow-md">
-                      <div className="font-medium">
-                        {data.year}年{getMonthName(data.month)}
-                      </div>
-                      <div className="flex items-center gap-1 text-sm">
-                        <div className="h-2 w-2 rounded-full bg-[var(--color-stars)]" />
-                        <span>Stars: +{formatNumber(data.delta)}</span>
-                      </div>
-                      <div className="text-xs text-muted-foreground mt-1">点击查看详细信息</div>
+            <ChartTooltip content={({ active, payload, label }) => {
+              if (active && payload && payload.length) {
+                const data = payload[0]?.payload.fullData
+                if (!data) return null
+                return (
+                  <div className="rounded-lg border bg-background p-3 shadow-md">
+                    <div className="font-medium">
+                      {data.year}年{getMonthName(data.month)}
                     </div>
-                  )
-                }
-                return null
-              }}
+                    <div className="flex items-center gap-1 text-sm">
+                      <div className="h-2 w-2 rounded-full bg-[var(--color-stars)]" />
+                      <span>Stars: +{formatNumber(data.delta)}</span>
+                    </div>
+                    <div className="text-xs text-muted-foreground mt-1">点击查看详细信息</div>
+                  </div>
+                )
+              }
+              return null
+            }}
               cursor={{ fill: "rgba(0, 0, 0, 0.1)" }}
             />
             <Bar

@@ -125,7 +125,20 @@ export const recommendationAppData = {
       limit,
       orderBy: asc(recommendationApps.order),
       with: {
-        app: true,
+        app: {
+          columns: {
+            id: true,
+            name: true,
+            icon: true,
+            website: true,
+            type: true,
+            version: true,
+            description: true,
+            descriptionZh: true,
+            slug: true,
+            tools: true,
+          },
+        },
       }
     });
 

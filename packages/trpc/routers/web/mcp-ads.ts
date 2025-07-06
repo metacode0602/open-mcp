@@ -1,11 +1,12 @@
 import { adsDataAccess } from "@repo/db/database/admin";
 import { z } from "zod";
 import { protectedProcedure, publicProcedure, router } from "../../trpc";
-import { zAdsStatusEnum } from "@repo/db/types";
+import { Ads, zAdsStatusEnum } from "@repo/db/types";
+
 export const mcpAdsRouter = router({
   // 获取广告
   getById: publicProcedure.input(z.object({ id: z.string() })).query(async ({ input }) => {
-    return adsDataAccess.getByIdWithApp(input.id);
+    return adsDataAccess.getByIdWithApp(input.id) as unknown as Ads;
   }),
 
   getListByAppId: publicProcedure

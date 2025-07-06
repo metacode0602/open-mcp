@@ -71,7 +71,7 @@ export function RecommendedApps({ currentApp, limit = 6 }: RecommendedAppsProps)
     appId: currentApp.id,
   })
 
-  const { currentIndex, totalPages, handlePrevious, handleNext, visibleItems } = useCarousel(recommendedApps, 3)
+  const { currentIndex, totalPages, handlePrevious, handleNext, visibleItems } = useCarousel(recommendedApps as unknown as McpApp[], 3)
 
   if (isLoading) {
     return (
