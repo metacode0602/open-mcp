@@ -85,7 +85,7 @@ GITHUB_TOKEN=your_github_token
 
 ```bash
 # Vercel API配置
-VERCEL_API_PROD_URL=https://api.vercel.com/v1/projects
+PROD_CREATE_API_URL=https://api.vercel.com/v1/projects
 VERCEL_PROD_TOKEN=your_vercel_token
 ```
 

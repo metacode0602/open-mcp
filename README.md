@@ -68,8 +68,8 @@ import { Button } from "@repo/ui/components/button";
 GITHUB_TOKEN=your_github_token
 
 # Vercel API配置（可选）
-VERCEL_API_PROD_URL=https://api.vercel.com/v1/projects
-VERCEL_PROD_TOKEN=your_vercel_token
+PROD_CREATE_API_URL=https://api.vercel.com/v1/projects
+PROD_CREATE_API_TOKEN=your_vercel_token
 ```
 
 #### 技术实现

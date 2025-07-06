@@ -51,12 +51,12 @@ export const appsRouter = router({
       if (existingApp) {
         throw new Error("该GitHub仓库已存在对应的应用");
       }
-      if (process.env.VERCEL_API_PROD_URL && process.env.VERCEL_PROD_TOKEN) {
+      if (process.env.PROD_CREATE_API_URL && process.env.PROD_CREATE_API_TOKEN) {
         try {
-          const response = await fetch(process.env.VERCEL_API_PROD_URL, {
+          const response = await fetch(process.env.PROD_CREATE_API_URL, {
             method: "POST",
             headers: {
-              "Authorization": `Bearer ${process.env.VERCEL_PROD_TOKEN}`,
+              "Authorization": `Bearer ${process.env.PROD_CREATE_API_TOKEN}`,
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
