@@ -74,7 +74,7 @@ export default function AdminAppsPage() {
         <Input
           placeholder="搜索应用名称或描述"
           value={searchParams.query}
-          onChange={(e) => setSearchParams(prev => ({ ...prev, query: e.target.value }))}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchParams(prev => ({ ...prev, query: e.target.value }))}
           className="max-w-sm"
         />
         <Select

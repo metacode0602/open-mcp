@@ -17,7 +17,7 @@ interface RecommendedAppsProps {
   limit?: number
 }
 
-const useCarousel = (items: any[], itemsPerPage: number) => {
+const useCarousel = (items: McpApp[], itemsPerPage: number) => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const totalPages = Math.ceil(items.length / itemsPerPage)
 

@@ -1,4 +1,5 @@
 import { z } from "zod";
+
 import { appTypeEnum } from "./apps";
 import { searchSchema } from "./common";
 
@@ -43,7 +44,7 @@ export const zClaimsSchema = z.object({
   updatedAt: z.date(),
 });
 
-export type Claims = z.infer<typeof zClaimsSchema>;  
+export type Claims = z.infer<typeof zClaimsSchema>;
 
 // 声明搜索
 export const searchClaimsSchema = searchSchema.extend({

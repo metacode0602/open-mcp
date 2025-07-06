@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { publicProcedure, router } from "../../trpc";
-import { McpApp } from "@repo/db/types";
+import { Ads, McpApp } from "@repo/db/types";
 import { mcpAppsDataAccess } from "@repo/db/database/web";
 import { adsDataAccess, tagsDataAccess, reposDataAccess } from "@repo/db/database/admin";
 
@@ -100,7 +100,7 @@ export const mcpappRouter = router({
     .query(async ({ input }) => {
       const { adType } = input;
       const ads = await adsDataAccess.getAdsListByType(adType);
-      return ads;
+      return ads as unknown as Ads[];
     }),
 
   // 获取应用的最新发布信息

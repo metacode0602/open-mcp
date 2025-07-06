@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { useState } from "react"
-import { ExternalLinkIcon, TrendingUpIcon, CalendarIcon } from "lucide-react"
+import { TrendingUpIcon, CalendarIcon } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@repo/ui/components/ui/card"
 import { Skeleton } from "@repo/ui/components/ui/skeleton"
 import { Button } from "@repo/ui/components/ui/button"
@@ -151,7 +151,7 @@ const MonthlyTrendsSection = ({ trends, project }: { trends: MonthlyTrend[]; pro
 
   const totalStars = chartData.reduce((sum, d) => sum + d.stars, 0)
 
-  const handleBarClick = (data: any) => {
+  const handleBarClick = (data: { activePayload?: Array<{ payload: { fullData: MonthlyTrend } }> }) => {
     if (data && data.activePayload && data.activePayload[0]) {
       const clickedData = data.activePayload[0].payload.fullData
       setSelectedMonth(clickedData)
@@ -219,9 +219,10 @@ const MonthlyTrendsSection = ({ trends, project }: { trends: MonthlyTrend[]; pro
               width={60}
             />
             <ChartTooltip
-              content={({ active, payload, label }) => {
+              content={({ active, payload, label }: { active: boolean, payload: Array<{ payload: { fullData: MonthlyTrend } }>, label: string }) => {
                 if (active && payload && payload.length) {
                   const data = payload[0]?.payload.fullData
+                  if (!data) return null
                   return (
                     <div className="rounded-lg border bg-background p-3 shadow-md">
                       <div className="font-medium">

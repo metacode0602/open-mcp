@@ -1,4 +1,3 @@
-import { getAssetUrl } from "@/lib/utils"
 import { cn } from "@repo/ui/lib/utils"
 import { ArrowLeft } from "lucide-react"
 import Image from "next/image"

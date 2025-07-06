@@ -11,23 +11,10 @@ import { Section } from "@/components/web/section"
 import { Skeleton } from "@repo/ui/components/ui/skeleton"
 import { formatNumber } from "@/lib/utils"
 import { useEffect, useState } from "react"
+import { Ads } from "@repo/db/types"
 
 type AdPromoProps = {
-  ad: {
-    id: string
-    title: string
-    description: string
-    url: string
-    imageUrl?: string | null
-    type: "listing" | "banner"
-    placement: "top" | "middle" | "bottom"
-    version?: string | null
-    impressions?: number | null
-    clicks?: number | null
-    app?: {
-      type: "client" | "server" | "application"
-    } | null
-  }
+  ad: Ads
   className?: string
 }
 
@@ -80,13 +67,13 @@ const ClientAdPromo = ({ ad, className }: AdPromoProps) => {
             </div>
             <div className="flex flex-col gap-2 min-[400px]:flex-row pt-2">
               <Button size="lg" className="gap-1" asChild>
-                <Link href={ad.url}>
+                <Link href={ad.app?.website}>
                   <Download className="h-4 w-4 mr-2" />
                   立即下载
                 </Link>
               </Button>
               <Button size="lg" variant="outline" asChild>
-                <Link href={ad.url}>
+                <Link href={ad.app?.website}>
                   了解更多
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
@@ -98,7 +85,7 @@ const ClientAdPromo = ({ ad, className }: AdPromoProps) => {
               <CardContent className="p-0">
                 <div className="relative aspect-[16/10] w-full overflow-hidden rounded-t-lg">
                   <Image
-                    src={ad.imageUrl || "/placeholder.svg"}
+                    src={ad.app?.icon || "/placeholder.svg"}
                     alt={ad.title}
                     width={640}
                     height={400}
@@ -113,7 +100,7 @@ const ClientAdPromo = ({ ad, className }: AdPromoProps) => {
                 </div>
                 <div className="grid grid-cols-3 divide-x">
                   <div className="p-4 text-center">
-                    <div className="text-2xl font-bold">{ad.version || "v1.0"}</div>
+                    <div className="text-2xl font-bold">{ad.app?.version || "v1.0"}</div>
                     <div className="text-xs text-muted-foreground">最新版本</div>
                   </div>
                   <div className="p-4 text-center">
@@ -154,13 +141,13 @@ const ServerAdPromo = ({ ad, className }: AdPromoProps) => {
             </div>
             <div className="flex flex-col gap-2 min-[400px]:flex-row pt-2">
               <Button size="lg" className="gap-1" asChild>
-                <Link href={ad.url}>
+                <Link href={ad.app?.website}>
                   <Download className="h-4 w-4 mr-2" />
                   立即部署
                 </Link>
               </Button>
               <Button size="lg" variant="outline" asChild>
-                <Link href={ad.url}>
+                <Link href={ad.app?.website}>
                   了解更多
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
@@ -172,7 +159,7 @@ const ServerAdPromo = ({ ad, className }: AdPromoProps) => {
               <CardContent className="p-0">
                 <div className="relative aspect-[16/10] w-full overflow-hidden rounded-t-lg">
                   <Image
-                    src={ad.imageUrl || "/placeholder.svg"}
+                    src={ad.app?.icon || "/placeholder.svg"}
                     alt={ad.title}
                     width={640}
                     height={400}
@@ -187,7 +174,7 @@ const ServerAdPromo = ({ ad, className }: AdPromoProps) => {
                 </div>
                 <div className="grid grid-cols-3 divide-x">
                   <div className="p-4 text-center">
-                    <div className="text-2xl font-bold">{ad.version || "v1.0"}</div>
+                    <div className="text-2xl font-bold">{ad.app?.version || ""}</div>
                     <div className="text-xs text-muted-foreground">最新版本</div>
                   </div>
                   <div className="p-4 text-center">
@@ -228,13 +215,13 @@ const ApplicationAdPromo = ({ ad, className }: AdPromoProps) => {
             </div>
             <div className="flex flex-col gap-2 min-[400px]:flex-row pt-2">
               <Button size="lg" className="gap-1" asChild>
-                <Link href={ad.url}>
+                <Link href={ad.app?.website}>
                   <Download className="h-4 w-4 mr-2" />
                   立即使用
                 </Link>
               </Button>
               <Button size="lg" variant="outline" asChild>
-                <Link href={ad.url}>
+                <Link href={ad.app?.website}>
                   了解更多
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
@@ -246,7 +233,7 @@ const ApplicationAdPromo = ({ ad, className }: AdPromoProps) => {
               <CardContent className="p-0">
                 <div className="relative aspect-[16/10] w-full overflow-hidden rounded-t-lg">
                   <Image
-                    src={ad.imageUrl || "/placeholder.svg"}
+                    src={ad.app?.icon || "/placeholder.svg"}
                     alt={ad.title}
                     width={640}
                     height={400}
@@ -261,7 +248,7 @@ const ApplicationAdPromo = ({ ad, className }: AdPromoProps) => {
                 </div>
                 <div className="grid grid-cols-3 divide-x">
                   <div className="p-4 text-center">
-                    <div className="text-2xl font-bold">{ad.version || "v1.0"}</div>
+                    <div className="text-2xl font-bold">{ad.app?.version || ""}</div>
                     <div className="text-xs text-muted-foreground">最新版本</div>
                   </div>
                   <div className="p-4 text-center">
