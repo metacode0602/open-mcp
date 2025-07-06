@@ -1,0 +1,15 @@
+{
+  "apps": [
+    {
+      "slug": "firstcycling-mcp",
+      "name": "FirstCycling MCP",
+      "categoryId": "sports",
+      "description": "通过自然语言访问自行车比赛数据、结果和统计信息。功能包括从 firstcycling.com 获取参赛名单、比赛结果和车手信息。",
+      "website": "https://github.com/r-huijts/firstcycling-mcp",
+      "github": "https://github.com/r-huijts/firstcycling-mcp",
+      "docs": "https://github.com/r-huijts/firstcycling-mcp",
+      "version": "1.0.0",
+      "tags": ["cloud"]
+    }
+  ]
+}

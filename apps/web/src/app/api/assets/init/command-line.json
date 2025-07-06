@@ -1,0 +1,44 @@
+{
+  "apps": [
+    {
+      "slug": "iterm-mcp",
+      "name": "iTerm MCP",
+      "categoryId": "command-line",
+      "description": "一个为 iTerm 终端提供访问能力的 MCP 服务器。您可以执行命令，并就终端中看到的内容进行提问交互。",
+      "website": "https://github.com/ferrislucas/iterm-mcp",
+      "github": "https://github.com/ferrislucas/iterm-mcp",
+      "docs": "https://github.com/ferrislucas/iterm-mcp",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-server-commands",
+      "name": "MCP Server Commands",
+      "categoryId": "command-line",
+      "description": "使用`run_command`和`run_script`工具运行任何命令。",
+      "website": "https://github.com/g0t4/mcp-server-commands",
+      "github": "https://github.com/g0t4/mcp-server-commands",
+      "docs": "https://github.com/g0t4/mcp-server-commands",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "cli-mcp-server",
+      "name": "CLI MCP Server",
+      "categoryId": "command-line",
+      "description": "具有安全执行和可定制安全策略的命令行界面",
+      "website": "https://github.com/MladenSU/cli-mcp-server",
+      "github": "https://github.com/MladenSU/cli-mcp-server",
+      "docs": "https://github.com/MladenSU/cli-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-shell-server",
+      "name": "Shell MCP Server",
+      "categoryId": "command-line",
+      "description": "实现模型上下文协议 (MCP) 的安全 shell 命令执行服务器",
+      "website": "https://github.com/tumf/mcp-shell-server",
+      "github": "https://github.com/tumf/mcp-shell-server",
+      "docs": "https://github.com/tumf/mcp-shell-server",
+      "version": "1.0.0"
+    }
+  ]
+}

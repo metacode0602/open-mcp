@@ -1,0 +1,111 @@
+---
+title: API 优先设计
+description: 为什么从 API 设计入手可以带来更好的软件架构和开发者体验
+author: rajiv
+date: 2025-03-12
+tags: [api, 设计, 架构, 开发者体验]
+image: https://shadcnblocks.com/images/block/placeholder-3.svg
+category: tech
+draft: true
+---
+
+在现代软件开发中，API 已从简单的集成点发展成为应用程序的基本构建块。API 优先设计是一种在实现之前优先定义和设计 API 的方法，从而产生更健壮、更灵活且对开发人员更友好的系统。
+
+##核心原则
+
+API 优先设计遵循几个指导开发过程的关键原则：
+
+### 先设计后实现
+
+API 优先方法不是将 API 视为事后诸葛亮，而是从清晰定义接口开始：
+
+- 定义资源、端点和操作
+- 建立数据模型和响应格式
+- 记录行为和错误处理
+
+### 合同驱动开发
+
+API 在系统、团队和组织之间建立合同：
+
+1. API 规范是唯一的事实来源
+2. 实现必须遵守已定义的合同
+3. 更改遵循版本控制策略以保持兼容性
+
+## API 优先的好处
+
+采用 API 优先设计的组织会体验到许多优势：
+
+### 并行开发
+
+定义良好的 API 使前端和后端团队能够同时工作：
+
+- 前端团队可以使用模拟数据针对 API 合同进行开发
+- 后端团队可以按照规范进行实现
+- 集成变得更可预测且不易出错
+
+### 更好的开发者体验
+
+以消费者为中心设计的 API 可以改善开发者体验：
+
+> “一个好的 API 使简单的事情变得容易，使复杂的事情成为可能。”
+
+### 面向未来的架构
+
+API 优先设计自然会产生更模块化、更易于维护的系统：
+
+```yaml
+# OpenAPI 规范片段示例
+paths:
+  /products:
+    get:
+      summary: 列出所有产品
+      parameters:
+        - name: category
+          in: query
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+      responses:
+        "200":
+          description: 产品列表
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+```
+
+## 实现方法
+
+有几种方法支持 API 优先设计：
+
+### OpenAPI/Swagger
+
+OpenAPI 规范（以前称为 Swagger）提供了一种与语言无关的方式来定义 REST API。该生态系统中的工具支持：
+
+- API 文档生成
+- 服务器和客户端代码生成
+- 测试和验证
+
+### GraphQL Schema 优先
+
+GraphQL 的类型系统支持 Schema 优先的方法：
+
+- 在 SDL 中定义类型、查询和变更
+- 针对 Schema 实现解析器
+- 为客户端工具启用内省
+
+## 挑战与最佳实践
+
+API 优先设计并非没有挑战：
+
+- 抵制立即开始编码的诱惑
+- 管理 Schema 的演变和版本控制
+- 在灵活性和简单性之间取得平衡
+
+成功采用 API 优先方法的组织通常会建立明确的治理、教育和工具来支持其 API 策略。

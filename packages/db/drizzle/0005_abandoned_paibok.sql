@@ -1,0 +1,1 @@
+ALTER TABLE "rankings" ADD COLUMN "records_count" integer DEFAULT 0;

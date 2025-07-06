@@ -1,0 +1,34 @@
+{
+  "apps": [
+    {
+      "slug": "mcp-server-data-exploration",
+      "name": "Data Exploration MCP Server",
+      "categoryId": "data-science-tools",
+      "description": "支持对基于 .csv 的数据集进行自主数据探索，以最小的成本提供智能见解。",
+      "website": "https://github.com/reading-plus-ai/mcp-server-data-exploration",
+      "github": "https://github.com/reading-plus-ai/mcp-server-data-exploration",
+      "docs": "https://github.com/reading-plus-ai/mcp-server-data-exploration",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "markdownify-mcp",
+      "name": "Markdownify MCP",
+      "categoryId": "data-science-tools",
+      "description": "一个 MCP 服务器，可将几乎任何文件或网络内容转换为 Markdown",
+      "website": "https://github.com/zcaceres/markdownify-mcp",
+      "github": "https://github.com/zcaceres/markdownify-mcp",
+      "docs": "https://github.com/zcaceres/markdownify-mcp",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-server-data-exploration-2",
+      "name": "Data Exploration MCP Server 2",
+      "categoryId": "data-science-tools",
+      "description": "实现基于.csv数据集的自动数据探索，提供最少工作量的智能化洞察。",
+      "website": "https://github.com/reading-plus-ai/mcp-server-data-exploration",
+      "github": "https://github.com/reading-plus-ai/mcp-server-data-exploration",
+      "docs": "https://github.com/reading-plus-ai/mcp-server-data-exploration",
+      "version": "1.0.0"
+    }
+  ]
+}

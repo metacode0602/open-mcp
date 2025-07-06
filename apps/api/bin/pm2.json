@@ -1,0 +1,10 @@
+{
+  "apps": [
+    {
+      "name": "@openmcp-api",
+      "script": "apps/api/server.js",
+      "exec_mode": "cluster",
+      "instances": 1
+    }
+  ]
+}

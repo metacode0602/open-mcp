@@ -1,0 +1,85 @@
+---
+title: 构建 React 组件库 - 配置 Vite 和 Tailwind
+description: 为什么现代安全架构会假设泄露并验证一切
+date: 2025-04-14
+author: rajiv
+tags: [react, component-library]
+image: https://shadcnblocks.com/images/block/placeholder-5.svg
+series: 构建 React 组件库
+seriesPart: 1
+draft: true
+---
+
+import { DynamicCodeBlock } from "fumadocs-ui/components/dynamic-codeblock";
+
+在这篇文章中，我将引导你使用 Vite 和 Tailwind 构建一个 React 组件库。我们还将了解如何将其发布到 npm 并在 React 应用程序中使用它。我们将集成 auto 以进行版本控制和发布说明。
+
+## 要求
+
+- 我们将使用 Vite 和 Tailwind 创建一个 react 组件库
+- 我们将把组件库发布到 npm
+- 我们将使用 Docusaurus 将文档发布到 GitHub pages
+- 在使用 Lerna 构建的 monorepo 中完成所有这些设置
+- 使用 auto 自动化发布版本控制和发布说明
+
+## 设置
+
+### 初始化代码库
+
+我们将使用 Lerna 来设置我们的代码库，并添加 Docusaurus 用于文档。
+
+```bash
+npx lerna init --packages="packages/*" --packages="apps/*"
+```
+
+### Create Docusaurus App
+
+```bash
+npx create-docusaurus@latest apps/docs classic --typescript
+```
+
+### 创建 Vite React 应用
+
+**运行以下命令**
+
+```bash
+npm create vite@latest packages/elements -- --template react-ts
+```
+
+**运行以下命令**
+
+将 package.json 中的名称更改为 @rcls/elements (实际上改成你喜欢的任何名字)
+
+### 设置脚本
+
+_将以下脚本添加到根目录的 package.json_
+
+```js
+console.log("1");
+console.log("2"); // [!code highlight]
+console.log("3");
+console.log("4");
+```
+
+```json reference title="package.json" customStyling="true"
+https://github.com/rjvim/react-component-library-starter/blob/main/package.json#L8-L16
+```
+
+<GithubCodeBlock
+  url="https://github.com/rjvim/react-component-library-starter/blob/main/package.json#L8-L16"
+  extractLines={false}
+  highlightLines="{2,8-16}"
+/>
+
+<include>../../../src/lib/source.ts</include>
+
+### 测试设置
+
+- 构建文档: npm run docs:build
+- 构建包: npm run package:build
+- 构建所有: npm run build
+如果这些都正常工作，则设置完成。如果出现任何问题，你可以清理仓库并重新构建，使用 npx lerna clean -y && npm install
+
+### 推送到 Github
+
+在 Github 上创建一个公共仓库并将代码库推送到该仓库，因为在接下来的步骤中我们将使用 Github Actions。

@@ -1,0 +1,177 @@
+---
+title: "Framer Motion 的 CSS 基础"
+description: "学习 CSS 动画概念，以及如何使用 Tailwind CSS 和 Framer Motion 来实现。这是一份面向 Web 开发人员的实用指南。"
+date: 2025-05-22
+author: rajiv
+tags: [framer-motion, css, animations, tailwind, web-development]
+image: https://shadcnblocks.com/images/block/placeholder-5.svg
+---
+
+动画是现代 Web 开发的重要组成部分，它能增强用户体验并使界面更直观。在本指南中，我们将探索基本的动画概念，并使用两种流行的方法来实现它们：
+
+1. **Tailwind CSS** - 用于快速的、基于工具类的动画
+2. **Framer Motion** - 用于更复杂的、声明式动画
+
+通过理解这两种方法，你将能够根据需求选择合适的工具，无论是简单的过渡还是复杂的交互动画。
+
+---
+
+import Opacity from "../../../src/components/animations/opacity.tsx";
+import TranslateBox from "../../../src/components/animations/translate.tsx";
+import Scale from "../../../src/components/animations/scale.tsx";
+import RotateBox from "../../../src/components/animations/rotate.tsx";
+import TransformOriginBox from "../../../src/components/animations/transform-origin.tsx";
+import KeyframesBox from "../../../src/components/animations/keyframes.tsx";
+
+## 1. 透明度
+
+透明度控制元素的透明程度，其中 0 表示完全透明，1 表示完全不透明。这是创建淡入淡出效果的基本 CSS 属性。
+
+#### 使用 Tailwind
+
+在 Tailwind CSS 中，我们可以使用 `opacity` 和 `transition` 工具类来制作透明度动画。`transition` 类指定要设置动画的属性、持续时间和时间函数。例如，我们使用 `opacity-100` 表示完全不透明，`hover:opacity-50` 表示悬停状态，以及 `transition-opacity duration-700 ease-out` 来控制过渡效果。
+
+#### 使用 Framer Motion
+
+Framer Motion 提供了一种更具声明性的方式来处理动画。可以使用以下属性实现相同的效果：
+
+- `initial`: 设置初始状态
+- `animate`: 定义动画
+- `whileHover`: 处理悬停状态
+- `transition`: 控制动画时间
+
+<CodeDisplay component={<Opacity />}>
+  <include lang="tsx" meta={{ title: "opacity.tsx" }}>
+    ../../../src/components/animations/opacity.tsx
+  </include>
+</CodeDisplay>
+
+## 2. 位移
+
+位移可以在不影响文档流的情况下将元素从一个位置移动到另一个位置。它通常用于滑动和移动元素。
+
+#### 使用 Tailwind
+
+在 Tailwind 中，我们使用 `translate-x-*` 工具类进行位移。`hover:translate-x-[50px]` 类在悬停时移动元素，`transition-transform duration-700 ease-out` 确保平滑的动画效果。`transform` 类用于启用变换属性。
+
+#### 使用 Framer Motion
+
+Framer Motion 通过 `x` 属性简化了这一过程，并提供了更多对动画状态的控制。
+
+<CodeDisplay component={<TranslateBox />}>
+  <include lang="tsx" meta={{ title: "translate.tsx" }}>
+    ../../../src/components/animations/translate.tsx
+  </include>
+</CodeDisplay>
+
+## 3. 缩放
+
+缩放改变元素的大小。它对于创建缩放效果和视觉反馈非常有用。
+
+#### 使用 Tailwind
+
+在 Tailwind 中，缩放是通过 `scale-*` 工具类实现的。`hover:scale-150` 类在悬停时将元素缩放至原始大小的 1.5 倍，而 `transition-transform duration-300 ease-out` 则控制动画效果。`transform` 类是启用变换属性所必需的。
+
+#### 使用 Framer Motion
+
+Framer Motion 提供了一种更直观的方式来处理缩放，使用 `scale` 属性即可。
+
+<CodeDisplay component={<Scale />}>
+  <include lang="tsx" meta={{ title: "scale.tsx" }}>
+    ../../../src/components/animations/scale.tsx
+  </include>
+</CodeDisplay>
+
+## 4. 旋转
+
+旋转使元素围绕其变换原点旋转。它非常适合创建旋转和翻转效果。
+
+#### 使用 Tailwind
+
+在 Tailwind 中，旋转是通过 `rotate-*` 工具类完成的。`hover:rotate-45` 类在悬停时将元素旋转 45 度。`transition-transform duration-300 ease-out` 类确保旋转动画的平滑过渡。`transform` 类是启用变换属性所需的。
+
+#### 使用 Framer Motion
+
+Framer Motion 通过 `rotate` 属性简化了旋转动画的处理，可以在动画状态中使用。
+
+<CodeDisplay component={<RotateBox />}>
+  <include lang="tsx" meta={{ title: "rotate.tsx" }}>
+    ../../../src/components/animations/rotate.tsx
+  </include>
+</CodeDisplay>
+
+## 5. 变换原点
+
+变换原点改变旋转和缩放等变换应用的中心点。
+
+#### 使用 Tailwind
+
+Tailwind 提供了 `origin-*` 工具类来设置变换原点。`origin-top-left` 类将变换原点设置为左上角。结合 `hover:scale-150` 和 `transition-transform duration-300 ease-out`，可以创建一个从左上角开始的缩放效果。`transform` 类是启用变换属性所必需的。
+
+#### 使用 Framer Motion
+
+Framer Motion 允许你直接在动画属性中设置变换原点。
+
+<CodeDisplay component={<TransformOriginBox />}>
+  <include lang="tsx" meta={{ title: "transform-origin.tsx" }}>
+    ../../../src/components/animations/transform-origin.tsx
+  </include>
+</CodeDisplay>
+
+## 6. 关键帧
+
+关键帧通过定义动画序列中的多个步骤来实现更复杂的动画效果。在这里我们演示三种不同的动画方法：
+
+1. **CSS 动画** - 使用 Tailwind 内置的动画
+2. **Framer Motion（页面加载时）** - 组件挂载时立即运行的动画
+3. **Framer Motion（进入视口时）** - 元素进入视口时触发的动画
+
+#### 使用 Tailwind
+
+对于 CSS 动画，我们在全局 CSS 中定义一个自定义关键帧动画，并使用 Tailwind 的 `animate-*` 工具类应用它。该动画使用 `move` 动画将元素从左移到右。
+
+```css
+/* Keyframe animation for the move effect */
+@keyframes move {
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* Animation utility class */
+.animate-move {
+  animation: move 0.6s ease-out forwards;
+  will-change: transform;
+}
+```
+
+在你的组件中，你可以像这样使用它：
+
+```tsx
+<div
+  className="h-20 w-20 bg-blue-500 animate-move"
+  style={{ transform: "translateX(-100px)" }}
+>
+  With CSS
+</div>
+```
+
+#### 使用 Framer Motion
+
+Framer Motion 提供了两种主要的关键帧动画方法：
+
+- **页面加载动画**：动画在组件挂载时自动开始。元素最初位于屏幕外（`x: -100`），并通过弹簧效果动画移动到最终位置（`x: 0`）。
+
+- **视口内动画**：动画仅在元素进入视口时触发。通过 Framer Motion 的 `useInView` 钩子实现，该钩子检测元素何时可见并触发动画。
+
+<CodeDisplay component={<KeyframesBox />}>
+  <include lang="tsx" meta={{ title: "keyframes.tsx" }}>
+    ../../../src/components/animations/keyframes.tsx
+  </include>
+</CodeDisplay>
+
+## 接下来该怎么办？
+
+希望你在入门 Framer Motion 时感到不再那么不知所措！你可以探索 [motion.dev](https://motion.dev/) 以深入了解动画，并尝试将一些动画添加到你自己的网页和应用中。随着我继续探索网页动画的世界，我会不断分享我的学习成果。
+
+开始自己动手试试吧！🚀

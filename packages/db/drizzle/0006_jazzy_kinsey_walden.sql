@@ -1,0 +1,1 @@
+ALTER TABLE "ranking_records" ADD COLUMN "entity_name" varchar(255) NOT NULL;

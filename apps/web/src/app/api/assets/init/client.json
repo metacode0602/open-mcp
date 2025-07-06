@@ -1,0 +1,422 @@
+[
+  {
+    "slug": "5ire",
+    "name": "5ire",
+    "categoryId": "mcp-client",
+    "description": "5ire 是一个跨平台的桌面 AI 助手和 MCP 客户端。它兼容主流服务提供商，支持通过模型上下文协议服务器实现本地知识库和工具功能。",
+    "banner": [
+      "./screenshots/5ire/preview.png"
+    ]
+  },
+  {
+    "slug": "aiaw",
+    "name": "AIaW",
+    "website": "https://aiaw.app/",
+    "github": "https://github.com/NitroRCr/AIaW",
+    "categoryId": "mcp-client",
+    "description": "AIaW 是一个跨平台、功能齐全且轻量级的 AI 聊天客户端，完全支持 MCP。",
+    "banner": [
+      "./screenshots/aiaw/plugins.png",
+      "./screenshots/aiaw/dialog.png",
+      "./screenshots/aiaw/dark.png",
+      "./screenshots/aiaw/mobile.png"
+    ]
+  },
+  {
+    "slug": "chainlit",
+    "name": "Chainlit",
+    "website": "https://chainlit.io/",
+    "github": "https://github.com/chainlit/chainlit",
+    "categoryId": "mcp-client",
+    "description": "Chainlit 是一个支持 MCP 的 Python 框架，用于构建对话式 AI 应用。",
+    "banner": [
+      "./screenshots/chainlit/example.png",
+      "./screenshots/chainlit/add-mcp.png",
+      "./screenshots/chainlit/manage-mcps.png"
+    ]
+  },
+  {
+    "slug": "chatmcp",
+    "name": "ChatMCP",
+    "github": "https://github.com/daodao97/chatmcp",
+    "categoryId": "mcp-client",
+    "description": "ChatMCP 是一个实现了模型上下文协议（MCP）的 AI 聊天客户端。",
+    "banner": [
+      "./screenshots/chatmcp/preview.png",
+      "./screenshots/chatmcp/settings.png"
+    ]
+  },
+  {
+    "slug": "cherry-studio",
+    "name": "Cherry Studio",
+    "website": "https://cherry-ai.com",
+    "github": "https://github.com/CherryHQ/cherry-studio",
+    "categoryId": "mcp-client",
+    "description": "Cherry Studio 是一个支持多个 LLM 提供商的桌面客户端，可在 Windows、Mac 和 Linux 上使用。",
+    "banner": [
+      "./screenshots/cherry-studio/preview.png",
+      "./screenshots/cherry-studio/settings.png"
+    ]
+  },
+  {
+    "slug": "claude-desktop",
+    "website": "https://claude.ai",
+    "name": "Claude Desktop",
+    "categoryId": "mcp-client",
+    "description": "Claude 桌面应用将 Claude 的功能直接带到您的计算机，实现与工作流程的无缝集成。",
+    "banner": [
+      "./screenshots/claude-desktop/claude-desktop.png"
+    ]
+  },
+  {
+    "slug": "claudemind",
+    "name": "ClaudeMind",
+    "website": "https://claudemind.com",
+    "categoryId": "mcp-client",
+    "description": "无限制地体验 Claude AI。使用我们的桌面应用进行日常 AI 辅助，或使用我们的 JetBrains 插件提升编码效率。",
+    "banner": [
+      "./screenshots/claudemind/ClaudeMind_Desktop_Chat_History.png",
+      "./screenshots/claudemind/ClaudeMind_Desktop_NewChatPage.png",
+      "./screenshots/claudemind/ClaudeMind_Desktop_Projects.png"
+    ]
+  },
+  {
+    "slug": "cline",
+    "name": "cline",
+    "website": "https://marketplace.visualstudio.com/items?itemName=saoudrizwan.claude-dev",
+    "github": "https://github.com/cline/cline",
+    "categoryId": "mcp-client",
+    "description": "cline 是一个跨平台的桌面 AI 助手和 MCP 客户端。它兼容主流服务提供商，支持通过模型上下文协议服务器实现本地知识库和工具功能。",
+    "banner": [
+      "./screenshots/cline/cline-demo.gif"
+    ]
+  },
+  {
+    "slug": "console-chat-gpt",
+    "name": "console-chat-gpt",
+    "github": "https://github.com/amidabuddha/console-chat-gpt",
+    "categoryId": "mcp-client",
+    "description": "直接从命令行与 ChatGPT、MistralAI、Anthropic 的 Claude、xAI 的 Grok、Google 的 Gemini 和 DeepSeek 进行无缝交互。",
+    "banner": [
+      "./screenshots/console-chat-gpt/markdown_preview.gif",
+      "./screenshots/console-chat-gpt/python_for_loop.gif",
+      "./screenshots/console-chat-gpt/settings_preview.gif"
+    ]
+  },
+  {
+    "slug": "copilot-mcp",
+    "name": "Copilot-MCP",
+    "github": "https://github.com/VikashLoomba/copilot-mcp",
+    "categoryId": "mcp-client",
+    "description": "VSCode 扩展，作为模型上下文协议（MCP）客户端，实现 MCP 服务器与 GitHub Copilot Chat 之间的集成。",
+    "banner": [
+      "./screenshots/copilot-mcp/preview.png"
+    ]
+  },
+  {
+    "slug": "cursor",
+    "name": "Cursor",
+    "website": "https://cursor.com/",
+    "github": "https://github.com/getcursor/cursor",
+    "categoryId": "mcp-client",
+    "description": "Cursor 是一个基于 VS Code 的 AI 优先代码编辑器，通过内置的聊天、编辑和调试 AI 功能帮助您更快地编码。它支持 MCP 以增强 AI 功能和工具集成。",
+    "banner": [
+      "./screenshots/cursor/cursor.png",
+      "./screenshots/cursor/new-server.png",
+      "./screenshots/cursor/settings.png",
+      "./screenshots/cursor/calling.png",
+      "./screenshots/cursor/called.png"
+    ]
+  },
+  {
+    "slug": "continue",
+    "name": "Continue",
+    "website": "https://continue.dev/",
+    "github": "https://github.com/continuedev/continue",
+    "categoryId": "mcp-client",
+    "description": "Continue 是领先的开源 AI 代码助手。您可以连接任何模型和任何上下文来构建自定义的自动完成和聊天体验，在 VS Code 和 JetBrains 内部使用。",
+    "banner": [
+      "./screenshots/continue/continue-demo.gif"
+    ]
+  },
+  {
+    "slug": "deepchat",
+    "name": "DeepChat",
+    "categoryId": "mcp-client",
+    "description": "DeepChat 是一个功能丰富的聊天组件，可以轻松集成到任何网站中。它支持多个 AI 提供商，并提供了许多开箱即用的功能。",
+    "banner": [
+      "./screenshots/deepchat/deepchat.png",
+      "./screenshots/deepchat/setting.png"
+    ],
+    "website": "https://deepchat.thinkinai.xyz",
+    "github": "https://github.com/thinkinaixyz/deepchat",
+    "docs": "https://github.com/OvidijusParsiunas/deep-chat/blob/main/README.md",
+    "version": "1.0.0"
+  },
+  {
+    "slug": "dolphin-mcp",
+    "name": "Dolphin-MCP",
+    "categoryId": "mcp-client",
+    "description": "一个轻量级的 MCP 客户端，专注于简单性和易用性。支持多种 MCP 服务器配置和交互模式。",
+    "banner": [
+      "./screenshots/dolphin-mcp/dolphin-mcp.png"
+    ],
+    "github": "https://github.com/cognitivecomputations/dolphin-mcp",
+    "version": "1.0.0"
+  },
+  {
+    "slug": "librechat",
+    "name": "LibreChat",
+    "website": "https://www.librechat.ai",  
+    "github": "https://github.com/danny-avila/LibreChat",
+    "categoryId": "mcp-client",
+    "description": "LibreChat 是一个强大的开源聊天平台，支持多种 AI 提供商和 MCP 集成。",
+    "banner": [
+      "./screenshots/librechat/librechat.webp"
+    ]
+  },
+  {
+    "slug": "nerve",
+    "name": "Nerve",
+    "website": "https://github.com/evilsocket/nerve",  
+    "github": "https://github.com/evilsocket/nerve",
+    "categoryId": "mcp-client",
+    "description": "Nerve 是一个终端优先的 AI 助手，支持 MCP 和多种 AI 模型。",
+    "banner": [
+      "https://asciinema.org/a/710433.svg"
+    ]
+  },
+  {
+    "slug": "nextchat",
+    "name": "NextChat",
+    "website": "https://nextchat.club",  
+    "github": "https://github.com/ChatGPTNextWeb/NextChat",
+    "categoryId": "mcp-client",
+    "description": "NextChat 是一个基于 Next.js 的现代化聊天界面，支持 MCP 和多种 AI 提供商。",
+    "banner": [
+      "https://github.com/ChatGPTNextWeb/NextChat/blob/main/docs/images/cover.png"
+    ]
+  },
+  {
+    "slug": "oterm",
+    "name": "OTerm",
+    "github": "https://github.com/ggozad/oterm",
+    "categoryId": "mcp-client",
+    "description": "OTerm 是一个终端风格的 AI 聊天界面，支持 MCP 和多种模型。",
+    "banner": [
+      "./screenshots/oterm/chat.png",
+      "./screenshots/oterm/mcp.svg"
+    ]
+  },
+  {
+    "slug": "superinterface",
+    "name": "Superinterface",
+    "website": "https://superinterface.ai",
+    "github": "https://github.com/supercorp-ai/superinterface",
+    "categoryId": "mcp-client",
+    "description": "Superinterface 是一个 AI 基础设施和开发者平台。",
+    "banner": [
+      "./screenshots/superinterface/mcp-chat.png",
+      "./screenshots/superinterface/interfaces.png",
+      "./screenshots/superinterface/setup-1.png",
+      "./screenshots/superinterface/setup-2.png",
+      "./screenshots/superinterface/setup-3.png"
+    ]
+  },
+  {
+    "slug": "seekchat",
+    "name": "SeekChat",
+    "website": "https://seekrays.com/chat",
+    "github": "https://github.com/seekrays/seekchat",
+    "categoryId": "mcp-client",
+    "description": "SeekChat 支持 MCP 工具执行。",
+    "banner": [
+      "./screenshots/seekchat/screenshot-chat.png",
+      "./screenshots/seekchat/screenshot-setting-mcp.png"
+    ]
+  },
+  {
+    "slug": "tester-mcp-client",
+    "name": "Tester MCP Client",  
+    "website": "https://apify.com/jiri.spilka/tester-mcp-client",
+    "github": "https://github.com/apify/tester-mcp-client",
+    "categoryId": "mcp-client",
+    "description": "一个使用服务器发送事件（SSE）连接到任何 MCP 服务器的客户端。",
+    "banner": [
+      "./screenshots/tester-mcp-client/setup.png",
+      "./screenshots/tester-mcp-client/chat-ui.png"
+    ]
+  },
+  {
+    "slug": "goose",
+    "name": "Goose",
+    "github": "https://github.com/block/goose",
+    "categoryId": "mcp-client",
+    "description": "Goose 是一个支持 MCP 的 AI 助手,可以帮助您完成各种任务。",
+    "banner": [
+      "./screenshots/goose/preview.png"
+    ]
+  },
+  {
+    "slug": "hyperchat",
+    "name": "HyperChat",
+    "github": "https://github.com/BigSweetPotatoStudio/HyperChat",
+    "categoryId": "mcp-client",
+    "description": "HyperChat 是一个支持 MCP 的聊天界面,提供了丰富的功能和工具集成。",
+    "banner": [
+      "./screenshots/hyperchat/main.png"
+    ]
+  },
+  {
+    "slug": "kibitz",
+    "name": "kibitz",
+    "website": "https://kibi.tz",
+    "github": "https://github.com/nick1udwig/kibitz",
+    "categoryId": "mcp-client",
+    "description": "kibitz 是一个轻量级的 MCP 客户端,专注于简单性和易用性。",
+    "banner": [
+      "./screenshots/kibitz/demo.png"
+    ]
+  },
+  {
+    "slug": "flujo",
+    "name": "FLUJO",
+    "website": "https://flujo.orchestraight.co",
+    "github": "https://github.com/mario-andreschak/FLUJO",
+    "categoryId": "mcp-client",
+    "description": "增强版 ChatGPT 克隆：具有代理、Anthropic、AWS、OpenAI、Assistants API、Azure、Groq、o1、GPT-4o、Mistral、OpenRouter、Vertex AI、Gemini、Artifacts、AI 模型切换、消息搜索、代码解释器、langchain、DALL-E-3、OpenAPI Actions、Functions、安全多用户认证、预设等功能，开源可自托管。",
+    "banner": [
+      "./screenshots/librechat/librechat.webp"
+    ]
+  },
+  {
+    "slug": "mcp-chatbot",
+    "name": "MCP Chatbot",
+
+    "categoryId": "mcp-client",
+    "description": "这个聊天机器人示例演示了如何将模型上下文协议（MCP）集成到一个简单的命令行聊天机器人中。该实现通过支持 MCP 服务器的多个工具展示了 MCP 的灵活性，并且与遵循 OpenAI API 标准的任何 LLM 提供商兼容。",
+    "banner": [],
+    "github": "https://github.com/3choff/mcp-chatbot"
+  },
+  {
+    "slug": "vs-code-github-copilot",
+    "name": "VS Code GitHub Copilot",
+    "categoryId": "mcp-client",
+    "description": "VS Code 通过代理模式将 MCP 与 GitHub Copilot 集成，允许在您的主动式编码工作流程中直接与 MCP 提供的工具交互。",
+    "banner": [],
+    "website": "https://code.visualstudio.com/",
+    "github": "https://github.com/microsoft/vscode"
+  },
+  {
+    "slug": "windsurf",
+    "name": "Windsurf",
+    "categoryId": "mcp-client",
+    "description": "第一个主动式 IDE，而且不仅如此。Windsurf Editor 是开发者和 AI 真正融合的地方，提供一种感觉像魔法一样的编码体验。",
+    "banner": [
+      "./screenshots/windsurf/windsurf.png",
+      "./screenshots/windsurf/easy-add-mcp-servers.png",
+      "./screenshots/windsurf/settings-cascade-mcp.png"
+    ],
+    "website": "https://codeium.com/windsurf"
+  },
+  {
+    "slug": "witsy",
+    "name": "Witsy",
+    "categoryId": "mcp-client",
+    "description": "Witsy 是一个支持所有主要提供商模型的 AI 桌面助手，只需一个键盘快捷键即可使用！",
+    "banner": [
+      "./screenshots/witsy/main.jpg",
+      "./screenshots/witsy/mcp.jpg"
+    ],
+    "website": "https://witsyai.com",
+    "github": "https://github.com/nbonamy/witsy"
+  },
+  {
+    "slug": "enconvo",
+    "name": "Enconvo",
+    "categoryId": "mcp-client",
+    "description": "Enconvo 是您的 AI 代理启动器，彻底改变生产力。通过即时访问，轻松自动化您的日常任务。",
+    "banner": [
+      "./screenshots/enconvo/agent_use_mcp.png",
+      "./screenshots/enconvo/mcp_config.png"
+    ],
+    "website": "https://enconvo.com",
+    "github": "https://github.com/Enconvo"
+  },
+  {
+    "slug": "y-cli",
+    "name": "y-cli",
+    "categoryId": "mcp-client",
+    "description": "一个小巧的命令行界面聊天应用程序，将 AI 对话带到您的终端。",
+    "banner": [
+      "./screenshots/y-cli/interactive-chat.png",
+      "./screenshots/y-cli/multi-mcp-server.png",
+      "./screenshots/y-cli/mcp.gif"
+    ],
+    "github": "https://github.com/luohy15/y-cli"
+  },
+  {
+    "slug": "zed",
+    "name": "Zed",
+    "categoryId": "mcp-client",
+    "description": "Zed 是由 Atom 和 Tree-sitter 的创建者开发的高性能、多人代码编辑器。",
+    "banner": [
+      "https://github.com/user-attachments/assets/95624731-5469-4b58-a21f-bbb31d9838fa"
+    ],
+    "website": "https://zed.dev/",
+    "github": "https://github.com/zed-industries/zed"
+  },
+  {
+    "slug": "mindpal",
+    "name": "MindPal",
+    "categoryId": "mcp-client",
+    "description": "MindPal 是一个用于构建和部署 AI 代理和多代理工作流的无代码平台。它使任何没有技术技能的人都能通过将任何 AI 模型与任何工具连接来创建强大的 AI 自动化解决方案。",
+    "banner": [
+      "./screenshots/mindpal/agent-config.jpg",
+      "./screenshots/mindpal/mcp-integration.jpg"
+    ],
+    "website": "https://mindpal.io",
+    "github": "https://github.com/mindpal-ai/mindpal"
+  },
+  {
+    "slug": "whatsmcp",
+    "name": "WhatsMCP",
+    "categoryId": "mcp-client",
+    "description": "WhatsMCP 是一个允许您与 MCP 服务器交互的 WhatsApp 代理。它是一个简单易用的工具，允许您从 WhatsApp 与您的 AI 堆栈进行交互。",
+    "banner": [
+      "./screenshots/whatsmcp/main.png",
+      "./screenshots/whatsmcp/whatsmcp.gif"
+    ],
+    "website": "https://wassist.app/mcp/"
+  },
+  {
+    "slug": "mcp-cli-client",
+    "name": "MCP CLI client",
+    "categoryId": "mcp-client",
+    "description": "一个用于运行 LLM 提示并实现 MCP 客户端的简单命令行工具。",
+    "banner": [
+      "./screenshots/mcp-cli-client/usage.png"
+    ],
+    "github": "https://github.com/adhikasp/mcp-client-cli"
+  },
+  {
+    "slug": "mcp-simple-slackbot",
+    "name": "MCP Simple Slackbot",
+    "categoryId": "mcp-client",
+    "description": "一个使用 LLMs 和模型上下文协议（MCP）工具的简单 Slack 机器人。",
+    "banner": [
+      "./screenshots/mcp-simple-slackbot/demo.gif"
+    ],
+    "github": "https://github.com/sooperset/mcp-client-slackbot"
+  },
+  {
+    "slug": "mcpomni-connect",
+    "name": "MCPOmni Connect",
+    "categoryId": "mcp-client",
+    "description": "一个强大的通用 MCP 服务器命令行客户端，通过智能界面提供与多个协议、AI 模型和工具的无缝集成。",
+    "banner": [
+      "https://github.com/user-attachments/assets/9c4eb3df-d0d5-464c-8815-8f7415a47fce"
+    ],
+    "github": "https://github.com/Abiorh001/mcp_omni_connect"
+  }
+]

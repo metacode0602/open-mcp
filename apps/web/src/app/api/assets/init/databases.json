@@ -1,0 +1,464 @@
+{
+  "apps": [
+    {
+      "slug": "alibabacloud-tablestore-mcp-server",
+      "name": "AlibabaCloud TableStore MCP Server",
+      "categoryId": "databases",
+      "description": "阿里云表格存储(Tablestore)的 MCP 服务器实现，特性包括添加文档、基于向量和标量进行语义搜索、RAG友好。",
+      "website": "https://github.com/aliyun/alibabacloud-tablestore-mcp-server",
+      "github": "https://github.com/aliyun/alibabacloud-tablestore-mcp-server",
+      "docs": "https://github.com/aliyun/alibabacloud-tablestore-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "elasticsearch-mcp-server",
+      "name": "Elasticsearch MCP Server",
+      "categoryId": "databases",
+      "description": "集成 Elasticsearch 的 MCP 服务器实现",
+      "website": "https://github.com/cr7258/elasticsearch-mcp-server",
+      "github": "https://github.com/cr7258/elasticsearch-mcp-server",
+      "docs": "https://github.com/cr7258/elasticsearch-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "airtable-mcp-server",
+      "name": "Airtable MCP Server",
+      "categoryId": "databases",
+      "description": "Airtable 数据库集成，具有架构检查、读写功能",
+      "website": "https://github.com/domdomegg/airtable-mcp-server",
+      "github": "https://github.com/domdomegg/airtable-mcp-server",
+      "docs": "https://github.com/domdomegg/airtable-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "airtable-mcp",
+      "name": "Airtable MCP",
+      "categoryId": "databases",
+      "description": "将AI工具直接连接至Airtable。通过自然语言查询、创建、更新及删除记录。通过标准化MCP接口实现的功能包括：基库管理、表格操作、结构修改、记录筛选以及数据迁移。",
+      "website": "https://github.com/rashidazarang/airtable-mcp",
+      "github": "https://github.com/rashidazarang/airtable-mcp",
+      "docs": "https://github.com/rashidazarang/airtable-mcp",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-server-bigquery",
+      "name": "BigQuery MCP Server",
+      "categoryId": "databases",
+      "description": "BigQuery 数据库集成了架构检查和查询功能",
+      "website": "https://github.com/LucasHild/mcp-server-bigquery",
+      "github": "https://github.com/LucasHild/mcp-server-bigquery",
+      "docs": "https://github.com/LucasHild/mcp-server-bigquery",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-server-tidb",
+      "name": "TiDB MCP Server",
+      "categoryId": "databases",
+      "description": "TiDB 数据库集成，包括表结构的建立 DDL 和 SQL 的执行",
+      "website": "https://github.com/c4pt0r/mcp-server-tidb",
+      "github": "https://github.com/c4pt0r/mcp-server-tidb",
+      "docs": "https://github.com/c4pt0r/mcp-server-tidb",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "postgres-mcp",
+      "name": "Postgres MCP",
+      "categoryId": "databases",
+      "description": "全能型 MCP 服务器，用于 Postgres 开发和运维，提供性能分析、调优和健康检查等工具",
+      "website": "https://github.com/crystaldba/postgres-mcp",
+      "github": "https://github.com/crystaldba/postgres-mcp",
+      "docs": "https://github.com/crystaldba/postgres-mcp",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "dolphindb-mcp-server",
+      "name": "DolphinDB MCP Server",
+      "categoryId": "databases",
+      "description": "DolphinDB数据库集成，具备模式检查与查询功能",
+      "website": "https://github.com/tradercjz/dolphindb-mcp-server",
+      "github": "https://github.com/tradercjz/dolphindb-mcp-server",
+      "docs": "https://github.com/tradercjz/dolphindb-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-bigquery-server",
+      "name": "BigQuery MCP Server",
+      "categoryId": "databases",
+      "description": "Google BigQuery 集成的服务器实现，可实现直接 BigQuery 数据库访问和查询功能",
+      "website": "https://github.com/ergut/mcp-bigquery-server",
+      "github": "https://github.com/ergut/mcp-bigquery-server",
+      "docs": "https://github.com/ergut/mcp-bigquery-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-clickhouse",
+      "name": "ClickHouse MCP",
+      "categoryId": "databases",
+      "description": "集成 Apache Kafka 和 Timeplus。可以获取Kafka中的最新数据，并通过 Timeplus 来 SQL 查询。",
+      "website": "https://github.com/ClickHouse/mcp-clickhouse",
+      "github": "https://github.com/ClickHouse/mcp-clickhouse",
+      "docs": "https://github.com/ClickHouse/mcp-clickhouse",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "convex-backend",
+      "name": "Convex Backend",
+      "categoryId": "databases",
+      "description": "集成 Convex 数据库，用于查看表结构、函数及执行一次性查询",
+      "website": "https://stack.convex.dev/convex-mcp-server",
+      "github": "https://github.com/get-convex/convex-backend/blob/main/npm-packages/convex/src/cli/mcp.ts",
+      "docs": "https://stack.convex.dev/convex-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "firebase-mcp",
+      "name": "Firebase MCP",
+      "categoryId": "databases",
+      "description": "包括认证、Firestore和存储在内的Firebase服务。",
+      "website": "https://github.com/gannonh/firebase-mcp",
+      "github": "https://github.com/gannonh/firebase-mcp",
+      "docs": "https://github.com/gannonh/firebase-mcp",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-timeplus",
+      "name": "Timeplus MCP",
+      "categoryId": "databases",
+      "description": "用于Apache Kafka和Timeplus的MCP服务器。能够列出Kafka主题、轮询Kafka消息、将Kafka数据本地保存，并通过Timeplus使用SQL查询流数据。",
+      "website": "https://github.com/jovezhong/mcp-timeplus",
+      "github": "https://github.com/jovezhong/mcp-timeplus",
+      "docs": "https://github.com/jovezhong/mcp-timeplus",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-database-server",
+      "name": "Fireproof Database Server",
+      "categoryId": "databases",
+      "description": "Fireproof 分布式账本数据库，支持多用户数据同步",
+      "website": "https://github.com/fireproof-storage/mcp-database-server",
+      "github": "https://github.com/fireproof-storage/mcp-database-server",
+      "docs": "https://github.com/fireproof-storage/mcp-database-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mysql_mcp_server",
+      "name": "MySQL MCP Server",
+      "categoryId": "databases",
+      "description": "MySQL 数据库集成可配置的访问控制、模式检查和全面的安全指南",
+      "website": "https://github.com/designcomputer/mysql_mcp_server",
+      "github": "https://github.com/designcomputer/mysql_mcp_server",
+      "docs": "https://github.com/designcomputer/mysql_mcp_server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-mysql-server",
+      "name": "MySQL MCP Server Node.js",
+      "categoryId": "databases",
+      "description": "基于 Node.js 的 MySQL 数据库集成，提供安全的 MySQL 数据库操作",
+      "website": "https://github.com/f4ww4z/mcp-mysql-server",
+      "github": "https://github.com/f4ww4z/mcp-mysql-server",
+      "docs": "https://github.com/f4ww4z/mcp-mysql-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "db-mcp-server",
+      "name": "DB MCP Server",
+      "categoryId": "databases",
+      "description": "一款基于Golang构建的高性能多数据库MCP服务器，支持MySQL和PostgreSQL（即将支持NoSQL）。内置查询执行、事务管理、模式探索、查询构建以及性能分析工具，与Cursor无缝集成优化数据库工作流程。",
+      "website": "https://github.com/FreePeak/db-mcp-server",
+      "github": "https://github.com/FreePeak/db-mcp-server",
+      "docs": "https://github.com/FreePeak/db-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "server-postgres",
+      "name": "PostgreSQL MCP Server",
+      "categoryId": "databases",
+      "description": "PostgreSQL 数据库集成了模式检查和查询功能",
+      "website": "https://github.com/modelcontextprotocol/servers/tree/main/src/postgres",
+      "github": "https://github.com/modelcontextprotocol/servers/tree/main/src/postgres",
+      "docs": "https://github.com/modelcontextprotocol/servers/tree/main/src/postgres",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "server-sqlite",
+      "name": "SQLite MCP Server",
+      "categoryId": "databases",
+      "description": "具有内置分析功能的 SQLite 数据库操作",
+      "website": "https://github.com/modelcontextprotocol/servers/tree/main/src/sqlite",
+      "github": "https://github.com/modelcontextprotocol/servers/tree/main/src/sqlite",
+      "docs": "https://github.com/modelcontextprotocol/servers/tree/main/src/sqlite",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "supabase",
+      "name": "Supabase MCP Server",
+      "categoryId": "databases",
+      "description": "Supabase MCP 服务器用于管理和创建 Supabase 中的项目和组织",
+      "website": "https://github.com/joshuarileydev/supabase",
+      "github": "https://github.com/joshuarileydev/supabase",
+      "docs": "https://github.com/joshuarileydev/supabase",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-server-duckdb",
+      "name": "DuckDB MCP Server",
+      "categoryId": "databases",
+      "description": "DuckDB 数据库集成了模式检查和查询功能",
+      "website": "https://github.com/ktanaka101/mcp-server-duckdb",
+      "github": "https://github.com/ktanaka101/mcp-server-duckdb",
+      "docs": "https://github.com/ktanaka101/mcp-server-duckdb",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-server-trino",
+      "name": "Trino MCP Server",
+      "categoryId": "databases",
+      "description": "用于查询和访问Trino集群数据的Trino MCP服务器。",
+      "website": "https://github.com/Dataring-engineering/mcp-server-trino",
+      "github": "https://github.com/Dataring-engineering/mcp-server-trino",
+      "docs": "https://github.com/Dataring-engineering/mcp-server-trino",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-trino",
+      "name": "Trino MCP Go",
+      "categoryId": "databases",
+      "description": "用于 Trino 的 Model Context Protocol (MCP) 服务器的 Go 实现.",
+      "website": "https://github.com/tuannvm/mcp-trino",
+      "github": "https://github.com/tuannvm/mcp-trino",
+      "docs": "https://github.com/tuannvm/mcp-trino",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-memgraph",
+      "name": "Memgraph MCP",
+      "categoryId": "databases",
+      "description": "Memgraph MCP 服务器 - 包含一个对Memgraph执行查询的工具以及一个模式资源。",
+      "website": "https://github.com/memgraph/mcp-memgraph",
+      "github": "https://github.com/memgraph/mcp-memgraph",
+      "docs": "https://github.com/memgraph/mcp-memgraph",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mongodb-lens",
+      "name": "MongoDB Lens",
+      "categoryId": "databases",
+      "description": "MongoDB Lens：功能全面的MongoDB数据库MCP服务器",
+      "website": "https://github.com/furey/mongodb-lens",
+      "github": "https://github.com/furey/mongodb-lens",
+      "docs": "https://github.com/furey/mongodb-lens",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mongo-mcp",
+      "name": "MongoDB MCP",
+      "categoryId": "databases",
+      "description": "MongoDB 集成使 LLM 能够直接与数据库交互。",
+      "website": "https://github.com/QuantGeekDev/mongo-mcp",
+      "github": "https://github.com/QuantGeekDev/mongo-mcp",
+      "docs": "https://github.com/QuantGeekDev/mongo-mcp",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-mongo-server",
+      "name": "MongoDB MCP Server",
+      "categoryId": "databases",
+      "description": "MongoDB 的模型上下文协议服务器",
+      "website": "https://github.com/kiliczsh/mcp-mongo-server",
+      "github": "https://github.com/kiliczsh/mcp-mongo-server",
+      "docs": "https://github.com/kiliczsh/mcp-mongo-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-tinybird",
+      "name": "Tinybird MCP",
+      "categoryId": "databases",
+      "description": "Tinybird 集成查询和 API 功能",
+      "website": "https://github.com/tinybirdco/mcp-tinybird",
+      "github": "https://github.com/tinybirdco/mcp-tinybird",
+      "docs": "https://github.com/tinybirdco/mcp-tinybird",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "vikingdb-mcp-server",
+      "name": "VikingDB MCP Server",
+      "categoryId": "databases",
+      "description": "VikingDB 数据库集成了collection和index的基本信息介绍，并提供向量存储和查询的功能.",
+      "website": "https://github.com/KashiwaByte/vikingdb-mcp-server",
+      "github": "https://github.com/KashiwaByte/vikingdb-mcp-server",
+      "docs": "https://github.com/KashiwaByte/vikingdb-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-neo4j",
+      "name": "Neo4j MCP",
+      "categoryId": "databases",
+      "description": "Neo4j 的模型上下文协议",
+      "website": "https://github.com/neo4j-contrib/mcp-neo4j",
+      "github": "https://github.com/neo4j-contrib/mcp-neo4j",
+      "docs": "https://github.com/neo4j-contrib/mcp-neo4j",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "nile-mcp-server",
+      "name": "Nile MCP Server",
+      "categoryId": "databases",
+      "description": "Nile 的 Postgres 平台 MCP 服务器 - 使用 LLM 管理和查询 Postgres 数据库、租户、用户和认证",
+      "website": "https://github.com/niledatabase/nile-mcp-server",
+      "github": "https://github.com/niledatabase/nile-mcp-server",
+      "docs": "https://github.com/niledatabase/nile-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-snowflake-server",
+      "name": "Snowflake MCP Server",
+      "categoryId": "databases",
+      "description": "Snowflake 集成实现，支持读取和（可选）写入操作，并具备洞察跟踪功能",
+      "website": "https://github.com/isaacwasserman/mcp-snowflake-server",
+      "github": "https://github.com/isaacwasserman/mcp-snowflake-server",
+      "docs": "https://github.com/isaacwasserman/mcp-snowflake-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "sqlite-explorer-fastmcp-mcp-server",
+      "name": "SQLite Explorer MCP Server",
+      "categoryId": "databases",
+      "description": "一个 MCP 服务器，通过模型上下文协议 （MCP） 提供对 SQLite 数据库的安全只读访问。该服务器是使用 FastMCP 框架构建的，它使 LLM 能够探索和查询具有内置安全功能和查询验证的 SQLite 数据库。",
+      "website": "https://github.com/hannesrudolph/sqlite-explorer-fastmcp-mcp-server",
+      "github": "https://github.com/hannesrudolph/sqlite-explorer-fastmcp-mcp-server",
+      "docs": "https://github.com/hannesrudolph/sqlite-explorer-fastmcp-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-pinecone",
+      "name": "Pinecone MCP",
+      "categoryId": "databases",
+      "description": "Pinecone 与矢量搜索功能的集成",
+      "website": "https://github.com/sirmews/mcp-pinecone",
+      "github": "https://github.com/sirmews/mcp-pinecone",
+      "docs": "https://github.com/sirmews/mcp-pinecone",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-alchemy",
+      "name": "SQLAlchemy MCP",
+      "categoryId": "databases",
+      "description": "基于SQLAlchemy的通用数据库集成，支持PostgreSQL、MySQL、MariaDB、SQLite、Oracle、MS SQL Server等众多数据库。具有架构和关系检查以及大型数据集分析功能。",
+      "website": "https://github.com/runekaagaard/mcp-alchemy",
+      "github": "https://github.com/runekaagaard/mcp-alchemy",
+      "docs": "https://github.com/runekaagaard/mcp-alchemy",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "go-mcp-mysql",
+      "name": "Go MySQL MCP",
+      "categoryId": "databases",
+      "description": "基于 Go 的开箱即用的 MySQL MCP 服务器，支持只读模式和自动 Schema 检查。",
+      "website": "https://github.com/Zhwt/go-mcp-mysql",
+      "github": "https://github.com/Zhwt/go-mcp-mysql",
+      "docs": "https://github.com/Zhwt/go-mcp-mysql",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-server-jdbc",
+      "name": "JDBC MCP Server",
+      "categoryId": "databases",
+      "description": "连接到任何兼容JDBC的数据库，执行查询、插入、更新、删除等操作。",
+      "website": "https://github.com/quarkiverse/quarkus-mcp-servers/tree/main/jdbc",
+      "github": "https://github.com/quarkiverse/quarkus-mcp-servers/tree/main/jdbc",
+      "docs": "https://github.com/quarkiverse/quarkus-mcp-servers/tree/main/jdbc",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "adx-mcp-server",
+      "name": "Azure Data Explorer MCP Server",
+      "categoryId": "databases",
+      "description": "查询和分析Azure Data Explorer数据库",
+      "website": "https://github.com/pab1it0/adx-mcp-server",
+      "github": "https://github.com/pab1it0/adx-mcp-server",
+      "docs": "https://github.com/pab1it0/adx-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "prometheus-mcp-server",
+      "name": "Prometheus MCP Server",
+      "categoryId": "databases",
+      "description": "查询并分析开源监控系统Prometheus。",
+      "website": "https://github.com/pab1it0/prometheus-mcp-server",
+      "github": "https://github.com/pab1it0/prometheus-mcp-server",
+      "docs": "https://github.com/pab1it0/prometheus-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-server-neon",
+      "name": "Neon MCP Server",
+      "categoryId": "databases",
+      "description": "用于通过 Neon Serverless Postgres 创建和管理 Postgres 数据库的MCP服务器",
+      "website": "https://github.com/neondatabase/mcp-server-neon",
+      "github": "https://github.com/neondatabase/mcp-server-neon",
+      "docs": "https://github.com/neondatabase/mcp-server-neon",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "xiyan_mcp_server",
+      "name": "XiyanSQL MCP Server",
+      "categoryId": "databases",
+      "description": "一个支持通过自然语言查询从数据库获取数据的MCP服务器，由XiyanSQL作为文本转SQL的大语言模型提供支持。",
+      "website": "https://github.com/XGenerationLab/xiyan_mcp_server",
+      "github": "https://github.com/XGenerationLab/xiyan_mcp_server",
+      "docs": "https://github.com/XGenerationLab/xiyan_mcp_server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "dbhub",
+      "name": "DBHub",
+      "categoryId": "databases",
+      "description": "支持主流数据库的通用数据库MCP服务器。",
+      "website": "https://github.com/bytebase/dbhub",
+      "github": "https://github.com/bytebase/dbhub",
+      "docs": "https://github.com/bytebase/dbhub",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "greptimedb-mcp-server",
+      "name": "GreptimeDB MCP Server",
+      "categoryId": "databases",
+      "description": "查询 GreptimeDB 的 MCP 服务。",
+      "website": "https://github.com/GreptimeTeam/greptimedb-mcp-server",
+      "github": "https://github.com/GreptimeTeam/greptimedb-mcp-server",
+      "docs": "https://github.com/GreptimeTeam/greptimedb-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "influxdb-mcp-server",
+      "name": "InfluxDB MCP Server",
+      "categoryId": "databases",
+      "description": "针对 InfluxDB OSS API v2 运行查询",
+      "website": "https://github.com/idoru/influxdb-mcp-server",
+      "github": "https://github.com/idoru/influxdb-mcp-server",
+      "docs": "https://github.com/idoru/influxdb-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-google-sheets",
+      "name": "Google Sheets MCP",
+      "categoryId": "databases",
+      "description": "一个用于与 Google Sheets 交互的模型上下文协议服务器。该服务器通过 Google Sheets API 提供创建、读取、更新和管理电子表格的工具。",
+      "website": "https://github.com/xing5/mcp-google-sheets",
+      "github": "https://github.com/xing5/mcp-google-sheets",
+      "docs": "https://github.com/xing5/mcp-google-sheets",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-server-qdrant",
+      "name": "Qdrant MCP Server",
+      "categoryId": "databases",
+      "description": "一个Qdrant MCP服务器",
+      "website": "https://github.com/qdrant/mcp-server-qdrant",
+      "github": "https://github.com/qdrant/mcp-server-qdrant",
+      "docs": "https://github.com/qdrant/mcp-server-qdrant",
+      "version": "1.0.0"
+    }
+  ]
+}

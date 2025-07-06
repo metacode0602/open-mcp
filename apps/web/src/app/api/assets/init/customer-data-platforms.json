@@ -1,0 +1,44 @@
+{
+  "apps": [
+    {
+      "slug": "inoyu-mcp-unomi-server",
+      "name": "Apache Unomi MCP Server",
+      "categoryId": "customer-data-platforms",
+      "description": "MCP 服务器用于访问和更新 Apache Unomi CDP 服务器上的配置文件。",
+      "website": "https://github.com/sergehuber/inoyu-mcp-unomi-server",
+      "github": "https://github.com/sergehuber/inoyu-mcp-unomi-server",
+      "docs": "https://github.com/sergehuber/inoyu-mcp-unomi-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "opendatamcp",
+      "name": "OpenDataMCP",
+      "categoryId": "customer-data-platforms",
+      "description": "使用模型上下文协议将任何开放数据连接到任何 LLM。",
+      "website": "https://github.com/OpenDataMCP/OpenDataMCP",
+      "github": "https://github.com/OpenDataMCP/OpenDataMCP",
+      "docs": "https://github.com/OpenDataMCP/OpenDataMCP",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-tinybird",
+      "name": "Tinybird MCP",
+      "categoryId": "customer-data-platforms",
+      "description": "MCP 服务器可从任何 MCP 客户端与 Tinybird Workspace 进行交互。",
+      "website": "https://github.com/tinybirdco/mcp-tinybird",
+      "github": "https://github.com/tinybirdco/mcp-tinybird",
+      "docs": "https://github.com/tinybirdco/mcp-tinybird",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-server-iaptic",
+      "name": "iaptic MCP Server",
+      "categoryId": "customer-data-platforms",
+      "description": "连接 iaptic 平台，让您轻松查询客户购买记录、交易数据以及应用营收统计信息。",
+      "website": "https://github.com/iaptic/mcp-server-iaptic",
+      "github": "https://github.com/iaptic/mcp-server-iaptic",
+      "docs": "https://github.com/iaptic/mcp-server-iaptic",
+      "version": "1.0.0"
+    }
+  ]
+}

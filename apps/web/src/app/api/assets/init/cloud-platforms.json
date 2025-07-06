@@ -1,0 +1,134 @@
+{
+  "apps": [
+    {
+      "slug": "qiniu-mcp-server",
+      "name": "七牛云 MCP Server",
+      "categoryId": "cloud-platforms",
+      "description": "基于七牛云产品构建的 MCP，支持访问七牛云存储、智能多媒体服务等。",
+      "website": "https://github.com/qiniu/qiniu-mcp-server",
+      "github": "https://github.com/qiniu/qiniu-mcp-server",
+      "docs": "https://github.com/qiniu/qiniu-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-server-cloudflare",
+      "name": "Cloudflare MCP Server",
+      "categoryId": "cloud-platforms",
+      "description": "与 Cloudflare 服务集成，包括 Workers、KV、R2 和 D1",
+      "website": "https://github.com/cloudflare/mcp-server-cloudflare",
+      "github": "https://github.com/cloudflare/mcp-server-cloudflare",
+      "docs": "https://github.com/cloudflare/mcp-server-cloudflare",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-ipfs",
+      "name": "IPFS MCP Server",
+      "categoryId": "cloud-platforms",
+      "description": "上传和操作 IPFS 存储",
+      "website": "https://github.com/alexbakers/mcp-ipfs",
+      "github": "https://github.com/alexbakers/mcp-ipfs",
+      "docs": "https://github.com/alexbakers/mcp-ipfs",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "aws-mcp-server",
+      "name": "AWS MCP Server",
+      "categoryId": "cloud-platforms",
+      "description": "一款轻量但功能强大的服务器，使AI助手能够在支持多架构的安全Docker环境中执行AWS CLI命令、使用Unix管道，并为常见AWS任务应用提示模板。",
+      "website": "https://github.com/alexei-led/aws-mcp-server",
+      "github": "https://github.com/alexei-led/aws-mcp-server",
+      "docs": "https://github.com/alexei-led/aws-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-k8s-go",
+      "name": "Kubernetes MCP Server",
+      "categoryId": "cloud-platforms",
+      "description": "通过 MCP 操作 Kubernetes 集群",
+      "website": "https://github.com/strowk/mcp-k8s-go",
+      "github": "https://github.com/strowk/mcp-k8s-go",
+      "docs": "https://github.com/strowk/mcp-k8s-go",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-server-kubernetes",
+      "name": "Flux159 Kubernetes MCP Server",
+      "categoryId": "cloud-platforms",
+      "description": "使用 Typescript 实现 Kubernetes 集群中针对 pod、部署、服务的操作。",
+      "website": "https://github.com/Flux159/mcp-server-kubernetes",
+      "github": "https://github.com/Flux159/mcp-server-kubernetes",
+      "docs": "https://github.com/Flux159/mcp-server-kubernetes",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "kubernetes-mcp-server",
+      "name": "Manusa Kubernetes MCP Server",
+      "categoryId": "cloud-platforms",
+      "description": "一个功能强大的Kubernetes MCP服务器，额外支持OpenShift。除了为任何Kubernetes资源提供CRUD操作外，该服务器还提供专用工具与您的集群进行交互。",
+      "website": "https://github.com/manusa/kubernetes-mcp-server",
+      "github": "https://github.com/manusa/kubernetes-mcp-server",
+      "docs": "https://github.com/manusa/kubernetes-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-k8s-eye",
+      "name": "K8s Eye MCP Server",
+      "categoryId": "cloud-platforms",
+      "description": "提供 Kubernetes 集群资源管理, 深度分析集群和应用的健康状态",
+      "website": "https://github.com/wenhuwang/mcp-k8s-eye",
+      "github": "https://github.com/wenhuwang/mcp-k8s-eye",
+      "docs": "https://github.com/wenhuwang/mcp-k8s-eye",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "netskope-mcp",
+      "name": "Netskope MCP Server",
+      "categoryId": "cloud-platforms",
+      "description": "提供对 Netskope Private Access 环境中所有组件的访问权限，包含详细的设置信息和 LLM 使用示例。",
+      "website": "https://github.com/johnneerdael/netskope-mcp",
+      "github": "https://github.com/johnneerdael/netskope-mcp",
+      "docs": "https://github.com/johnneerdael/netskope-mcp",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "tfmcp",
+      "name": "Terraform MCP Server",
+      "categoryId": "cloud-platforms",
+      "description": "一个Terraform MCP服务器，允许AI助手管理和操作Terraform环境，实现读取配置、分析计划、应用配置以及管理Terraform状态的功能。",
+      "website": "https://github.com/nwiizo/tfmcp",
+      "github": "https://github.com/nwiizo/tfmcp",
+      "docs": "https://github.com/nwiizo/tfmcp",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "esxi-mcp-server",
+      "name": "ESXi MCP Server",
+      "categoryId": "cloud-platforms",
+      "description": "提供对 VMware ESXi/vCenter 管理服务器，提供简单的 REST API 接口来管理虚拟机。",
+      "website": "https://github.com/bright8192/esxi-mcp-server",
+      "github": "https://github.com/bright8192/esxi-mcp-server",
+      "docs": "https://github.com/bright8192/esxi-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "k8m",
+      "name": "K8M",
+      "categoryId": "cloud-platforms",
+      "description": "提供MCP多集群k8s管理操作，提供管理界面、日志，内置近50种工具，覆盖常见运维开发场景，支持常规资源、CRD资源。",
+      "website": "https://github.com/weibaohui/k8m",
+      "github": "https://github.com/weibaohui/k8m",
+      "docs": "https://github.com/weibaohui/k8m",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-k8s",
+      "name": "MCP-K8S",
+      "categoryId": "cloud-platforms",
+      "description": "MCP-K8S 是一个 AI 驱动的 Kubernetes 资源管理工具，通过自然语言交互方式，让用户能够轻松操作 Kubernetes 集群中的任意资源，包括原生资源（如 Deployment、Service）和自定义资源（CRD）。无需记忆复杂命令，只需描述需求，AI 就能准确执行对应的集群操作，大大提升了 Kubernetes 的易用性。",
+      "website": "https://github.com/silenceper/mcp-k8s",
+      "github": "https://github.com/silenceper/mcp-k8s",
+      "docs": "https://github.com/silenceper/mcp-k8s",
+      "version": "1.0.0"
+    }
+  ]
+}

@@ -1,0 +1,494 @@
+{
+  "apps": [
+    {
+      "slug": "actors-mcp-server",
+      "name": "Apify Actors MCP Server",
+      "categoryId": "other-tools",
+      "description": "使用超过 3,000 个预构建的云工具（称为 Actors）从网站、电商、社交媒体、搜索引擎、地图等提取数据。",
+      "website": "https://github.com/apify/actors-mcp-server",
+      "github": "https://github.com/apify/actors-mcp-server",
+      "docs": "https://github.com/apify/actors-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-server-calculator",
+      "name": "Calculator MCP Server",
+      "categoryId": "other-tools",
+      "description": "使LLM能够使用计算器进行精确的数值计算",
+      "website": "https://github.com/githejie/mcp-server-calculator",
+      "github": "https://github.com/githejie/mcp-server-calculator",
+      "docs": "https://github.com/githejie/mcp-server-calculator",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "contentful-mcp",
+      "name": "Contentful MCP Server",
+      "categoryId": "other-tools",
+      "description": "更新、创建、删除 Contentful Space 中的内容、内容模型和资产",
+      "website": "https://github.com/ivo-toby/contentful-mcp",
+      "github": "https://github.com/ivo-toby/contentful-mcp",
+      "docs": "https://github.com/ivo-toby/contentful-mcp",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-openai",
+      "name": "OpenAI MCP Server",
+      "categoryId": "other-tools",
+      "description": "与 OpenAI 最智能的模型聊天",
+      "website": "https://github.com/mzxrai/mcp-openai",
+      "github": "https://github.com/mzxrai/mcp-openai",
+      "docs": "https://github.com/mzxrai/mcp-openai",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "godoc-mcp",
+      "name": "GoDoc MCP Server",
+      "categoryId": "other-tools",
+      "description": "高效的 Go 文档服务器，让 AI 助手可以智能访问包文档和类型，而无需阅读整个源文件",
+      "website": "https://github.com/mrjoshuak/godoc-mcp",
+      "github": "https://github.com/mrjoshuak/godoc-mcp",
+      "docs": "https://github.com/mrjoshuak/godoc-mcp",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-server-openai",
+      "name": "OpenAI Assistant MCP Server",
+      "categoryId": "other-tools",
+      "description": "直接从Claude查询OpenAI模型，使用MCP协议",
+      "website": "https://github.com/pierrebrunelle/mcp-server-openai",
+      "github": "https://github.com/pierrebrunelle/mcp-server-openai",
+      "docs": "https://github.com/pierrebrunelle/mcp-server-openai",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "server-everything",
+      "name": "Everything MCP Server",
+      "categoryId": "other-tools",
+      "description": "MCP服务器，涵盖MCP协议的所有功能",
+      "website": "https://github.com/modelcontextprotocol/servers/tree/main/src/everything",
+      "github": "https://github.com/modelcontextprotocol/servers/tree/main/src/everything",
+      "docs": "https://github.com/modelcontextprotocol/servers/tree/main/src/everything",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "phabricator-mcp-server",
+      "name": "Phabricator MCP Server",
+      "categoryId": "other-tools",
+      "description": "与Phabricator API交互",
+      "website": "https://github.com/baba786/phabricator-mcp-server",
+      "github": "https://github.com/baba786/phabricator-mcp-server",
+      "docs": "https://github.com/baba786/phabricator-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-obsidian",
+      "name": "Obsidian MCP Server",
+      "categoryId": "other-tools",
+      "description": "通过REST API与Obsidian交互",
+      "website": "https://github.com/MarkusPfundstein/mcp-obsidian",
+      "github": "https://github.com/MarkusPfundstein/mcp-obsidian",
+      "docs": "https://github.com/MarkusPfundstein/mcp-obsidian",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "obsidian-connector",
+      "name": "Obsidian Connector",
+      "categoryId": "other-tools",
+      "description": "这是一个连接器，允许Claude Desktop（或任何MCP兼容应用程序）读取和搜索包含Markdown笔记的目录（如Obsidian库）。",
+      "website": "https://github.com/calclavia/mcp-obsidian",
+      "github": "https://github.com/calclavia/mcp-obsidian",
+      "docs": "https://github.com/calclavia/mcp-obsidian",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-youtube",
+      "name": "YouTube MCP Server",
+      "categoryId": "other-tools",
+      "description": "获取YouTube字幕",
+      "website": "https://github.com/anaisbetts/mcp-youtube",
+      "github": "https://github.com/anaisbetts/mcp-youtube",
+      "docs": "https://github.com/anaisbetts/mcp-youtube",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "notion-mcp",
+      "name": "Notion MCP Server",
+      "categoryId": "other-tools",
+      "description": "与Notion API集成，管理个人待办事项列表",
+      "website": "https://github.com/danhilse/notion_mcp",
+      "github": "https://github.com/danhilse/notion_mcp",
+      "docs": "https://github.com/danhilse/notion_mcp",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "wcgw",
+      "name": "WCGW",
+      "categoryId": "other-tools",
+      "description": "自动化shell执行、计算机控制和编码代理。（Mac）",
+      "website": "https://github.com/rusiaaman/wcgw/blob/main/src/wcgw/client/mcp_server/Readme.md",
+      "github": "https://github.com/rusiaaman/wcgw",
+      "docs": "https://github.com/rusiaaman/wcgw/blob/main/src/wcgw/client/mcp_server/Readme.md",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "ancestry-mcp",
+      "name": "Ancestry MCP Server",
+      "categoryId": "other-tools",
+      "description": "允许AI读取.ged文件和基因数据",
+      "website": "https://github.com/reeeeemo/ancestry-mcp",
+      "github": "https://github.com/reeeeemo/ancestry-mcp",
+      "docs": "https://github.com/reeeeemo/ancestry-mcp",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "apple-notes-mcp",
+      "name": "Apple Notes MCP Server",
+      "categoryId": "other-tools",
+      "description": "允许AI读取本地Apple Notes数据库（仅限macOS）",
+      "website": "https://github.com/sirmews/apple-notes-mcp",
+      "github": "https://github.com/sirmews/apple-notes-mcp",
+      "docs": "https://github.com/sirmews/apple-notes-mcp",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "coinmarket-mcp-server",
+      "name": "Coinmarket MCP Server",
+      "categoryId": "other-tools",
+      "description": "Coinmarket API集成，用于获取加密货币列表和报价",
+      "website": "https://github.com/anjor/coinmarket-mcp-server",
+      "github": "https://github.com/anjor/coinmarket-mcp-server",
+      "docs": "https://github.com/anjor/coinmarket-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-notion-server",
+      "name": "Notion Server",
+      "categoryId": "other-tools",
+      "description": "与Notion API交互",
+      "website": "https://github.com/suekou/mcp-notion-server",
+      "github": "https://github.com/suekou/mcp-notion-server",
+      "docs": "https://github.com/suekou/mcp-notion-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "unichat-mcp-server",
+      "name": "UniChat MCP Server",
+      "categoryId": "other-tools",
+      "description": "使用MCP协议通过工具或预定义的提示发送请求给OpenAI、MistralAI、Anthropic、xAI或Google AI。需要供应商API密钥",
+      "website": "https://github.com/amidabuddha/unichat-mcp-server",
+      "github": "https://github.com/amidabuddha/unichat-mcp-server",
+      "docs": "https://github.com/amidabuddha/unichat-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-miro",
+      "name": "Miro MCP Server",
+      "categoryId": "other-tools",
+      "description": "访问 MIRO 白板，批量创建和读取项目。需要 REST API 的 OAUTH 密钥。",
+      "website": "https://github.com/evalstate/mcp-miro",
+      "github": "https://github.com/evalstate/mcp-miro",
+      "docs": "https://github.com/evalstate/mcp-miro",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-linear",
+      "name": "Linear MCP Server",
+      "categoryId": "other-tools",
+      "description": "与Linear项目管理系统集成",
+      "website": "https://github.com/tacticlaunch/mcp-linear",
+      "github": "https://github.com/tacticlaunch/mcp-linear",
+      "docs": "https://github.com/tacticlaunch/mcp-linear",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "jira-mcp-server",
+      "name": "Jira MCP Server",
+      "categoryId": "other-tools",
+      "description": "通过 JQL 和 API 读取 Jira 数据，并执行创建和编辑工单的请求",
+      "website": "https://github.com/KS-GEN-AI/jira-mcp-server",
+      "github": "https://github.com/KS-GEN-AI/jira-mcp-server",
+      "docs": "https://github.com/KS-GEN-AI/jira-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "confluence-mcp-server",
+      "name": "Confluence MCP Server",
+      "categoryId": "other-tools",
+      "description": "通过 CQL 获取 Confluence 数据并阅读页面",
+      "website": "https://github.com/KS-GEN-AI/confluence-mcp-server",
+      "github": "https://github.com/KS-GEN-AI/confluence-mcp-server",
+      "docs": "https://github.com/KS-GEN-AI/confluence-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-atlassian",
+      "name": "Atlassian MCP Server",
+      "categoryId": "other-tools",
+      "description": "Confluence工作区的自然语言搜索和内容访问",
+      "website": "https://github.com/sooperset/mcp-atlassian",
+      "github": "https://github.com/sooperset/mcp-atlassian",
+      "docs": "https://github.com/sooperset/mcp-atlassian",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "any-chat-completions-mcp",
+      "name": "Any Chat Completions MCP",
+      "categoryId": "other-tools",
+      "description": "与任何其他OpenAI SDK兼容的聊天完成API对话，例如Perplexity、Groq、xAI等",
+      "website": "https://github.com/pyroprompts/any-chat-completions-mcp",
+      "github": "https://github.com/pyroprompts/any-chat-completions-mcp",
+      "docs": "https://github.com/pyroprompts/any-chat-completions-mcp",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-installer",
+      "name": "MCP Installer",
+      "categoryId": "other-tools",
+      "description": "一个MCP服务器，可以为您安装其他MCP服务器",
+      "website": "https://github.com/anaisbetts/mcp-installer",
+      "github": "https://github.com/anaisbetts/mcp-installer",
+      "docs": "https://github.com/anaisbetts/mcp-installer",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-server-perplexity",
+      "name": "Perplexity MCP Server",
+      "categoryId": "other-tools",
+      "description": "与 Perplexity API 交互",
+      "website": "https://github.com/tanigami/mcp-server-perplexity",
+      "github": "https://github.com/tanigami/mcp-server-perplexity",
+      "docs": "https://github.com/tanigami/mcp-server-perplexity",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "wikimedia-enterprise-mcp",
+      "name": "Wikimedia Enterprise MCP",
+      "categoryId": "other-tools",
+      "description": "维基百科文章查找 API",
+      "website": "https://gitlab.wikimedia.org/repos/future-audiences/wikimedia-enterprise-model-context-protocol",
+      "github": "https://gitlab.wikimedia.org/repos/future-audiences/wikimedia-enterprise-model-context-protocol",
+      "docs": "https://gitlab.wikimedia.org/repos/future-audiences/wikimedia-enterprise-model-context-protocol",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-simple-timeserver",
+      "name": "Simple Timeserver MCP",
+      "categoryId": "other-tools",
+      "description": "MCP 服务器允许检查客户端计算机上的本地时间或 NTP 服务器上的当前 UTC 时间",
+      "website": "https://github.com/andybrandt/mcp-simple-timeserver",
+      "github": "https://github.com/andybrandt/mcp-simple-timeserver",
+      "docs": "https://github.com/andybrandt/mcp-simple-timeserver",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-simple-openai-assistant",
+      "name": "Simple OpenAI Assistant MCP",
+      "categoryId": "other-tools",
+      "description": "MCP 与 OpenAI 助手对话（Claude 可以使用任何 GPT 模型作为他的助手）",
+      "website": "https://github.com/andybrandt/mcp-simple-openai-assistant",
+      "github": "https://github.com/andybrandt/mcp-simple-openai-assistant",
+      "docs": "https://github.com/andybrandt/mcp-simple-openai-assistant",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-hfspace",
+      "name": "HuggingFace Spaces MCP",
+      "categoryId": "other-tools",
+      "description": "直接从 Claude 使用 HuggingFace Spaces。使用开源图像生成、聊天、视觉任务等。支持图像、音频和文本上传/下载。",
+      "website": "https://github.com/evalstate/mcp-hfspace",
+      "github": "https://github.com/evalstate/mcp-hfspace",
+      "docs": "https://github.com/evalstate/mcp-hfspace",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-manager",
+      "name": "MCP Manager",
+      "categoryId": "other-tools",
+      "description": "简单的 Web UI 用于安装和管理 Claude 桌面应用程序的 MCP 服务器。",
+      "website": "https://github.com/zueai/mcp-manager",
+      "github": "https://github.com/zueai/mcp-manager",
+      "docs": "https://github.com/zueai/mcp-manager",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-cli",
+      "name": "MCP CLI",
+      "categoryId": "other-tools",
+      "description": "用于测试 MCP 服务器的 CLI 工具",
+      "website": "https://github.com/wong2/mcp-cli",
+      "github": "https://github.com/wong2/mcp-cli",
+      "docs": "https://github.com/wong2/mcp-cli",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-vegalite-server",
+      "name": "VegaLite MCP Server",
+      "categoryId": "other-tools",
+      "description": "使用 VegaLite 格式和渲染器从获取的数据生成可视化效果。",
+      "website": "https://github.com/isaacwasserman/mcp-vegalite-server",
+      "github": "https://github.com/isaacwasserman/mcp-vegalite-server",
+      "docs": "https://github.com/isaacwasserman/mcp-vegalite-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "homeassistant-mcp",
+      "name": "Home Assistant MCP",
+      "categoryId": "other-tools",
+      "description": "访问家庭助理数据和控制设备（灯、开关、恒温器等）。",
+      "website": "https://github.com/tevonsb/homeassistant-mcp",
+      "github": "https://github.com/tevonsb/homeassistant-mcp",
+      "docs": "https://github.com/tevonsb/homeassistant-mcp",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-server-home-assistant",
+      "name": "Home Assistant Server MCP",
+      "categoryId": "other-tools",
+      "description": "通过模型上下文协议服务器暴露所有 Home Assistant 语音意图，实现智能家居控制",
+      "website": "https://github.com/allenporter/mcp-server-home-assistant",
+      "github": "https://github.com/allenporter/mcp-server-home-assistant",
+      "docs": "https://github.com/allenporter/mcp-server-home-assistant",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-server-giphy",
+      "name": "Giphy MCP Server",
+      "categoryId": "other-tools",
+      "description": "通过Giphy API从庞大的Giphy图库中搜索并获取GIF动图。",
+      "website": "https://github.com/magarcia/mcp-server-giphy",
+      "github": "https://github.com/magarcia/mcp-server-giphy",
+      "docs": "https://github.com/magarcia/mcp-server-giphy",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "all-in-one-mcp",
+      "name": "All-in-One MCP",
+      "categoryId": "other-tools",
+      "description": "一些对开发者有用的工具，几乎涵盖工程师所需的一切：Confluence、Jira、YouTube、运行脚本、知识库RAG、抓取URL、管理YouTube频道、电子邮件、日历、GitLab",
+      "website": "https://github.com/nguyenvanduocit/all-in-one-model-context-protocol",
+      "github": "https://github.com/nguyenvanduocit/all-in-one-model-context-protocol",
+      "docs": "https://github.com/nguyenvanduocit/all-in-one-model-context-protocol",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mac-apps-launcher",
+      "name": "Mac Apps Launcher",
+      "categoryId": "other-tools",
+      "description": "用于列出和启动 MacOS 上的应用程序的 MCP 服务器",
+      "website": "https://github.com/JoshuaRileyDev/mac-apps-launcher",
+      "github": "https://github.com/JoshuaRileyDev/mac-apps-launcher",
+      "docs": "https://github.com/JoshuaRileyDev/mac-apps-launcher",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-datetime",
+      "name": "DateTime MCP",
+      "categoryId": "other-tools",
+      "description": "MCP 服务器提供多种格式的日期和时间函数",
+      "website": "https://github.com/ZeparHyfar/mcp-datetime",
+      "github": "https://github.com/ZeparHyfar/mcp-datetime",
+      "docs": "https://github.com/ZeparHyfar/mcp-datetime",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "wolfram-alpha-mcp",
+      "name": "Wolfram Alpha MCP",
+      "categoryId": "other-tools",
+      "description": "用于查询Wolfram Alpha API的MCP服务器。",
+      "website": "https://github.com/SecretiveShell/MCP-wolfram-alpha",
+      "github": "https://github.com/SecretiveShell/MCP-wolfram-alpha",
+      "docs": "https://github.com/SecretiveShell/MCP-wolfram-alpha",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "piapi-mcp-server",
+      "name": "PiAPI MCP Server",
+      "categoryId": "other-tools",
+      "description": "PiAPI MCP服务器使用户能够直接从Claude或其他MCP兼容应用程序中使用Midjourney/Flux/Kling/Hunyuan/Udio/Trellis生成媒体内容。",
+      "website": "https://github.com/apinetwork/piapi-mcp-server",
+      "github": "https://github.com/apinetwork/piapi-mcp-server",
+      "docs": "https://github.com/apinetwork/piapi-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "difyworkflow",
+      "name": "DifyWorkflow",
+      "categoryId": "other-tools",
+      "description": "MCP 服务器 Tools 实现查询与执行 Dify AI 平台上自定义的工作流",
+      "website": "https://github.com/gotoolkits/mcp-difyworkflow-server",
+      "github": "https://github.com/gotoolkits/mcp-difyworkflow-server",
+      "docs": "https://github.com/gotoolkits/mcp-difyworkflow-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "hn-server",
+      "name": "Hacker News Server",
+      "categoryId": "other-tools",
+      "description": "解析 news.ycombinator.com（Hacker News）的 HTML 内容，为不同类型的故事（热门、最新、问答、展示、工作）提供结构化数据",
+      "website": "https://github.com/pskill9/hn-server",
+      "github": "https://github.com/pskill9/hn-server",
+      "docs": "https://github.com/pskill9/hn-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "screenpipe",
+      "name": "Screenpipe",
+      "categoryId": "other-tools",
+      "description": "本地优先的系统，支持屏幕/音频捕获并带有时间戳索引、SQL/嵌入存储、语义搜索、LLM 驱动的历史分析和事件触发动作 - 通过 NextJS 插件生态系统实现构建上下文感知的 AI 代理",
+      "website": "https://github.com/mediar-ai/screenpipe",
+      "github": "https://github.com/mediar-ai/screenpipe",
+      "docs": "https://github.com/mediar-ai/screenpipe",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "bear-mcp-server",
+      "name": "Bear MCP Server",
+      "categoryId": "other-tools",
+      "description": "允许 AI 读取您的 Bear Notes（仅支持 macOS）",
+      "website": "https://github.com/akseyh/bear-mcp-server",
+      "github": "https://github.com/akseyh/bear-mcp-server",
+      "docs": "https://github.com/akseyh/bear-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-server-jfx",
+      "name": "JavaFX MCP Server",
+      "categoryId": "other-tools",
+      "description": "在JavaFX画布上绘制。",
+      "website": "https://github.com/quarkiverse/quarkus-mcp-servers/tree/main/jfx",
+      "github": "https://github.com/quarkiverse/quarkus-mcp-servers/tree/main/jfx",
+      "docs": "https://github.com/quarkiverse/quarkus-mcp-servers/tree/main/jfx",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "attio-mcp-server",
+      "name": "Attio MCP Server",
+      "categoryId": "other-tools",
+      "description": "允许AI客户端在Attio CRM中管理记录和笔记",
+      "website": "https://github.com/hmk/attio-mcp-server",
+      "github": "https://github.com/hmk/attio-mcp-server",
+      "docs": "https://github.com/hmk/ataatio-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-server-asana",
+      "name": "Asana MCP Server",
+      "categoryId": "other-tools",
+      "description": "这个Asana的模型上下文协议（MCP）服务器实现允许你通过MCP客户端（如Anthropic的Claude桌面应用等）与Asana API进行交互。",
+      "website": "https://github.com/roychri/mcp-server-asana",
+      "github": "https://github.com/roychri/mcp-server-asana",
+      "docs": "https://github.com/roychri/mcp-server-asana",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-server-asana",
+      "name": "Asana MCP Server",
+      "categoryId": "other-tools",
+      "description": "这个Asana的模型上下文协议（MCP）服务器实现允许你通过MCP客户端（如Anthropic的Claude桌面应用等）与Asana API进行交互。",
+      "website": "https://github.com/roychri/mcp-server-asana",
+      "github": "https://github.com/roychri/mcp-server-asana",
+      "docs": "https://github.com/roychri/mcp-server-asana",
+      "version": "1.0.0"
+    }
+  ]
+}

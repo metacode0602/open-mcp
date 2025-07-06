@@ -1,0 +1,144 @@
+{
+  "apps": [
+    {
+      "slug": "gtasks-mcp",
+      "name": "Google Tasks MCP",
+      "categoryId": "communication",
+      "description": "用于管理 Google Tasks 的 MCP 服务器",
+      "website": "https://github.com/zcaceres/gtasks-mcp",
+      "github": "https://github.com/zcaceres/gtasks-mcp",
+      "docs": "https://github.com/zcaceres/gtasks-mcp",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "imessage-query-fastmcp-mcp-server",
+      "name": "iMessage Query MCP Server",
+      "categoryId": "communication",
+      "description": "MCP 服务器通过模型上下文协议 (MCP) 提供对 iMessage 数据库的安全访问，使 LLM 能够通过适当的电话号码验证和附件处理来查询和分析 iMessage 对话",
+      "website": "https://github.com/hannesrudolph/imessage-query-fastmcp-mcp-server",
+      "github": "https://github.com/hannesrudolph/imessage-query-fastmcp-mcp-server",
+      "docs": "https://github.com/hannesrudolph/imessage-query-fastmcp-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "server-slack",
+      "name": "Slack MCP Server",
+      "categoryId": "communication",
+      "description": "用于频道管理和消息传递的 Slack 工作区集成",
+      "website": "https://github.com/modelcontextprotocol/servers/tree/main/src/slack",
+      "github": "https://github.com/modelcontextprotocol/servers/tree/main/src/slack",
+      "docs": "https://github.com/modelcontextprotocol/servers/tree/main/src/slack",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "bluesky-context-server",
+      "name": "Bluesky Context Server",
+      "categoryId": "communication",
+      "description": "Bluesky 实例集成，用于查询和交互",
+      "website": "https://github.com/keturiosakys/bluesky-context-server",
+      "github": "https://github.com/keturiosakys/bluesky-context-server",
+      "docs": "https://github.com/keturiosakys/bluesky-context-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-gsuite",
+      "name": "GSuite MCP",
+      "categoryId": "communication",
+      "description": "与 Gmail 和 Google 日历集成。",
+      "website": "https://github.com/MarkusPfundstein/mcp-gsuite",
+      "github": "https://github.com/MarkusPfundstein/mcp-gsuite",
+      "docs": "https://github.com/MarkusPfundstein/mcp-gsuite",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-twikit",
+      "name": "Twikit MCP",
+      "categoryId": "communication",
+      "description": "与 Twitter 搜索和时间线进行交互",
+      "website": "https://github.com/adhikasp/mcp-twikit",
+      "github": "https://github.com/adhikasp/mcp-twikit",
+      "docs": "https://github.com/adhikasp/mcp-twikit",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-wecombot-server",
+      "name": "WeCom Bot MCP Server",
+      "categoryId": "communication",
+      "description": "MCP服务器 Tools 应用程序，用于向企业微信群机器人发送各种类型的消息。",
+      "website": "https://github.com/gotoolkits/mcp-wecombot-server.git",
+      "github": "https://github.com/gotoolkits/mcp-wecombot-server.git",
+      "docs": "https://github.com/gotoolkits/mcp-wecombot-server.git",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "nostr-mcp",
+      "name": "Nostr MCP",
+      "categoryId": "communication",
+      "description": "Nostr MCP 服务器，支持与 Nostr 交互，可发布笔记等功能。",
+      "website": "https://github.com/AbdelStark/nostr-mcp",
+      "github": "https://github.com/AbdelStark/nostr-mcp",
+      "docs": "https://github.com/AbdelStark/nostr-mcp",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "inbox-zero",
+      "name": "Inbox Zero MCP",
+      "categoryId": "communication",
+      "description": "一款专为 Inbox Zero 设计的MCP服务器。在Gmail基础上新增功能，例如识别需要回复或跟进处理的邮件。",
+      "website": "https://github.com/elie222/inbox-zero/tree/main/apps/mcp-server",
+      "github": "https://github.com/elie222/inbox-zero/tree/main/apps/mcp-server",
+      "docs": "https://github.com/elie222/inbox-zero/tree/main/apps/mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mac-messages-mcp",
+      "name": "Mac Messages MCP",
+      "categoryId": "communication",
+      "description": "一款通过模型上下文协议（MCP）安全连接iMessage数据库的MCP服务器，支持大语言模型查询与分析iMessage对话。该系统具备完善的电话号码验证、附件处理、联系人管理、群聊操作功能，并全面支持消息收发。",
+      "website": "https://github.com/carterlasalle/mac_messages_mcp",
+      "github": "https://github.com/carterlasalle/mac_messages_mcp",
+      "docs": "https://github.com/carterlasalle/mac_messages_mcp",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "vrchat-mcp",
+      "name": "VRChat MCP",
+      "categoryId": "communication",
+      "description": "这是一个与VRChat API交互的MCP服务器。您可以获取VRChat的好友、世界、化身等信息。",
+      "website": "https://github.com/sawa-zen/vrchat-mcp",
+      "github": "https://github.com/sawa-zen/vrchat-mcp",
+      "docs": "https://github.com/sawa-zen/vrchat-mcp",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-googletasks",
+      "name": "Google Tasks MCP Server",
+      "categoryId": "communication",
+      "description": "一个用于连接Google Tasks API的MCP服务器",
+      "website": "https://github.com/arpitbatra123/mcp-googletasks",
+      "github": "https://github.com/arpitbatra123/mcp-googletasks",
+      "docs": "https://github.com/arpitbatra123/mcp-googletasks",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "ntfy-mcp",
+      "name": "Ntfy MCP",
+      "categoryId": "communication",
+      "description": "通过使用 ntfy 向手机发送通知，实时更新信息的 MCP 服务器。",
+      "website": "https://github.com/teddyzxcv/ntfy-mcp",
+      "github": "https://github.com/teddyzxcv/ntfy-mcp",
+      "docs": "https://github.com/teddyzxcv/ntfy-mcp",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "ycloud-whatsapp-mcp-server",
+      "name": "YCloud WhatsApp MCP Server",
+      "categoryId": "communication",
+      "description": "一个通过 YCloud 平台发送 WhatsApp Business 消息的 MCP 服务器。",
+      "website": "https://github.com/YCloud-Developers/ycloud-whatsapp-mcp-server",
+      "github": "https://github.com/YCloud-Developers/ycloud-whatsapp-mcp-server",
+      "docs": "https://github.com/YCloud-Developers/ycloud-whatsapp-mcp-server",
+      "version": "1.0.0"
+    }
+  ]
+}

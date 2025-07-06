@@ -1,0 +1,67 @@
+---
+title: 响应式预览
+description: Jamstack 架构如何从静态站点转变为动态 Web 应用程序
+author: devon
+date: 2025-04-04
+tags: [jamstack, web开发, 前端, 静态站点]
+image: https://shadcnblocks.com/images/block/placeholder-4.svg
+readingTime: 3 分钟
+category: Web 开发
+featured: true
+lastModified: 2025-04-04
+draft: true
+---
+
+Jamstack 架构通过强调预渲染、解耦和使用现代构建工具，改变了 Web 开发。最初作为简单静态站点的方法，现已演变为构建动态 Web 应用程序的综合策略。
+
+## 最初的愿景
+
+“Jamstack”一词旨在代表一种特定的架构方法：
+
+### JavaScript、API 和标记语言
+
+最初的公式很简单：
+
+- **J**：用于客户端交互的 JavaScript
+- **A**：用于处理动态功能的 API
+- **M**：在构建时预渲染的标记语言
+
+## 现代 Jamstack
+
+如今的 Jamstack 已经发生了显著的变化：
+
+### 混合渲染
+
+现代 Jamstack 站点采用多种渲染策略：
+
+1. 用于营销页面的静态生成
+2. 用于个性化内容的服务器端渲染
+3. 用于高度交互元素的客户端渲染
+
+### 群岛架构
+
+群岛架构模式优化了性能和动态性：
+
+```jsx
+// 使用群岛架构的示例组件
+export default function ProductPage({ product }) {
+  return (
+    <div>
+      <StaticHeader />
+      <StaticProductDetails product={product} />
+
+      {/* 交互式群岛 */}
+      <ClientComponent>
+        <DynamicPricingCalculator productId={product.id} />
+      </ClientComponent>
+
+      <StaticFooter />
+    </div>
+  );
+}
+```
+
+<Cards>
+  <Card title="Static Site Generators" href="/docs/ssg" />
+  <Card title="Islands Architecture" href="/docs/islands" />
+</Cards>

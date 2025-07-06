@@ -1,0 +1,1 @@
+ALTER TABLE "email_subscriptions" ADD COLUMN "utm_medium" varchar DEFAULT 'subscribe_form';

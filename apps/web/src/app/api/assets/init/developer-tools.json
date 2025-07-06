@@ -1,0 +1,394 @@
+{
+  "apps": [
+    {
+      "slug": "magic-mcp",
+      "name": "Magic MCP",
+      "categoryId": "developer-tools",
+      "description": "打造受21世纪顶尖设计工程师启发的精致UI组件。",
+      "website": "https://github.com/21st-dev/magic-mcp",
+      "github": "https://github.com/21st-dev/magic-mcp",
+      "docs": "https://github.com/21st-dev/magic-mcp",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "qasphere-mcp",
+      "name": "QA Sphere MCP",
+      "categoryId": "developer-tools",
+      "description": "与QA Sphere测试管理系统集成，使LLM能够发现、总结和操作测试用例，并可直接从AI驱动的IDE访问",
+      "website": "https://github.com/Hypersequent/qasphere-mcp",
+      "github": "https://github.com/Hypersequent/qasphere-mcp",
+      "docs": "https://github.com/Hypersequent/qasphere-mcp",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "opik-mcp",
+      "name": "Opik MCP",
+      "categoryId": "developer-tools",
+      "description": "使用自然语言与您的LLM可观测性、Opik捕获的追踪和监控数据进行对话。",
+      "website": "https://github.com/comet-ml/opik-mcp",
+      "github": "https://github.com/comet-ml/opik-mcp",
+      "docs": "https://github.com/comet-ml/opik-mcp",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "figma-context-mcp",
+      "name": "Figma Context MCP",
+      "categoryId": "developer-tools",
+      "description": "为编码代理提供直接访问Figma数据的权限，助力其一次性完成设计实现。",
+      "website": "https://github.com/GLips/Figma-Context-MCP",
+      "github": "https://github.com/GLips/Figma-Context-MCP",
+      "docs": "https://github.com/GLips/Figma-Context-MCP",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "docker-mcp",
+      "name": "Docker MCP",
+      "categoryId": "developer-tools",
+      "description": "通过 MCP 进行 Docker 容器管理和操作",
+      "website": "https://github.com/QuantGeekDev/docker-mcp",
+      "github": "https://github.com/QuantGeekDev/docker-mcp",
+      "docs": "https://github.com/QuantGeekDev/docker-mcp",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "fetch-mcp",
+      "name": "Fetch MCP",
+      "categoryId": "developer-tools",
+      "description": "一个灵活获取 JSON、文本和 HTML 数据的 MCP 服务器",
+      "website": "https://github.com/zcaceres/fetch-mcp",
+      "github": "https://github.com/zcaceres/fetch-mcp",
+      "docs": "https://github.com/zcaceres/fetch-mcp",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "xcode-mcp-server",
+      "name": "Xcode MCP Server",
+      "categoryId": "developer-tools",
+      "description": "Xcode 集成，支持项目管理、文件操作和构建自动化",
+      "website": "https://github.com/r-huijts/xcode-mcp-server",
+      "github": "https://github.com/r-huijts/xcode-mcp-server",
+      "docs": "https://github.com/r-huijts/xcode-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "openapi-mcp-server",
+      "name": "OpenAPI MCP Server",
+      "categoryId": "developer-tools",
+      "description": "使用开放 API 规范 (v3) 连接任何 HTTP/REST API 服务器",
+      "website": "https://github.com/snaggle-ai/openapi-mcp-server",
+      "github": "https://github.com/snaggle-ai/openapi-mcp-server",
+      "docs": "https://github.com/snaggle-ai/openapi-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcpproxy",
+      "name": "JetBrains MCP Proxy",
+      "categoryId": "developer-tools",
+      "description": "连接到 JetBrains IDE",
+      "website": "https://github.com/JetBrains/mcpProxy",
+      "github": "https://github.com/JetBrains/mcpProxy",
+      "docs": "https://github.com/JetBrains/mcpProxy",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-text-editor",
+      "name": "Text Editor MCP",
+      "categoryId": "developer-tools",
+      "description": "面向行的文本文件编辑器。针对 LLM 工具进行了优化，具有高效的部分文件访问功能，可最大限度地减少令牌使用量。",
+      "website": "https://github.com/tumf/mcp-text-editor",
+      "github": "https://github.com/tumf/mcp-text-editor",
+      "docs": "https://github.com/tumf/mcp-text-editor",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "simulator-mcp-server",
+      "name": "iOS Simulator MCP Server",
+      "categoryId": "developer-tools",
+      "description": "用于控制 iOS 模拟器的 MCP 服务器",
+      "website": "https://github.com/JoshuaRileyDev/simulator-mcp-server",
+      "github": "https://github.com/JoshuaRileyDev/simulator-mcp-server",
+      "docs": "https://github.com/JoshuaRileyDev/simulator-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "app-store-connect-mcp-server",
+      "name": "App Store Connect MCP Server",
+      "categoryId": "developer-tools",
+      "description": "一个 MCP 服务器，用于与 iOS 开发者的 App Store Connect API 进行通信",
+      "website": "https://github.com/JoshuaRileyDev/app-store-connect-mcp-server",
+      "github": "https://github.com/JoshuaRileyDev/app-store-connect-mcp-server",
+      "docs": "https://github.com/JoshuaRileyDev/app-store-connect-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-package-version",
+      "name": "Package Version MCP",
+      "categoryId": "developer-tools",
+      "description": "MCP 服务器可帮助 LLM 在编写代码时建议最新的稳定软件包版本。",
+      "website": "https://github.com/sammcj/mcp-package-version",
+      "github": "https://github.com/sammcj/mcp-package-version",
+      "docs": "https://github.com/sammcj/mcp-package-version",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "postman-mcp-server",
+      "name": "Postman MCP Server",
+      "categoryId": "developer-tools",
+      "description": "与 Postman API 进行交互",
+      "website": "https://github.com/delano/postman-mcp-server",
+      "github": "https://github.com/delano/postman-mcp-server",
+      "docs": "https://github.com/delano/postman-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-pandoc",
+      "name": "Pandoc MCP",
+      "categoryId": "developer-tools",
+      "description": "基于 Pandoc 的 MCP 服务器，支持 Markdown、HTML、PDF、DOCX（.docx）、csv 等格式之间的无缝转换",
+      "website": "https://github.com/vivekVells/mcp-pandoc",
+      "github": "https://github.com/vivekVells/mcp-pandoc",
+      "docs": "https://github.com/vivekVells/mcp-pandoc",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "website-downloader",
+      "name": "Website Downloader",
+      "categoryId": "developer-tools",
+      "description": "这个 MCP 服务器提供了使用 wget 下载完整网站的工具，可保留网站结构并转换链接以支持本地访问",
+      "website": "https://github.com/pskill9/website-downloader",
+      "github": "https://github.com/pskill9/website-downloader",
+      "docs": "https://github.com/pskill9/website-downloader",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-server-multiverse",
+      "name": "MCP Server Multiverse",
+      "categoryId": "developer-tools",
+      "description": "一种中间件服务器，允许多个相同MCP服务器的隔离实例以独立的命名空间和配置共存。",
+      "website": "https://github.com/lamemind/mcp-server-multiverse",
+      "github": "https://github.com/lamemind/mcp-server-multiverse",
+      "docs": "https://github.com/lamemind/mcp-server-multiverse",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-server-sql-analyzer",
+      "name": "SQL Analyzer MCP Server",
+      "categoryId": "developer-tools",
+      "description": "基于 SQLGlot 的 MCP 服务器，提供 SQL 分析、代码检查和方言转换功能",
+      "website": "https://github.com/j4c0bs/mcp-server-sql-analyzer",
+      "github": "https://github.com/j4c0bs/mcp-server-sql-analyzer",
+      "docs": "https://github.com/j4c0bs/mcp-server-sql-analyzer",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "excel-mcp-server",
+      "name": "Excel MCP Server",
+      "categoryId": "developer-tools",
+      "description": "一个Excel操作服务器，提供工作簿创建、数据操作、格式设置及高级功能（图表、数据透视表、公式）。",
+      "website": "https://github.com/haris-musa/excel-mcp-server",
+      "github": "https://github.com/haris-musa/excel-mcp-server",
+      "docs": "https://github.com/haris-musa/excel-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "xcodebuild",
+      "name": "Xcodebuild",
+      "categoryId": "developer-tools",
+      "description": "构建iOS Xcode工作区/项目并将错误反馈给LLM。",
+      "website": "https://github.com/ShenghaiWang/xcodebuild",
+      "github": "https://github.com/ShenghaiWang/xcodebuild",
+      "docs": "https://github.com/ShenghaiWang/xcodebuild",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "claude-debugs-for-you",
+      "name": "Claude Debugs For You",
+      "categoryId": "developer-tools",
+      "description": "一个MCP服务器及VS Code扩展，支持通过断点和表达式评估实现（语言无关的）自动调试。",
+      "website": "https://github.com/jasonjmcghee/claude-debugs-for-you",
+      "github": "https://github.com/jasonjmcghee/claude-debugs-for-you",
+      "docs": "https://github.com/jasonjmcghee/claude-debugs-for-you",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "servemyapi",
+      "name": "ServeMyAPI",
+      "categoryId": "developer-tools",
+      "description": "一个个人MCP（模型上下文协议）服务器，用于通过macOS钥匙串安全存储和跨项目访问API密钥。",
+      "website": "https://github.com/Jktfe/serveMyAPI",
+      "github": "https://github.com/Jktfe/serveMyAPI",
+      "docs": "https://github.com/Jktfe/serveMyAPI",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "jvm-mcp-server",
+      "name": "JVM MCP Server",
+      "categoryId": "developer-tools",
+      "description": "一个基于JVM的MCP（模型上下文协议）服务器的实现项目。",
+      "website": "https://github.com/xzq-xu/jvm-mcp-server",
+      "github": "https://github.com/xzq-xu/jvm-mcp-server",
+      "docs": "https://github.com/xzq-xu/jvm-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-server-apache-airflow",
+      "name": "Apache Airflow MCP Server",
+      "categoryId": "developer-tools",
+      "description": "使用官方客户端连接至Apache Airflow的MCP服务器。",
+      "website": "https://github.com/yangkyeongmo/mcp-server-apache-airflow",
+      "github": "https://github.com/yangkyeongmo/mcp-server-apache-airflow",
+      "docs": "https://github.com/yangkyeongmo/mcp-server-apache-airflow",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "droidmind",
+      "name": "DroidMind",
+      "categoryId": "developer-tools",
+      "description": "通过MCP利用AI控制安卓设备，实现设备操控、调试、系统分析及UI自动化，并配备全面的安全框架。",
+      "website": "https://github.com/hyperb1iss/droidmind",
+      "github": "https://github.com/hyperb1iss/droidmind",
+      "docs": "https://github.com/hyperb1iss/droidmind",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "rootly-mcp-server",
+      "name": "Rootly MCP Server",
+      "categoryId": "developer-tools",
+      "description": "用于事件管理平台 Rootly 的 MCP 服务器",
+      "website": "https://github.com/Rootly-AI-Labs/Rootly-MCP-server",
+      "github": "https://github.com/Rootly-AI-Labs/Rootly-MCP-server",
+      "docs": "https://github.com/Rootly-AI-Labs/Rootly-MCP-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mindmap-mcp-server",
+      "name": "Mindmap MCP Server",
+      "categoryId": "developer-tools",
+      "description": "用于生成漂亮交互式思维导图mindmap的模型上下文协议（MCP）服务器。",
+      "website": "https://github.com/YuChenSSR/mindmap-mcp-server",
+      "github": "https://github.com/YuChenSSR/mindmap-mcp-server",
+      "docs": "https://github.com/YuChenSSR/mindmap-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-image-compression",
+      "name": "Image Compression MCP",
+      "categoryId": "developer-tools",
+      "description": "用于本地压缩各种图片格式的 MCP 服务器。",
+      "website": "https://github.com/InhiblabCore/mcp-image-compression",
+      "github": "https://github.com/InhiblabCore/mcp-image-compression",
+      "docs": "https://github.com/InhiblabCore/mcp-image-compression",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-claude-code",
+      "name": "Claude Code MCP",
+      "categoryId": "developer-tools",
+      "description": "使用 MCP 实现的 Claude Code 功能，支持 AI 代码理解、修改和项目分析，并提供全面的工具支持。",
+      "website": "https://github.com/SDGLBL/mcp-claude-code",
+      "github": "https://github.com/SDGLBL/mcp-claude-code",
+      "docs": "https://github.com/SDGLBL/mcp-claude-code",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "gradle-mcp-server",
+      "name": "Gradle MCP Server",
+      "categoryId": "developer-tools",
+      "description": "使用 Gradle Tooling API 来检查项目、执行任务并在每个测试的级别进行测试结果报告的 Gradle 集成",
+      "website": "https://github.com/IlyaGulya/gradle-mcp-server",
+      "github": "https://github.com/IlyaGulya/gradle-mcp-server",
+      "docs": "https://github.com/IlyaGulya/gradle-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "firefly-mcp",
+      "name": "Firefly MCP",
+      "categoryId": "developer-tools",
+      "description": "集成、发现、管理并通过Firefly规范化云资源。",
+      "website": "https://github.com/gofireflyio/firefly-mcp",
+      "github": "https://github.com/gofireflyio/firefly-mcp",
+      "docs": "https://github.com/gofireflyio/firefly-mcp",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "apisix-mcp",
+      "name": "APISIX MCP",
+      "categoryId": "developer-tools",
+      "description": "支持对 Apache APISIX 网关中所有资源进行查询和管理的 MCP 服务。",
+      "website": "https://github.com/api7/apisix-mcp",
+      "github": "https://github.com/api7/apisix-mcp",
+      "docs": "https://github.com/api7/apisix-mcp",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "ios-simulator-mcp",
+      "name": "iOS Simulator MCP",
+      "categoryId": "developer-tools",
+      "description": "用于与 iOS 模拟器交互的模型上下文协议 (MCP) 服务器。此服务器允许您通过获取有关 iOS 模拟器的信息、控制 UI 交互和检查 UI 元素来与 iOS 模拟器交互。",
+      "website": "https://github.com/joshuayoes/ios-simulator-mcp",
+      "github": "https://github.com/joshuayoes/ios-simulator-mcp",
+      "docs": "https://github.com/joshuayoes/ios-simulator-mcp",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "higress-ops-mcp-server",
+      "name": "Higress Ops MCP Server",
+      "categoryId": "developer-tools",
+      "description": "支持对 Higress 网关进行全面的配置和管理。",
+      "website": "https://github.com/higress-group/higress-ops-mcp-server",
+      "github": "https://github.com/higress-group/higress-ops-mcp-server",
+      "docs": "https://github.com/higress-group/higress-ops-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-openapi",
+      "name": "OpenAPI MCP",
+      "categoryId": "developer-tools",
+      "description": "MCP服务器让LLM能够了解您的OpenAPI规范的所有信息，以发现、解释和生成代码/模拟数据",
+      "website": "https://github.com/ReAPI-com/mcp-openapi",
+      "github": "https://github.com/ReAPI-com/mcp-openapi",
+      "docs": "https://github.com/ReAPI-com/mcp-openapi",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-link",
+      "name": "MCP Link",
+      "categoryId": "developer-tools",
+      "description": "无缝集成任何 API 与 AI 代理（通过 OpenAPI 架构）",
+      "website": "https://github.com/automation-ai-labs/mcp-link",
+      "github": "https://github.com/automation-ai-labs/mcp-link",
+      "docs": "https://github.com/automation-ai-labs/mcp-link",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-code-runner",
+      "name": "Code Runner MCP",
+      "categoryId": "developer-tools",
+      "description": "一个MCP服务器，用于在本地通过docker运行代码，并支持多种编程语言。",
+      "website": "https://github.com/axliupore/mcp-code-runner",
+      "github": "https://github.com/axliupore/mcp-code-runner",
+      "docs": "https://github.com/axliupore/mcp-code-runner",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "edgeone-pages-mcp",
+      "name": "EdgeOne Pages MCP",
+      "categoryId": "developer-tools",
+      "description": "基于 EdgeOne Pages 的 MCP 服务器，支持代码部署为在线页面。",
+      "website": "https://github.com/TencentEdgeOne/edgeone-pages-mcp",
+      "github": "https://github.com/TencentEdgeOne/edgeone-pages-mcp",
+      "docs": "https://github.com/TencentEdgeOne/edgeone-pages-mcp",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "godoc-mcp-server",
+      "name": "GoDoc MCP Server",
+      "categoryId": "developer-tools",
+      "description": "查询 pkg.go.dev 上的 golang 包信息",
+      "website": "https://github.com/yikakia/godoc-mcp-server",
+      "github": "https://github.com/yikakia/godoc-mcp-server",
+      "docs": "https://github.com/yikakia/godoc-mcp-server",
+      "version": "1.0.0"
+    }
+  ]
+}

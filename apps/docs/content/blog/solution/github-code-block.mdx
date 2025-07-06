@@ -1,0 +1,172 @@
+---
+title: GithubCodeBlock 组件
+description: 一个代码块组件，用于在 Fuma Docs 中显示来自公共 GitHub 仓库的代码
+date: 2025-04-15
+author: rajiv
+tags: [react, component]
+image: https://shadcnblocks.com/images/block/placeholder-5.svg
+---
+
+`GithubCodeBlock` 组件允许您直接在 Fuma Docs 应用程序中嵌入和显示来自 GitHub 仓库的代码。它支持行提取、语法高亮和行高亮功能。
+
+## 发布帖子
+
+<XEmbed url="https://x.com/rjv_im/status/1912033485285376492" width={325} />
+
+## 安装
+
+您需要准备好并运行 fumadocs。
+
+### 1. 将以下代码复制到您组件中的任何位置
+
+_我仍在研究是否有更好的方法，例如使用 shadcn cli_
+
+<include lang="tsx" meta='title="github-code-block.tsx"'>
+  ../../../src/components/github-code-block.tsx
+</include>
+
+### 2. 添加到 MDX 组件
+
+```tsx title="mdx-components.tsx"
+import defaultMdxComponents from "fumadocs-ui/mdx";
+import type { MDXComponents } from "mdx/types";
+import GithubCodeBlock from "./components/github-code-block";
+
+export function getMDXComponents(components?: MDXComponents): MDXComponents {
+  return {
+    ...defaultMdxComponents,
+    GithubCodeBlock: GithubCodeBlock,
+    ...components,
+  };
+}
+```
+
+### 3. 基本用法
+
+```tsx title="usage"
+<GithubCodeBlock url="https://github.com/rjvim/react-component-library-starter/blob/main/lerna.json" />
+```
+
+<GithubCodeBlock
+  url="https://github.com/rjvim/react-component-library-starter/blob/main/lerna.json"
+  wrapper={{ title: "result" }}
+/>
+
+## Props
+
+该组件接受以下 props：
+
+
+
+| Prop             | Type      | Default     | Description                                                  |
+| ---------------- | --------- | ----------- | ------------------------------------------------------------ |
+| `url`            | `string`  | (required)  | 您要显示的文件的 GitHub URL                                     |
+| `extractLines`   | `boolean` | `false`     | 是否从文件中提取特定行                                           |
+| `highlightLines` | `string`  | `undefined` | 要高亮的行，格式为 ` "{1,3-4}" `                                |
+| `wrapper`        | `object`  | `undefined` | CodeBlock 组件的 CodeBlockProps                               |
+
+## 示例
+
+### 显示完整文件
+
+```tsx title="usage"
+<GithubCodeBlock url="https://github.com/rjvim/react-component-library-starter/blob/main/lerna.json" />
+```
+
+<GithubCodeBlock
+  url="https://github.com/rjvim/react-component-library-starter/blob/main/lerna.json"
+  wrapper={{ title: "result" }}
+/>
+
+### 提取特定行
+
+您可以通过向 URL 添加行引用并将 `extractLines` 设置为 `true` 来从文件中提取特定行：
+
+```tsx title="usage"
+<GithubCodeBlock
+  url="https://github.com/rjvim/react-component-library-starter/blob/main/lerna.json#L2-L4"
+  extractLines={true}
+/>
+```
+
+<GithubCodeBlock
+  url="https://github.com/rjvim/react-component-library-starter/blob/main/lerna.json#L2-L4"
+  extractLines={true}
+  wrapper={{ title: "result" }}
+/>
+
+### 高亮特定行
+
+您可以使用 `highlightLines` prop 高亮特定行：
+
+```tsx title="usage"
+<GithubCodeBlock
+  url="https://github.com/rjvim/react-component-library-starter/blob/main/lerna.json"
+  highlightLines="{2,4}"
+/>
+```
+
+<GithubCodeBlock
+  url="https://github.com/rjvim/react-component-library-starter/blob/main/lerna.json"
+  highlightLines="{2,4}"
+  wrapper={{ title: "result" }}
+/>
+
+### 提取并高亮行
+
+您可以同时提取特定行并高亮它们：
+
+```tsx title="usage"
+<GithubCodeBlock
+  url="https://github.com/rjvim/react-component-library-starter/blob/main/lerna.json#L2-L4"
+  extractLines={true}
+  highlightLines="{2}"
+/>
+```
+
+<GithubCodeBlock
+  url="https://github.com/rjvim/react-component-library-starter/blob/main/lerna.json#L2-L4"
+  extractLines={true}
+  highlightLines="{2}"
+  wrapper={{ title: "result" }}
+/>
+
+### 从 URL 自动高亮
+
+如果未提供 `highlightLines` prop，组件将自动使用 URL 哈希中的行引用进行高亮：
+
+```tsx title="usage"
+<GithubCodeBlock url="https://github.com/rjvim/react-component-library-starter/blob/main/lerna.json#L2-L4" />
+```
+
+如果 `extractLines` 为 `false` ，这将高亮第 `2-4` 行：
+
+<GithubCodeBlock
+  url="https://github.com/rjvim/react-component-library-starter/blob/main/lerna.json#L2-L4"
+  wrapper={{ title: "result" }}
+/>
+
+### 覆盖 URL 高亮
+
+您可以通过提供自己的 `highlightLines` prop 来覆盖基于 `URL` 的自动高亮：
+
+```tsx title="usage"
+<GithubCodeBlock
+  url="https://github.com/rjvim/react-component-library-starter/blob/main/lerna.json#L2-L4"
+  highlightLines="{3}"
+/>
+```
+
+<GithubCodeBlock
+  url="https://github.com/rjvim/react-component-library-starter/blob/main/lerna.json#L2-L4"
+  highlightLines="{3}"
+  wrapper={{ title: "result" }}
+/>
+
+## 高亮格式
+
+highlightLines prop 接受格式为 "{lineNumber,lineRange}" 的字符串，其中：
+
+- 单行指定为数字： "{1,3,5}"
+- 范围用连字符指定： "{1-3,5-7}"
+- 您可以两者结合： "{1,3-5,7,9-11}"

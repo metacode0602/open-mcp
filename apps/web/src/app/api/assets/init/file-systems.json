@@ -1,0 +1,94 @@
+{
+  "apps": [
+    {
+      "slug": "server-filesystem",
+      "name": "Filesystem Server",
+      "categoryId": "file-systems",
+      "description": "直接访问本地文件系统。",
+      "website": "https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem",
+      "github": "https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem",
+      "docs": "https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "server-google-drive",
+      "name": "Google Drive Server",
+      "categoryId": "file-systems",
+      "description": "Google Drive 集成，用于列出、阅读和搜索文件",
+      "website": "https://github.com/modelcontextprotocol/servers/tree/main/src/gdrive",
+      "github": "https://github.com/modelcontextprotocol/servers/tree/main/src/gdrive",
+      "docs": "https://github.com/modelcontextprotocol/servers/tree/main/src/gdrive",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "box-mcp-server",
+      "name": "Box MCP Server",
+      "categoryId": "file-systems",
+      "description": "Box 集成，支持文件列表、阅读和搜索功能",
+      "website": "https://github.com/hmk/box-mcp-server",
+      "github": "https://github.com/hmk/box-mcp-server",
+      "docs": "https://github.com/hmk/box-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-filesystem-server",
+      "name": "Filesystem Server Go",
+      "categoryId": "file-systems",
+      "description": "用于本地文件系统访问的 Golang 实现。",
+      "website": "https://github.com/mark3labs/mcp-filesystem-server",
+      "github": "https://github.com/mark3labs/mcp-filesystem-server",
+      "docs": "https://github.com/mark3labs/mcp-filesystem-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-everything-search",
+      "name": "Everything Search",
+      "categoryId": "file-systems",
+      "description": "使用 Everything SDK 实现的快速 Windows 文件搜索",
+      "website": "https://github.com/mamertofabian/mcp-everything-search",
+      "github": "https://github.com/mamertofabian/mcp-everything-search",
+      "docs": "https://github.com/mamertofabian/mcp-everything-search",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "llm-context",
+      "name": "LLM Context",
+      "categoryId": "file-systems",
+      "description": "通过 MCP 或剪贴板与 LLM 共享代码上下文",
+      "website": "https://github.com/cyberchitta/llm-context.py",
+      "github": "https://github.com/cyberchitta/llm-context.py",
+      "docs": "https://github.com/cyberchitta/llm-context.py",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "quarkus-mcp-filesystem",
+      "name": "Quarkus MCP Filesystem",
+      "categoryId": "file-systems",
+      "description": "一个基于Java和Quarkus实现的文件系统，支持浏览和编辑文件。提供jar包或原生镜像两种形式。",
+      "website": "https://github.com/quarkiverse/quarkus-mcp-servers/tree/main/filesystem",
+      "github": "https://github.com/quarkiverse/quarkus-mcp-servers/tree/main/filesystem",
+      "docs": "https://github.com/quarkiverse/quarkus-mcp-servers/tree/main/filesystem",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-server-opendal",
+      "name": "OpenDAL MCP Server",
+      "categoryId": "file-systems",
+      "description": "使用 Apache OpenDAL™ 访问任何存储",
+      "website": "https://github.com/Xuanwo/mcp-server-opendal",
+      "github": "https://github.com/Xuanwo/mcp-server-opendal",
+      "docs": "https://github.com/Xuanwo/mcp-server-opendal",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-file-merger",
+      "name": "File Merger MCP",
+      "categoryId": "file-systems",
+      "description": "文件合并工具，适配AI Chat长度限制",
+      "website": "https://github.com/exoticknight/mcp-file-merger",
+      "github": "https://github.com/exoticknight/mcp-file-merger",
+      "docs": "https://github.com/exoticknight/mcp-file-merger",
+      "version": "1.0.0"
+    }
+  ]
+}

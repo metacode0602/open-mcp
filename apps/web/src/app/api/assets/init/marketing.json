@@ -1,0 +1,18 @@
+{
+  "apps": [
+    {
+      "slug": "osp-marketing-tools",
+      "name": "Open Strategy Partners Marketing Tools",
+      "categoryId": "marketing",
+      "description": "Open Strategy Partners 提供的营销工具套件，包含写作风格指南、编辑规范和产品营销价值图谱创建工具",
+      "website": "https://github.com/open-strategy-partners/osp_marketing_tools",
+      "github": "https://github.com/open-strategy-partners/osp_marketing_tools",
+      "docs": "https://github.com/open-strategy-partners/osp_marketing_tools",
+      "version": "1.0.0",
+      "tags": [
+        "python",
+        "local"
+      ]
+    }
+  ]
+}

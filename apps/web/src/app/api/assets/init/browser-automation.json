@@ -1,0 +1,124 @@
+{
+  "apps": [
+    {
+      "slug": "playwright-plus-python-mcp",
+      "name": "Playwright Plus Python MCP",
+      "categoryId": "browser-automation",
+      "description": "使用 Playwright 进行浏览器自动化的 MCP 服务器，更适合llm",
+      "website": "https://github.com/blackwhite084/playwright-plus-python-mcp",
+      "github": "https://github.com/blackwhite084/playwright-plus-python-mcp",
+      "docs": "https://github.com/blackwhite084/playwright-plus-python-mcp",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "playwright-mcp-server",
+      "name": "Playwright MCP Server",
+      "categoryId": "browser-automation",
+      "description": "使用 Playwright 进行浏览器自动化和网页抓取的 MCP 服务器",
+      "website": "https://github.com/executeautomation/mcp-playwright",
+      "github": "https://github.com/executeautomation/mcp-playwright",
+      "docs": "https://github.com/executeautomation/mcp-playwright",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-server-playwright",
+      "name": "Automata Labs Playwright MCP Server",
+      "categoryId": "browser-automation",
+      "description": "使用 Playwright 实现浏览器自动化的 MCP 服务器",
+      "website": "https://github.com/Automata-Labs-team/MCP-Server-Playwright",
+      "github": "https://github.com/Automata-Labs-team/MCP-Server-Playwright",
+      "docs": "https://github.com/Automata-Labs-team/MCP-Server-Playwright",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "server-puppeteer",
+      "name": "Puppeteer MCP Server",
+      "categoryId": "browser-automation",
+      "description": "用于网页抓取和交互的浏览器自动化",
+      "website": "https://github.com/modelcontextprotocol/servers/tree/main/src/puppeteer",
+      "github": "https://github.com/modelcontextprotocol/servers/tree/main/src/puppeteer",
+      "docs": "https://github.com/modelcontextprotocol/servers/tree/main/src/puppeteer",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-server-youtube-transcript",
+      "name": "YouTube Transcript MCP Server",
+      "categoryId": "browser-automation",
+      "description": "获取 YouTube 字幕和文字记录以供 AI 分析",
+      "website": "https://github.com/kimtaeyoon83/mcp-server-youtube-transcript",
+      "github": "https://github.com/kimtaeyoon83/mcp-server-youtube-transcript",
+      "docs": "https://github.com/kimtaeyoon83/mcp-server-youtube-transcript",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-server-apple-shortcuts",
+      "name": "Apple Shortcuts MCP Server",
+      "categoryId": "browser-automation",
+      "description": "MCP 服务器与 Apple Shortcuts 的集成",
+      "website": "https://github.com/recursechat/mcp-server-apple-shortcuts",
+      "github": "https://github.com/recursechat/mcp-server-apple-shortcuts",
+      "docs": "https://github.com/recursechat/mcp-server-apple-shortcuts",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-server-apple-reminders",
+      "name": "Apple Reminders MCP Server",
+      "categoryId": "browser-automation",
+      "description": "macOS 上与 Apple Reminders 集成的 MCP 服务器",
+      "website": "https://github.com/FradSer/mcp-server-apple-reminders",
+      "github": "https://github.com/FradSer/mcp-server-apple-reminders",
+      "docs": "https://github.com/FradSer/mcp-server-apple-reminders",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-aoai-web-browsing",
+      "name": "Azure OpenAI Web Browsing MCP",
+      "categoryId": "browser-automation",
+      "description": "使用 Azure OpenAI 和 Playwright 的最小服务器/客户端 MCP 实现。",
+      "website": "https://github.com/kimtth/mcp-aoai-web-browsing",
+      "github": "https://github.com/kimtth/mcp-aoai-web-browsing",
+      "docs": "https://github.com/kimtth/mcp-aoai-web-browsing",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "web-search",
+      "name": "Web Search MCP Server",
+      "categoryId": "browser-automation",
+      "description": "一个支持使用 Google 搜索结果进行免费网页搜索的 MCP 服务器，无需 API 密钥",
+      "website": "https://github.com/pskill9/web-search",
+      "github": "https://github.com/pskill9/web-search",
+      "docs": "https://github.com/pskill9/web-search",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "browser-use-mcp-server",
+      "name": "Browser Use MCP Server",
+      "categoryId": "browser-automation",
+      "description": "browser-use是一个封装了SSE传输协议的MCP服务器。包含一个dockerfile用于在docker中运行chromium浏览器+VNC服务器。",
+      "website": "https://github.com/co-browser/browser-use-mcp-server",
+      "github": "https://github.com/co-browser/browser-use-mcp-server",
+      "docs": "https://github.com/co-browser/browser-use-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "bilibili-mcp-js",
+      "name": "Bilibili MCP Server",
+      "categoryId": "browser-automation",
+      "description": "一个支持搜索 B站 内容的 MCP 服务器。提供LangChain调用示例、测试脚本。",
+      "website": "https://github.com/34892002/bilibili-mcp-js",
+      "github": "https://github.com/34892002/bilibili-mcp-js",
+      "docs": "https://github.com/34892002/bilibili-mcp-js",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "ashra-mcp",
+      "name": "Ashra MCP Server",
+      "categoryId": "browser-automation",
+      "description": "从任何网站提取结构化数据。只需输入提示即可获取JSON。",
+      "website": "https://github.com/getrupt/ashra-mcp",
+      "github": "https://github.com/getrupt/ashra-mcp",
+      "docs": "https://github.com/getrupt/ashra-mcp",
+      "version": "1.0.0"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "apps": [
+    {
+      "slug": "airbnb-mcp",
+      "name": "Airbnb MCP Server",
+      "categoryId": "travel-and-transportation",
+      "description": "提供搜索Airbnb房源及获取详细信息的工具。",
+      "website": "https://github.com/openbnb-org/mcp-server-airbnb",
+      "github": "https://github.com/openbnb-org/mcp-server-airbnb",
+      "docs": "https://github.com/openbnb-org/mcp-server-airbnb",
+      "version": "1.0.0",
+      "tags": ["cloud"]
+    },
+    {
+      "slug": "ns-travel-mcp",
+      "name": "NS Travel Information MCP Server",
+      "categoryId": "travel-and-transportation",
+      "description": "了解荷兰铁路 (NS) 的旅行信息、时刻表和实时更新",
+      "website": "https://github.com/r-huijts/ns-mcp-server",
+      "github": "https://github.com/r-huijts/ns-mcp-server",
+      "docs": "https://github.com/r-huijts/ns-mcp-server",
+      "version": "1.0.0",
+      "tags": ["cloud"]
+    },
+    {
+      "slug": "nationalparks-mcp",
+      "name": "National Parks MCP Server",
+      "categoryId": "travel-and-transportation",
+      "description": "美国国家公园管理局 API 集成，提供美国国家公园的详细信息、警报、游客中心、露营地和活动的最新信息",
+      "website": "https://github.com/KyrieTangSheng/mcp-server-nationalparks",
+      "github": "https://github.com/KyrieTangSheng/mcp-server-nationalparks",
+      "docs": "https://github.com/KyrieTangSheng/mcp-server-nationalparks",
+      "version": "1.0.0",
+      "tags": ["cloud"]
+    },
+    {
+      "slug": "tripadvisor-mcp",
+      "name": "TripAdvisor MCP",
+      "categoryId": "travel-and-transportation",
+      "description": "一个MCP服务器，使LLM能够通过标准化的MCP接口与Tripadvisor API交互，支持位置数据、评论和照片",
+      "website": "https://github.com/pab1it0/tripadvisor-mcp",
+      "github": "https://github.com/pab1it0/tripadvisor-mcp",
+      "docs": "https://github.com/pab1it0/tripadvisor-mcp",
+      "version": "1.0.0",
+      "tags": ["cloud", "python"]
+    }
+  ]
+}

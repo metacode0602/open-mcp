@@ -1,0 +1,223 @@
+---
+title: 使用 NextJS 和 Fuma Docs 搭建博客
+description: 一份使用 NextJS 上的 Fuma Docs 搭建博客的指南
+date: 2025-04-23
+author: rajiv
+tags: [博客, 模板, fumadocs, nextjs, mdx]
+image: https://shadcnblocks.com/images/block/placeholder-5.svg
+---
+
+你希望你的博客拥有哪些功能？以下是我选择的功能：
+
+## 功能
+
+- [x] 可以发布到 GitHub Pages 的静态网站
+- [x] MDX 支持：我从事前端代码工作，所以我需要在我的文章中嵌入 React 组件
+- [x] 搜索
+- [x] 目录（Clerk 风格）
+- [x] 一篇博客文章
+- [x] 带有分页的文章列表
+- [x] 分类
+- [x] 系列
+- [ ] 标签（正在进行中）
+- [x] 带有社交图片的元数据
+- [x] 静态（是的，重复以强调）
+
+## 设置
+
+FumaDocs 官方文档有一篇关于搭建博客的文章：[搭建博客](https://fumadocs.vercel.app/blog/make-a-blog)。以此为基础，我用上面的功能搭建了我的博客。
+
+你可以通过两种方式进行：
+
+- 克隆当前仓库
+- 按照以下步骤将这些功能添加到你现有的 Next.js 网站
+
+### 安装和配置 Fuma Docs
+
+<Steps>
+
+<Step>
+
+### 安装 Fuma Docs
+
+你需要一个可用的 Fuma Docs 设置。如果你没有，请使用以下命令创建它：
+
+```package-install
+pnpm create fumadocs-app
+```
+
+或者你可以[手动](https://fumadocs.vercel.app/docs/ui/manual-installation)配置 FumaDocs。
+
+此时，你应该已经准备好了一个基本设置，包含文件：`source.config.ts` 和 `lib/source.ts`。
+
+</Step>
+
+<Step>
+
+### 设置 ShadCN 组件
+
+如果你已经设置了 shadcn，则无需运行以下命令。
+
+```bash
+pnpm dlx shadcn@latest init
+```
+
+我们需要以下组件：
+
+- 按钮
+- 弹出框
+- 徽章
+- 卡片
+
+你可以使用以下命令添加所有上述组件：
+
+```bash
+pnpm dlx shadcn@latest add button popover badge card
+```
+
+我们还需要一个 **book** 图标组件，用于显示系列时使用：
+
+```bash
+pnpm dlx shadcn@latest add "https://21st.dev/r/designali-in/book"
+```
+
+</Step>
+
+<Step>
+
+### 为博客定义一个集合
+
+安装 `zod`，因为我们将使用它来添加 frontmatter 模式。
+
+```package-install
+zod
+```
+
+现在为博客定义一个集合。添加以下内容：
+
+```ts title="source.config.ts"
+import {
+  defineDocs,
+  defineConfig,
+  defineCollections,
+  frontmatterSchema,
+} from "fumadocs-mdx/config";
+import { z } from "zod";
+
+export const blog = defineCollections({
+  type: "doc",
+  dir: "content/blog",
+  schema: frontmatterSchema.extend({
+    author: z.string(),
+    date: z
+      .string()
+      .or(z.date())
+      .transform((value, context) => {
+        try {
+          return new Date(value);
+        } catch {
+          context.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: "无效的日期",
+          });
+          return z.NEVER;
+        }
+      }),
+    tags: z.array(z.string()).optional(),
+    image: z.string().optional(),
+    draft: z.boolean().optional().default(false),
+    series: z.string().optional(),
+    seriesPart: z.number().optional(),
+  }),
+});
+```
+
+将以下内容添加到 `lib/source.ts`：
+
+```ts title="lib/source.ts"
+import { docs, blog } from "@/.source";
+import { loader } from "fumadocs-core/source";
+import { createMDXSource } from "fumadocs-mdx";
+
+export const blogSource = loader({
+  baseUrl: "/blog",
+  source: createMDXSource(blog),
+});
+
+export const {
+  getPage: getBlogPost,
+  getPages: getBlogPosts,
+  pageTree: pageBlogTree,
+} = blogSource;
+
+export type BlogPost = ReturnType<typeof getBlogPost>;
+```
+
+</Step>
+
+<Step>
+
+### 添加 fumadocs-blog 组件
+
+由于功能较多，我们将使用 giget 命令复制整个文件夹，而不是逐个添加文件。
+
+**添加所有必需的组件**
+
+```bash
+npx giget gh:rjvim/rjvim.github.io/packages/fumadocs-blog/src fumadocs-blog --force
+```
+
+**添加 /blog 路由页面**
+
+```bash
+npx giget gh:rjvim/rjvim.github.io/apps/web/app/\(home\)/blog app/\(home\)/blog --force
+```
+
+**添加 /blog-og 路由页面**
+
+```bash
+npx giget gh:rjvim/rjvim.github.io/apps/web/app/blog-og app/blog-og --force
+```
+
+**更正导入**
+
+_原始组件是为在 monorepo 中工作而构建的，因此我们需要更正导入。_
+
+运行以下命令：
+
+```bash
+sed -i '' 's|@repo/fumadocs-blog/blog|@/fumadocs-blog|g' 'app/(home)/blog/[[...slug]]/page.tsx'
+```
+
+```bash
+sed -i '' 's|@repo/fumadocs-blog/blog|@/fumadocs-blog|g' 'app/blog-og/[[...slug]]/route.tsx'
+```
+
+**将样式添加到 global.css**
+
+```css title="global.css"
+@import "../fumadocs-blog/styles/globals.css";
+```
+
+</Step>
+
+</Steps>
+
+## 结论
+
+按照这些步骤，你应该拥有一个功能齐全的博客，具有搜索、目录、分类、系列和元数据等功能。你可以在 [rjvim.github.io](https://rjvim.github.io) 上查看此博客的运行情况。
+
+## 待办事项
+
+- [ ] 添加标签支持
+- [ ] 改进 UI/UX
+
+## 贡献
+
+欢迎通过拉取请求做出贡献。对于重大更改，请先打开一个问题来讨论你想要更改的内容。
+
+请确保根据需要更新测试。
+
+## 许可证
+
+[MIT](https://choosealicense.com/licenses/mit/)

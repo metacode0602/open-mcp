@@ -1,0 +1,88 @@
+---
+title: 为我的博客添加分类
+description: locospec 是使用 Fuma Docs 实现的，本文介绍了我为博客文章实现分类功能的尝试和遇到的问题
+author: rajiv
+date: 2025-04-02
+tags: [fuma-docs, 静态网站, 网站, 博客]
+draft: true
+---
+
+## 问题
+
+Fuma Docs 是一个在 NextJS 中使用 MDX 添加文档的工具。我非常喜欢它开箱即用的用户体验/用户界面，尤其是目录功能。
+
+它本身不支持“博客”功能，而且由于它是一个也提供 MDX 文件解析的框架，我用它来构建我的博客。
+
+我进行了多次尝试，本文介绍了在 Fuma Docs 上实现分类功能的尝试和遇到的问题。
+
+## 尝试 1：使用 Frontmatter
+
+我像下面这样将 `category` 添加到 frontmatter 中：
+
+```md
+---
+title: 开源可持续性
+description: 探讨维护健康开源生态系统的挑战与解决方案
+author: rajiv
+date: 2025-03-12
+category: tech
+---
+```
+
+我在 `source.config.ts` 中扩展了 frontmatter 以支持 `category`。
+
+```ts
+export const blog = defineCollections({
+  type: "doc",
+  dir: "content/blog",
+  schema: frontmatterSchema.extend({
+    category: z.string(),
+  }),
+});
+```
+
+然后我添加了一个路由 `app/(home)/blog/[category]/[slug]/page.tsx`，并且需要将这些 URL 生成为静态参数。
+
+```tsx
+export function generateStaticParams(): { category: string; slug: string }[] {
+  return blogSource.getPages().map((page) => ({
+    category: page.data.category,
+    slug: page.slugs[0] || "",
+  }));
+}
+```
+
+最后：
+
+```tsx
+export default async function Page(props: {
+  params: Promise<{ category: string; slug: string }>;
+}) {
+  const params = await props.params;
+  const page = getPostsByCategoryAndSlug(params.category, params.slug);
+  // 剩余代码
+}
+```
+
+## 尝试 2：使用文件夹
+
+事实上，Fuma Docs 本身就是这样实现文档功能的。你可以创建任意深度的文件夹——但我只需要两层。
+
+意识到我可以直接使用文件夹是一个令人扼腕的时刻，因为上面的尝试完全是多此一举——我没有花足够的时间去理解 Docs 是如何处理这个问题的！
+
+所以，现在它变得非常简单：
+
+```tsx
+export default async function Page(props: {
+  params: Promise<{ slug?: string[] }>;
+}) {
+  const params = await props.params;
+  const page = blogSource.getPage(params.slug);
+  // 剩余代码
+}
+
+export async function generateStaticParams() {
+  return blogSource.generateParams();
+}
+```
+        

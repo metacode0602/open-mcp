@@ -1,0 +1,26 @@
+{
+  "apps": [
+    {
+      "slug": "open-mcp",
+      "name": "OpenMCP",
+      "categoryId": "aggregators",
+      "description": "10秒内将Web API转换为MCP服务器并将其添加到开源注册表中: https://open-mcp.org",
+      "website": "https://github.com/wegotdocs/open-mcp",
+      "github": "https://github.com/wegotdocs/open-mcp",
+      "docs": "https://github.com/wegotdocs/open-mcp",
+      "version": "1.0.0",
+      "tags": ["typescript", "local", "macos", "windows", "linux"]
+    },
+    {
+      "slug": "metamcp",
+      "name": "MetaMCP",
+      "categoryId": "aggregators",
+      "description": "MetaMCP是一个统一的中间件MCP服务器，通过GUI管理您的MCP连接。",
+      "website": "https://github.com/metatool-ai/metatool-app",
+      "github": "https://github.com/metatool-ai/metatool-app",
+      "docs": "https://github.com/metatool-ai/metatool-app",
+      "version": "1.0.0",
+      "tags": ["typescript", "cloud", "local", "macos", "windows", "linux"]
+    }
+  ]
+}

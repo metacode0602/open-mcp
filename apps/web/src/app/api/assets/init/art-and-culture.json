@@ -1,0 +1,34 @@
+{
+  "apps": [
+    {
+      "slug": "video-editing-mcp",
+      "name": "Video Editing MCP",
+      "categoryId": "art-and-culture",
+      "description": "从您的视频集合中添加、分析、搜索和生成视频剪辑",
+      "website": "https://github.com/burningion/video-editing-mcp",
+      "github": "https://github.com/burningion/video-editing-mcp",
+      "docs": "https://github.com/burningion/video-editing-mcp",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "rijksmuseum-mcp",
+      "name": "Rijksmuseum MCP",
+      "categoryId": "art-and-culture",
+      "description": "荷兰国立博物馆 API 集成，支持艺术品搜索、详情查询和收藏品浏览",
+      "website": "https://github.com/r-huijts/rijksmuseum-mcp",
+      "github": "https://github.com/r-huijts/rijksmuseum-mcp",
+      "docs": "https://github.com/r-huijts/rijksmuseum-mcp",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "anilist-mcp",
+      "name": "AniList MCP",
+      "categoryId": "art-and-culture",
+      "description": "集成 AniList API 获取动画和漫画信息的 MCP 服务器",
+      "website": "https://github.com/yuna0x0/anilist-mcp",
+      "github": "https://github.com/yuna0x0/anilist-mcp",
+      "docs": "https://github.com/yuna0x0/anilist-mcp",
+      "version": "1.0.0"
+    }
+  ]
+}

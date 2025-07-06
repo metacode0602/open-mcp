@@ -1,0 +1,26 @@
+{
+  "apps": [
+    {
+      "slug": "freshdesk-mcp",
+      "name": "Freshdesk MCP",
+      "categoryId": "support-and-service-management",
+      "description": "与Freshdesk集成的MCP服务器，使AI模型能够与Freshdesk模块交互并执行各种支持操作。",
+      "website": "https://github.com/effytech/freshdesk_mcp",
+      "github": "https://github.com/effytech/freshdesk_mcp",
+      "docs": "https://github.com/effytech/freshdesk_mcp",
+      "version": "1.0.0",
+      "tags": ["python", "cloud"]
+    },
+    {
+      "slug": "jira-mcp",
+      "name": "Jira MCP",
+      "categoryId": "support-and-service-management",
+      "description": "一款基于Go语言的Jira MCP连接器，使Claude等AI助手能够与Atlassian Jira交互。该工具为AI模型提供了一个无缝接口，可执行包括问题管理、Sprint计划和工作流转换在内的常见Jira操作。",
+      "website": "https://github.com/nguyenvanduocit/jira-mcp",
+      "github": "https://github.com/nguyenvanduocit/jira-mcp",
+      "docs": "https://github.com/nguyenvanduocit/jira-mcp",
+      "version": "1.0.0",
+      "tags": ["go", "cloud"]
+    }
+  ]
+}

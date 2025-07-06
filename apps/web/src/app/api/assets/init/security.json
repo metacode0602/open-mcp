@@ -1,0 +1,114 @@
+{
+  "apps": [
+    {
+      "slug": "mcp-dnstwist",
+      "name": "dnstwist MCP Server",
+      "categoryId": "security",
+      "description": "dnstwist 的 MCP 服务器，这是一个强大的 DNS 模糊测试工具，可帮助检测域名抢注、钓鱼和企业窃密行为",
+      "website": "https://github.com/BurtTheCoder/mcp-dnstwist",
+      "github": "https://github.com/BurtTheCoder/mcp-dnstwist",
+      "docs": "https://github.com/BurtTheCoder/mcp-dnstwist",
+      "version": "1.0.0",
+      "tags": ["windows", "cloud"]
+    },
+    {
+      "slug": "binary-ninja-mcp",
+      "name": "Binary Ninja MCP",
+      "categoryId": "security",
+      "description": "Binary Ninja 的 MCP 服务器和桥接器。提供二进制分析和逆向工程工具。",
+      "website": "https://github.com/Vector35/binaryninja-mcp",
+      "github": "https://github.com/Vector35/binaryninja-mcp",
+      "docs": "https://github.com/Vector35/binaryninja-mcp",
+      "version": "1.0.0",
+      "tags": ["python", "local", "mac", "windows", "linux"]
+    },
+    {
+      "slug": "mcp-maigret",
+      "name": "Maigret MCP Server",
+      "categoryId": "security",
+      "description": "maigret 的 MCP 服务器，maigret 是一款强大的 OSINT 工具，可从各种公共来源收集用户帐户信息。此服务器提供用于在社交网络中搜索用户名和分析 URL 的工具。",
+      "website": "https://github.com/BurtTheCoder/mcp-maigret",
+      "github": "https://github.com/BurtTheCoder/mcp-maigret",
+      "docs": "https://github.com/BurtTheCoder/mcp-maigret",
+      "version": "1.0.0",
+      "tags": ["windows", "cloud"]
+    },
+    {
+      "slug": "mcp-shodan",
+      "name": "Shodan MCP Server",
+      "categoryId": "security",
+      "description": "MCP 服务器用于查询 Shodan API 和 Shodan CVEDB。此服务器提供 IP 查找、设备搜索、DNS 查找、漏洞查询、CPE 查找等工具。",
+      "website": "https://github.com/BurtTheCoder/mcp-shodan",
+      "github": "https://github.com/BurtTheCoder/mcp-shodan",
+      "docs": "https://github.com/BurtTheCoder/mcp-shodan",
+      "version": "1.0.0",
+      "tags": ["windows", "cloud"]
+    },
+    {
+      "slug": "mcp-virustotal",
+      "name": "VirusTotal MCP Server",
+      "categoryId": "security",
+      "description": "用于查询 VirusTotal API 的 MCP 服务器。此服务器提供用于扫描 URL、分析文件哈希和检索 IP 地址报告的工具。",
+      "website": "https://github.com/BurtTheCoder/mcp-virustotal",
+      "github": "https://github.com/BurtTheCoder/mcp-virustotal",
+      "docs": "https://github.com/BurtTheCoder/mcp-virustotal",
+      "version": "1.0.0",
+      "tags": ["windows", "cloud"]
+    },
+    {
+      "slug": "mcp-security",
+      "name": "ORKL MCP Server",
+      "categoryId": "security",
+      "description": "用于查询 ORKL API 的 MCP 服务器。此服务器提供获取威胁报告、分析威胁行为者和检索威胁情报来源的工具。",
+      "website": "https://github.com/fr0gger/MCP_Security",
+      "github": "https://github.com/fr0gger/MCP_Security",
+      "docs": "https://github.com/fr0gger/MCP_Security",
+      "version": "1.0.0",
+      "tags": ["cloud", "security"]
+    },
+    {
+      "slug": "mcp-security-audit",
+      "name": "Security Audit MCP Server",
+      "categoryId": "security",
+      "description": "一个强大的 MCP (模型上下文协议) 服务器，审计 npm 包依赖项的安全漏洞。内置远程 npm 注册表集成，以进行实时安全检查。",
+      "website": "https://github.com/qianniuspace/mcp-security-audit",
+      "github": "https://github.com/qianniuspace/mcp-security-audit",
+      "docs": "https://github.com/qianniuspace/mcp-security-audit",
+      "version": "1.0.0",
+      "tags": ["cloud", "security"]
+    },
+    {
+      "slug": "mcp-zoomeye",
+      "name": "ZoomEye MCP",
+      "categoryId": "security",
+      "description": "使用 ZoomEye API 搜索全球网络空间资产",
+      "website": "https://github.com/zoomeye-ai/mcp_zoomeye",
+      "github": "https://github.com/zoomeye-ai/mcp_zoomeye",
+      "docs": "https://github.com/zoomeye-ai/mcp_zoomeye",
+      "version": "1.0.0",
+      "tags": ["cloud"]
+    },
+    {
+      "slug": "openai-websearch-mcp",
+      "name": "OpenAI WebSearch MCP",
+      "categoryId": "security",
+      "description": "将OpenAI内置的`web_search`工具封转成MCP服务器使用",
+      "website": "https://github.com/ConechoAI/openai-websearch-mcp/",
+      "github": "https://github.com/ConechoAI/openai-websearch-mcp/",
+      "docs": "https://github.com/ConechoAI/openai-websearch-mcp/",
+      "version": "1.0.0",
+      "tags": ["python", "local", "cloud"]
+    },
+    {
+      "slug": "cve-search-mcp",
+      "name": "CVE Search MCP",
+      "categoryId": "security",
+      "description": "CVE-Search MCP服务器， 提供CVE漏洞信息查询、漏洞产品信息查询等功能。",
+      "website": "https://github.com/roadwy/cve-search_mcp",
+      "github": "https://github.com/roadwy/cve-search_mcp",
+      "docs": "https://github.com/roadwy/cve-search_mcp",
+      "version": "1.0.0",
+      "tags": ["python", "local"]
+    }
+  ]
+}

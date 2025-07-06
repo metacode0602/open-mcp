@@ -1,0 +1,75 @@
+{
+  "apps": [
+    {
+      "slug": "server-sentry",
+      "name": "Sentry Server",
+      "categoryId": "monitoring",
+      "description": "Sentry.io 集成用于错误跟踪和性能监控",
+      "website": "https://github.com/modelcontextprotocol/servers/tree/main/src/sentry",
+      "github": "https://github.com/modelcontextprotocol/servers/tree/main/src/sentry",
+      "docs": "https://github.com/modelcontextprotocol/servers/tree/main/src/sentry",
+      "version": "1.0.0",
+      "tags": ["python", "cloud"]
+    },
+    {
+      "slug": "server-raygun",
+      "name": "Raygun Server",
+      "categoryId": "monitoring",
+      "description": "Raygun API V3 集成用于崩溃报告和真实用户监控",
+      "website": "https://github.com/MindscapeHQ/mcp-server-raygun",
+      "github": "https://github.com/MindscapeHQ/mcp-server-raygun",
+      "docs": "https://github.com/MindscapeHQ/mcp-server-raygun",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "metoro-mcp-server",
+      "name": "Metoro Server",
+      "categoryId": "monitoring",
+      "description": "查询并与 Metoro 监控的 kubernetes 环境交互",
+      "website": "https://github.com/metoro-io/metoro-mcp-server",
+      "github": "https://github.com/metoro-io/metoro-mcp-server",
+      "docs": "https://github.com/metoro-io/metoro-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-grafana",
+      "name": "Grafana MCP",
+      "categoryId": "monitoring",
+      "description": "在 Grafana 实例中搜索仪表盘、调查事件并查询数据源",
+      "website": "https://github.com/grafana/mcp-grafana",
+      "github": "https://github.com/grafana/mcp-grafana",
+      "docs": "https://github.com/grafana/mcp-grafana",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "logfire-mcp",
+      "name": "Logfire MCP",
+      "categoryId": "monitoring",
+      "description": "通过Logfire提供对OpenTelemetry追踪和指标的访问",
+      "website": "https://github.com/pydantic/logfire-mcp",
+      "github": "https://github.com/pydantic/logfire-mcp",
+      "docs": "https://github.com/pydantic/logfire-mcp",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-monitor",
+      "name": "MCP Monitor",
+      "categoryId": "monitoring",
+      "description": "一款通过模型上下文协议（MCP）暴露系统指标的监控工具。该工具允许大型语言模型通过兼容MCP的接口实时获取系统信息（支持CPU、内存、磁盘、网络、主机、进程）。",
+      "website": "https://github.com/seekrays/mcp-monitor",
+      "github": "https://github.com/seekrays/mcp-monitor",
+      "docs": "https://github.com/seekrays/mcp-monitor",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "lucidity-mcp",
+      "name": "Lucidity MCP",
+      "categoryId": "monitoring",
+      "description": "通过基于提示的智能分析，从代码复杂度到安全漏洞等10个关键维度，提升AI生成代码的质量",
+      "website": "https://github.com/hyperb1iss/lucidity-mcp",
+      "github": "https://github.com/hyperb1iss/lucidity-mcp",
+      "docs": "https://github.com/hyperb1iss/lucidity-mcp",
+      "version": "1.0.0"
+    }
+  ]
+}

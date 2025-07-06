@@ -1,0 +1,238 @@
+{
+  "categories": [
+    {
+      "name": "聚合器",
+      "description": "通过单个MCP服务器访问多个应用程序和工具的服务器。",
+      "slug": "aggregators",
+      "icon": "??",
+      "status": "active",
+      "parentId": null,
+      "appsCount": 2
+    },
+    {
+      "name": "浏览器自动化",
+      "description": "Web 内容访问和自动化功能。支持以 AI 友好格式搜索、抓取和处理 Web 内容。",
+      "slug": "browser-automation", 
+      "icon": "??",
+      "status": "active",
+      "parentId": null,
+      "appsCount": 11
+    },
+    {
+      "name": "艺术与文化",
+      "description": "提供艺术收藏、文化遗产和博物馆数据库的访问与探索。让 AI 模型能够搜索和分析艺术文化内容。",
+      "slug": "art-and-culture",
+      "icon": "??",
+      "status": "active",
+      "parentId": null,
+      "appsCount": 3
+    },
+    {
+      "name": "云平台",
+      "description": "云平台服务集成。实现与云基础设施和服务的管理和交互。",
+      "slug": "cloud-platforms",
+      "icon": "??",
+      "status": "active", 
+      "parentId": null,
+      "appsCount": 15
+    },
+    {
+      "name": "命令行",
+      "description": "运行命令、捕获输出以及以其他方式与 shell 和命令行工具交互。",
+      "slug": "command-line",
+      "icon": "???",
+      "status": "active",
+      "parentId": null,
+      "appsCount": 4
+    },
+    {
+      "name": "社交",
+      "description": "与通讯平台集成，实现消息管理和渠道运营。使AI模型能够与团队沟通工具进行交互。",
+      "slug": "communication",
+      "icon": "??",
+      "status": "active",
+      "parentId": null,
+      "appsCount": 15
+    },
+    {
+      "name": "客户数据平台",
+      "description": "提供对客户数据平台内客户资料的访问",
+      "slug": "customer-data-platforms",
+      "icon": "??",
+      "status": "active",
+      "parentId": null,
+      "appsCount": 4
+    },
+    {
+      "name": "数据库",
+      "description": "具有模式检查功能的安全数据库访问。支持使用可配置的安全控制（包括只读访问）查询和分析数据。",
+      "slug": "databases",
+      "icon": "???",
+      "status": "active",
+      "parentId": null,
+      "appsCount": 35
+    },
+    {
+      "name": "数据平台",
+      "description": "用于数据集成、转换和管道编排的数据平台。",
+      "slug": "data-platforms",
+      "icon": "??",
+      "status": "active",
+      "parentId": null,
+      "appsCount": 1
+    },
+    {
+      "name": "开发者工具",
+      "description": "增强开发工作流程和环境管理的工具和集成。",
+      "slug": "developer-tools",
+      "icon": "???",
+      "status": "active",
+      "parentId": null,
+      "appsCount": 24
+    },
+    {
+      "name": "数据科学工具",
+      "description": "旨在简化数据探索、分析和增强数据科学工作流程的集成和工具。",
+      "slug": "data-science-tools",
+      "icon": "??",
+      "status": "active",
+      "parentId": null,
+      "appsCount": 3
+    },
+    {
+      "name": "文件系统",
+      "description": "提供对本地文件系统的直接访问，并具有可配置的权限。使 AI 模型能够读取、写入和管理指定目录中的文件。",
+      "slug": "file-systems",
+      "icon": "??",
+      "status": "active",
+      "parentId": null,
+      "appsCount": 8
+    },
+    {
+      "name": "金融与金融科技",
+      "description": "金融数据访问和加密货币市场信息。支持查询实时市场数据、加密货币价格和财务分析。",
+      "slug": "finance-fintech",
+      "icon": "??",
+      "status": "active",
+      "parentId": null,
+      "appsCount": 17
+    },
+    {
+      "name": "游戏",
+      "description": "游戏相关数据和服务集成",
+      "slug": "gaming",
+      "icon": "??",
+      "status": "active",
+      "parentId": null,
+      "appsCount": 3
+    },
+    {
+      "name": "知识与记忆",
+      "description": "使用知识图谱结构的持久内存存储。使 AI 模型能够跨会话维护和查询结构化信息。",
+      "slug": "knowledge-memory",
+      "icon": "??",
+      "status": "active",
+      "parentId": null,
+      "appsCount": 7
+    },
+    {
+      "name": "位置服务",
+      "description": "地理和基于位置的服务集成。支持访问地图数据、方向和位置信息。",
+      "slug": "location-services",
+      "icon": "???",
+      "status": "active",
+      "parentId": null,
+      "appsCount": 5
+    },
+    {
+      "name": "营销",
+      "description": "用于创建和编辑营销内容、处理网页元数据、产品定位和编辑指南的工具。",
+      "slug": "marketing",
+      "icon": "??",
+      "status": "active",
+      "parentId": null,
+      "appsCount": 1
+    },
+    {
+      "name": "监测",
+      "description": "访问和分析应用程序监控数据。使 AI 模型能够审查错误报告和性能指标。",
+      "slug": "monitoring",
+      "icon": "??",
+      "status": "active",
+      "parentId": null,
+      "appsCount": 7
+    },
+    {
+      "name": "搜索",
+      "description": "搜索功能集成",
+      "slug": "search",
+      "icon": "??",
+      "status": "active",
+      "parentId": null,
+      "appsCount": 24
+    },
+    {
+      "name": "安全",
+      "description": "安全相关工具和服务集成",
+      "slug": "security",
+      "icon": "??",
+      "status": "active",
+      "parentId": null,
+      "appsCount": 9
+    },
+    {
+      "name": "客户支持与服务管理",
+      "description": "用于管理客户支持、IT服务管理和服务台操作的工具。",
+      "slug": "support-and-service-management",
+      "icon": "??",
+      "status": "active",
+      "parentId": null,
+      "appsCount": 2
+    },
+    {
+      "name": "体育",
+      "description": "体育相关数据、结果和统计信息的访问工具。",
+      "slug": "sports",
+      "icon": "??",
+      "status": "active",
+      "parentId": null,
+      "appsCount": 1
+    },
+    {
+      "name": "翻译服务",
+      "description": "AI助手可以通过翻译工具和服务在不同语言之间翻译内容。",
+      "slug": "translation-services",
+      "icon": "??",
+      "status": "active",
+      "parentId": null,
+      "appsCount": 1
+    },
+    {
+      "name": "旅行与交通",
+      "description": "访问旅行和交通信息。可以查询时刻表、路线和实时旅行数据。",
+      "slug": "travel-and-transportation",
+      "icon": "??",
+      "status": "active",
+      "parentId": null,
+      "appsCount": 4
+    },
+    {
+      "name": "版本控制",
+      "description": "与 Git 存储库和版本控制平台交互。通过标准化 API 实现存储库管理、代码分析、拉取请求处理、问题跟踪和其他版本控制操作。",
+      "slug": "version-control",
+      "icon": "??",
+      "status": "active",
+      "parentId": null,
+      "appsCount": 5
+    },
+    {
+      "name": "其他",
+      "description": "其他类型的工具和集成",
+      "slug": "other-tools-and-integrations",
+      "icon": "???",
+      "status": "active",
+      "parentId": null,
+      "appsCount": 45
+    }
+  ]
+}

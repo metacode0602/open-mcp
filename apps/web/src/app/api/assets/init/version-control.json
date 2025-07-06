@@ -1,0 +1,74 @@
+{
+  "apps": [
+    {
+      "slug": "server-github",
+      "name": "GitHub MCP Server",
+      "categoryId": "version-control",
+      "description": "GitHub API集成用于仓库管理、PR、问题等",
+      "website": "https://github.com/modelcontextprotocol/servers/tree/main/src/github",
+      "github": "https://github.com/modelcontextprotocol/servers/tree/main/src/github",
+      "docs": "https://github.com/modelcontextprotocol/servers/tree/main/src/github",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "server-gitlab",
+      "name": "GitLab MCP Server",
+      "categoryId": "version-control", 
+      "description": "GitLab平台集成用于项目管理和CI/CD操作",
+      "website": "https://github.com/modelcontextprotocol/servers/tree/main/src/gitlab",
+      "github": "https://github.com/modelcontextprotocol/servers/tree/main/src/gitlab",
+      "docs": "https://github.com/modelcontextprotocol/servers/tree/main/src/gitlab",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-gitee",
+      "name": "Gitee MCP Server",
+      "categoryId": "version-control",
+      "description": "Gitee API集成、仓库、问题及拉取请求管理等功能。",
+      "website": "https://github.com/oschina/gitee",
+      "github": "https://github.com/oschina/gitee",
+      "docs": "https://github.com/oschina/gitee",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "server-git",
+      "name": "Git MCP Server",
+      "categoryId": "version-control",
+      "description": "直接的Git仓库操作，包括读取、搜索和分析本地仓库",
+      "website": "https://github.com/modelcontextprotocol/servers/tree/main/src/git",
+      "github": "https://github.com/modelcontextprotocol/servers/tree/main/src/git",
+      "docs": "https://github.com/modelcontextprotocol/servers/tree/main/src/git",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "azure-devops-mcp",
+      "name": "Azure DevOps MCP Server",
+      "categoryId": "version-control",
+      "description": "Azure DevOps 集成，用于管理存储库、工作项目和管道",
+      "website": "https://github.com/Tiberriver256/mcp-server-azure-devops",
+      "github": "https://github.com/Tiberriver256/mcp-server-azure-devops",
+      "docs": "https://github.com/Tiberriver256/mcp-server-azure-devops",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-git-ingest",
+      "name": "Git Ingest MCP Server",
+      "categoryId": "version-control",
+      "description": "使用 LLM 阅读和分析 GitHub 存储库",
+      "website": "https://github.com/adhikasp/mcp-git-ingest",
+      "github": "https://github.com/adhikasp/mcp-git-ingest",
+      "docs": "https://github.com/adhikasp/mcp-git-ingest",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "gitlab-mr-mcp",
+      "name": "GitLab MR MCP Server",
+      "categoryId": "version-control",
+      "description": "与 GitLab 项目问题和合并请求无缝互动",
+      "website": "https://github.com/kopfrechner/gitlab-mr-mcp",
+      "github": "https://github.com/kopfrechner/gitlab-mr-mcp",
+      "docs": "https://github.com/kopfrechner/gitlab-mr-mcp",
+      "version": "1.0.0"
+    }
+  ]
+}

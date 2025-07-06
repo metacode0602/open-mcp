@@ -1,0 +1,68 @@
+---
+title: 系列 X 第 2 部分
+description: 为什么现代安全架构假设泄露并验证一切
+author: lina
+date: 2025-04-14
+tags: [安全, 零信任, 网络安全, 企业]
+image: https://shadcnblocks.com/images/block/placeholder-5.svg
+draft: true
+series: x
+seriesPart: 2
+---
+
+# 系列 X 第 2 部分
+
+传统安全模型遵循“信任但验证”的原则，并侧重于边界防御。零信任以一个简单的原则颠覆了这种模式：从不信任，始终验证。
+
+## 核心原则
+
+零信任建立在几个基本理念之上：
+
+### 假设泄露
+
+零信任架构在攻击者已存在于网络内部的假设下运行。
+
+### 显式验证
+
+每个访问请求都必须经过全面身份验证、授权和加密：
+
+1. 对所有用户进行强身份验证
+2. 设备健康状况验证
+3. 及时和恰当的访问权限
+4. 上下文感知策略
+
+## 实施策略
+
+转向零信任需要系统性的变革：
+
+### 以身份为控制平面
+
+现代安全以身份为中心，而不是网络位置：
+
+```yaml
+# 访问策略示例
+资源：
+  - id: financial-dashboard
+    access_rules:
+      - condition:
+          user:
+            groups: ["finance-team"]
+            authentication:
+              mfa: required
+          device:
+            compliance: verified
+            encryption: enabled
+          context:
+            location: approved
+            risk_score: low
+        permission: allow
+```
+
+### 微分段
+
+网络安全从基于边界转向工作负载之间的细粒度分段。
+
+<Cards>
+  <Card title="Zero Trust Reference Architecture" href="/docs/zero-trust" />
+  <Card title="Identity Management" href="/docs/identity" />
+</Cards>

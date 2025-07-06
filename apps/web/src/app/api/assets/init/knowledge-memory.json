@@ -1,0 +1,84 @@
+{
+  "apps": [
+    {
+      "slug": "server-memory",
+      "name": "Memory Server",
+      "categoryId": "knowledge-memory",
+      "description": "基于知识图谱的长期记忆系统用于维护上下文",
+      "website": "https://github.com/modelcontextprotocol/servers/tree/main/src/memory",
+      "github": "https://github.com/modelcontextprotocol/servers/tree/main/src/memory",
+      "docs": "https://github.com/modelcontextprotocol/servers/tree/main/src/memory",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "memory-mesh",
+      "name": "MemoryMesh",
+      "categoryId": "knowledge-memory",
+      "description": "增强基于图形的记忆，重点关注 AI 角色扮演和故事生成",
+      "website": "https://github.com/CheMiguel23/MemoryMesh",
+      "github": "https://github.com/CheMiguel23/MemoryMesh",
+      "docs": "https://github.com/CheMiguel23/MemoryMesh",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "cognee",
+      "name": "Cognee",
+      "categoryId": "knowledge-memory",
+      "description": "AI应用程序和Agent的内存管理器使用各种图存储和向量存储，并允许从 30 多个数据源提取数据",
+      "website": "https://github.com/topoteretes/cognee/tree/dev/cognee-mcp",
+      "github": "https://github.com/topoteretes/cognee/tree/dev/cognee-mcp",
+      "docs": "https://github.com/topoteretes/cognee/tree/dev/cognee-mcp",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-ragdocs",
+      "name": "RAG Docs",
+      "categoryId": "knowledge-memory",
+      "description": "MCP 服务器实现提供了通过矢量搜索检索和处理文档的工具，使 AI 助手能够利用相关文档上下文来增强其响应能力",
+      "website": "https://github.com/hannesrudolph/mcp-ragdocs",
+      "github": "https://github.com/hannesrudolph/mcp-ragdocs",
+      "docs": "https://github.com/hannesrudolph/mcp-ragdocs",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-zotero",
+      "name": "Zotero MCP",
+      "categoryId": "knowledge-memory",
+      "description": "为 LLM 提供的连接器，用于操作 Zotero Cloud 上的文献集合和资源",
+      "website": "https://github.com/kaliaboi/mcp-zotero",
+      "github": "https://github.com/kaliaboi/mcp-zotero",
+      "docs": "https://github.com/kaliaboi/mcp-zotero",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-summarizer",
+      "name": "MCP Summarizer",
+      "categoryId": "knowledge-memory",
+      "description": "AI摘要生成MCP服务器，支持多种内容类型：纯文本、网页、PDF文档、EPUB电子书、HTML内容",
+      "website": "https://github.com/0xshellming/mcp-summarizer",
+      "github": "https://github.com/0xshellming/mcp-summarizer",
+      "docs": "https://github.com/0xshellming/mcp-summarizer",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "graphlit-mcp-server",
+      "name": "Graphlit MCP Server",
+      "categoryId": "knowledge-memory",
+      "description": "将来自Slack、Discord、网站、Google Drive、Linear或GitHub的任何内容摄取到Graphlit项目中，然后在诸如Cursor、Windsurf或Cline等MCP客户端中搜索并检索相关知识。",
+      "website": "https://github.com/graphlit/graphlit-mcp-server",
+      "github": "https://github.com/graphlit/graphlit-mcp-server",
+      "docs": "https://github.com/graphlit/graphlit-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mem0-mcp",
+      "name": "Mem0 MCP",
+      "categoryId": "knowledge-memory",
+      "description": "用于 Mem0 的模型上下文协议服务器，帮助管理编码偏好和模式，提供工具用于存储、检索和语义处理代码实现、最佳实践和技术文档，适用于 Cursor 和 Windsurf 等 IDE",
+      "website": "https://github.com/mem0ai/mem0-mcp",
+      "github": "https://github.com/mem0ai/mem0-mcp",
+      "docs": "https://github.com/mem0ai/mem0-mcp",
+      "version": "1.0.0"
+    }
+  ]
+}

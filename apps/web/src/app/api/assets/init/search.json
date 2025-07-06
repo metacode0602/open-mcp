@@ -1,0 +1,195 @@
+{
+  "apps": [
+    {
+      "slug": "scrapeless-mcp-server",
+      "name": "Scrapeless MCP Server",
+      "categoryId": "search",
+      "description": "Scrapeless模型上下文协议服务作为MCP服务器连接器，连接到Google SERP API，使得在MCP生态系统内无需离开即可进行网页搜索。",
+      "website": "https://github.com/scrapeless-ai/scrapeless-mcp-server",
+      "github": "https://github.com/scrapeless-ai/scrapeless-mcp-server",
+      "docs": "https://github.com/scrapeless-ai/scrapeless-mcp-server",
+      "version": "1.0.0",
+      "tags": ["python", "cloud"]
+    },
+    {
+      "slug": "server-brave-search",
+      "name": "Brave Search Server",
+      "categoryId": "search",
+      "description": "使用 Brave 的搜索 API 实现网页搜索功能",
+      "website": "https://github.com/modelcontextprotocol/servers/tree/main/src/brave-search",
+      "github": "https://github.com/modelcontextprotocol/servers/tree/main/src/brave-search",
+      "docs": "https://github.com/modelcontextprotocol/servers/tree/main/src/brave-search",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-server-dumplingai",
+      "name": "Dumpling AI Server",
+      "categoryId": "search",
+      "description": "通过 Dumpling AI 提供的数据访问、网页抓取与文档转换 API",
+      "website": "https://github.com/Dumpling-AI/mcp-server-dumplingai",
+      "github": "https://github.com/Dumpling-AI/mcp-server-dumplingai",
+      "docs": "https://github.com/Dumpling-AI/mcp-server-dumplingai",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "nyt",
+      "name": "NYTimes Search",
+      "categoryId": "search",
+      "description": "使用 NYTimes API 搜索文章",
+      "website": "https://github.com/angheljf/nyt",
+      "github": "https://github.com/angheljf/nyt",
+      "docs": "https://github.com/angheljf/nyt",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "server-fetch",
+      "name": "Fetch Server",
+      "categoryId": "search",
+      "description": "高效获取和处理网页内容，供 AI 使用",
+      "website": "https://github.com/modelcontextprotocol/servers/tree/main/src/fetch",
+      "github": "https://github.com/modelcontextprotocol/servers/tree/main/src/fetch",
+      "docs": "https://github.com/modelcontextprotocol/servers/tree/main/src/fetch",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-servers-kagi",
+      "name": "Kagi Search",
+      "categoryId": "search",
+      "description": "Kagi 搜索 API 集成",
+      "website": "https://github.com/ac3xx/mcp-servers-kagi",
+      "github": "https://github.com/ac3xx/mcp-servers-kagi",
+      "docs": "https://github.com/ac3xx/mcp-servers-kagi",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "exa-mcp-server",
+      "name": "Exa Search Server",
+      "categoryId": "search",
+      "description": "模型上下文协议 (MCP) 服务器让 Claude 等 AI 助手可以使用 Exa AI Search API 进行网络搜索。此设置允许 AI 模型以安全且可控的方式获取实时网络信息。",
+      "website": "https://github.com/exa-labs/exa-mcp-server",
+      "github": "https://github.com/exa-labs/exa-mcp-server",
+      "docs": "https://github.com/exa-labs/exa-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "search1api-mcp",
+      "name": "Search1API MCP",
+      "categoryId": "search",
+      "description": "通过 search1api 搜索（需要付费 API 密钥）",
+      "website": "https://github.com/fatwang2/search1api-mcp",
+      "github": "https://github.com/fatwang2/search1api-mcp",
+      "docs": "https://github.com/fatwang2/search1api-mcp",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-server-tavily",
+      "name": "Tavily Search",
+      "categoryId": "search",
+      "description": "Tavily AI 搜索 API",
+      "website": "https://github.com/Tomatio13/mcp-server-tavily",
+      "github": "https://github.com/Tomatio13/mcp-server-tavily",
+      "docs": "https://github.com/Tomatio13/mcp-server-tavily",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "arxiv-mcp-server",
+      "name": "ArXiv Search",
+      "categoryId": "search",
+      "description": "搜索 ArXiv 研究论文",
+      "website": "https://github.com/blazickjp/arxiv-mcp-server",
+      "github": "https://github.com/blazickjp/arxiv-mcp-server",
+      "docs": "https://github.com/blazickjp/arxiv-mcp-server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-webresearch",
+      "name": "Web Research",
+      "categoryId": "search",
+      "description": "在 Google 上搜索并对任何主题进行深度研究",
+      "website": "https://github.com/mzxrai/mcp-webresearch",
+      "github": "https://github.com/mzxrai/mcp-webresearch",
+      "docs": "https://github.com/mzxrai/mcp-webresearch",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-simple-arxiv",
+      "name": "Simple ArXiv",
+      "categoryId": "search",
+      "description": "MCP for LLM 用于搜索和阅读 arXiv 上的论文",
+      "website": "https://github.com/andybrandt/mcp-simple-arxiv",
+      "github": "https://github.com/andybrandt/mcp-simple-arxiv",
+      "docs": "https://github.com/andybrandt/mcp-simple-arxiv",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-simple-pubmed",
+      "name": "Simple PubMed",
+      "categoryId": "search",
+      "description": "MCP 用于搜索和阅读 PubMed 中的医学/生命科学论文",
+      "website": "https://github.com/andybrandt/mcp-simple-pubmed",
+      "github": "https://github.com/andybrandt/mcp-simple-pubmed",
+      "docs": "https://github.com/andybrandt/mcp-simple-pubmed",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-server-rag-web-browser",
+      "name": "RAG Web Browser",
+      "categoryId": "search",
+      "description": "一个用于 Apify 的 RAG Web 浏览器 Actor 的 MCP 服务器，可以执行网页搜索、抓取 URL，并以 Markdown 格式返回内容。",
+      "website": "https://github.com/apify/mcp-server-rag-web-browser",
+      "github": "https://github.com/apify/mcp-server-rag-web-browser",
+      "docs": "https://github.com/apify/mcp-server-rag-web-browser",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-searxng",
+      "name": "SearXNG",
+      "categoryId": "search",
+      "description": "用于连接到 searXNG 实例的 MCP 服务器",
+      "website": "https://github.com/SecretiveShell/MCP-searxng",
+      "github": "https://github.com/SecretiveShell/MCP-searxng",
+      "docs": "https://github.com/SecretiveShell/MCP-searxng",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "clojars-mcp-server",
+      "name": "Clojars Search",
+      "categoryId": "search",
+      "description": "Clojars MCP 服务器，提供 Clojure 库的最新依赖信息",
+      "website": "https://github.com/Bigsy/Clojars-MCP-Server",
+      "github": "https://github.com/Bigsy/Clojars-MCP-Server",
+      "docs": "https://github.com/Bigsy/Clojars-MCP-Server",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "mcp-hn",
+      "name": "Hacker News Search",
+      "categoryId": "search",
+      "description": "一个用于搜索 Hacker News、获取热门故事等的 MCP 服务器",
+      "website": "https://github.com/erithwik/mcp-hn",
+      "github": "https://github.com/erithwik/mcp-hn",
+      "docs": "https://github.com/erithwik/mcp-hn",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "google-news-mcp-server",
+      "name": "Google News Search",
+      "categoryId": "search",
+      "description": "Google News 集成，具有自动主题分类、多语言支持，以及通过 SerpAPI 提供的标题、故事和相关主题的综合搜索功能。",
+      "website": "https://github.com/ChanMeng666/server-google-news",
+      "github": "https://github.com/ChanMeng666/server-google-news",
+      "docs": "https://github.com/ChanMeng666/server-google-news",
+      "version": "1.0.0"
+    },
+    {
+      "slug": "unsplash-mcp-server",
+      "name": "Unsplash Search",
+      "categoryId": "search",
+      "description": "用于集成 Unsplash 图片搜索功能",
+      "website": "https://github.com/hellokaton/unsplash-mcp-server",
+      "github": "https://github.com/hellokaton/unsplash-mcp-server",
+      "docs": "https://github.com/hellokaton/unsplash-mcp-server",
+      "version": "1.0.0"
+    }
+  ]
+}

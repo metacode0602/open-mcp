@@ -1,0 +1,15 @@
+{
+  "apps": [
+    {
+      "slug": "lara-mcp",
+      "name": "Lara MCP",
+      "categoryId": "translation-services",
+      "description": "Lara翻译API的MCP服务器，提供强大的翻译功能，支持语言检测和上下文感知翻译。",
+      "website": "https://github.com/translated/lara-mcp",
+      "github": "https://github.com/translated/lara-mcp",
+      "docs": "https://github.com/translated/lara-mcp",
+      "version": "1.0.0",
+      "tags": ["premium", "cloud"]
+    }
+  ]
+}

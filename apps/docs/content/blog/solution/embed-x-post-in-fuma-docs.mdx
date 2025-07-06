@@ -1,0 +1,72 @@
+---
+title: 在 Fumadocs 中嵌入 X 帖子
+description: 在 Fumadocs 网站中嵌入 X 帖子的指南
+date: 2025-04-16
+author: rajiv
+tags: [教程, 社交媒体, x-twitter, 组件]
+image: https://shadcnblocks.com/images/block/placeholder-5.svg
+---
+
+本教程将指导您完成在 Fumadocs 网站中嵌入 X（前身为 Twitter）帖子的过程。我们将介绍安装、组件设置以及在 MDX 文件中的使用方法。
+
+## 步骤 1：安装所需的包
+
+首先，您需要安装 `react-social-media-embed` 包：
+
+```package-install
+react-social-media-embed
+```
+
+## 步骤 2：创建 XEmbedClient 组件
+
+为 XEmbed 组件创建一个客户端组件包装器。这需要是一个客户端组件，因为它与 X 嵌入脚本进行交互。
+
+<include lang="tsx" meta='title="XEmbedClient.tsx"'>
+  ../../../src/components/XEmbedClient.tsx
+</include>
+
+客户端组件包装器：
+
+- 使用 "use client" 指令以确保它在客户端运行
+- 包装来自 react-social-media-embed 的 XEmbed 组件
+- 添加一个具有居中对齐的 flex 容器以获得更好的显示效果
+- 保持与原始 XEmbed 组件相同的 API
+
+## 步骤 3：将组件添加到 MDX 组件
+
+更新您的 mdx-components.tsx 文件以包含 XEmbedClient 组件：
+
+```jsx
+import defaultMdxComponents from "fumadocs-ui/mdx";
+import type { MDXComponents } from "mdx/types";
+import { XEmbedClient } from "./components/XEmbedClient";
+
+export function getMDXComponents(components?: MDXComponents): MDXComponents {
+  return {
+    ...defaultMdxComponents,
+    XEmbed: XEmbedClient,
+    ...components,
+  };
+}
+
+```
+
+## 步骤 4：在 MDX 文件中使用 XEmbed 组件
+
+现在您可以在 MDX 文件中使用 XEmbed 组件：
+
+```jsx
+<XEmbed url="https://x.com/rjv_im/status/1912033485285376492" width={325} />
+```
+
+## 示例
+
+这是一个嵌入式 X 帖子的示例：
+
+<div className="flex justify-center my-6">
+  <XEmbed url="https://x.com/rjv_im/status/1912033485285376492" width={325} />
+</div>
+
+## 文档
+
+您也可以嵌入 Facebook、LinkedIn 等。有关更多详细信息，请参阅 [react-social-media-embed](https://www.npmjs.com/package/react-social-media-embed) 。

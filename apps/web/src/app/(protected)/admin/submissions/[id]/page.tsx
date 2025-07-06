@@ -1,0 +1,39 @@
+import { ArrowLeft, Edit } from "lucide-react";
+import Link from "next/link";
+
+import { AdminPageHeader } from "@/components/admin/admin-page-header";
+import { Button } from "@repo/ui/components/ui/button";
+
+import { SubmissionDetail } from "@/components/admin/submissions/submission-detail";
+
+export const dynamic = "force-dynamic";
+
+export default async function AppDetailsPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+
+  return (
+    <div className="space-y-6">
+      <AdminPageHeader
+        title="应用提交详情"
+        description="查看和管理应用提交详细信息"
+        actions={
+          <div className="flex gap-2">
+            <Button variant="outline" asChild>
+              <Link href="/admin/submissions">
+                <ArrowLeft className="mr-2 h-4 w-4" />
+                返回
+              </Link>
+            </Button>
+            <Button asChild>
+              <Link href={`/admin/submissions/${id}/edit`}>
+                <Edit className="mr-2 h-4 w-4" />
+                编辑
+              </Link>
+            </Button>
+          </div>
+        }
+      />
+      <SubmissionDetail submissionId={id} />
+    </div>
+  );
+}
