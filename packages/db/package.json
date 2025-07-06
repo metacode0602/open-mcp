@@ -10,7 +10,7 @@
     "db:studio": "drizzle-kit studio",
     "lint": "biome check . --write",
     "db:push": "drizzle-kit push",
-    "db:seed": "DATABASE_URL='postgresql://container:container@localhost:5432/container_hub' tsx ./seeding/seed-db.ts"
+    "db:seed": "POSTGRES_URL='postgresql://container:container@localhost:5432/container_hub' tsx ./seeding/seed-db.ts"
   },
   "dependencies": {
     "@paralleldrive/cuid2": "^2.2.2",
