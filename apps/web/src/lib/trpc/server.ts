@@ -1,4 +1,4 @@
-import { createTRPCContext, type AppRouter } from "@repo/trpc";
+import { createTRPCContext, UserWithRole, type AppRouter } from "@repo/trpc";
 import { createTRPCClient, httpBatchLink, loggerLink } from "@trpc/client";
 import superjson from "superjson";
 import { authClient } from "../auth-client";
@@ -43,7 +43,7 @@ export const createContextFromRequest = async (req: Request) => {
   const headers = new Headers(req.headers);
   const authSession = await getUserFromRequest(req);
   // console.log("[route.ts] [createContextFromRequest] user", authSession);
-  return createTRPCContext({ headers, req, user: authSession?.user, session: authSession?.session });
+  return createTRPCContext({ headers, req, user: authSession?.user as UserWithRole, session: authSession?.session });
 };
 
 /**

@@ -1,13 +1,7 @@
-import { ArrowRight } from "lucide-react"
-import Link from "next/link"
-
 import { CategorySection } from "@/components/category-section"
 import { HeroSection } from "@/components/hero-section"
-import { OpenMCPStudioPromo } from "@/components/openmcp-studio-promo"
-import { Button } from "@repo/ui/components/ui/button"
 import { Container } from "@/components/web/container"
 import { Section } from "@/components/web/section"
-import { SectionHeader } from "@/components/web/section-header"
 import { serverApi } from "@/lib/trpc/server"
 import { AdPromo } from "@/components/web/ad-promo"
 import { DeployButton } from "@/components/deploy-button"
