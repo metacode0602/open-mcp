@@ -3,7 +3,7 @@ import { migrate } from "drizzle-orm/node-postgres/migrator";
 import { Client } from "pg";
 
 const pool = new Client({
-  connectionString: process.env.DATABASE_URL ?? "",
+  connectionString: process.env.POSTGRES_URL ?? "",
 });
 
 const db = drizzle(pool);
