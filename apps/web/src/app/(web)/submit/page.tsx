@@ -17,6 +17,8 @@ import { toast } from "sonner";
 import { z } from "zod";
 
 import { trpc } from "@/lib/trpc/client";
+import { uploadToOSS } from "@/lib/utils";
+
 // 表单验证模式
 const formSchema = z.object({
   nickname: z.string().min(1, "昵称不能为空"),
@@ -112,28 +114,21 @@ export default function SubmitPage() {
     // 上传图片
     try {
       setIsUploading(true);
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("assetType", "logo");
-      formData.append("contentType", file.type);
 
-      const response = await fetch("/api/assets", {
-        method: "POST",
-        body: formData,
-      });
+      // 使用OSS上传
+      const result = await uploadToOSS(file, "app-logos");
 
-      if (!response.ok) {
-        throw new Error("上传失败");
+      if (!result.success) {
+        throw new Error(result.error || "上传失败");
       }
 
-      const data = await response.json();
-      form.setValue("logoUrl", data.url);
+      form.setValue("logoUrl", result.url || "");
       toast.success("上传成功", {
         description: "图片已成功上传",
       });
     } catch (error) {
       toast.error("上传失败", {
-        description: "图片上传失败，请重试",
+        description: error instanceof Error ? error.message : "图片上传失败，请重试",
       });
       setLogoFile(null);
       setLogoPreview(null);
@@ -335,7 +330,8 @@ export default function SubmitPage() {
                       htmlFor="logo"
                       className={cn(
                         "flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer",
-                        logoPreview ? "border-primary" : "bg-muted/40 hover:bg-muted/60"
+                        logoPreview ? "border-primary" : "bg-muted/40 hover:bg-muted/60",
+                        isUploading && "opacity-50 cursor-not-allowed"
                       )}
                     >
                       {logoPreview ? (
@@ -348,15 +344,20 @@ export default function SubmitPage() {
                               handleDeleteLogo();
                             }}
                             className="absolute top-2 right-2 p-1 rounded-full bg-background/80 hover:bg-background"
+                            disabled={isUploading}
                           >
                             <X className="h-4 w-4" />
                           </button>
                         </div>
                       ) : (
                         <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                          <Upload className="w-8 h-8 mb-3 text-muted-foreground" />
+                          {isUploading ? (
+                            <div className="w-8 h-8 mb-3 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                          ) : (
+                            <Upload className="w-8 h-8 mb-3 text-muted-foreground" />
+                          )}
                           <p className="mb-2 text-sm text-muted-foreground">
-                            <span className="font-semibold">点击上传</span> 或拖放文件
+                            {isUploading ? "上传中..." : "点击上传 或拖放文件"}
                           </p>
                           <p className="text-xs text-muted-foreground">SVG, PNG 或 JPG (最大 2MB)</p>
                         </div>

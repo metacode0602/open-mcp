@@ -7,7 +7,7 @@ import type React from "react";
 import { useRef, useState } from "react";
 import { toast } from "sonner";
 
-import { getAssetUrl } from "@/lib/utils";
+import { getAssetUrl, uploadToOSSWithProgress } from "@/lib/utils";
 
 export type FileUploadItem = {
   file: File;
@@ -15,6 +15,7 @@ export type FileUploadItem = {
   progress: number;
   status: "idle" | "uploading" | "success" | "error";
   assetId?: string;
+  url?: string;
   error?: string;
 };
 
@@ -53,6 +54,7 @@ export const FormFileUpload = ({
       progress: 100,
       status: "success",
       assetId: item.assetId,
+      url: item.url,
     }))
   );
 
@@ -107,75 +109,44 @@ export const FormFileUpload = ({
   const uploadFile = async (file: File, fileIndex: number | ((prev: FileUploadItem[]) => number)) => {
     const actualIndex = typeof fileIndex === "function" ? fileIndex(files) : fileIndex;
 
+    // Update status to uploading
     setFiles((prev) => {
       const updated = [...prev];
       const currentFile = updated[actualIndex];
       if (!currentFile) return updated;
 
       updated[actualIndex] = {
-        file: currentFile.file,
-        preview: currentFile.preview,
-        progress: currentFile.progress,
+        ...currentFile,
         status: "uploading",
-        assetId: currentFile.assetId,
-        error: currentFile.error
+        progress: 0,
       };
       return updated;
     });
 
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("assetType", assetType);
-
     try {
-      const xhr = new XMLHttpRequest();
-
-      // Track upload progress
-      xhr.upload.addEventListener("progress", (event) => {
-        if (event.lengthComputable) {
-          const progress = Math.round((event.loaded / event.total) * 100);
+      // 使用带进度跟踪的OSS上传
+      const result = await uploadToOSSWithProgress(
+        file,
+        assetType,
+        (progress) => {
+          // 更新上传进度
           setFiles((prev) => {
             const updated = [...prev];
             const currentFile = updated[actualIndex];
             if (!currentFile) return updated;
 
             updated[actualIndex] = {
-              file: currentFile.file,
-              preview: currentFile.preview,
+              ...currentFile,
               progress,
-              status: currentFile.status,
-              assetId: currentFile.assetId,
-              error: currentFile.error
             };
             return updated;
           });
         }
-      });
+      );
 
-      // Handle response
-      const uploadPromise = new Promise<string>((resolve, reject) => {
-        xhr.onload = () => {
-          if (xhr.status >= 200 && xhr.status < 300) {
-            try {
-              const response = JSON.parse(xhr.responseText);
-              resolve(response.assetId);
-            } catch (error) {
-              reject(new Error("解析响应失败"));
-            }
-          } else {
-            reject(new Error(`上传失败: ${xhr.status}`));
-          }
-        };
-
-        xhr.onerror = () => {
-          reject(new Error("网络错误"));
-        };
-      });
-
-      xhr.open("POST", "/api/assets");
-      xhr.send(formData);
-
-      const assetId = await uploadPromise;
+      if (!result.success) {
+        throw new Error(result.error || "上传失败");
+      }
 
       // Update file status to success
       setFiles((prev) => {
@@ -184,26 +155,31 @@ export const FormFileUpload = ({
         if (!currentFile) return updated;
 
         updated[actualIndex] = {
-          file: currentFile.file,
-          preview: currentFile.preview,
+          ...currentFile,
           progress: 100,
           status: "success",
-          assetId,
-          error: currentFile.error
+          assetId: result.assetId,
+          url: result.url,
         };
         return updated;
       });
 
       // Get all successful asset IDs
-      const allAssetIds = files.filter((f) => f.status === "success" && f.assetId).map((f) => f.assetId as string);
+      const allAssetIds = files
+        .filter((f) => f.status === "success" && f.assetId)
+        .map((f) => f.assetId as string);
 
       // Add the new asset ID if it's not already included
-      if (!allAssetIds.includes(assetId)) {
-        allAssetIds.push(assetId);
+      if (result.assetId && !allAssetIds.includes(result.assetId)) {
+        allAssetIds.push(result.assetId);
       }
 
       // Notify parent component
       onUploadComplete(allAssetIds);
+
+      toast.success("上传成功", {
+        description: `${file.name} 已成功上传`,
+      });
     } catch (error) {
       // Update file status to error
       setFiles((prev) => {
@@ -212,12 +188,9 @@ export const FormFileUpload = ({
         if (!currentFile) return updated;
 
         updated[actualIndex] = {
-          file: currentFile.file,
-          preview: currentFile.preview,
-          progress: currentFile.progress,
+          ...currentFile,
           status: "error",
-          assetId: currentFile.assetId,
-          error: error instanceof Error ? error.message : "上传文件时出现错误"
+          error: error instanceof Error ? error.message : "上传文件时出现错误",
         };
         return updated;
       });
@@ -234,7 +207,9 @@ export const FormFileUpload = ({
       updated.splice(index, 1);
 
       // Get all successful asset IDs after removal
-      const remainingAssetIds = updated.filter((f) => f.status === "success" && f.assetId).map((f) => f.assetId as string);
+      const remainingAssetIds = updated
+        .filter((f) => f.status === "success" && f.assetId)
+        .map((f) => f.assetId as string);
 
       // Notify parent component of the updated list
       onUploadComplete(remainingAssetIds);
@@ -286,7 +261,12 @@ export const FormFileUpload = ({
               )}
 
               {/* Remove button */}
-              <Button variant="destructive" size="icon" className="absolute top-2 right-2 h-6 w-6 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" onClick={() => removeFile(index)}>
+              <Button
+                variant="destructive"
+                size="icon"
+                className="absolute top-2 right-2 h-6 w-6 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                onClick={() => removeFile(index)}
+              >
                 <X className="h-3 w-3" />
               </Button>
             </div>
@@ -302,7 +282,15 @@ export const FormFileUpload = ({
                 </p>
                 <p className="text-xs text-muted-foreground">SVG, PNG 或 JPG</p>
               </div>
-              <input ref={fileInputRef} id={`${label}-file-input`} type="file" className="hidden" accept={accept} onChange={handleFileChange} multiple={multiple} />
+              <input
+                ref={fileInputRef}
+                id={`${label}-file-input`}
+                type="file"
+                className="hidden"
+                accept={accept}
+                onChange={handleFileChange}
+                multiple={multiple}
+              />
             </label>
           )}
         </div>

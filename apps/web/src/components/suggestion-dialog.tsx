@@ -26,6 +26,7 @@ import type { z } from "zod"
 
 import { AuthCheckWrapper } from "@/components/auth/auth-check-wrapper"
 import { trpc } from "@/lib/trpc/client"
+import { uploadToOSS } from "@/lib/utils"
 
 interface SuggestionDialogProps {
   app: McpApp
@@ -65,6 +66,15 @@ export function SuggestionDialog({ app }: SuggestionDialogProps) {
     const file = e.target.files?.[0]
     if (!file) return
 
+    // 验证文件大小（5MB限制）
+    const maxSize = 5 * 1024 * 1024
+    if (file.size > maxSize) {
+      toast.error("文件过大", {
+        description: "文件大小不能超过 5MB",
+      })
+      return
+    }
+
     // 创建预览URL
     const preview = URL.createObjectURL(file)
     setPreviewUrl(preview)
@@ -72,27 +82,20 @@ export function SuggestionDialog({ app }: SuggestionDialogProps) {
 
     setIsUploading(true)
     try {
-      const formData = new FormData()
-      formData.append("file", file)
-      formData.append("assetType", "IMAGE")
+      // 使用OSS上传
+      const result = await uploadToOSS(file, "suggestion-attachments")
 
-      const response = await fetch("/api/assets", {
-        method: "POST",
-        body: formData,
-      })
-
-      if (!response.ok) {
-        throw new Error("上传失败")
+      if (!result.success) {
+        throw new Error(result.error || "上传失败")
       }
 
-      const data = await response.json()
-      form.setValue("attachmentUrl", data.assetId)
+      form.setValue("attachmentUrl", result.assetId)
       toast.success("上传成功", {
         description: "文件已成功上传",
       })
     } catch (error) {
       toast.error("上传失败", {
-        description: "文件上传失败，请重试",
+        description: error instanceof Error ? error.message : "文件上传失败，请重试",
       })
       // 保留预览，即使上传失败
     } finally {

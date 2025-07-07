@@ -1,4 +1,3 @@
-
 // import dayjs from "dayjs";
 // import relativeTime from "dayjs/plugin/relativeTime";
 
@@ -133,6 +132,200 @@ export async function signOut(): Promise<void> {
       resolve()
     }, 500)
   })
+}
+
+/**
+ * 上传文件到阿里云OSS（带进度跟踪）
+ */
+export interface OSSUploadResult {
+  success: boolean;
+  assetId?: string;
+  url?: string;
+  error?: string;
+}
+
+export interface OSSUploadOptions {
+  onProgress?: (progress: number) => void;
+  assetType?: string;
+}
+
+export async function uploadToOSS(
+  file: File,
+  assetType?: string,
+  options?: OSSUploadOptions
+): Promise<OSSUploadResult> {
+  try {
+    // 第一步：获取OSS临时上传凭证
+    const credentialResponse = await fetch("/api/assets/oss", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        fileName: file.name,
+        fileType: file.type,
+        fileSize: file.size,
+        assetType,
+      }),
+    });
+
+    if (!credentialResponse.ok) {
+      const errorData = await credentialResponse.json();
+      throw new Error(errorData.error || "获取上传凭证失败");
+    }
+
+    const credentialData = await credentialResponse.json();
+    const { uploadUrl, assetId } = credentialData;
+
+    // 第二步：直接上传文件到OSS（带进度跟踪）
+    const uploadResponse = await fetch(uploadUrl, {
+      method: "PUT",
+      headers: {
+        "Content-Type": file.type,
+      },
+      body: file,
+    });
+
+    if (!uploadResponse.ok) {
+      throw new Error("文件上传到OSS失败");
+    }
+
+    // 第三步：调用回调接口通知服务器上传完成
+    const callbackUrl = new URL("/api/assets/oss", window.location.origin);
+    callbackUrl.searchParams.set("assetId", assetId);
+    callbackUrl.searchParams.set("url", uploadUrl.split("?")[0]); // 获取不带参数的URL
+    callbackUrl.searchParams.set("size", file.size.toString());
+    callbackUrl.searchParams.set("mimeType", file.type);
+
+    const callbackResponse = await fetch(callbackUrl.toString(), {
+      method: "GET",
+    });
+
+    if (!callbackResponse.ok) {
+      console.warn("回调通知失败，但文件已上传成功");
+    }
+
+    return {
+      success: true,
+      assetId,
+      url: uploadUrl.split("?")[0], // 返回不带参数的URL
+    };
+  } catch (error) {
+    console.error("OSS上传失败:", error);
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "上传失败",
+    };
+  }
+}
+
+/**
+ * 带进度跟踪的OSS上传（使用XMLHttpRequest）
+ */
+export function uploadToOSSWithProgress(
+  file: File,
+  assetType?: string,
+  onProgress?: (progress: number) => void
+): Promise<OSSUploadResult> {
+  return new Promise(async (resolve) => {
+    try {
+      // 第一步：获取OSS临时上传凭证
+      const credentialResponse = await fetch("/api/assets/oss", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fileName: file.name,
+          fileType: file.type,
+          fileSize: file.size,
+          assetType,
+        }),
+      });
+
+      if (!credentialResponse.ok) {
+        const errorData = await credentialResponse.json();
+        throw new Error(errorData.error || "获取上传凭证失败");
+      }
+
+      const credentialData = await credentialResponse.json();
+      const { uploadUrl, assetId } = credentialData;
+
+      // 第二步：使用XMLHttpRequest上传文件到OSS（带进度跟踪）
+      const xhr = new XMLHttpRequest();
+
+      xhr.upload.addEventListener("progress", (event) => {
+        if (event.lengthComputable && onProgress) {
+          const progress = Math.round((event.loaded / event.total) * 100);
+          onProgress(progress);
+        }
+      });
+
+      xhr.addEventListener("load", async () => {
+        if (xhr.status >= 200 && xhr.status < 300) {
+          try {
+            // 第三步：调用回调接口通知服务器上传完成
+            const callbackUrl = new URL("/api/assets/oss", window.location.origin);
+            callbackUrl.searchParams.set("assetId", assetId);
+            callbackUrl.searchParams.set("url", uploadUrl.split("?")[0]);
+            callbackUrl.searchParams.set("size", file.size.toString());
+            callbackUrl.searchParams.set("mimeType", file.type);
+
+            const callbackResponse = await fetch(callbackUrl.toString(), {
+              method: "GET",
+            });
+
+            if (!callbackResponse.ok) {
+              console.warn("回调通知失败，但文件已上传成功");
+            }
+
+            resolve({
+              success: true,
+              assetId,
+              url: uploadUrl.split("?")[0],
+            });
+          } catch (error) {
+            console.warn("回调通知失败，但文件已上传成功");
+            resolve({
+              success: true,
+              assetId,
+              url: uploadUrl.split("?")[0],
+            });
+          }
+        } else {
+          resolve({
+            success: false,
+            error: `上传失败: ${xhr.status}`,
+          });
+        }
+      });
+
+      xhr.addEventListener("error", () => {
+        resolve({
+          success: false,
+          error: "网络错误",
+        });
+      });
+
+      xhr.open("PUT", uploadUrl);
+      xhr.setRequestHeader("Content-Type", file.type);
+      xhr.send(file);
+    } catch (error) {
+      resolve({
+        success: false,
+        error: error instanceof Error ? error.message : "上传失败",
+      });
+    }
+  });
+}
+
+/**
+ * 获取OSS文件的完整URL
+ */
+export function getOSSFileUrl(ossFileName: string): string {
+  const bucket = process.env.NEXT_PUBLIC_ALIYUN_OSS_BUCKET;
+  const region = process.env.NEXT_PUBLIC_ALIYUN_OSS_REGION || "oss-cn-hangzhou";
+  return `https://${bucket}.${region}.aliyuncs.com/${ossFileName}`;
 }
 
 
