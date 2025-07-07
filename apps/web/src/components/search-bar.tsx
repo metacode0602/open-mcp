@@ -2,11 +2,11 @@
 
 import { Input } from "@repo/ui/components/ui/input"
 import { useDebounce } from "@repo/ui/hooks/use-debounce"
-import { AnimatePresence,motion } from "framer-motion"
-import { AppWindow, Filter,Laptop, Search, Send, Server } from "lucide-react"
+import { AnimatePresence, motion } from "framer-motion"
+import { AppWindow, Filter, Laptop, Search, Send, Server } from "lucide-react"
 import { useRouter } from "next/navigation"
 import type React from "react"
-import { useEffect,useState, useTransition } from "react"
+import { useEffect, useState, useTransition } from "react"
 
 interface SearchBarProps {
   defaultValue?: string
@@ -119,9 +119,9 @@ export function SearchBar({ defaultValue = "", defaultCategory = "all" }: Search
     <div className="w-full max-w-xl mx-auto">
       <div className="relative flex flex-col justify-start items-center">
         <div className="w-full sticky top-0 bg-background z-10 pt-4 pb-1">
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1 block" htmlFor="search">
+          {/* <label className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1 block" htmlFor="search">
             搜索应用
-          </label>
+          </label> */}
           <form onSubmit={handleSearch} className="relative">
             <div className="flex items-center">
               <div className="relative flex-1">
