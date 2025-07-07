@@ -1,20 +1,41 @@
-import { notFound } from "next/navigation"
+"use client"
 
 import { AdPromo } from "@/components/web/ad-promo"
-import { serverApi } from "@/lib/trpc/server"
+import { trpc } from "@/lib/trpc/client"
+import { notFound } from "next/navigation"
+import { use } from "react"
 
-export const dynamic = "force-dynamic";
+export default function AdPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params)
 
-export default async function AdPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params
-  const ad = await serverApi.mcpAds.getById.query({ id })
+  // 获取广告数据
+  const { data: ad, isLoading, error } = trpc.mcpAds.getById.useQuery({ id })
 
-  if (!ad) {
-    notFound()
+  // 增加展示次数的 mutation
+  const incrementImpressions = trpc.mcpAds.incrementImpressions.useMutation()
+
+  // 当广告数据加载完成后，增加展示次数
+  useEffect(() => {
+    if (ad && !incrementImpressions.isPending) {
+      incrementImpressions.mutate({ id })
+    }
+  }, [ad, id, incrementImpressions])
+
+  // 处理加载状态
+  if (isLoading) {
+    return (
+      <div className="container mx-auto py-8">
+        <div className="animate-pulse">
+          <div className="h-64 bg-muted rounded-lg"></div>
+        </div>
+      </div>
+    )
   }
 
-  // 增加展示次数
-  await serverApi.mcpAds.incrementImpressions.mutate({ id })
+  // 处理错误状态
+  if (error || !ad) {
+    notFound()
+  }
 
   return (
     <div className="container mx-auto py-8">

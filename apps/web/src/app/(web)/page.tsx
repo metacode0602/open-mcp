@@ -1,26 +1,22 @@
-import { Button } from "@repo/ui/components/ui/button"
-import { ArrowRight } from "lucide-react"
-import Link from "next/link"
+"use client"
 
 import { CategorySection } from "@/components/category-section"
-import { DeployButton } from "@/components/deploy-button"
 import { HeroSection } from "@/components/hero-section"
-import { OpenMCPStudioPromo } from "@/components/openmcp-studio-promo"
-import { AdPromo } from "@/components/web/ad-promo"
 import { Container } from "@/components/web/container"
 import { Section } from "@/components/web/section"
-import { SectionHeader } from "@/components/web/section-header"
-import { serverApi } from "@/lib/trpc/server"
+import { trpc } from "@/lib/trpc/client"
+import { AdPromo } from "@/components/web/ad-promo"
+import { DeployButton } from "@/components/deploy-button"
+import { Ads } from "@repo/db/types"
 
-export const dynamic = "force-dynamic";
-
-export default async function Home() {
-  const adsList = await serverApi.mcpApps.getAdsListByType.query({ adType: "banner" })
+export default function Home() {
+  // 获取广告列表
+  const { data: adsList = [], isLoading: adsLoading } = trpc.mcpApps.getAdsListByType.useQuery({ adType: "banner" })
 
   // 根据广告位置分组
-  const topAds = adsList.filter((ad) => ad.placement === "top")
-  const middleAds = adsList.filter((ad) => ad.placement === "middle")
-  const bottomAds = adsList.filter((ad) => ad.placement === "bottom")
+  const topAds = adsList.filter((ad: Ads) => ad.placement === "top")
+  const middleAds = adsList.filter((ad: Ads) => ad.placement === "middle")
+  const bottomAds = adsList.filter((ad: Ads) => ad.placement === "bottom")
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -28,7 +24,7 @@ export default async function Home() {
         <HeroSection />
 
         {/* 顶部广告 */}
-        {topAds && topAds.map((ad) => (
+        {!adsLoading && topAds && topAds.map((ad: Ads) => (
           <AdPromo key={ad.id} ad={ad} />
         ))}
 
@@ -41,7 +37,7 @@ export default async function Home() {
         </Section>
 
         {/* 中间广告 */}
-        {middleAds.map((ad) => (
+        {!adsLoading && middleAds.map((ad: Ads) => (
           <AdPromo key={ad.id} ad={ad} />
         ))}
 
@@ -56,7 +52,7 @@ export default async function Home() {
         </Section>
 
         {/* 底部广告 */}
-        {bottomAds.map((ad) => (
+        {!adsLoading && bottomAds.map((ad: Ads) => (
           <AdPromo key={ad.id} ad={ad} />
         ))}
 

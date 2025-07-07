@@ -264,9 +264,6 @@ importers:
       next-themes:
         specifier: ^0.4.4
         version: 0.4.6(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      pg:
-        specifier: ^8.15.6
-        version: 8.16.3
       pinyin:
         specifier: 4.0.0-alpha.2
         version: 4.0.0-alpha.2(segmentit@2.0.3)
@@ -343,6 +340,9 @@ importers:
       '@paralleldrive/cuid2':
         specifier: ^2.2.2
         version: 2.2.2
+      '@vercel/postgres':
+        specifier: ^0.10.0
+        version: 0.10.0
       bcrypt:
         specifier: ^5.1.1
         version: 5.1.1
@@ -352,9 +352,6 @@ importers:
       drizzle-orm:
         specifier: ^0.41.0
         version: 0.41.0(@opentelemetry/api@1.9.0)(@types/pg@8.15.4)(@vercel/postgres@0.10.0)(gel@2.1.1)(kysely@0.28.2)(pg@8.16.3)
-      pg:
-        specifier: ^8.14.1
-        version: 8.16.3
       pinyin:
         specifier: 4.0.0-alpha.2
         version: 4.0.0-alpha.2(segmentit@2.0.3)
@@ -9401,7 +9398,6 @@ snapshots:
   '@neondatabase/serverless@0.9.5':
     dependencies:
       '@types/pg': 8.11.6
-    optional: true
 
   '@next/env@13.5.11': {}
 
@@ -11732,11 +11728,11 @@ snapshots:
 
   '@types/bunyan@1.8.11':
     dependencies:
-      '@types/node': 20.19.4
+      '@types/node': 22.16.0
 
   '@types/connect@3.4.38':
     dependencies:
-      '@types/node': 20.19.4
+      '@types/node': 22.16.0
 
   '@types/cors@2.8.19':
     dependencies:
@@ -11914,7 +11910,7 @@ snapshots:
 
   '@types/memcached@2.2.10':
     dependencies:
-      '@types/node': 20.19.4
+      '@types/node': 22.16.0
 
   '@types/minimatch@6.0.0':
     dependencies:
@@ -11924,7 +11920,7 @@ snapshots:
 
   '@types/mysql@2.15.26':
     dependencies:
-      '@types/node': 20.19.4
+      '@types/node': 22.16.0
 
   '@types/node-fetch@2.6.12':
     dependencies:
@@ -11951,10 +11947,9 @@ snapshots:
 
   '@types/pg@8.11.6':
     dependencies:
-      '@types/node': 22.16.0
+      '@types/node': 20.19.4
       pg-protocol: 1.10.3
       pg-types: 4.0.2
-    optional: true
 
   '@types/pg@8.15.4':
     dependencies:
@@ -11964,7 +11959,7 @@ snapshots:
 
   '@types/pg@8.6.1':
     dependencies:
-      '@types/node': 20.19.4
+      '@types/node': 22.16.0
       pg-protocol: 1.10.3
       pg-types: 2.2.0
 
@@ -11990,7 +11985,7 @@ snapshots:
 
   '@types/tedious@4.0.14':
     dependencies:
-      '@types/node': 20.19.4
+      '@types/node': 22.16.0
 
   '@types/through@0.0.33':
     dependencies:
@@ -12152,7 +12147,6 @@ snapshots:
       ws: 8.18.3(bufferutil@4.0.9)
     transitivePeerDependencies:
       - utf-8-validate
-    optional: true
 
   '@wojtekmaj/react-recaptcha-v3@0.1.4(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
@@ -12428,7 +12422,6 @@ snapshots:
   bufferutil@4.0.9:
     dependencies:
       node-gyp-build: 4.8.4
-    optional: true
 
   bundle-require@5.1.0(esbuild@0.25.5):
     dependencies:
@@ -15458,8 +15451,7 @@ snapshots:
     dependencies:
       whatwg-url: 5.0.0
 
-  node-gyp-build@4.8.4:
-    optional: true
+  node-gyp-build@4.8.4: {}
 
   node-plop@0.26.3:
     dependencies:
@@ -15536,8 +15528,7 @@ snapshots:
       define-properties: 1.2.1
       es-object-atoms: 1.1.1
 
-  obuf@1.1.2:
-    optional: true
+  obuf@1.1.2: {}
 
   once@1.4.0:
     dependencies:
@@ -15746,16 +15737,17 @@ snapshots:
   pg-cloudflare@1.2.7:
     optional: true
 
-  pg-connection-string@2.9.1: {}
+  pg-connection-string@2.9.1:
+    optional: true
 
   pg-int8@1.0.1: {}
 
-  pg-numeric@1.0.2:
-    optional: true
+  pg-numeric@1.0.2: {}
 
   pg-pool@3.10.1(pg@8.16.3):
     dependencies:
       pg: 8.16.3
+    optional: true
 
   pg-protocol@1.10.3: {}
 
@@ -15776,7 +15768,6 @@ snapshots:
       postgres-date: 2.1.0
       postgres-interval: 3.0.0
       postgres-range: 1.1.4
-    optional: true
 
   pg@8.16.3:
     dependencies:
@@ -15787,10 +15778,12 @@ snapshots:
       pgpass: 1.0.5
     optionalDependencies:
       pg-cloudflare: 1.2.7
+    optional: true
 
   pgpass@1.0.5:
     dependencies:
       split2: 4.2.0
+    optional: true
 
   picocolors@1.0.1: {}
 
@@ -15861,30 +15854,25 @@ snapshots:
 
   postgres-array@2.0.0: {}
 
-  postgres-array@3.0.4:
-    optional: true
+  postgres-array@3.0.4: {}
 
   postgres-bytea@1.0.0: {}
 
   postgres-bytea@3.0.0:
     dependencies:
       obuf: 1.1.2
-    optional: true
 
   postgres-date@1.0.7: {}
 
-  postgres-date@2.1.0:
-    optional: true
+  postgres-date@2.1.0: {}
 
   postgres-interval@1.2.0:
     dependencies:
       xtend: 4.0.2
 
-  postgres-interval@3.0.0:
-    optional: true
+  postgres-interval@3.0.0: {}
 
-  postgres-range@1.1.4:
-    optional: true
+  postgres-range@1.1.4: {}
 
   prelude-ls@1.2.1: {}
 
@@ -15926,7 +15914,7 @@ snapshots:
       '@protobufjs/path': 1.1.2
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
-      '@types/node': 20.19.4
+      '@types/node': 22.16.0
       long: 5.3.2
 
   proxy-agent@6.5.0:
@@ -16818,7 +16806,8 @@ snapshots:
 
   spdx-license-ids@3.0.21: {}
 
-  split2@4.2.0: {}
+  split2@4.2.0:
+    optional: true
 
   sprintf-js@1.1.3: {}
 
@@ -17585,7 +17574,6 @@ snapshots:
   ws@8.18.3(bufferutil@4.0.9):
     optionalDependencies:
       bufferutil: 4.0.9
-    optional: true
 
   xtend@4.0.2: {}
 
