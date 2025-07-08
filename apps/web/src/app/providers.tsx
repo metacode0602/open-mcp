@@ -3,13 +3,13 @@
 import { AuthQueryProvider } from "@daveyplate/better-auth-tanstack"
 import { AuthUIProviderTanstack } from "@daveyplate/better-auth-ui/tanstack"
 import { AppRouter } from "@repo/trpc"
-import { isServer,QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { isServer, QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { createTRPCClient } from "@trpc/client"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { ThemeProvider } from "next-themes"
-import { type ReactNode,useState } from "react"
-import { toast,Toaster } from "sonner"
+import { type ReactNode, useState } from "react"
+import { toast, Toaster } from "sonner"
 
 import { authClient } from "@/lib/auth-client"
 import { trpc } from "@/lib/trpc/client"
@@ -82,25 +82,25 @@ export function Providers({ children }: { children: ReactNode }) {
               }}
               Link={Link}
               localization={{
-                signIn: "登录",
-                signUp: "注册",
-                signOut: "退出登录",
-                settings: "账号设置",
-                account: "账号",
-                email: "邮箱",
-                password: "密码",
-                confirmPassword: "确认密码",
-                newPassword: "新密码",
-                forgotPassword: "忘记密码?",
-                resetPassword: "重置密码",
-                continue: "继续",
-                cancel: "取消",
-                delete: "删除",
-                name: "名称",
-                username: "用户名",
-                currentPassword: "当前密码",
-                avatar: "头像",
-                save: "保存"
+                SIGN_IN: "登录",
+                SIGN_UP: "注册",
+                SIGN_OUT: "退出登录",
+                SETTINGS: "账号设置",
+                ACCOUNT: "账号",
+                EMAIL: "邮箱",
+                PASSWORD: "密码",
+                CONFIRM_PASSWORD: "确认密码",
+                NEW_PASSWORD: "新密码",
+                FORGOT_PASSWORD: "忘记密码?",
+                RESET_PASSWORD: "重置密码",
+                CONTINUE: "继续",
+                CANCEL: "取消",
+                DELETE: "删除",
+                NAME: "名称",
+                USERNAME: "用户名",
+                CURRENT_PASSWORD: "当前密码",
+                AVATAR: "头像",
+                SAVE: "保存"
               }}
             >
               {children}

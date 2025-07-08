@@ -29,9 +29,7 @@ export function MainNav() {
               trigger: {
                 base: "flex items-center gap-2 rounded-md ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-background text-sm font-medium",
                 user: {
-                  base: "flex items-center gap-2",
-                  p: "text-sm font-medium",
-                  small: "text-xs text-muted-foreground"
+                  base: "flex items-center gap-2"
                 }
               },
               content: {
@@ -39,9 +37,7 @@ export function MainNav() {
                 menuItem: "relative flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
                 separator: "mx-1 my-1 h-px bg-muted",
                 user: {
-                  base: "flex items-center gap-2 p-2",
-                  p: "text-sm font-medium",
-                  small: "text-xs text-muted-foreground"
+                  base: "flex items-center gap-2 p-2"
                 }
               }
             }}
