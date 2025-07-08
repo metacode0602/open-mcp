@@ -328,4 +328,54 @@ export function getOSSFileUrl(ossFileName: string): string {
   return `https://${bucket}.${region}.aliyuncs.com/${ossFileName}`;
 }
 
+/**
+ * Save form data to localStorage for later restoration
+ */
+export function saveFormData(formData: Record<string, any>, key: string = 'submit-form-data') {
+  try {
+    localStorage.setItem(key, JSON.stringify({
+      data: formData,
+      timestamp: Date.now()
+    }))
+  } catch (error) {
+    console.error('Failed to save form data:', error)
+  }
+}
+
+/**
+ * Get saved form data from localStorage
+ */
+export function getFormData(key: string = 'submit-form-data'): Record<string, any> | null {
+  try {
+    const saved = localStorage.getItem(key)
+    if (!saved) return null
+
+    const parsed = JSON.parse(saved)
+    const { data, timestamp } = parsed
+
+    // 检查数据是否过期（24小时）
+    const isExpired = Date.now() - timestamp > 24 * 60 * 60 * 1000
+    if (isExpired) {
+      localStorage.removeItem(key)
+      return null
+    }
+
+    return data
+  } catch (error) {
+    console.error('Failed to get form data:', error)
+    return null
+  }
+}
+
+/**
+ * Clear saved form data from localStorage
+ */
+export function clearFormData(key: string = 'submit-form-data') {
+  try {
+    localStorage.removeItem(key)
+  } catch (error) {
+    console.error('Failed to clear form data:', error)
+  }
+}
+
 

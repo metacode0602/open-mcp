@@ -9,15 +9,16 @@ import { Label } from "@repo/ui/components/ui/label";
 import { Textarea } from "@repo/ui/components/ui/textarea";
 import { cn } from "@repo/ui/lib/utils";
 import { ArrowLeft, BrainCircuit, Laptop, Server, Upload, X } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import type React from "react";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
 import { trpc } from "@/lib/trpc/client";
-import { uploadToOSS } from "@/lib/utils";
+import { uploadToOSS, saveFormData, getFormData, clearFormData } from "@/lib/utils";
+import { useSession } from "@/hooks/auth-hooks";
 
 // 表单验证模式
 const formSchema = z.object({
@@ -37,16 +38,22 @@ type FormValues = z.infer<typeof formSchema>;
 
 export default function SubmitPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const { data: session } = useSession();
 
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [logoPreview, setLogoPreview] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [pendingLogoFile, setPendingLogoFile] = useState<File | null>(null);
 
   // 使用tRPC mutation
   const submitMutation = trpc.mcpSubmit.create.useMutation({
     onSuccess: () => {
       setIsSubmitting(false);
+      // 提交成功后清除保存的表单数据
+      clearFormData();
+      setPendingLogoFile(null);
       toast.success("提交成功", {
         description: "您的应用信息已成功提交，我们将尽快审核",
       });
@@ -80,6 +87,103 @@ export default function SubmitPage() {
   // 监听类型变化，以便显示/隐藏服务器配置字段
   const appType = form.watch("type");
 
+  // 上传logo的函数
+  const uploadLogo = useCallback(async (file: File) => {
+    try {
+      setIsUploading(true);
+
+      // 使用OSS上传
+      const result = await uploadToOSS(file, "app-logos");
+
+      if (!result.success) {
+        throw new Error(result.error || "上传失败");
+      }
+
+      form.setValue("logoUrl", result.url || "");
+      setPendingLogoFile(null);
+      toast.success("上传成功", {
+        description: "图片已成功上传",
+      });
+    } catch (error) {
+      toast.error("上传失败", {
+        description: error instanceof Error ? error.message : "图片上传失败，请重试",
+      });
+      setLogoFile(null);
+      setLogoPreview(null);
+      setPendingLogoFile(null);
+    } finally {
+      setIsUploading(false);
+    }
+  }, [form]);
+
+  // 页面加载时恢复表单数据
+  useEffect(() => {
+    const savedData = getFormData();
+    if (savedData) {
+      // 恢复表单数据
+      Object.keys(savedData).forEach((key) => {
+        if (key in form.getValues()) {
+          form.setValue(key as keyof FormValues, savedData[key]);
+        }
+      });
+
+      // 如果有待处理的logo文件，提示用户重新上传
+      if (savedData.pendingLogoFile) {
+        toast.info("检测到之前未完成的logo上传", {
+          description: "请重新选择logo文件以继续上传",
+        });
+      }
+    }
+  }, [form]);
+
+  // 监听登录状态变化，处理待上传的logo文件
+  useEffect(() => {
+    if (session && pendingLogoFile) {
+      // 用户已登录且有待上传的文件，自动上传
+      toast.success("登录成功", {
+        description: "正在继续上传您的logo文件...",
+      });
+      uploadLogo(pendingLogoFile);
+    } else if (session) {
+      // 用户刚登录成功，显示欢迎信息
+      const savedData = getFormData();
+      if (savedData?.pendingLogoFile) {
+        toast.success("欢迎回来", {
+          description: "您的表单数据已恢复，请继续完成logo上传",
+        });
+      } else if (savedData) {
+        toast.success("欢迎回来", {
+          description: "您的表单数据已自动恢复",
+        });
+      }
+    }
+  }, [session, pendingLogoFile, uploadLogo]);
+
+  // 监听表单变化，自动保存数据
+  useEffect(() => {
+    const subscription = form.watch((value) => {
+      // 保存表单数据到localStorage
+      saveFormData({
+        ...value,
+        pendingLogoFile: pendingLogoFile ? true : false,
+      });
+    });
+    return () => subscription.unsubscribe();
+  }, [form, pendingLogoFile]);
+
+  // 页面卸载时清理数据
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      // 如果用户直接关闭页面，保留数据以便恢复
+      // 这里不做特殊处理，让用户下次访问时可以选择是否恢复
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, []);
+
   // 处理图片上传
   const handleLogoChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -110,37 +214,36 @@ export default function SubmitPage() {
     };
     reader.readAsDataURL(file);
     setLogoFile(file);
+    setPendingLogoFile(file);
 
-    // 上传图片
-    try {
-      setIsUploading(true);
-
-      // 使用OSS上传
-      const result = await uploadToOSS(file, "app-logos");
-
-      if (!result.success) {
-        throw new Error(result.error || "上传失败");
-      }
-
-      form.setValue("logoUrl", result.url || "");
-      toast.success("上传成功", {
-        description: "图片已成功上传",
+    // 检查用户是否已登录
+    if (!session) {
+      // 保存当前表单数据
+      const currentFormData = form.getValues();
+      saveFormData({
+        ...currentFormData,
+        pendingLogoFile: true,
       });
-    } catch (error) {
-      toast.error("上传失败", {
-        description: error instanceof Error ? error.message : "图片上传失败，请重试",
+
+      toast.info("需要登录", {
+        description: "上传logo需要先登录，即将跳转到登录页面",
       });
-      setLogoFile(null);
-      setLogoPreview(null);
-    } finally {
-      setIsUploading(false);
+
+      // 跳转到登录页面，并设置重定向回当前页面
+      const currentUrl = window.location.pathname + window.location.search;
+      router.push(`/auth/sign-in?redirectTo=${encodeURIComponent(currentUrl)}`);
+      return;
     }
+
+    // 用户已登录，直接上传图片
+    await uploadLogo(file);
   };
 
   // 删除图片
   const handleDeleteLogo = () => {
     setLogoFile(null);
     setLogoPreview(null);
+    setPendingLogoFile(null);
     form.setValue("logoUrl", "");
   };
 
@@ -162,13 +265,21 @@ export default function SubmitPage() {
     }
   };
 
+  // 处理取消操作
+  const handleCancel = () => {
+    // 清除保存的数据
+    clearFormData();
+    setPendingLogoFile(null);
+    router.back();
+  };
+
   return (
     <div className="flex min-h-screen items-center justify-center py-10 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-3xl">
         <div className="mb-8 text-center">
           <Button
             variant="ghost"
-            onClick={() => router.back()}
+            onClick={handleCancel}
             className="absolute left-4 top-4 md:left-8 md:top-8"
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
@@ -376,7 +487,7 @@ export default function SubmitPage() {
               </CardContent>
 
               <CardFooter className="flex justify-between">
-                <Button variant="outline" type="button" onClick={() => router.back()}>
+                <Button variant="outline" type="button" onClick={handleCancel}>
                   取消
                 </Button>
                 <Button
