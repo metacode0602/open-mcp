@@ -652,8 +652,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // 5. 保存webhook数据到文件
-    const savedFilePath = saveWebhookData(body, repoData.id);
+    // 5. 保存webhook数据到文件，在serverless环境中无法写入本地文件，因此暂时注释掉
+    // const savedFilePath = saveWebhookData(body, repoData.id);
 
     // 6. 数据库事务处理
     const result = await db.transaction(async (tx) => {
@@ -695,7 +695,7 @@ export async function POST(request: NextRequest) {
         monthly_snapshot_id: result.monthlySnapshot.id,
         weekly_snapshot_id: result.weeklySnapshot.id,
         apps_count: result.upsertedApps.length,
-        saved_file_path: savedFilePath,
+        // saved_file_path: savedFilePath,
         processed_at: new Date().toISOString(),
       },
     });
