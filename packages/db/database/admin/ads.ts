@@ -2,7 +2,7 @@ import { and, asc, desc, eq, like, or, sql } from "drizzle-orm";
 
 import { ads } from "../../schema";
 import { db } from "../../index";
-import { zCreateAdsSchema, zUpdateAdsSchema, zSearchAdsSchema, AdsStatus } from "../../types";
+import { zCreateAdsSchema, zUpdateAdsSchema, zSearchAdsSchema, AdsStatus, Ads } from "../../types";
 
 // 广告数据访问模块
 export const adsDataAccess = {
@@ -37,7 +37,19 @@ export const adsDataAccess = {
     return await db.query.ads.findFirst({
       where: eq(ads.id, id),
       with: {
-        app: true,
+        app: {
+          columns: {
+            id: true,
+            type: true,
+            version: true,
+            description: true,
+            descriptionZh: true,
+            slug: true,
+            name: true,
+            icon: true,
+            website: true,
+          },
+        },
       },
     });
   },
@@ -125,12 +137,27 @@ export const adsDataAccess = {
   },
 
   getAdsListByType: async (type: "banner" | "listing") => {
-    return await db.query.ads.findMany({
+    const results = await db.query.ads.findMany({
       where: and(eq(ads.type, type), eq(ads.status, "active")),
       with: {
-        app: true,
+        app: {
+          columns: {
+            id: true,
+            name: true,
+            icon: true,
+            website: true, // 作为 url 字段
+            slug: true,
+            description: true,
+            descriptionZh: true,
+            type: true,
+            version: true,
+          },
+        },
       },
     });
+
+    // 将 website 字段映射为 url 字段以匹配前端期望
+    return results as unknown as Ads[];
   },
 
   getActiveAds: async (type?: "banner" | "listing", limit = 10) => {
@@ -189,12 +216,30 @@ export const adsDataAccess = {
    * @returns 用户发布的广告
    */
   getAdsByUserId: async (userId: string) => {
-    return await db.query.ads.findMany({
+    const results = await db.query.ads.findMany({
       where: eq(ads.userId, userId),
       with: {
-        app: true,
+        app: {
+          columns: {
+            id: true,
+            name: true,
+            icon: true,
+            website: true, // 作为 url 字段
+            type: true,
+            version: true,
+          },
+        },
       },
     });
+
+    // 将 website 字段映射为 url 字段以匹配前端期望
+    return results.map(ad => ({
+      ...ad,
+      app: ad.app ? {
+        ...ad.app,
+        url: ad.app.website, // 将 website 映射为 url
+      } : null,
+    }));
   },
 
   getAdsCountByUserId: async (userId: string) => {
