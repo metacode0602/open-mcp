@@ -128,7 +128,23 @@ export const adsDataAccess = {
     return await db.query.ads.findMany({
       where: and(eq(ads.type, type), eq(ads.status, "active")),
       with: {
-        app: true,
+        app: {
+          columns: {
+            id: true,
+            name: true,
+            slug: true,
+            description: true,
+            stars: true,
+            repoCreatedAt: true,
+            updatedAt: true,
+            license: true,
+            status: true,
+            type: true,
+            icon: true,
+            website: true,
+            repoId: true,
+          }
+        },
       },
     });
   },

@@ -3,7 +3,7 @@
 import { AdPromo } from "@/components/web/ad-promo"
 import { trpc } from "@/lib/trpc/client"
 import { notFound } from "next/navigation"
-import { use } from "react"
+import { use, useEffect } from "react"
 
 export default function AdPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params)
@@ -39,6 +39,7 @@ export default function AdPage({ params }: { params: Promise<{ id: string }> }) 
 
   return (
     <div className="container mx-auto py-8">
+      {/* @ts-expect-error ad.appId is null */}
       <AdPromo ad={ad} />
     </div>
   )
