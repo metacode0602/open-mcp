@@ -34,6 +34,7 @@ export const appsRouter = router({
   createFromGitHub: adminProcedure.input(z.object({
     gitHubURL: z.string().url().startsWith("https://github.com/"),
     type: z.enum(["client", "server", "application"]),
+    categoryId: z.string().optional(),
   })).mutation(async ({ input, ctx }) => {
     try {
       // 1. 从GitHub URL提取仓库信息
@@ -79,6 +80,7 @@ export const appsRouter = router({
                 source: "admin",
                 repoId: data.data.project.id,
                 owner: repoInfo.owner,
+                categoryId: input.categoryId,
               }, ctx.user.id);
 
               return app;
