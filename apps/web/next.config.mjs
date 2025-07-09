@@ -1,10 +1,11 @@
-// const isProd = process.env.NODE_ENV === "production";
+// 执行build.sh时，会设置BUILD_ENV=production， vercel环境中无此环境变量
+const isProd = process.env.BUILD_ENV === "production";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "standalone",
   reactStrictMode: true,
-  // assetPrefix: isProd ? "https://zenly.oss-cn-hangzhou.aliyuncs.com/mcp" : "",
+  assetPrefix: isProd ? "https://zenly.oss-cn-hangzhou.aliyuncs.com/mcp" : "",
   images: {
     remotePatterns: [
       {
@@ -25,11 +26,17 @@ const nextConfig = {
       },
       {
         protocol: "http",
-        hostname: "localhost"
-      }
+        hostname: "localhost",
+      },
     ],
   },
-  transpilePackages: ["@repo/ui", "@repo/db", "@repo/email", "@repo/github", "@repo/trpc"],
-}
+  transpilePackages: [
+    "@repo/ui",
+    "@repo/db",
+    "@repo/email",
+    "@repo/github",
+    "@repo/trpc",
+  ],
+};
 
-export default nextConfig
+export default nextConfig;

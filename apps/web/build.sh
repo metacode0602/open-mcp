@@ -4,6 +4,7 @@ rm -rf .next
 # 定义内存限制大小，单位为MB
 NODE_MEMORY_LIMIT=4096
 
+BUILD_ENV=production
 # 执行带有内存限制的pnpm构建命令
 NODE_OPTIONS="--max-old-space-size=$NODE_MEMORY_LIMIT" pnpm build
 
