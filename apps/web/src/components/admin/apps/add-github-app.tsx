@@ -16,18 +16,20 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from "@repo/ui/co
 import { Input } from "@repo/ui/components/ui/input";
 import { Label } from "@repo/ui/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@repo/ui/components/ui/select";
-import { AlertCircle,Github, Loader2 } from "lucide-react";
+import { AlertCircle, Github, Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
 import { trpc } from "@/lib/trpc/client";
+import { CategorySelect } from "@/components/admin/category-select";
 
 const formSchema = z.object({
   gitHubURL: z.string().url("请输入有效的URL").startsWith("https://github.com/", "必须是GitHub仓库地址"),
   type: z.enum(["client", "server", "application"]),
+  categoryId: z.string().optional(),
 });
 
 export function AddGitHubAppButton() {
@@ -37,10 +39,43 @@ export function AddGitHubAppButton() {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: { gitHubURL: "", type: "client" },
+    defaultValues: { gitHubURL: "", type: "client", categoryId: "" },
   });
 
-  // tRPC mutations
+  // 获取当前选择的应用类型
+  const selectedType = form.watch("type");
+
+  // tRPC queries and mutations
+  const { data: categoriesData, isLoading: isLoadingCategories } = trpc.categories.search.useQuery({
+    limit: 100,
+    page: 1,
+  });
+
+  // 根据应用类型过滤分类
+  const filteredCategories = useMemo(() => {
+    if (!categoriesData?.data) return [];
+
+    const allCategories = categoriesData.data;
+
+    // 找到对应的顶级分类
+    const parentCategory = allCategories.find(cat => cat.slug === selectedType);
+
+    if (!parentCategory) {
+      // 如果没有找到对应的顶级分类，返回空数组
+      return [];
+    }
+
+    // 返回该顶级分类下的所有子分类
+    const childCategories = allCategories
+      .filter(cat => cat.parentId === parentCategory.id && cat.status === "online")
+      .map((item) => ({
+        ...item,
+        description: item.description || "",
+      }));
+
+    return childCategories;
+  }, [categoriesData?.data, selectedType]);
+
   const createFromGitHub = trpc.apps.createFromGitHub.useMutation();
 
   const isPending = form.formState.isSubmitting || isProcessing;
@@ -51,6 +86,7 @@ export function AddGitHubAppButton() {
       const project = await createFromGitHub.mutateAsync({
         gitHubURL: values.gitHubURL,
         type: values.type,
+        categoryId: values.categoryId || undefined,
       });
 
       if (project) {
@@ -77,6 +113,12 @@ export function AddGitHubAppButton() {
     if (!newOpen) {
       form.reset();
     }
+  };
+
+  // 当应用类型改变时，清空分类选择
+  const handleTypeChange = (newType: string) => {
+    form.setValue("type", newType as "client" | "server" | "application");
+    form.setValue("categoryId", ""); // 清空分类选择
   };
 
   return (
@@ -140,7 +182,7 @@ export function AddGitHubAppButton() {
                     <FormItem>
                       <FormControl>
                         <Select
-                          onValueChange={field.onChange}
+                          onValueChange={handleTypeChange}
                           value={field.value as string}
                           disabled={isPending}
                         >
@@ -149,10 +191,43 @@ export function AddGitHubAppButton() {
                           </SelectTrigger>
                           <SelectContent>
                             <SelectItem value="client">客户端应用</SelectItem>
-                            <SelectItem value="server">服务端应用</SelectItem>
-                            <SelectItem value="application">完整应用程序</SelectItem>
+                            <SelectItem value="server">服务器应用</SelectItem>
+                            <SelectItem value="application">AI应用</SelectItem>
                           </SelectContent>
                         </Select>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <div className="grid grid-cols-[100px_1fr] items-center gap-4">
+                <Label htmlFor="categoryId" className="text-right">
+                  应用分类
+                </Label>
+                <FormField
+                  control={form.control}
+                  name="categoryId"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        {isLoadingCategories ? (
+                          <div className="flex items-center justify-center h-10 px-3 py-2 text-sm text-muted-foreground">
+                            加载分类中...
+                          </div>
+                        ) : (
+                          <CategorySelect
+                            categories={filteredCategories}
+                            name="categoryId"
+                            placeholder={
+                              filteredCategories.length > 0
+                                ? "选择应用分类（可选）"
+                                : "该应用类型暂无可用的分类"
+                            }
+                            disabled={isPending}
+                          />
+                        )}
                       </FormControl>
                       <FormMessage />
                     </FormItem>

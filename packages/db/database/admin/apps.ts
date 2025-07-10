@@ -79,6 +79,7 @@ export const appsDataAccess = {
     type: "client" | "server" | "application";
     source: "automatic" | "submitted" | "admin";
     repoId: string;
+    categoryId?: string;
   }, createdBy: string) => {
     return await db.transaction(async (tx) => {
       // 1. 验证唯一性约束
@@ -103,6 +104,7 @@ export const appsDataAccess = {
           type: data.type,
           github: data.gitHubURL,
           repoId: data.repoId,
+          categoryId: data.categoryId,
           status: "pending",
           createdBy: createdBy,
           source: data.source,
