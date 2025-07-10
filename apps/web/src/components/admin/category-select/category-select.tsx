@@ -20,9 +20,15 @@ import {
 } from "@repo/ui/components/ui/popover";
 import { FormControl, FormDescription, FormItem, FormLabel, FormMessage } from "@repo/ui/components/ui/form";
 import { useFormContext } from "react-hook-form";
-import { useCategoryState, Category } from "@/hooks/use-category-state";
 
-
+interface Category {
+  id: string;
+  name: string;
+  description?: string;
+  parentId?: string | null;
+  slug: string;
+  status: "online" | "offline";
+}
 
 interface CategorySelectProps {
   categories: Category[];
@@ -33,6 +39,8 @@ interface CategorySelectProps {
   disabled?: boolean;
   multiple?: boolean;
   className?: string;
+  value?: string | string[];
+  onChange?: (value: string | string[]) => void;
 }
 
 export function CategorySelect({
@@ -44,54 +52,105 @@ export function CategorySelect({
   disabled = false,
   multiple = false,
   className,
+  value,
+  onChange,
 }: CategorySelectProps) {
   const [open, setOpen] = React.useState(false);
   const form = useFormContext();
 
+  // 检查是否有表单上下文
+  const hasFormContext = !!form;
+
   // 获取当前值
-  const currentValue = form.watch(name);
-  const initialSelectedIds = multiple
-    ? (Array.isArray(currentValue) ? currentValue : [])
-    : (currentValue ? [currentValue] : []);
+  const currentValue = hasFormContext ? form.watch(name) : value;
+  const [selectedIds, setSelectedIds] = React.useState<string[]>(
+    multiple
+      ? (Array.isArray(currentValue) ? currentValue : [])
+      : (currentValue ? [currentValue] : [])
+  );
 
-  // 使用状态管理hook
-  const {
-    selectedIds,
-    selectedCategories,
-    cascadeOptions,
-    handleSelect,
-    removeCategory,
-    findCategoryById,
-  } = useCategoryState({
-    categories,
-    initialSelectedIds,
-    multiple,
-  });
+  // 获取选中的分类对象
+  const selectedCategories = React.useMemo(() => {
+    return selectedIds.map(id => categories.find(cat => cat.id === id)).filter(Boolean) as Category[];
+  }, [selectedIds, categories]);
 
-  // 处理选择变化
-  const handleValueChange = (categoryId: string) => {
-    handleSelect(categoryId);
+  // 同步表单状态和内部状态（仅在表单上下文中）
+  React.useEffect(() => {
+    if (!hasFormContext) return;
 
     if (multiple) {
       const currentValues = form.getValues(name) || [];
-      const isSelected = currentValues.includes(categoryId);
-
-      if (isSelected) {
-        form.setValue(name, currentValues.filter((id: string) => id !== categoryId));
-      } else {
-        form.setValue(name, [...currentValues, categoryId]);
+      if (JSON.stringify(currentValues) !== JSON.stringify(selectedIds)) {
+        form.setValue(name, selectedIds);
       }
     } else {
-      form.setValue(name, categoryId);
+      const currentValue = form.getValues(name);
+      const expectedValue = selectedIds[0] || "";
+      if (currentValue !== expectedValue) {
+        form.setValue(name, expectedValue);
+      }
+    }
+  }, [selectedIds, form, name, multiple, hasFormContext]);
+
+  // 处理选择变化
+  const handleValueChange = (categoryId: string) => {
+    if (multiple) {
+      setSelectedIds(prev => {
+        const isSelected = prev.includes(categoryId);
+        if (isSelected) {
+          return prev.filter(id => id !== categoryId);
+        } else {
+          return [...prev, categoryId];
+        }
+      });
+    } else {
+      setSelectedIds([categoryId]);
       setOpen(false);
+    }
+
+    if (hasFormContext) {
+      if (multiple) {
+        const currentValues = form.getValues(name) || [];
+        const isSelected = currentValues.includes(categoryId);
+
+        if (isSelected) {
+          form.setValue(name, currentValues.filter((id: string) => id !== categoryId));
+        } else {
+          form.setValue(name, [...currentValues, categoryId]);
+        }
+      } else {
+        form.setValue(name, categoryId);
+      }
+    } else {
+      // 没有表单上下文时，使用 onChange 回调
+      if (onChange) {
+        if (multiple) {
+          const currentValues = Array.isArray(value) ? value : [];
+          const isSelected = currentValues.includes(categoryId);
+
+          if (isSelected) {
+            onChange(currentValues.filter((id: string) => id !== categoryId));
+          } else {
+            onChange([...currentValues, categoryId]);
+          }
+        } else {
+          onChange(categoryId);
+        }
+      }
     }
   };
 
   // 移除选中的分类（多选模式）
   const handleRemoveCategory = (categoryId: string) => {
-    removeCategory(categoryId);
-    const currentValues = form.getValues(name) || [];
-    form.setValue(name, currentValues.filter((id: string) => id !== categoryId));
+    setSelectedIds(prev => prev.filter(id => id !== categoryId));
+
+    if (hasFormContext) {
+      const currentValues = form.getValues(name) || [];
+      form.setValue(name, currentValues.filter((id: string) => id !== categoryId));
+    } else if (onChange) {
+      const currentValues = Array.isArray(value) ? value : [];
+      onChange(currentValues.filter((id: string) => id !== categoryId));
+    }
   };
 
   // 渲染选中的分类标签（多选模式）
@@ -141,39 +200,26 @@ export function CategorySelect({
             <Command>
               <CommandInput placeholder="搜索分类..." />
               <CommandList>
-                <CommandEmpty>未找到分类</CommandEmpty>
-                {cascadeOptions.map((option) => (
-                  <CommandGroup key={option.id} heading={option.name}>
+                <CommandEmpty>
+                  {categories.length === 0 ? "暂无可用的分类" : "未找到分类"}
+                </CommandEmpty>
+                <CommandGroup>
+                  {categories.map((category) => (
                     <CommandItem
-                      value={option.id}
-                      onSelect={() => handleValueChange(option.id)}
+                      key={category.id}
+                      value={category.id}
+                      onSelect={() => handleValueChange(category.id)}
                     >
                       <Check
                         className={cn(
                           "mr-2 h-4 w-4",
-                          selectedIds.includes(option.id) ? "opacity-100" : "opacity-0"
+                          selectedIds.includes(category.id) ? "opacity-100" : "opacity-0"
                         )}
                       />
-                      {option.name}
+                      {category.name}
                     </CommandItem>
-                    {option.children?.map((child) => (
-                      <CommandItem
-                        key={child.id}
-                        value={child.id}
-                        onSelect={() => handleValueChange(child.id)}
-                        className="ml-4"
-                      >
-                        <Check
-                          className={cn(
-                            "mr-2 h-4 w-4",
-                            selectedIds.includes(child.id) ? "opacity-100" : "opacity-0"
-                          )}
-                        />
-                        {child.name}
-                      </CommandItem>
-                    ))}
-                  </CommandGroup>
-                ))}
+                  ))}
+                </CommandGroup>
               </CommandList>
             </Command>
           </PopoverContent>

@@ -46,6 +46,8 @@ const createApps = async (cateogrySlug: string) => {
       description: app.description,
       slug: app.slug,
       categoryId: category.id,
+      repoId: undefined,
+      owner: undefined,
       type: "server" as const,
       source: "automatic" as const,
       status: "approved" as const,
@@ -59,7 +61,25 @@ const createApps = async (cateogrySlug: string) => {
     };
 
     try {
-      await appsDataAccess.create(appData, "system");
+      const response = await fetch(process.env.PROD_CREATE_API_URL || "http://localhost:3000/api/assets/mcp", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${process.env.PROD_CREATE_API_TOKEN}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          githubUrl: app.github,
+        }),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log("data", JSON.stringify(data, null, 2));
+        const project = data.data.project;
+        appData.repoId = project.id;
+        await appsDataAccess.create(appData, "system");
+      } else {
+        console.error("创建应用失败:", response.statusText);
+      }
     } catch (error) {
       console.error("创建应用失败:", error, appData);
     }
@@ -138,7 +158,7 @@ export async function POST(request: NextRequest) {
         name: app.name,
         categoryId: app.categoryId,
         description: app.description,
-        type: "client" as const,
+        type: "server" as const,
         source: "automatic" as const,
         status: "approved" as const,
         publishStatus: "online" as const,

@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const { githubUrl } = body;
-
+    console.info("[vercel] [post] githuburl", githubUrl);
     // 验证请求参数
     if (!githubUrl) {
       return NextResponse.json(
