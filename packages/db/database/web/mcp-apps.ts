@@ -18,7 +18,7 @@ export const mcpAppsDataAccess = {
     if (tag) {
       conditions.push(eq(tags.slug, tag));
     }
-    console.info("conditions", conditions);
+    console.info("conditions", JSON.stringify(conditions, null, 2));
     const query = db
       .selectDistinct({
         id: apps.id,
