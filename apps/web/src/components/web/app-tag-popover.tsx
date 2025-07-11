@@ -2,10 +2,10 @@ import { Badge } from "@repo/ui/components/ui/badge"
 import { Button } from "@repo/ui/components/ui/button"
 import { Popover, PopoverContent, PopoverTrigger } from "@repo/ui/components/ui/popover"
 import { cn } from "@repo/ui/lib/utils"
-import { AlertCircleIcon, RefreshCwIcon,StarIcon, TagIcon, UsersIcon } from "lucide-react"
+import { AlertCircleIcon, RefreshCwIcon, StarIcon, TagIcon, UsersIcon } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useCallback, useRef,useState } from "react"
+import { useCallback, useRef, useState } from "react"
 
 import { trpc } from "@/lib/trpc/client"
 import { formatNumber } from "@/lib/utils"
@@ -69,7 +69,7 @@ export const AppTagWithPopover = ({ tag }: { tag: string }) => {
     error,
     refetch,
     isFetching,
-  } = trpc.mcpApps.getByTag.useQuery({ tagName: tag, appSlug: path }, {
+  } = trpc.mcpApps.getByTag.useQuery({ tagName: tag, appSlug: path, limit: 5 }, {
     enabled: isOpen, // 只在弹窗打开时获取数据
     staleTime: 5 * 60 * 1000, // 5分钟缓存
     retry: 2,
@@ -154,8 +154,8 @@ export const AppTagWithPopover = ({ tag }: { tag: string }) => {
                     </Badge>
                   )}
                 </div>
-                {app.descriptionZh || app.description && (
-                  <p className="text-xs text-muted-foreground truncate line-clamp-2">{app.descriptionZh || app.description}</p>
+                {(app.descriptionZh || app.description) && (
+                  <p className="text-xs text-muted-foreground line-clamp-2">{app.descriptionZh || app.description}</p>
                 )}
                 <div className="flex items-center gap-3 mt-1">
                   <div className="flex items-center gap-1 text-xs text-muted-foreground">

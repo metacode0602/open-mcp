@@ -9,6 +9,7 @@ import Link from "next/link"
 
 import { formatDate } from "@/lib/utils"
 import { getAssetUrl } from "@/lib/utils"
+import { TagIcon } from "lucide-react"
 
 interface AppCardProps {
   app: McpApp
@@ -59,11 +60,11 @@ export function AppCard({ app, selectedTag, onTagClick }: AppCardProps) {
               <div className="text-sm text-muted-foreground">{app.descriptionZh || app.description}</div>
             </HoverCardContent>
           </HoverCard>
-          <div className="flex-wrap gap-1 mt-3">
+          <div className="flex-wrap gap-1 mt-3 space-x-1">
             {app.tags?.slice(0, 3).map((tag) => (
               <Badge
                 key={tag.id}
-                variant={selectedTag === tag.name ? "default" : "outline"}
+                variant={selectedTag === tag.name ? "default" : "secondary"}
                 className="text-xs cursor-pointer"
                 onClick={(e) => {
                   if (onTagClick) {
@@ -73,11 +74,12 @@ export function AppCard({ app, selectedTag, onTagClick }: AppCardProps) {
                   }
                 }}
               >
+                <TagIcon className="mr-1 h-3 w-3" />
                 {tag.name}
               </Badge>
             ))}
             {app.tags && app.tags.length > 3 && (
-              <Badge variant="outline" className="text-xs ml-1">
+              <Badge variant="outline" className="text-xs">
                 +{app.tags.length - 3}
               </Badge>
             )}
