@@ -22,8 +22,14 @@ export const mcpRecommendationsRouter = router({
       }
       if (id.trim().length > 0) {
         const recommendationApps = await recommendationDataAccess.getAppsByRecommendationId(id, input.limit ?? 10);
-        // 提取 app 数据
-        return recommendationApps.map((item) => item.app);
+        // 提取 app 数据，并拍平成 tags 结构
+        return recommendationApps.map((item) => {
+          const app = item.app;
+          return {
+            ...app,
+            tags: app.tags?.map((t: any) => t.tag) || []
+          };
+        });
 
       } else {
         return []

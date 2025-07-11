@@ -4,7 +4,6 @@ import type { McpApp } from "@repo/db/types"
 import { Badge } from "@repo/ui/components/ui/badge"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@repo/ui/components/ui/card"
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@repo/ui/components/ui/hover-card"
-import { Eye, GitFork, Star } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -78,7 +77,7 @@ export function AppCard({ app, selectedTag, onTagClick }: AppCardProps) {
               </Badge>
             ))}
             {app.tags && app.tags.length > 3 && (
-              <Badge variant="outline" className="text-xs">
+              <Badge variant="outline" className="text-xs ml-1">
                 +{app.tags.length - 3}
               </Badge>
             )}
@@ -87,7 +86,7 @@ export function AppCard({ app, selectedTag, onTagClick }: AppCardProps) {
         <CardFooter className="mt-auto p-4 pt-0">
           <div className="flex items-center justify-between w-full space-x-2 text-sm text-muted-foreground">
             <span className="flex items-center gap-1">
-              <Badge variant="outline" className="text-xs">{app.primaryLanguage}</Badge>
+              <Badge variant="outline" className="text-xs">{app.primaryLanguage ?? app.languages?.[0]}</Badge>
             </span>
             <span>{formatDate(app.createdAt)}</span>
           </div>
