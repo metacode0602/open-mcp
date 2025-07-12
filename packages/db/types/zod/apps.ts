@@ -101,6 +101,7 @@ export const zAppSchema = zCreateAppSchema.extend({
   commits: z.number().int().optional().nullable(), // 提交次数
   updatedAt: z.date().optional().nullable(),
   primaryLanguage: z.string().optional().nullable(),
+  languages: z.array(z.string()).optional().nullable(),
   repoId: z.string().optional().nullable(),
 });
 

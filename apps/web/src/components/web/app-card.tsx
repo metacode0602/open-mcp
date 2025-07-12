@@ -4,12 +4,12 @@ import type { McpApp } from "@repo/db/types"
 import { Badge } from "@repo/ui/components/ui/badge"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@repo/ui/components/ui/card"
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@repo/ui/components/ui/hover-card"
-import { Eye, GitFork, Star } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
 import { formatDate } from "@/lib/utils"
 import { getAssetUrl } from "@/lib/utils"
+import { TagIcon } from "lucide-react"
 
 interface AppCardProps {
   app: McpApp
@@ -60,11 +60,11 @@ export function AppCard({ app, selectedTag, onTagClick }: AppCardProps) {
               <div className="text-sm text-muted-foreground">{app.descriptionZh || app.description}</div>
             </HoverCardContent>
           </HoverCard>
-          <div className="flex-wrap gap-1 mt-3">
+          <div className="flex-wrap gap-1 mt-3 space-x-1">
             {app.tags?.slice(0, 3).map((tag) => (
               <Badge
                 key={tag.id}
-                variant={selectedTag === tag.name ? "default" : "outline"}
+                variant={selectedTag === tag.name ? "default" : "secondary"}
                 className="text-xs cursor-pointer"
                 onClick={(e) => {
                   if (onTagClick) {
@@ -74,6 +74,7 @@ export function AppCard({ app, selectedTag, onTagClick }: AppCardProps) {
                   }
                 }}
               >
+                <TagIcon className="mr-1 h-3 w-3" />
                 {tag.name}
               </Badge>
             ))}
@@ -87,7 +88,7 @@ export function AppCard({ app, selectedTag, onTagClick }: AppCardProps) {
         <CardFooter className="mt-auto p-4 pt-0">
           <div className="flex items-center justify-between w-full space-x-2 text-sm text-muted-foreground">
             <span className="flex items-center gap-1">
-              <Badge variant="outline" className="text-xs">{app.primaryLanguage}</Badge>
+              <Badge variant="outline" className="text-xs">{app.primaryLanguage ?? app.languages?.[0]}</Badge>
             </span>
             <span>{formatDate(app.createdAt)}</span>
           </div>

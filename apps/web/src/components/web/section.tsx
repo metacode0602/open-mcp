@@ -17,7 +17,7 @@ export function Section({ children, className, background = "default", id }: Sec
   }
 
   return (
-    <section id={id} className={cn("w-full py-12 md:py-16 lg:py-20", backgroundClasses[background], className)}>
+    <section id={id} className={cn("w-full py-6 md:py-8 lg:py-10", backgroundClasses[background], className)}>
       {children}
     </section>
   )
