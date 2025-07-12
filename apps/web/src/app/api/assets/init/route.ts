@@ -151,7 +151,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     // 遍历 client.json 中的数据
-    for (const app of clientData) {
+    for (const app of clientData?.apps) {
       // 构建符合数据库表结构的数据
       const appData = {
         slug: app.slug,
