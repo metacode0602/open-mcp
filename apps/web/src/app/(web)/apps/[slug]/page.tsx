@@ -123,7 +123,7 @@ export default function AppPage({ params }: { params: Promise<{ slug: string }> 
           <Badge variant={app.type === "client" ? "default" : app.type === "server" ? "secondary" : "outline"}>
             {app.type === "client" ? "客户端" : app.type === "server" ? "服务器" : "应用"}
           </Badge>
-          {app.tags && app.tags?.map((tag) =>
+          {app.tags && app.tags?.slice(0, 5).map((tag) =>
             tag && (
               <Link key={tag.id} href={`/tag/${encodeURIComponent(tag.name)}`}>
                 <AppTagWithPopover tag={tag.name} />
