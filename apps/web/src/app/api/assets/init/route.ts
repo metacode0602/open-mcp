@@ -48,7 +48,7 @@ const createApps = async (cateogrySlug: string) => {
       categoryId: category.id,
       repoId: undefined,
       owner: undefined,
-      type: "server" as const,
+      type: "client" as const,
       source: "automatic" as const,
       status: "approved" as const,
       publishStatus: "online" as const,

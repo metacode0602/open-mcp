@@ -7,19 +7,30 @@ export const mcpAppsDataAccess = {
   getByTypeCategoryAndTag: async (params: { type: AppType; category?: string; tag?: string }) => {
     const { type, category, tag } = params;
 
-    let conditions: SQL[] = [eq(apps.type, type)];
+    // 先查出符合条件的 app id
+    let appIdConditions: SQL[] = [eq(apps.type, type)];
 
-    // 如果指定了分类，添加分类过滤
     if (category) {
-      conditions.push(eq(categories.slug, category));
+      appIdConditions.push(eq(categories.slug, category));
+    }
+    if (tag) {
+      appIdConditions.push(eq(tags.slug, tag));
     }
 
-    // 如果指定了标签，添加标签过滤
-    if (tag) {
-      conditions.push(eq(tags.slug, tag));
-    }
-    console.info("conditions", conditions);
-    const query = db
+    // 只查 id
+    const appIdRows = await db
+      .selectDistinct({ id: apps.id })
+      .from(apps)
+      .leftJoin(categories, eq(apps.categoryId, categories.id))
+      .leftJoin(appTags, eq(apps.id, appTags.appId))
+      .leftJoin(tags, eq(appTags.tagId, tags.id))
+      .where(and(...appIdConditions));
+
+    const appIds = appIdRows.map(row => row.id);
+    if (appIds.length === 0) return [];
+
+    // 再查详情
+    const appsData = await db
       .selectDistinct({
         id: apps.id,
         slug: apps.slug,
@@ -46,13 +57,9 @@ export const mcpAppsDataAccess = {
         version: apps.version,
       })
       .from(apps)
-      // .leftJoin(appCategories, eq(apps.id, appCategories.appId))
-      .leftJoin(categories, eq(apps.categoryId, categories.id))
-      .leftJoin(appTags, eq(apps.id, appTags.appId))
-      .leftJoin(tags, eq(appTags.tagId, tags.id))
-      .where(and(...conditions));
+      .where(inArray(apps.id, appIds));
 
-    return query;
+    return appsData;
   },
 
   /**
