@@ -52,8 +52,8 @@ const CountBadge = ({ className }: CountBadgeProps) => {
               <>
                 <Ping className="mr-0.5" />
                 <span>
-                  新增 <span className="font-semibold">{formatNumber(data.newCount)}</span>{" "}
-                  {plur("工具", data.newCount)}
+                  新增 <span className="font-semibold">{formatNumber(data.newCount)}</span>{" 个应用"}
+                  {/* {plur("工具", data.newCount)} */}
                 </span>
               </>
             ) : (
