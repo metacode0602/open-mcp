@@ -108,7 +108,7 @@ export function SearchResults({ query, category }: SearchResultsProps) {
             <CardContent className="flex-1 p-4 pt-0">
               <CardDescription className="line-clamp-4">{app.description}</CardDescription>
               <div className="flex flex-wrap gap-1 mt-3">
-                {app.tags?.slice(0, 3).map((tag) => (
+                {app.tags?.slice(0, 3).filter((tag) => tag && tag.name).map((tag) => (
                   <Badge key={tag.id} variant="outline" className="text-xs">
                     {tag.name}
                   </Badge>

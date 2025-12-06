@@ -63,13 +63,13 @@ export function AppCard({ app, selectedTag, onTagClick }: AppCardProps) {
             </HoverCardContent>
           </HoverCard>
           <div className="flex-wrap gap-1 mt-3 space-x-1">
-            {app.tags?.slice(0, 3).map((tag) => (
+            {app.tags?.slice(0, 3).filter((tag) => tag && tag.name).map((tag) => (
               <Badge
                 key={tag.id}
                 variant={selectedTag === tag.name ? "default" : "secondary"}
                 className="text-xs cursor-pointer"
                 onClick={(e) => {
-                  if (onTagClick) {
+                  if (onTagClick && tag.name) {
                     e.preventDefault()
                     e.stopPropagation()
                     onTagClick(tag.name)

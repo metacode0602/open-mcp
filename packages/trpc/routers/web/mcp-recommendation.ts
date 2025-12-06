@@ -27,7 +27,9 @@ export const mcpRecommendationsRouter = router({
           const app = item.app;
           return {
             ...app,
-            tags: app.tags?.map((t: any) => t.tag) || []
+            tags: app.tags
+              ?.filter((t: any) => t.tag !== null && t.tag !== undefined)
+              .map((t: any) => t.tag) || []
           };
         });
 

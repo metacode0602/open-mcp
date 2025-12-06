@@ -94,7 +94,9 @@ export const prepareRepositoryData = async (
     issues: repository.issues.totalCount,
     pullRequests: repository.pullRequests.totalCount,
     release: repository.releases.totalCount,
-    languages: repository.languages.nodes.map(node => node.name),
+    languages: repository.languages.nodes
+      .filter((node): node is { name: string } => node !== null && node !== undefined)
+      .map(node => node.name),
     primaryLanguage: repository.primaryLanguage?.name ?? "",
     lastCommitDate: repository.defaultBranchRef?.target?.history?.nodes[0]?.committedDate,
     commits: repository.defaultBranchRef?.target?.history?.totalCount,
@@ -109,7 +111,11 @@ export const prepareRepositoryData = async (
       : repository.licenseInfo.spdxId
 
   // Prepare topics data
-  const topics = repository.repositoryTopics.nodes.map(node => node.topic.name)
+  const topics = repository.repositoryTopics.nodes
+    .filter((node): node is { topic: { name: string } } => 
+      node !== null && node !== undefined && node.topic !== null && node.topic !== undefined
+    )
+    .map(node => node.topic.name)
 
   // Return the extracted data
   return {
