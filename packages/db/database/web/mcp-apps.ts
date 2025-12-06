@@ -211,7 +211,16 @@ export const mcpAppsDataAccess = {
 
   getCount: async () => {
     try {
-      const totalCount = await db.select({ count: count() }).from(apps).where(and(eq(apps.status, "approved"), eq(apps.publishStatus, "online")));
+      const totalCount = await db
+        .select({ count: count() })
+        .from(apps)
+        .where(
+          and(
+            eq(apps.status, "approved"),
+            eq(apps.publishStatus, "online"),
+            eq(apps.deleted, false)
+          )
+        );
       return totalCount[0]?.count ?? 0;
     } catch (error) {
       console.error("getCount error", error);
@@ -221,7 +230,17 @@ export const mcpAppsDataAccess = {
 
   getNewCount: async () => {
     try {
-      const newCount = await db.select({ count: count() }).from(apps).where(and(eq(apps.status, "approved"), eq(apps.publishStatus, "online"), gte(apps.createdAt, subDays(new Date(), 7))));
+      const newCount = await db
+        .select({ count: count() })
+        .from(apps)
+        .where(
+          and(
+            eq(apps.status, "approved"),
+            eq(apps.publishStatus, "online"),
+            eq(apps.deleted, false),
+            gte(apps.createdAt, subDays(new Date(), 7))
+          )
+        );
       return newCount[0]?.count ?? 0;
     } catch (error) {
       console.error("getNewCount error", error);
