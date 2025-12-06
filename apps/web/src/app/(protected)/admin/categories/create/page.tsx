@@ -1,7 +1,6 @@
 "use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Category } from "@repo/db/types"
 import { Button } from "@repo/ui/components/ui/button"
 import {
   Form,
@@ -21,7 +20,6 @@ import {
   SelectValue,
 } from "@repo/ui/components/ui/select"
 import { Textarea } from "@repo/ui/components/ui/textarea"
-import { slugify } from "inngest/helpers/strings"
 import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
@@ -32,6 +30,7 @@ import { z } from "zod"
 import { AdminPageHeader } from "@/components/admin/admin-page-header"
 import { useComputedField } from "@/hooks/use-computed-field"
 import { trpc } from "@/lib/trpc/client"
+import { slugifyText } from "@/lib/utils"
 
 // 表单验证模式
 const formSchema = z.object({
@@ -83,7 +82,7 @@ export default function CategoryCreatePage() {
     form,
     sourceField: 'name',
     computedField: 'slug',
-    callback: slugify,
+    callback: slugifyText,
   });
 
   // 处理表单提交
