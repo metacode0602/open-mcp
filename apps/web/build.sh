@@ -10,6 +10,9 @@ NODE_OPTIONS="--max-old-space-size=$NODE_MEMORY_LIMIT" pnpm build
 
 cp ./bin/* .next/standalone/
 cp -rf public .next/standalone/apps/web/
+## 复制静态文件到 standalone 目录
+cp -rf .next/static .next/standalone/apps/web/.next
+
 # 复制 node_modules 到 standalone 目录
 # cp -rf node_modules .next/standalone/
 # 检查上一条命令的退出状态

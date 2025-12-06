@@ -7,9 +7,9 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from "@repo/ui/componen
 import Image from "next/image"
 import Link from "next/link"
 
-import { formatDate } from "@/lib/utils"
+import { formatDate, formatNumber } from "@/lib/utils"
 import { getAssetUrl } from "@/lib/utils"
-import { TagIcon } from "lucide-react"
+import { StarIcon, TagIcon, UsersIcon } from "lucide-react"
 
 interface AppCardProps {
   app: McpApp
@@ -39,13 +39,15 @@ export function AppCard({ app, selectedTag, onTagClick }: AppCardProps) {
               </div>
               <div>
                 <CardTitle className="text-base">{app.name}</CardTitle>
-                <div className="flex items-center mt-1">
-                  <Badge
-                    variant={app.type === "client" ? "default" : app.type === "server" ? "secondary" : "outline"}
-                    className="text-xs"
-                  >
-                    {app.type === "client" ? "客户端" : app.type === "server" ? "服务器" : "应用"}
-                  </Badge>
+                <div className="flex items-center mt-1 gap-2">
+                  <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                    <StarIcon className="h-3 w-3" />
+                    {formatNumber(app.stars || 0)}
+                  </div>
+                  <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                    <UsersIcon className="h-3 w-3" />
+                    {formatNumber(app.contributors || 0)}
+                  </div>
                 </div>
               </div>
             </div>
