@@ -34,7 +34,7 @@ export function AppGrid({
   }
 
   return (
-    <div className={cn("grid gap-6 sm:grid-cols-2 lg:grid-cols-3", className)}>
+    <div className={cn("grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3", className)}>
       {apps.map((app, index) => (
         <AppCard key={`${app.id}-${index}`} app={app} selectedTag={selectedTag} onTagClick={onTagClick} />
       ))}

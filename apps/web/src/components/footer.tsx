@@ -13,15 +13,15 @@ export function Footer() {
   const [isContactDialogOpen, setIsContactDialogOpen] = useState(false)
 
   return (
-    <footer className="w-full border-t py-10 bg-muted/20">
+    <footer className="w-full border-t py-8 sm:py-10 bg-muted/20">
       <Container>
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-8 sm:gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <LogoIcon type="openmcp" />
+              <LogoIcon type="openmcp" className="shrink-0" />
               <span className="font-bold">OpenMCP</span>
             </div>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-muted-foreground max-w-md">
               OpenMCP 是一个一站式 AI 全聚合平台，专注于 MCP 生态的构建和发展，推动AI技术创新和应用落地。
             </p>
           </div>
@@ -91,16 +91,20 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 pt-8 border-t">
+        <div className="mt-8 pt-6 sm:pt-8 border-t">
           <div className="flex flex-col items-center gap-2 text-center">
-            <p className="text-sm text-muted-foreground">Copyright ©2025-2027 天津聚链科技有限公司版权所有</p>
-            <div className="text-xs text-muted-foreground flex items-center gap-1">
+            <p className="text-xs sm:text-sm text-muted-foreground px-2">Copyright ©2025-2027 天津聚链科技有限公司版权所有</p>
+            <div className="text-xs text-muted-foreground flex flex-wrap items-center justify-center gap-x-1 gap-y-1 px-2">
               <Link href="https://beian.miit.gov.cn/" target="_blank" className="hover:underline">
                 津ICP备2023007973号-1
-              </Link>{" "}
-              |{" "}
-              <Link href="http://www.beian.gov.cn/portal/registerSystemInfo" target="_blank" className="hover:underline flex items-center gap-1">
-                <span className="rounded-full pr-1">
+              </Link>
+              <span className="hidden sm:inline">|</span>
+              <Link
+                href="http://www.beian.gov.cn/portal/registerSystemInfo"
+                target="_blank"
+                className="hover:underline inline-flex items-center gap-1"
+              >
+                <span className="rounded-full pr-1 shrink-0">
                   <Image src="/images/gongan.png" alt="津公网安备12011402001495号" className="w-3 h-auto" width={16} height={16} />
                 </span>
                 津公网安备12011402001495号

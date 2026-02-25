@@ -32,11 +32,11 @@ export default function TagPage({ params }: { params: Promise<{ tag: string }> }
   // 加载状态
   if (isLoading) {
     return (
-      <Container className="py-10">
-        <Skeleton className="h-16 w-2/3 mb-6" />
-        <Skeleton className="h-10 w-full mb-8" />
+      <Container className="py-6 sm:py-10">
+        <Skeleton className="h-12 sm:h-16 w-2/3 mb-4 sm:mb-6" />
+        <Skeleton className="h-10 w-full mb-6 sm:mb-8" />
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 6 }).map((_, i) => (
             <Skeleton key={i} className="h-[300px] rounded-lg" />
           ))}

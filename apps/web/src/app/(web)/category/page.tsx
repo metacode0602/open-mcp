@@ -69,14 +69,14 @@ export default function CategoryPage() {
   }
 
   return (
-    <Container className="py-10">
+    <Container className="py-6 sm:py-10">
       <PageHeader
         title="MCP 应用"
         backLink={{ href: "/", label: "返回首页" }}
         description="浏览所有支持 MCP 协议的应用"
       />
 
-      <div className="mb-8">
+      <div className="mb-6 sm:mb-8 w-full">
         <SearchBar />
       </div>
 

@@ -133,22 +133,22 @@ export default function AppPage({ params }: { params: Promise<{ slug: string }> 
         </div>
       </PageHeader>
 
-      <div className="grid gap-8 lg:grid-cols-[2fr_1fr]">
-        <div>
-          <div className="flex items-start gap-4 mb-6">
-            <div className="h-16 w-16 rounded-lg bg-muted flex items-center justify-center overflow-hidden">
+      <div className="grid gap-6 sm:gap-8 grid-cols-1 lg:grid-cols-[1fr_320px]">
+        <div className="min-w-0">
+          <div className="flex flex-col sm:flex-row items-start gap-4 mb-6">
+            <div className="h-14 w-14 sm:h-16 sm:w-16 rounded-lg bg-muted flex items-center justify-center overflow-hidden shrink-0">
               {app.icon ? (
                 <Image src={getAssetUrl(app.icon)} alt={app.name} width={64} height={64} className="object-cover" />
               ) : (
                 <div className="text-2xl font-bold">{app.name.charAt(0)}</div>
               )}
             </div>
-            <div className="flex-1">
-              <p className="text-muted-foreground">{app.descriptionZh || app.description}</p>
+            <div className="flex-1 min-w-0">
+              <p className="text-muted-foreground text-sm sm:text-base">{app.descriptionZh || app.description}</p>
             </div>
           </div>
 
-          <div className="flex flex-wrap gap-3 mb-8">
+          <div className="flex flex-wrap gap-2 sm:gap-3 mb-6 sm:mb-8">
             {app?.website && <Button asChild>
               <Link href={app.website || "#"} target="_blank" rel="noopener noreferrer">
                 访问官网
@@ -166,9 +166,9 @@ export default function AppPage({ params }: { params: Promise<{ slug: string }> 
           <AppGitHubCard project={app} />
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6 lg:min-w-0">
           <div className="rounded-lg border bg-card text-card-foreground shadow-sm">
-            <div className="p-6 space-y-4">
+            <div className="p-4 sm:p-6 space-y-4">
               <h3 className="text-lg font-medium">应用信息</h3>
               <Separator />
               <div className="space-y-2">

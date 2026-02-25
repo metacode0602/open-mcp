@@ -59,25 +59,25 @@ export default function Home() {
         <Section background="muted">
           <Container>
             <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
-              <div className="flex flex-col justify-center space-y-4">
+              <div className="flex flex-col justify-center space-y-4 order-2 lg:order-1">
                 <div className="space-y-2">
-                  <h2 className="text-3xl font-bold tracking-tight">一键部署您的 MCP 服务</h2>
-                  <p className="text-muted-foreground">
+                  <h2 className="text-xl font-bold tracking-tight sm:text-2xl md:text-3xl">一键部署您的 MCP 服务</h2>
+                  <p className="text-muted-foreground text-sm sm:text-base">
                     我们提供简单的自部署服务，让您可以快速部署和管理 MCP 服务器和应用
                   </p>
                 </div>
-                <div className="flex flex-col gap-2 min-[400px]:flex-row">
+                <div className="flex flex-col gap-2 sm:flex-row">
                   <DeployButton />
                 </div>
               </div>
-              <div className="flex items-center justify-center">
-                <div className="relative h-[300px] w-full overflow-hidden rounded-lg bg-background p-4 shadow-lg">
-                  <div className="absolute inset-0 bg-gradient-to-br from-muted/50 to-muted p-4">
-                    <div className="space-y-2 text-sm">
+              <div className="flex items-center justify-center order-1 lg:order-2">
+                <div className="relative h-[240px] sm:h-[280px] lg:h-[300px] w-full max-w-lg mx-auto overflow-hidden rounded-lg bg-background p-3 sm:p-4 shadow-lg">
+                  <div className="absolute inset-0 bg-gradient-to-br from-muted/50 to-muted p-3 sm:p-4">
+                    <div className="space-y-2 text-xs sm:text-sm">
                       <div className="flex items-center gap-2 text-muted-foreground">
                         <span>部署控制台</span>
                       </div>
-                      <div className="rounded-md bg-background p-2 font-mono text-xs">
+                      <div className="rounded-md bg-background p-2 font-mono text-[10px] sm:text-xs overflow-x-auto">
                         <div className="text-green-500">&gt; 正在准备部署环境...</div>
                         <div className="text-green-500">&gt; 环境准备完成</div>
                         <div className="text-blue-500">&gt; 正在拉取 Neon MCP Server 镜像</div>

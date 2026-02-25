@@ -156,23 +156,23 @@ export default function AdvertisePage() {
             ，了解推广可能带来的影响。
           </p>
 
-          <div className="flex justify-center gap-4 mt-6">
-            <Button onClick={() => setIsContactDialogOpen(true)}>
-              <MessageSquare className="mr-2 h-4 w-4" />
+          <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 mt-6">
+            <Button onClick={() => setIsContactDialogOpen(true)} className="touch-manipulation" size="default">
+              <MessageSquare className="mr-2 h-4 w-4 shrink-0" />
               联系我们
             </Button>
-            <Button variant="outline" asChild>
-              <Link href="#ad-options">
+            <Button variant="outline" asChild size="default">
+              <Link href="#ad-options" className="inline-flex items-center justify-center">
                 查看推广选项
-                <ArrowRight className="ml-2 h-4 w-4" />
+                <ArrowRight className="ml-2 h-4 w-4 shrink-0" />
               </Link>
             </Button>
           </div>
         </div>
 
-        <div id="ad-options" className="mb-16">
-          <Tabs defaultValue="listing" onValueChange={setSelectedAdType} className="max-w-4xl mx-auto">
-            <TabsList className="grid w-full grid-cols-2 mb-8">
+        <div id="ad-options" className="mb-10 sm:mb-16">
+          <Tabs defaultValue="listing" onValueChange={setSelectedAdType} className="max-w-4xl mx-auto w-full">
+            <TabsList className="grid w-full grid-cols-2 mb-6 sm:mb-8 h-10 sm:h-11">
               <TabsTrigger value="listing">列表广告</TabsTrigger>
               <TabsTrigger value="banner">横幅广告</TabsTrigger>
             </TabsList>
@@ -283,8 +283,8 @@ export default function AdvertisePage() {
                     </div>
                   </div>
                 </CardContent>
-                <CardFooter className="flex justify-between">
-                  <div className="text-sm">
+                <CardFooter className="flex flex-col gap-3 sm:flex-row sm:justify-between sm:items-center">
+                  <div className="text-sm order-2 sm:order-1">
                     已选择 <span className="font-medium">{selectedDates.length}</span> 天
                     {selectedDates.length > 0 && (
                       <span className="ml-1">
@@ -292,8 +292,8 @@ export default function AdvertisePage() {
                       </span>
                     )}
                   </div>
-                  <Button onClick={handlePurchase}>
-                    <CreditCard className="mr-2 h-4 w-4" />
+                  <Button onClick={handlePurchase} className="w-full sm:w-auto order-1 sm:order-2 touch-manipulation">
+                    <CreditCard className="mr-2 h-4 w-4 shrink-0" />
                     立即推广
                   </Button>
                 </CardFooter>
@@ -406,8 +406,8 @@ export default function AdvertisePage() {
                     </div>
                   </div>
                 </CardContent>
-                <CardFooter className="flex justify-between">
-                  <div className="text-sm">
+                <CardFooter className="flex flex-col gap-3 sm:flex-row sm:justify-between sm:items-center">
+                  <div className="text-sm order-2 sm:order-1">
                     已选择 <span className="font-medium">{selectedDates.length}</span> 天
                     {selectedDates.length > 0 && (
                       <span className="ml-1">
@@ -415,8 +415,8 @@ export default function AdvertisePage() {
                       </span>
                     )}
                   </div>
-                  <Button onClick={handlePurchase}>
-                    <CreditCard className="mr-2 h-4 w-4" />
+                  <Button onClick={handlePurchase} className="w-full sm:w-auto order-1 sm:order-2 touch-manipulation">
+                    <CreditCard className="mr-2 h-4 w-4 shrink-0" />
                     立即购买
                   </Button>
                 </CardFooter>
@@ -426,14 +426,14 @@ export default function AdvertisePage() {
         </div>
 
         <Section id="statistics" background="muted" className="rounded-xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">平台数据</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-xl font-bold sm:text-2xl md:text-3xl mb-3 sm:mb-4">平台数据</h2>
+            <p className="text-muted-foreground text-sm sm:text-base max-w-2xl mx-auto px-2">
               OpenMCP 是一个快速增长的平台，拥有大量活跃用户和高质量的流量
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             <Card>
               <CardContent className="pt-6">
                 <div className="text-center">
@@ -504,18 +504,18 @@ export default function AdvertisePage() {
           </div>
         </Section>
 
-        <Section className="text-center">
-          <h2 className="text-3xl font-bold mb-4">准备好推广您的应用了吗？</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto mb-6">
+        <Section className="text-center px-2">
+          <h2 className="text-xl font-bold sm:text-2xl md:text-3xl mb-3 sm:mb-4">准备好推广您的应用了吗？</h2>
+          <p className="text-muted-foreground text-sm sm:text-base max-w-2xl mx-auto mb-4 sm:mb-6">
             选择适合您的广告方案，提高您的应用在开发者社区中的知名度
           </p>
-          <div className="flex justify-center gap-4">
-            <Button onClick={() => setIsContactDialogOpen(true)}>
-              <MessageSquare className="mr-2 h-4 w-4" />
+          <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
+            <Button onClick={() => setIsContactDialogOpen(true)} className="touch-manipulation" size="default">
+              <MessageSquare className="mr-2 h-4 w-4 shrink-0" />
               联系我们
             </Button>
-            <Button variant="outline" onClick={handlePurchase}>
-              <CreditCard className="mr-2 h-4 w-4" />
+            <Button variant="outline" onClick={handlePurchase} className="touch-manipulation" size="default">
+              <CreditCard className="mr-2 h-4 w-4 shrink-0" />
               立即购买
             </Button>
           </div>

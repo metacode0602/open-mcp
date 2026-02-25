@@ -3,23 +3,23 @@ import { Container } from "@/components/web/container"
 export default function AboutPage() {
   return (
     <Container>
-      <div className="max-w-4xl mx-auto py-6">
-        <h1 className="text-3xl font-bold mb-8">关于 OpenMCP</h1>
+      <div className="max-w-4xl mx-auto py-6 sm:py-8 px-2 sm:px-0">
+        <h1 className="text-xl font-bold sm:text-2xl md:text-3xl mb-6 sm:mb-8">关于 OpenMCP</h1>
 
-        <section className="space-y-6">
+        <section className="space-y-6 sm:space-y-8">
           <div>
-            <h2 className="text-2xl font-semibold mb-4">我们的愿景</h2>
-            <p className="text-muted-foreground">
+            <h2 className="text-lg font-semibold sm:text-xl md:text-2xl mb-3 sm:mb-4">我们的愿景</h2>
+            <p className="text-muted-foreground text-sm sm:text-base">
               OpenMCP 致力于打造一个开放、共享、创新的 AI 生态系统。我们希望通过 MCP 协议，让不同的 AI 模型能够无缝对接，为开发者和用户提供更好的人工智能应用体验。
             </p>
           </div>
 
           <div>
-            <h2 className="text-2xl font-semibold mb-4">平台简介</h2>
-            <p className="text-muted-foreground mb-4">
+            <h2 className="text-lg font-semibold sm:text-xl md:text-2xl mb-3 sm:mb-4">平台简介</h2>
+            <p className="text-muted-foreground text-sm sm:text-base mb-4">
               作为一站式 AI 全聚合平台，OpenMCP 专注于:
             </p>
-            <ul className="list-disc list-inside space-y-2 text-muted-foreground pl-4">
+            <ul className="list-disc list-inside space-y-2 text-muted-foreground text-sm sm:text-base pl-4">
               <li>提供丰富的 MCP 客户端和服务器选择</li>
               <li>支持多样化的 AI 模型接入</li>
               <li>简化 AI 应用开发流程</li>
@@ -28,18 +28,18 @@ export default function AboutPage() {
           </div>
 
           <div>
-            <h2 className="text-2xl font-semibold mb-4">我们的使命</h2>
-            <p className="text-muted-foreground">
+            <h2 className="text-lg font-semibold sm:text-xl md:text-2xl mb-3 sm:mb-4">我们的使命</h2>
+            <p className="text-muted-foreground text-sm sm:text-base">
               通过技术创新和开放协作，推动 AI 技术的民主化，让每个开发者都能轻松构建智能化应用，为用户创造更大的价值。
             </p>
           </div>
 
           <div>
-            <h2 className="text-2xl font-semibold mb-4">加入我们</h2>
-            <p className="text-muted-foreground">
+            <h2 className="text-lg font-semibold sm:text-xl md:text-2xl mb-3 sm:mb-4">加入我们</h2>
+            <p className="text-muted-foreground text-sm sm:text-base">
               无论您是开发者、创业者还是 AI 爱好者，我们都欢迎您加入 OpenMCP 社区。您可以：
             </p>
-            <ul className="list-disc list-inside space-y-2 text-muted-foreground pl-4 mt-4">
+            <ul className="list-disc list-inside space-y-2 text-muted-foreground text-sm sm:text-base pl-4 mt-4">
               <li>分享您的 AI 应用</li>
               <li>参与技术讨论</li>
               <li>贡献代码</li>

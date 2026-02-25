@@ -20,12 +20,12 @@ export function TagFilter({ category, selectedTag, onSelectTag }: TagFilterProps
   }
 
   return (
-    <div className="mb-6">
-      <div className="flex items-center mb-2">
-        <h3 className="text-sm font-medium mr-2">标签过滤:</h3>
+    <div className="mb-4 sm:mb-6">
+      <div className="flex flex-wrap items-center gap-2 mb-2">
+        <h3 className="text-sm font-medium">标签过滤:</h3>
         {selectedTag && (
-          <Button variant="ghost" size="sm" className="h-7 text-xs" onClick={() => onSelectTag(null)}>
-            清除过滤 <X className="ml-1 h-3 w-3" />
+          <Button variant="ghost" size="sm" className="h-8 text-xs touch-manipulation" onClick={() => onSelectTag(null)}>
+            清除过滤 <X className="ml-1 h-3 w-3 shrink-0" />
           </Button>
         )}
       </div>
@@ -34,7 +34,7 @@ export function TagFilter({ category, selectedTag, onSelectTag }: TagFilterProps
           <Badge
             key={tag.id}
             variant={selectedTag === tag.name ? "default" : "outline"}
-            className="cursor-pointer hover:bg-muted transition-colors"
+            className="cursor-pointer hover:bg-muted transition-colors text-xs py-1.5 px-2.5 touch-manipulation"
             onClick={() => onSelectTag(tag.name === selectedTag ? null : tag.name)}
           >
             {tag.name}

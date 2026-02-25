@@ -54,9 +54,9 @@ export function CategorySection({ category, limit = 6, viewAllLink = true }: Cat
           description={descriptions[category as keyof typeof descriptions]}
           viewAllLink={viewAllLink ? `/category/${category}` : undefined}
         />
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: limit }).map((_, i) => (
-            <Skeleton key={i} className="h-[300px] rounded-lg" />
+            <Skeleton key={i} className="h-[280px] sm:h-[300px] rounded-lg" />
           ))}
         </div>
       </Container>

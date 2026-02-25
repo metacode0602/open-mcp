@@ -97,14 +97,14 @@ export default function CategoryPage({ params }: { params: Promise<{ type: strin
 				<SearchBar defaultCategory={type} />
 			</div> */}
 
-      <div className={`grid grid-cols-1 gap-6 ${type === "client" ? "md:grid-cols-1" : "md:grid-cols-4"}`}>
+      <div className={`grid grid-cols-1 gap-4 sm:gap-6 ${type === "client" ? "md:grid-cols-1" : "lg:grid-cols-[240px_1fr]"}`}>
         {type !== "client" && (
-          <div className="md:col-span-1">
+          <div className="lg:col-span-1 order-2 lg:order-1">
             <CategoryList categoryType={type} selectedCategory={selectedSubcategory || undefined} onSelectCategory={handleSubcategorySelect} />
           </div>
         )}
 
-        <div className={`${type === "client" ? "md:col-span-1" : "md:col-span-3"}`}>
+        <div className={`min-w-0 ${type === "client" ? "lg:col-span-1" : "lg:col-span-1 order-1 lg:order-2"}`}>
 
           <TagFilter category={type} selectedTag={selectedTag} onSelectTag={handleTagSelect} />
 

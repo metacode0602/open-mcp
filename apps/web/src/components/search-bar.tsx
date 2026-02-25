@@ -116,15 +116,12 @@ export function SearchBar({ defaultValue = "", defaultCategory = "all" }: Search
   }
 
   return (
-    <div className="w-full max-w-xl mx-auto">
+    <div className="w-full max-w-xl mx-auto px-1">
       <div className="relative flex flex-col justify-start items-center">
-        <div className="w-full sticky top-0 bg-background z-10 pt-4 pb-1">
-          {/* <label className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1 block" htmlFor="search">
-            搜索应用
-          </label> */}
+        <div className="w-full sticky top-0 bg-background z-10 pt-2 sm:pt-4 pb-1">
           <form onSubmit={handleSearch} className="relative">
-            <div className="flex items-center">
-              <div className="relative flex-1">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-2">
+              <div className="relative flex-1 w-full min-w-0">
                 <Input
                   id="search"
                   type="text"
@@ -133,12 +130,12 @@ export function SearchBar({ defaultValue = "", defaultCategory = "all" }: Search
                   onChange={(e) => setQuery(e.target.value)}
                   onFocus={() => setIsFocused(true)}
                   onBlur={() => setIsFocused(false)}
-                  className="pl-9 pr-3 py-1.5 h-10 text-sm rounded-lg focus-visible:ring-offset-0"
+                  className="pl-9 pr-3 py-2.5 h-11 sm:h-10 text-base sm:text-sm rounded-lg focus-visible:ring-offset-0 touch-manipulation"
                 />
-                <div className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400">
+                <div className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400 pointer-events-none">
                   <Search className="h-4 w-4" />
                 </div>
-                <div className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4">
+                <div className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 pointer-events-none">
                   <AnimatePresence mode="popLayout">
                     {query.length > 0 ? (
                       <motion.div
@@ -154,50 +151,51 @@ export function SearchBar({ defaultValue = "", defaultCategory = "all" }: Search
                   </AnimatePresence>
                 </div>
               </div>
-              <div className="relative ml-2" data-dropdown="category">
-                <button
-                  type="button"
-                  onClick={toggleDropdown}
-                  className="flex items-center gap-2 px-3 py-2 h-10 text-sm rounded-lg border border-input bg-background hover:bg-accent hover:text-accent-foreground"
-                >
-                  {selectedCategoryObj?.icon}
-                  <span>{selectedCategoryObj?.label}</span>
-                </button>
+              <div className="flex gap-2 sm:flex-initial">
+                <div className="relative flex-1 sm:flex-initial min-w-0" data-dropdown="category">
+                  <button
+                    type="button"
+                    onClick={toggleDropdown}
+                    className="flex items-center justify-center gap-2 px-3 py-2.5 h-11 sm:h-10 w-full sm:w-auto text-sm rounded-lg border border-input bg-background hover:bg-accent hover:text-accent-foreground touch-manipulation"
+                  >
+                    {selectedCategoryObj?.icon}
+                    <span className="truncate">{selectedCategoryObj?.label}</span>
+                  </button>
 
-                <AnimatePresence>
-                  {isDropdownOpen && (
-                    <motion.div
-                      className="absolute right-0 mt-1 w-40 border rounded-md shadow-sm overflow-hidden bg-white dark:bg-black dark:border-gray-800 z-20"
-                      variants={container}
-                      initial="hidden"
-                      animate="show"
-                      exit="exit"
-                    >
-                      <motion.ul>
-                        {categories.map((cat) => (
-                          <motion.li
-                            key={cat.id}
-                            className={`px-3 py-2 flex items-center gap-2 hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer ${category === cat.value ? "bg-gray-100 dark:bg-gray-800" : ""
-                              }`}
-                            variants={item}
-                            onClick={() => handleCategorySelect(cat.value)}
-                          >
-                            {cat.icon}
-                            <span className="text-sm">{cat.label}</span>
-                          </motion.li>
-                        ))}
-                      </motion.ul>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                  <AnimatePresence>
+                    {isDropdownOpen && (
+                      <motion.div
+                        className="absolute left-0 right-0 sm:left-auto sm:right-0 mt-1 w-full sm:w-40 min-w-[8rem] border rounded-md shadow-sm overflow-hidden bg-background z-20"
+                        variants={container}
+                        initial="hidden"
+                        animate="show"
+                        exit="exit"
+                      >
+                        <motion.ul>
+                          {categories.map((cat) => (
+                            <motion.li
+                              key={cat.id}
+                              className={`px-4 py-3 flex items-center gap-2 hover:bg-muted cursor-pointer touch-manipulation ${category === cat.value ? "bg-muted" : ""}`}
+                              variants={item}
+                              onClick={() => handleCategorySelect(cat.value)}
+                            >
+                              {cat.icon}
+                              <span className="text-sm">{cat.label}</span>
+                            </motion.li>
+                          ))}
+                        </motion.ul>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+                <button
+                  type="submit"
+                  disabled={isPending}
+                  className="shrink-0 px-4 py-2.5 h-11 sm:h-10 text-sm bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors touch-manipulation min-w-[4.5rem]"
+                >
+                  {isPending ? "搜索中..." : "搜索"}
+                </button>
               </div>
-              <button
-                type="submit"
-                disabled={isPending}
-                className="ml-2 px-4 py-2 h-10 text-sm bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
-              >
-                {isPending ? "搜索中..." : "搜索"}
-              </button>
             </div>
           </form>
         </div>

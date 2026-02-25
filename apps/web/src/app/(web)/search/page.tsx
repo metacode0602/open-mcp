@@ -54,15 +54,15 @@ export default function SearchPage() {
   const visibleApps = searchResults?.slice(0, visibleCount) || [];
 
   return (
-    <Container className="py-10">
-      <h1 className="text-3xl font-bold mb-6">搜索结果</h1>
+    <Container className="py-6 sm:py-10">
+      <h1 className="text-xl font-bold sm:text-2xl md:text-3xl mb-4 sm:mb-6">搜索结果</h1>
 
-      <div className="mb-8">
+      <div className="mb-6 sm:mb-8 w-full">
         <SearchBar defaultValue={query} defaultCategory={category} />
       </div>
 
-      <div className="space-y-2 mb-6">
-        <p className="text-muted-foreground">
+      <div className="space-y-2 mb-4 sm:mb-6">
+        <p className="text-muted-foreground text-sm sm:text-base">
           {query ? `搜索 "${query}" 的结果` : "所有结果"}
           {category !== "all" ? ` - 分类: ${category}` : ""}
           {searchResults && ` (共 ${searchResults.length} 个)`}
@@ -71,7 +71,7 @@ export default function SearchPage() {
 
       {/* 加载状态 */}
       {isLoading && (
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 6 }).map((_, i) => (
             <Skeleton key={i} className="h-[300px] rounded-lg" />
           ))}
@@ -95,10 +95,10 @@ export default function SearchPage() {
 
       {/* 空结果状态 */}
       {!isLoading && !error && searchResults && searchResults.length === 0 && (
-        <div className="text-center py-12">
-          <h3 className="text-lg font-medium">没有找到相关结果</h3>
-          <p className="text-muted-foreground mt-2">尝试使用不同的关键词或浏览分类</p>
-          <Button variant="outline" className="mt-4" onClick={() => router.push("/")}>
+        <div className="text-center py-8 sm:py-12 px-4">
+          <h3 className="text-base font-medium sm:text-lg">没有找到相关结果</h3>
+          <p className="text-muted-foreground text-sm sm:text-base mt-2">尝试使用不同的关键词或浏览分类</p>
+          <Button variant="outline" className="mt-4 touch-manipulation" onClick={() => router.push("/")}>
             返回首页
           </Button>
         </div>

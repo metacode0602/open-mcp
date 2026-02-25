@@ -64,12 +64,12 @@ export default function WebLayout({
     ],
   }
   return (
-    <div className="antialiased min-h-screen bg-background">
+    <div className="antialiased min-h-screen min-h-[100dvh] bg-background">
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-        <div className="relative flex min-h-screen flex-col">
+        <div className="relative flex min-h-screen min-h-[100dvh] flex-col">
           <Header />
-          <main className="flex-1 container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div className="max-w-7xl mx-auto">
+          <main className="flex-1 container mx-auto w-full max-w-7xl px-4 py-4 sm:px-6 sm:py-6 lg:px-8 lg:py-8">
+            <div className="mx-auto w-full">
               {children}
             </div>
           </main>
