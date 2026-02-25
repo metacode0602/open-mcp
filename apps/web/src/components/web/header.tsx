@@ -14,7 +14,7 @@ import { useSession } from "@/hooks/auth-hooks"
 
 export function Header() {
   const pathname = usePathname()
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false)
   const { data: session } = useSession()
   const routes = [
     {
@@ -59,7 +59,7 @@ export function Header() {
       <Container>
         <div className="flex h-14 sm:h-16 items-center gap-2 justify-between">
           <div className="flex min-w-0 flex-1 items-center gap-2 md:flex-initial md:mr-4">
-            <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+            <Sheet open={mobileMenuOpen} onOpenChange={(open) => setMobileMenuOpen(open)}>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" className="shrink-0 md:hidden" aria-label="打开菜单">
                   <Menu className="h-5 w-5" />
@@ -77,7 +77,7 @@ export function Header() {
                     <Link
                       key={route.href}
                       href={route.href}
-                      onClick={() => setMobileMenuOpen(false)}
+                      onClick={() => setMobileMenuOpen(false as any)}
                       className={`rounded-lg px-4 py-3 text-base font-medium transition-colors hover:bg-muted ${route.active ? "bg-muted text-foreground" : "text-muted-foreground"}`}
                     >
                       {route.label}
