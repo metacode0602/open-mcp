@@ -8,11 +8,11 @@
   "dependencies": {
     "@octokit/graphql": "^8.2.1",
     "date-fns": "^4.1.0",
-    "zod": "^3.24.3"
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
-    "@types/node": "^20.17.31",
-    "typescript": "^5.7.3"
+    "@types/node": "^22.14.0",
+    "typescript": "^5.9.3"
   }
 }
