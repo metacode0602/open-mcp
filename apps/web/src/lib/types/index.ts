@@ -31,4 +31,8 @@ export * from "./schema/claims";
 export * from "./schema/ads";
 
 // 支付相关 schema
-export * from "./schema/payments"; 
+export * from "./schema/payments";
+
+// 其他类型
+export * from "./usecases";
+export * from "./skills";

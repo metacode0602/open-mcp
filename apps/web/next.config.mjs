@@ -25,6 +25,10 @@ const nextConfig = {
         hostname: "rescdn.qqmail.com",
       },
       {
+        protocol: "https",
+        hostname: "api.dicebear.com",
+      },
+      {
         protocol: "http",
         hostname: "localhost",
       },
