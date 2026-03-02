@@ -39,6 +39,7 @@ export interface Skill {
   usecaseIds?: string[]
   i18n?: SkillI18nContent
   verified: boolean
+  price?: number
 }
 
 export const skillCategories: Record<SkillCategory, { label: string; icon: string; description: string }> = {
@@ -102,6 +103,7 @@ config:
       longDescription_en: "RSS Fetcher is a data collection Skill designed for OpenClaw, supporting RSS 2.0, Atom 1.0 and other mainstream formats. Built-in concurrency control, incremental deduplication, and timeout retry mechanisms for efficiently fetching hundreds of feeds.",
     },
     verified: true,
+    price: 0,
   },
   {
     id: "web-scraper",
@@ -135,6 +137,7 @@ config:
       longDescription_en: "Web Scraper provides content scraping for any web page, supporting both static and dynamic rendering (via Headless Chrome). Built-in CSS selector and XPath parsers for structured data extraction.",
     },
     verified: true,
+    price: 0,
   },
   {
     id: "ai-summarizer",
@@ -166,6 +169,7 @@ config:
       longDescription_en: "AI Summarizer uses large language models to automatically generate structured summaries for long texts. Supports GPT-4o, Claude and other mainstream models with customizable summary templates.",
     },
     verified: true,
+    price: 7.9,
   },
   {
     id: "ai-classifier",
@@ -201,6 +205,7 @@ config:
       longDescription_en: "AI Classifier uses LLM to intelligently classify and tag text content. Supports custom taxonomies, multi-level classification, and confidence scoring.",
     },
     verified: true,
+    price: 9.8,
   },
   {
     id: "feishu-bot",
@@ -231,6 +236,7 @@ config:
       longDescription_en: "Feishu Bot provides deep integration with the Feishu platform. Supports sending rich text messages via Webhook and API, creating Feishu documents, and managing group members.",
     },
     verified: true,
+    price: 0,
   },
   {
     id: "github-api",
@@ -261,6 +267,7 @@ config:
       longDescription_en: "GitHub API Skill wraps GitHub REST and GraphQL APIs, providing convenient operations on repositories, Pull Requests, Issues, Stars and other resources.",
     },
     verified: true,
+    price: 0,
   },
   {
     id: "notion-sync",
@@ -291,6 +298,7 @@ config:
       longDescription_en: "Notion Sync provides bi-directional data synchronization with Notion workspaces. Supports creating and updating database entries, page content, and file uploads.",
     },
     verified: true,
+    price: 0,
   },
   {
     id: "markdown-parser",
@@ -322,6 +330,7 @@ config:
       longDescription_en: "Markdown Parser provides advanced Markdown parsing and format conversion. Supports converting Markdown to WeChat, Juejin, Zhihu and other platform-specific formats.",
     },
     verified: true,
+    price: 10,
   },
   {
     id: "multi-platform-publisher",
@@ -355,6 +364,7 @@ config:
       longDescription_en: "Multi-Platform Publisher enables one-click content publishing to multiple platforms. Supports WeChat Official Account, Juejin, Zhihu, Jianshu, CSDN and 10+ platforms.",
     },
     verified: true,
+    price: 8.99,
   },
   {
     id: "scheduler",
@@ -388,6 +398,7 @@ config:
       longDescription_en: "Scheduler is OpenClaw's core scheduling Skill, supporting Cron-based scheduled tasks and event-based trigger mechanisms. Built-in task queue, retry strategies, concurrency control and execution logs.",
     },
     verified: true,
+    price: 0.98,
   },
 ]
 
