@@ -43,14 +43,14 @@ export function Header() {
       active: pathname === "/category/application",
     },
     {
-      href: "/advertise",
-      label: "推广",
-      active: pathname === "/advertise",
+      href: "/usecase",
+      label: "Openclaw",
+      active: pathname === "/usecase",
     },
     {
-      href: "/submit",
-      label: "提交应用",
-      active: pathname === "/submit",
+      href: "/skills",
+      label: "Skills",
+      active: pathname === "/skills",
     },
   ]
 

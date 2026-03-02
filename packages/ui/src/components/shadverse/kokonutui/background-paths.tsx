@@ -10,7 +10,7 @@ export function FloatingPaths({
   position: number;
   color?: string;
 }) {
-  const paths = Array.from({ length: 36 }, (_, i) => ({
+  const paths = Array.from({ length: 36 }, (_, i: number) => ({
     id: i,
     d: `M-${380 - i * 5 * position} -${189 + i * 6}C-${380 - i * 5 * position
       } -${189 + i * 6} -${312 - i * 5 * position} ${216 - i * 6} ${152 - i * 5 * position
@@ -27,7 +27,7 @@ export function FloatingPaths({
         viewBox="0 0 696 316"
         fill="none"
       >
-        {paths.map((path) => (
+        {paths.map((path: any) => (
           <motion.path
             key={path.id}
             d={path.d}

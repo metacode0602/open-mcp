@@ -34,7 +34,7 @@
     "date-fns": "^4.1.0",
     "dayjs": "^1.11.13",
     "drizzle-orm": "^0.44.2",
-    "framer-motion": "^12.6.5",
+    "framer-motion": "^12.34.3",
     "fs-extra": "^11.3.0",
     "immer": "^10.1.1",
     "inngest": "^3.35.0",
