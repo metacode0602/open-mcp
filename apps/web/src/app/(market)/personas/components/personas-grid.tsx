@@ -3,10 +3,10 @@
 import { useState, useMemo } from "react"
 import { Search } from "lucide-react"
 import { CategoryFilter } from "../../components/category-filter"
-import { UsecaseCard } from "./usecase-card"
+import { UsecaseCard } from "./personas-card"
 import { usecases, categories, type Category } from "@/lib/types"
 
-export function UsecaseGrid() {
+export function PersonasGrid() {
   const [selected, setSelected] = useState<Category | "all">("all")
   const [searchQuery, setSearchQuery] = useState("")
 

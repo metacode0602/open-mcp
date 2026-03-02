@@ -9,8 +9,10 @@ import { ThemeToggle } from "@/components/theme-toggle"
 
 const navItems = [
   { label: "Marketplace", href: "/" },
+  { label: "AI 员工", href: "/personas" },
   { label: "Skills", href: "/skills" },
-  { label: "Clawsourcing", href: "/clawsourcing" },
+  { label: "MCP", href: "/mcp" },
+  { label: "定制服务", href: "/clawsourcing" },
   { label: "贡献指南", href: "/contribute" },
 ]
 

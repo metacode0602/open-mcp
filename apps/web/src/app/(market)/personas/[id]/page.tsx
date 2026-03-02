@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation"
-import { UsecaseDetail } from "../components/usecase-detail"
+import { UsecaseDetail } from "../components/personas-detail"
 import { usecases, getUsecaseById } from "@/lib/types"
 import type { Metadata } from "next"
 
