@@ -130,7 +130,7 @@ interface FeaturedCreatorsProps {
 
 export function FeaturedCreators({ creators = DEFAULT_FEATURED }: FeaturedCreatorsProps) {
   return (
-    <section className="border-t border-border bg-card px-6 py-16">
+    <section className="border-t border-border bg-card px-6 py-16 my-8">
       <div className="mx-auto max-w-6xl">
         <h2 className="text-2xl font-semibold text-foreground">
           Featured Creators

@@ -3,12 +3,14 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState } from "react"
-import { Terminal, Menu, X } from "lucide-react"
+import { Terminal, Menu, X, User, ShieldCheck } from "lucide-react"
 import { cn } from "@repo/ui/lib/utils"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { Button } from "@repo/ui/components/ui/button"
+import { useSession } from "@/hooks/auth-hooks"
 
 const navItems = [
-  { label: "Marketplace", href: "/" },
+  { label: "首页", href: "/" },
   { label: "AI 员工", href: "/personas" },
   { label: "Skills", href: "/skills" },
   { label: "MCP", href: "/mcp" },
@@ -20,6 +22,7 @@ const navItems = [
 export function SiteHeader() {
   const pathname = usePathname()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const { data: session } = useSession()
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-xl">
@@ -61,6 +64,19 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden items-center gap-3 md:flex">
+          <Button variant="outline" size="sm" className="rounded-full shrink-0 text-xs sm:text-sm min-h-9" asChild>
+            {session ? (
+              <Link href="/web/dashboard" className="inline-flex items-center">
+                <ShieldCheck className="h-4 w-4 mr-1 shrink-0 sm:mr-2" />
+                <span className="hidden sm:inline">控制台</span>
+              </Link>
+            ) : (
+              <Link href="/auth/sign-in" className="inline-flex items-center">
+                <User className="h-4 w-4 mr-1 shrink-0 sm:mr-2" />
+                <span className="hidden sm:inline">登录</span>
+              </Link>
+            )}
+          </Button>
           <ThemeToggle />
           <Link
             href="https://github.com"

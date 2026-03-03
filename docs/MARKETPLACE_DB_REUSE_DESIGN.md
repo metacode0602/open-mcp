@@ -335,3 +335,102 @@
 
 **`apps.type` 扩展**：在现有 `client | server | application` 基础上增加 `skill`、`persona`；`application` 专指 AI 应用，Skill/Persona 通过 `type = skill | persona` 区分。
 
+---
+
+### 7. 数据库表结构实现摘要（已落地）
+
+以下为基于 Drizzle ORM 的已实现表结构，迁移文件：`packages/db/drizzle/0011_*.sql`、`0012_*.sql`。
+
+#### 7.1 扩展的现有表
+
+| 表名 | 变更 |
+|------|------|
+| **users** | 新增 `is_creator boolean DEFAULT false`、`payout_settings jsonb` |
+| **apps** | `type` 枚举扩展：`client \| server \| application \| skill \| persona` |
+| **payments** | `type` 枚举扩展：`marketplace_order`、`creator_onboarding`、`creator_payout`；`type` 列长改为 varchar(30) |
+
+#### 7.2 新增表结构
+
+**orders（订单表）**
+
+| 列名 | 类型 | 说明 |
+|------|------|------|
+| id | text PK | 主键 |
+| user_id | text NOT NULL FK→users.id | 购买人 |
+| app_id | text FK→apps.id | 商品应用（创作者资格订单可为空） |
+| app_meta | jsonb | 商品快照（name/slug/icon/productType/ownerName 等） |
+| product_type | varchar(30) | persona / skill / creator_membership |
+| amount_cents | integer NOT NULL | 订单总金额（分） |
+| currency | varchar(10) DEFAULT 'CNY' | 币种 |
+| platform_fee_cents | integer NOT NULL DEFAULT 0 | 平台抽成（分） |
+| creator_earnings_cents | integer NOT NULL DEFAULT 0 | 创作者分成（分） |
+| creator_id | text FK→users.id | 收款创作者 |
+| status | varchar(20) | pending / completed / refunded / cancelled |
+| paid_at | timestamp | 支付完成时间 |
+| created_at, updated_at | timestamp | |
+
+**user_balances（用户账户/站内余额）**
+
+| 列名 | 类型 | 说明 |
+|------|------|------|
+| id | text PK | 主键 |
+| user_id | text NOT NULL UNIQUE FK→users.id | 用户 |
+| balance_cents | integer NOT NULL DEFAULT 0 | 当前余额（分） |
+| currency | varchar(10) DEFAULT 'CNY' | 币种 |
+| updated_at | timestamp | 更新时间（乐观锁/对账） |
+
+**withdrawals（提现记录表）**
+
+| 列名 | 类型 | 说明 |
+|------|------|------|
+| id | text PK | 主键 |
+| user_id | text NOT NULL FK→users.id | 申请人（创作者） |
+| amount_cents | integer NOT NULL | 提现金额（分） |
+| currency | varchar(10) DEFAULT 'CNY' | 币种 |
+| status | varchar(20) | pending / processing / completed / rejected / cancelled |
+| payment_id | text FK→payments.id | 打款成功时关联的支付记录 |
+| reject_reason | text | 拒绝原因 |
+| requested_at | timestamp NOT NULL | 申请时间 |
+| processed_at | timestamp | 处理完成时间 |
+| created_at, updated_at | timestamp | |
+
+**persona_skills（Persona–Skill 多对多）**
+
+| 列名 | 类型 | 说明 |
+|------|------|------|
+| id | text PK | 主键 |
+| persona_id | text NOT NULL FK→apps.id CASCADE | Persona 应用 id |
+| skill_id | text NOT NULL FK→apps.id CASCADE | Skill 应用 id |
+| sort_order | integer DEFAULT 0 | 展示顺序 |
+| created_at | timestamp | |
+| UNIQUE(persona_id, skill_id) | | |
+
+**persona_mcp_tools（Persona–MCP 多对多）**
+
+| 列名 | 类型 | 说明 |
+|------|------|------|
+| id | text PK | 主键 |
+| persona_id | text NOT NULL FK→apps.id CASCADE | Persona 应用 id |
+| mcp_app_id | text NOT NULL FK→apps.id CASCADE | MCP 应用 id |
+| sort_order | integer DEFAULT 0 | 展示顺序 |
+| created_at | timestamp | |
+| UNIQUE(persona_id, mcp_app_id) | | |
+
+**skill_mcp_tools（Skill–MCP 多对多）**
+
+| 列名 | 类型 | 说明 |
+|------|------|------|
+| id | text PK | 主键 |
+| skill_id | text NOT NULL FK→apps.id CASCADE | Skill 应用 id |
+| mcp_app_id | text NOT NULL FK→apps.id CASCADE | MCP 应用 id |
+| sort_order | integer DEFAULT 0 | 展示顺序 |
+| created_at | timestamp | |
+| UNIQUE(skill_id, mcp_app_id) | | |
+
+#### 7.3 索引与约束
+
+- **orders**：`user_id`、`app_id`、`creator_id`、`status`、`product_type` 索引。
+- **user_balances**：`user_id` 唯一索引。
+- **withdrawals**：`user_id`、`status` 索引。
+- **persona_skills / persona_mcp_tools / skill_mcp_tools**：左列 + 右列索引、唯一约束 (A, B)；外键 ON DELETE CASCADE。
+

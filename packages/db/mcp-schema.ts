@@ -58,7 +58,7 @@ export const apps = pgTable(
     longDescription: text("long_description"), //概要介绍的内容
     readme: text("readme"), // 从github上拉取的readme中的内容
     readmeZh: text("readme_zh"), // 从github上拉取的readme中的内容，中文
-    type: varchar("type", { length: 20, enum: ["client", "server", "application"] }).notNull(),
+    type: varchar("type", { length: 20, enum: ["client", "server", "application", "skill", "persona"] }).notNull(),
     deployable: boolean("deployable").default(false), //是否可以部署为服务
     source: varchar("source", { length: 20, enum: ["automatic", "submitted", "admin"] }).notNull(), // automatic, submitted, admin，即自动，提交，管理员录入
     status: varchar("status", { length: 20, enum: ["pending", "approved", "rejected", "archived"] }).notNull(), // pending, approved, rejected, archived
@@ -290,7 +290,7 @@ export const payments = pgTable(
       .$defaultFn(() => createId()),
     userId: text("user_id")
       .notNull(),
-    type: varchar("type", { length: 20, enum: ["ad", "subscription", "service", "other"] }).notNull(),
+    type: varchar("type", { length: 30, enum: ["ad", "subscription", "service", "other", "marketplace_order", "creator_onboarding", "creator_payout"] }).notNull(),
     relatedId: text("related_id"),
     amount: real("amount").notNull(),
     currency: varchar("currency", { length: 10 }).default("CNY"),
@@ -426,6 +426,152 @@ export const invoicesRelations = relations(invoices, ({ one }) => ({
     references: [payments.id],
   }),
 }))
+
+// ========== 市场：订单、用户余额、提现、Persona/Skill/MCP 关联表 ==========
+
+/** 订单表：记录用户购买记录（Persona/Skill/创作者资格），与支付渠道无关 */
+export const orders = pgTable(
+  "orders",
+  {
+    id: text("id").primaryKey().notNull().$defaultFn(() => createId()),
+    userId: text("user_id").notNull().references(() => users.id),
+    appId: text("app_id").references(() => apps.id),
+    appMeta: jsonb("app_meta"),
+    productType: varchar("product_type", { length: 30, enum: ["persona", "skill", "creator_membership"] }).notNull(),
+    amountCents: integer("amount_cents").notNull(),
+    currency: varchar("currency", { length: 10 }).default("CNY"),
+    platformFeeCents: integer("platform_fee_cents").notNull().default(0),
+    creatorEarningsCents: integer("creator_earnings_cents").notNull().default(0),
+    creatorId: text("creator_id").references(() => users.id),
+    status: varchar("status", { length: 20, enum: ["pending", "completed", "refunded", "cancelled"] }).notNull().default("pending"),
+    paidAt: timestamp("paid_at", { mode: "date" }),
+    createdAt: timestamp("created_at", { mode: "date" }).defaultNow().notNull(),
+    updatedAt: timestamp("updated_at", { mode: "date" }).defaultNow().notNull(),
+  },
+  (table) => [
+    index("orders_user_id_idx").on(table.userId),
+    index("orders_app_id_idx").on(table.appId),
+    index("orders_creator_id_idx").on(table.creatorId),
+    index("orders_status_idx").on(table.status),
+    index("orders_product_type_idx").on(table.productType),
+  ]
+);
+
+/** 用户账户表（站内余额）：创作者收入先沉淀再提现 */
+export const userBalances = pgTable(
+  "user_balances",
+  {
+    id: text("id").primaryKey().notNull().$defaultFn(() => createId()),
+    userId: text("user_id").notNull().references(() => users.id),
+    balanceCents: integer("balance_cents").notNull().default(0),
+    currency: varchar("currency", { length: 10 }).default("CNY"),
+    updatedAt: timestamp("updated_at", { mode: "date" }).defaultNow().notNull(),
+  },
+  (table) => [uniqueIndex("user_balances_user_id_unique_idx").on(table.userId)]
+);
+
+/** 提现记录表：创作者提现申请及处理结果 */
+export const withdrawals = pgTable(
+  "withdrawals",
+  {
+    id: text("id").primaryKey().notNull().$defaultFn(() => createId()),
+    userId: text("user_id").notNull().references(() => users.id),
+    amountCents: integer("amount_cents").notNull(),
+    currency: varchar("currency", { length: 10 }).default("CNY"),
+    status: varchar("status", { length: 20, enum: ["pending", "processing", "completed", "rejected", "cancelled"] }).notNull().default("pending"),
+    paymentId: text("payment_id").references(() => payments.id),
+    rejectReason: text("reject_reason"),
+    requestedAt: timestamp("requested_at", { mode: "date" }).defaultNow().notNull(),
+    processedAt: timestamp("processed_at", { mode: "date" }),
+    createdAt: timestamp("created_at", { mode: "date" }).defaultNow().notNull(),
+    updatedAt: timestamp("updated_at", { mode: "date" }).defaultNow().notNull(),
+  },
+  (table) => [
+    index("withdrawals_user_id_idx").on(table.userId),
+    index("withdrawals_status_idx").on(table.status),
+  ]
+);
+
+/** Persona–Skill 关联表：某 Persona 使用了哪些 Skill（多对多） */
+export const personaSkills = pgTable(
+  "persona_skills",
+  {
+    id: text("id").primaryKey().notNull().$defaultFn(() => createId()),
+    personaId: text("persona_id").notNull().references(() => apps.id, { onDelete: "cascade" }),
+    skillId: text("skill_id").notNull().references(() => apps.id, { onDelete: "cascade" }),
+    sortOrder: integer("sort_order").default(0),
+    createdAt: timestamp("created_at", { mode: "date" }).defaultNow().notNull(),
+  },
+  (table) => [
+    index("persona_skills_persona_id_idx").on(table.personaId),
+    index("persona_skills_skill_id_idx").on(table.skillId),
+    uniqueIndex("persona_skills_unique_idx").on(table.personaId, table.skillId),
+  ]
+);
+
+/** Persona–MCP 工具关联表：某 Persona 使用了哪些 MCP 工具（多对多） */
+export const personaMcpTools = pgTable(
+  "persona_mcp_tools",
+  {
+    id: text("id").primaryKey().notNull().$defaultFn(() => createId()),
+    personaId: text("persona_id").notNull().references(() => apps.id, { onDelete: "cascade" }),
+    mcpAppId: text("mcp_app_id").notNull().references(() => apps.id, { onDelete: "cascade" }),
+    sortOrder: integer("sort_order").default(0),
+    createdAt: timestamp("created_at", { mode: "date" }).defaultNow().notNull(),
+  },
+  (table) => [
+    index("persona_mcp_tools_persona_id_idx").on(table.personaId),
+    index("persona_mcp_tools_mcp_app_id_idx").on(table.mcpAppId),
+    uniqueIndex("persona_mcp_tools_unique_idx").on(table.personaId, table.mcpAppId),
+  ]
+);
+
+/** Skill–MCP 工具关联表：某 Skill 依赖哪些 MCP 工具（多对多） */
+export const skillMcpTools = pgTable(
+  "skill_mcp_tools",
+  {
+    id: text("id").primaryKey().notNull().$defaultFn(() => createId()),
+    skillId: text("skill_id").notNull().references(() => apps.id, { onDelete: "cascade" }),
+    mcpAppId: text("mcp_app_id").notNull().references(() => apps.id, { onDelete: "cascade" }),
+    sortOrder: integer("sort_order").default(0),
+    createdAt: timestamp("created_at", { mode: "date" }).defaultNow().notNull(),
+  },
+  (table) => [
+    index("skill_mcp_tools_skill_id_idx").on(table.skillId),
+    index("skill_mcp_tools_mcp_app_id_idx").on(table.mcpAppId),
+    uniqueIndex("skill_mcp_tools_unique_idx").on(table.skillId, table.mcpAppId),
+  ]
+);
+
+export const ordersRelations = relations(orders, ({ one }) => ({
+  user: one(users, { fields: [orders.userId], references: [users.id] }),
+  app: one(apps, { fields: [orders.appId], references: [apps.id] }),
+  creator: one(users, { fields: [orders.creatorId], references: [users.id] }),
+}));
+
+export const userBalancesRelations = relations(userBalances, ({ one }) => ({
+  user: one(users, { fields: [userBalances.userId], references: [users.id] }),
+}));
+
+export const withdrawalsRelations = relations(withdrawals, ({ one }) => ({
+  user: one(users, { fields: [withdrawals.userId], references: [users.id] }),
+  payment: one(payments, { fields: [withdrawals.paymentId], references: [payments.id] }),
+}));
+
+export const personaSkillsRelations = relations(personaSkills, ({ one }) => ({
+  persona: one(apps, { fields: [personaSkills.personaId], references: [apps.id], relationName: "persona" }),
+  skill: one(apps, { fields: [personaSkills.skillId], references: [apps.id], relationName: "skill" }),
+}));
+
+export const personaMcpToolsRelations = relations(personaMcpTools, ({ one }) => ({
+  persona: one(apps, { fields: [personaMcpTools.personaId], references: [apps.id], relationName: "persona" }),
+  mcpApp: one(apps, { fields: [personaMcpTools.mcpAppId], references: [apps.id], relationName: "mcpApp" }),
+}));
+
+export const skillMcpToolsRelations = relations(skillMcpTools, ({ one }) => ({
+  skill: one(apps, { fields: [skillMcpTools.skillId], references: [apps.id], relationName: "skill" }),
+  mcpApp: one(apps, { fields: [skillMcpTools.mcpAppId], references: [apps.id], relationName: "mcpApp" }),
+}));
 
 export const activitiesRelations = relations(activities, ({ one }) => ({
   user: one(users, {
@@ -693,6 +839,14 @@ export const appsRelations = relations(apps, ({ many, one }) => ({
   analysisHistory: many(appAnalysisHistory),
   rss: many(appRss),
   approvedSubmissions: many(appSubmissions, { relationName: "approvedApp" }),
+  // 市场：Persona/Skill/MCP 关联
+  personaSkillsAsPersona: many(personaSkills, { relationName: "persona" }),
+  personaSkillsAsSkill: many(personaSkills, { relationName: "skill" }),
+  personaMcpToolsAsPersona: many(personaMcpTools, { relationName: "persona" }),
+  personaMcpToolsAsMcp: many(personaMcpTools, { relationName: "mcpApp" }),
+  skillMcpToolsAsSkill: many(skillMcpTools, { relationName: "skill" }),
+  skillMcpToolsAsMcp: many(skillMcpTools, { relationName: "mcpApp" }),
+  ordersAsApp: many(orders),
 }))
 
 // 资产表

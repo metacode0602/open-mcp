@@ -31,10 +31,9 @@ export interface Persona {
   i18n?: PersonaI18nContent
 }
 
-export const personaCategories: Record<
-  Persona["category"],
-  { label: string; icon: string }
-> = {
+export type PersonaCategory = Persona["category"]
+
+export const personaCategories: Record<PersonaCategory, { label: string; icon: string }> = {
   leadership: { label: "领导力", icon: "Crown" },
   engineering: { label: "工程", icon: "Code" },
   marketing: { label: "营销", icon: "Megaphone" },

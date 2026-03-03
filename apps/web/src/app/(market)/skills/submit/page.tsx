@@ -8,8 +8,6 @@ export const metadata: Metadata = {
 
 export default function SkillSubmitPage() {
   return (
-    <main className="flex-1">
-      <SkillSubmitForm />
-    </main>
+    <SkillSubmitForm />
   )
 }

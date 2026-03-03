@@ -25,6 +25,10 @@ export const users = pgTable("users", {
   website: text("website"),
   github: text("github"),
   twitter: text("twitter"),
+
+  // 市场/创作者扩展：创作者身份与收款设置
+  isCreator: boolean("is_creator").default(false),
+  payoutSettings: jsonb("payout_settings"), // 银行/支付宝/微信等收款信息
 });
 
 export const sessions = pgTable("sessions", {

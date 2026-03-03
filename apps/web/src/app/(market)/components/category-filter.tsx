@@ -17,7 +17,7 @@ const icons: Record<string, React.ReactNode> = {
 }
 
 interface CategoryFilterProps {
-  categories: Record<PersonaCategory, { label: string; icon: string; description: string }>
+  categories: Record<PersonaCategory, { label: string; icon: string }>
   selected: PersonaCategory | "all"
   onSelect: (category: PersonaCategory | "all") => void
   counts: Record<string, number>
@@ -40,7 +40,7 @@ export function CategoryFilter({ categories, selected, onSelect, counts }: Categ
         <span className="ml-1 rounded-md bg-background px-1.5 py-0.5 text-xs">{counts.all}</span>
       </button>
 
-      {(Object.entries(categories) as [PersonaCategory, { label: string; icon: string; description: string }][]).map(
+      {(Object.entries(categories) as [PersonaCategory, { label: string; icon: string }][]).map(
         ([key, { label, icon }]) => (
           <button
             key={key}

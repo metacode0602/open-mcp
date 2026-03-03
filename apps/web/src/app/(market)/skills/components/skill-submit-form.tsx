@@ -102,7 +102,7 @@ export function SkillSubmitForm() {
   }
 
   return (
-    <div className="mx-auto max-w-3xl px-6 py-10">
+    <div className="mx-auto max-w-7xl px-6 py-10">
       <Link
         href="/skills"
         className="mb-6 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
