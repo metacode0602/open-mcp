@@ -10,17 +10,17 @@ import { CopyButton } from "@/components/copy-button"
 import { cn } from "@repo/ui/lib/utils"
 
 const CODE_SNIPPET = `# Create a listing
-curl -X POST https://www.shopclawmart.com/api/v1/listings \\
-  -H "Authorization: Bearer $CLAWMART_API_KEY" \\
+curl -X POST https://www.openmcp.com/api/v1/listings \\
+  -H "Authorization: Bearer $OPENMCP_API_KEY" \\
   -d '{"type":"skill","name":"My Skill",...}'
 
 # Upload a package
-curl -X POST .../listings/{id}/versions \\
+curl -X POST https://www.openmcp.com/api/v1/listings/{id}/versions \\
   -F "package=@SKILL.md" \\
   -F "changelog=Initial release"
 
 # Or let your AI do it
-"Create a skill on ClawMart for daily standup summaries"
+"Create a skill on OpenMCP for daily standup summaries"
 `
 
 const FEATURES = [
@@ -54,7 +54,7 @@ export function CreatorApi() {
               Publish skills from your terminal
             </h2>
             <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-              Build a skill or persona, then ship it to ClawMart with a single
+              Build a skill or persona, then ship it to OpenMCP with a single
               API call. Your AI assistant can create listings, upload packages,
               and manage versions — all programmatically.
             </p>

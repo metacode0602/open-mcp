@@ -17,10 +17,10 @@ export function HeroSection() {
           </div>
           <div className="space-y-2">
             <h1 className="text-lg font-bold tracking-tighter sm:text-xl md:text-2xl xl:text-3xl/none bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/60 px-1">
-              一站式 AI 全聚合平台，专注于 MCP 生态系统
+              AI 助手的应用商店
             </h1>
             <p className="max-w-4xl text-muted-foreground text-sm sm:text-base md:text-lg lg:text-xl mx-auto px-1">
-              探索 MCP 客户端、服务器和开源应用的综合导航平台，一键部署您的 MCP 服务
+              Personas 角色配置包与 Skills 技能组件，弥合 AI 能力与实际应用之间的差距。探索、购买并一键部署，由真实运营 AI 助手的创作者打造。
             </p>
           </div>
         </div>

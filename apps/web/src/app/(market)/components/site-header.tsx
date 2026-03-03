@@ -13,7 +13,8 @@ const navItems = [
   { label: "Skills", href: "/skills" },
   { label: "MCP", href: "/mcp" },
   { label: "定制服务", href: "/clawsourcing" },
-  { label: "贡献指南", href: "/contribute" },
+  { label: "关于我们", href: "/aboutus" },
+  { label: "博客", href: "/blog" },
 ]
 
 export function SiteHeader() {
