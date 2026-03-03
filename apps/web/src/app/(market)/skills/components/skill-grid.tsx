@@ -4,11 +4,24 @@ import { useState, useMemo } from "react"
 import { Search } from "lucide-react"
 import { SkillCategoryFilter } from "./skill-category-filter"
 import { SkillCard } from "./skill-card"
-import { skills, skillCategories, type SkillCategory } from "@/lib/types"
+import { skillCategories, type SkillCategory } from "@/lib/types"
+import { trpc } from "@/lib/trpc/client"
+import { mapSkillListRowToSkill } from "../../lib/map-marketplace"
+import { Skeleton } from "@repo/ui/components/ui/skeleton"
 
 export function SkillGrid() {
   const [selected, setSelected] = useState<SkillCategory | "all">("all")
   const [searchQuery, setSearchQuery] = useState("")
+
+  const { data, isLoading } = trpc.marketplaceSkills.list.useQuery(
+    { limit: 500 },
+    { refetchOnWindowFocus: false, staleTime: 60 * 1000 }
+  )
+
+  const skills = useMemo(
+    () => (data?.items ?? []).map(mapSkillListRowToSkill),
+    [data?.items]
+  )
 
   const counts = useMemo(() => {
     const c: Record<string, number> = { all: skills.length }
@@ -16,7 +29,7 @@ export function SkillGrid() {
       c[s.category] = (c[s.category] || 0) + 1
     }
     return c
-  }, [])
+  }, [skills])
 
   const filtered = useMemo(() => {
     let result = skills
@@ -29,11 +42,26 @@ export function SkillGrid() {
         (s) =>
           s.name.toLowerCase().includes(q) ||
           s.description.toLowerCase().includes(q) ||
-          s.tags.some((t) => t.toLowerCase().includes(q))
+          (s.tags ?? []).some((t) => t.toLowerCase().includes(q))
       )
     }
     return result
-  }, [selected, searchQuery])
+  }, [skills, selected, searchQuery])
+
+  if (isLoading) {
+    return (
+      <section className="mx-auto max-w-7xl px-6 py-16">
+        <div className="mb-8 flex flex-col gap-6">
+          <div className="h-10 w-64 rounded-lg bg-muted" />
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <Skeleton key={i} className="h-[300px] rounded-xl" />
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
 
   return (
     <section className="mx-auto max-w-7xl px-6 py-16">

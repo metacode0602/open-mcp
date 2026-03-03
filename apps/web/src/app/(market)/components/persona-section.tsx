@@ -11,8 +11,16 @@ import {
   Check,
   ArrowRight,
 } from "lucide-react"
-import { personas, personaCategories, type Persona } from "@/lib/types"
+import { personaCategories, type Persona } from "@/lib/types"
 import { PriceTag } from "./price-tag"
+import { trpc } from "@/lib/trpc/client"
+import { mapPersonaListRowToPersona } from "../lib/map-marketplace"
+import { Skeleton } from "@repo/ui/components/ui/skeleton"
+import { Alert, AlertDescription, AlertTitle } from "@repo/ui/components/ui/alert"
+import { Button } from "@repo/ui/components/ui/button"
+import { AlertCircle, RefreshCw } from "lucide-react"
+
+const FEATURED_PERSONAS_COUNT = 6
 
 const categoryIcons: Record<string, React.ReactNode> = {
   Crown: <Crown className="h-4 w-4" />,
@@ -23,7 +31,7 @@ const categoryIcons: Record<string, React.ReactNode> = {
 }
 
 function PersonaCard({ persona }: { persona: Persona }) {
-  const cat = personaCategories[persona.category]
+  const cat = personaCategories[persona.category] ?? personaCategories.operations
 
   return (
     <div className="group flex flex-col rounded-xl border border-border bg-card p-6 transition-all hover:border-primary/40 hover:bg-accent/50">
@@ -52,7 +60,7 @@ function PersonaCard({ persona }: { persona: Persona }) {
       </p>
 
       <ul className="mb-4 flex flex-col gap-1.5">
-        {persona.features.slice(0, 3).map((f) => (
+        {(persona.features ?? []).slice(0, 3).map((f) => (
           <li key={f} className="flex items-start gap-2">
             <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" />
             <span className="text-xs text-muted-foreground">{f}</span>
@@ -62,7 +70,7 @@ function PersonaCard({ persona }: { persona: Persona }) {
 
       <div className="flex items-center justify-between border-t border-border pt-4">
         <div className="flex items-center gap-2">
-          {persona.authorInfo.avatar ? (
+          {persona.authorInfo?.avatar ? (
             <div className="relative h-5 w-5 shrink-0 overflow-hidden rounded-full bg-secondary">
               <Image
                 src={persona.authorInfo.avatar}
@@ -73,11 +81,11 @@ function PersonaCard({ persona }: { persona: Persona }) {
             </div>
           ) : (
             <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-secondary text-[10px] font-bold text-muted-foreground">
-              {persona.authorInfo.name.charAt(0)}
+              {(persona.authorInfo?.name ?? "?").charAt(0)}
             </div>
           )}
           <span className="text-xs text-muted-foreground">
-            {persona.authorInfo.name}
+            {persona.authorInfo?.name ?? ""}
           </span>
         </div>
         <span className="flex items-center gap-1 text-xs font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100">
@@ -90,6 +98,59 @@ function PersonaCard({ persona }: { persona: Persona }) {
 }
 
 export function PersonaSection() {
+  const { data, isLoading, error, refetch } = trpc.marketplacePersonas.list.useQuery(
+    { limit: FEATURED_PERSONAS_COUNT },
+    { refetchOnWindowFocus: false, staleTime: 60 * 1000 }
+  )
+
+  if (isLoading) {
+    return (
+      <section id="marketplace" className="border-border py-16">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div>
+              <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-border bg-secondary px-3 py-1">
+                <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                <span className="text-xs font-medium text-muted-foreground">Personas</span>
+              </div>
+              <h2 className="text-2xl font-bold text-foreground">Personas 角色配置包</h2>
+              <p className="mt-1 text-sm text-muted-foreground">
+                完整的 AI 助手配置，包含个性、记忆系统、决策框架和工具设置。购买后几分钟内完成安装。
+              </p>
+            </div>
+          </div>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {Array.from({ length: FEATURED_PERSONAS_COUNT }).map((_, i) => (
+              <Skeleton key={i} className="h-[320px] rounded-xl" />
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  if (error) {
+    return (
+      <section id="marketplace" className="border-border py-16">
+        <div className="mx-auto max-w-7xl">
+          <Alert variant="destructive">
+            <AlertCircle className="h-4 w-4" />
+            <AlertTitle>加载失败</AlertTitle>
+            <AlertDescription>
+              获取 Personas 列表时出现错误
+              <Button variant="ghost" size="sm" className="ml-2" onClick={() => refetch()}>
+                <RefreshCw className="mr-2 h-4 w-4" />
+                重试
+              </Button>
+            </AlertDescription>
+          </Alert>
+        </div>
+      </section>
+    )
+  }
+
+  const personas = (data?.items ?? []).map(mapPersonaListRowToPersona)
+
   return (
     <section id="marketplace" className="border-border py-16">
       <div className="mx-auto max-w-7xl">
@@ -97,15 +158,11 @@ export function PersonaSection() {
           <div>
             <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-border bg-secondary px-3 py-1">
               <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-              <span className="text-xs font-medium text-muted-foreground">
-                Personas
-              </span>
+              <span className="text-xs font-medium text-muted-foreground">Personas</span>
             </div>
-            <h2 className="text-2xl font-bold text-foreground">
-              {'Personas 角色配置包'}
-            </h2>
+            <h2 className="text-2xl font-bold text-foreground">Personas 角色配置包</h2>
             <p className="mt-1 text-sm text-muted-foreground">
-              {'完整的 AI 助手配置，包含个性、记忆系统、决策框架和工具设置。购买后几分钟内完成安装。'}
+              完整的 AI 助手配置，包含个性、记忆系统、决策框架和工具设置。购买后几分钟内完成安装。
             </p>
           </div>
           <div className="flex items-center gap-2 text-sm text-muted-foreground">

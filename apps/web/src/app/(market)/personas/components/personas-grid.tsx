@@ -4,15 +4,24 @@ import { useState, useMemo } from "react"
 import { Search } from "lucide-react"
 import { CategoryFilter } from "../../components/category-filter"
 import { PersonaCard } from "./personas-card"
-import {
-  personas,
-  personaCategories,
-  type PersonaCategory,
-} from "@/lib/types/personas"
+import { personaCategories, type PersonaCategory } from "@/lib/types/personas"
+import { trpc } from "@/lib/trpc/client"
+import { mapPersonaListRowToPersona } from "../../lib/map-marketplace"
+import { Skeleton } from "@repo/ui/components/ui/skeleton"
 
 export function PersonasGrid() {
   const [selected, setSelected] = useState<PersonaCategory | "all">("all")
   const [searchQuery, setSearchQuery] = useState("")
+
+  const { data, isLoading } = trpc.marketplacePersonas.list.useQuery(
+    { limit: 500 },
+    { refetchOnWindowFocus: false, staleTime: 60 * 1000 }
+  )
+
+  const personas = useMemo(
+    () => (data?.items ?? []).map(mapPersonaListRowToPersona),
+    [data?.items]
+  )
 
   const counts = useMemo(() => {
     const c: Record<string, number> = { all: personas.length }
@@ -20,7 +29,7 @@ export function PersonasGrid() {
       c[p.category] = (c[p.category] || 0) + 1
     }
     return c
-  }, [])
+  }, [personas])
 
   const filtered = useMemo(() => {
     let result = personas
@@ -34,11 +43,26 @@ export function PersonasGrid() {
           p.name.toLowerCase().includes(q) ||
           p.description.toLowerCase().includes(q) ||
           p.subtitle?.toLowerCase().includes(q) ||
-          p.tags.some((t) => t.toLowerCase().includes(q))
+          (p.tags ?? []).some((t) => t.toLowerCase().includes(q))
       )
     }
     return result
-  }, [selected, searchQuery])
+  }, [personas, selected, searchQuery])
+
+  if (isLoading) {
+    return (
+      <section id="personas" className="mx-auto max-w-7xl px-6 py-16">
+        <div className="mb-8 flex flex-col gap-6">
+          <div className="h-10 w-64 rounded-lg bg-muted" />
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <Skeleton key={i} className="h-[320px] rounded-xl" />
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
 
   return (
     <section id="personas" className="mx-auto max-w-7xl px-6 py-16">

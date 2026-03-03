@@ -1,6 +1,5 @@
 "use client"
 
-import type { McpApp } from "@repo/db/types"
 import { Alert, AlertDescription, AlertTitle } from "@repo/ui/components/ui/alert"
 import { Button } from "@repo/ui/components/ui/button"
 import { Skeleton } from "@repo/ui/components/ui/skeleton"
@@ -13,9 +12,24 @@ import { trpc } from "@/lib/trpc/client"
 
 const FEATURED_MCP_LIMIT = 6
 
-function McpServerCard({ app }: { app: McpApp }) {
+type McpListApp = {
+  id: string
+  slug: string
+  name: string
+  icon: string | null
+  description: string
+  descriptionZh: string | null
+  stars: number | null
+  contributors: number | null
+  primaryLanguage: string | null
+  languages: string[] | null
+  createdAt: Date
+  tags: { id: string; name: string }[]
+}
+
+function McpServerCard({ app }: { app: McpListApp }) {
   const description = app.descriptionZh || app.description || ""
-  const tags = app.tags?.slice(0, 3).filter((tag) => tag && tag.name) ?? []
+  const tags = app.tags?.slice(0, 3) ?? []
   const language = app.primaryLanguage ?? app.languages?.[0]
 
   return (
@@ -72,7 +86,7 @@ function McpServerCard({ app }: { app: McpApp }) {
             {tag.name}
           </span>
         ))}
-        {app.tags && app.tags.length > 3 && (
+        {app.tags.length > 3 && (
           <span className="rounded-md bg-secondary px-2 py-0.5 text-xs text-muted-foreground">
             +{app.tags.length - 3}
           </span>
@@ -101,11 +115,11 @@ function McpServerCard({ app }: { app: McpApp }) {
 
 export function McpSections() {
   const {
-    data: apps,
+    data,
     isLoading,
     error,
     refetch,
-  } = trpc.mcpRecommendations.getRecommendedAppsByType.useQuery(
+  } = trpc.marketplaceMcp.list.useQuery(
     {
       type: "server",
       limit: FEATURED_MCP_LIMIT,
@@ -116,6 +130,7 @@ export function McpSections() {
       staleTime: 30 * 1000,
     }
   )
+  const apps = data?.items ?? []
 
   if (isLoading) {
     return (
@@ -172,8 +187,6 @@ export function McpSections() {
     )
   }
 
-  const serverApps = (apps || []) as McpApp[]
-
   return (
     <section id="mcp-servers" className=" border-border py-16">
       <div className="mx-auto max-w-7xl">
@@ -201,16 +214,16 @@ export function McpSections() {
           </Link>
         </div>
 
-        {serverApps.length > 0 ? (
+        {apps.length > 0 ? (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {serverApps.map((app) => (
+            {apps.map((app) => (
               <McpServerCard key={app.id} app={app} />
             ))}
           </div>
         ) : (
           <div className="flex flex-col items-center justify-center rounded-xl border border-border bg-card py-20">
             <p className="text-lg font-medium text-foreground">
-              暂无推荐 MCP 服务器
+              暂无 MCP 服务器
             </p>
             <p className="mt-1 text-sm text-muted-foreground">
               请稍后再查看或前往分类页浏览

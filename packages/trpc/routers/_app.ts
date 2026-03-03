@@ -11,6 +11,9 @@ import { mcpDashboardRouter } from "./web/mcp-dashboaard";
 import { mcpSuggestionsRouter } from "./web/mcp-suggestions";
 import { mcpSearchRouter } from "./web/mcp-search";
 import { mcpRecommendationsRouter } from "./web/mcp-recommendation";
+import { marketplacePersonasRouter } from "./web/marketplace-personas";
+import { marketplaceSkillsRouter } from "./web/marketplace-skills";
+import { marketplaceMcpRouter } from "./web/marketplace-mcp";
 import { paymentsRouter } from "./admin/payments";
 import { dashboardRouter } from "./admin/dashboard";
 import { adsRouter } from "./admin/ads";
@@ -65,6 +68,9 @@ export const appRouter = router({
   mcpAds: mcpAdsRouter,
   mcpRelatedApps: mcpRelatedAppsRouter,
   mcpRecommendations: mcpRecommendationsRouter,
+  marketplacePersonas: marketplacePersonasRouter,
+  marketplaceSkills: marketplaceSkillsRouter,
+  marketplaceMcp: marketplaceMcpRouter,
   mcpSuggestions: mcpSuggestionsRouter,
   mcpSearch: mcpSearchRouter,
   mcpSubmit: mcpAppSubmissionsRouter,
