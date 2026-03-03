@@ -34,7 +34,7 @@ function McpServerCard({ app }: { app: McpListApp }) {
 
   return (
     <Link
-      href={`/apps/${app.slug}`}
+      href={`/mcp/${app.slug}`}
       className="group flex flex-col rounded-xl border border-border bg-card p-6 transition-all hover:border-primary/40 hover:bg-accent/50"
     >
       <div className="mb-4 flex items-start justify-between gap-2">

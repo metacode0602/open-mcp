@@ -24,9 +24,9 @@ export async function generateMetadata({
 export default async function SkillPage({
   params,
 }: {
-  params: Promise<{ id: string }>
+  params: Promise<{ slug: string }>
 }) {
-  const { id } = await params
+  const { slug: id } = await params
   const skill = getSkillById(id)
   if (!skill) notFound()
 
