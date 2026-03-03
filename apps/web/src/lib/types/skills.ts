@@ -36,7 +36,7 @@ export interface Skill {
   githubStats?: GithubStats
   installCommand?: string
   configExample?: string
-  usecaseIds?: string[]
+  personaIds?: string[]
   i18n?: SkillI18nContent
   verified: boolean
   price?: number
@@ -96,7 +96,7 @@ config:
   concurrency: 5
   timeout: 10s
   dedup: true`,
-    usecaseIds: ["rss-social-digest"],
+    personaIds: ["rss-social-digest"],
     i18n: {
       name_en: "RSS Fetcher",
       description_en: "High-performance RSS/Atom feed fetching and parsing with concurrency and incremental updates.",
@@ -130,7 +130,7 @@ config:
     title: "h1.title"
     content: "article.main"
   proxy: \${PROXY_URL}`,
-    usecaseIds: ["paper-reading-assistant", "social-reply-bot", "bookmark-knowledge-base", "content-calendar-ai", "competitor-monitor"],
+    personaIds: ["paper-reading-assistant", "social-reply-bot", "bookmark-knowledge-base", "content-calendar-ai", "competitor-monitor"],
     i18n: {
       name_en: "Web Scraper",
       description_en: "Universal web content scraping with dynamic rendering and structured data extraction.",
@@ -162,7 +162,7 @@ config:
   language: zh
   template: key_points  # key_points | executive | bullet
   max_length: 200`,
-    usecaseIds: ["rss-social-digest", "meeting-notes-ai", "paper-reading-assistant", "social-reply-bot", "code-review-assistant", "bookmark-knowledge-base", "content-calendar-ai"],
+    personaIds: ["rss-social-digest", "meeting-notes-ai", "paper-reading-assistant", "social-reply-bot", "code-review-assistant", "bookmark-knowledge-base", "content-calendar-ai"],
     i18n: {
       name_en: "AI Summarizer",
       description_en: "LLM-based intelligent content summarization with multi-language and custom templates.",
@@ -198,7 +198,7 @@ config:
       description: "产品设计相关"
   multi_label: true
   min_confidence: 0.7`,
-    usecaseIds: ["github-star-curator", "email-auto-sorter", "competitor-monitor"],
+    personaIds: ["github-star-curator", "email-auto-sorter", "competitor-monitor"],
     i18n: {
       name_en: "AI Classifier",
       description_en: "AI-based intelligent content classification and tagging with custom taxonomy support.",
@@ -229,7 +229,7 @@ config:
   webhook: \${FEISHU_WEBHOOK}
   message_type: interactive  # text | interactive | post
   template: daily_digest`,
-    usecaseIds: ["rss-social-digest", "meeting-notes-ai", "email-auto-sorter", "competitor-monitor"],
+    personaIds: ["rss-social-digest", "meeting-notes-ai", "email-auto-sorter", "competitor-monitor"],
     i18n: {
       name_en: "Feishu Bot",
       description_en: "Feishu (Lark) bot integration with message pushing, document creation, and group management.",
@@ -260,7 +260,7 @@ config:
   token: \${GITHUB_TOKEN}
   api: rest  # rest | graphql
   rate_limit: auto`,
-    usecaseIds: ["github-star-curator", "code-review-assistant"],
+    personaIds: ["github-star-curator", "code-review-assistant"],
     i18n: {
       name_en: "GitHub API",
       description_en: "GitHub API integration for repos, PRs, issues, and more.",
@@ -291,7 +291,7 @@ config:
   token: \${NOTION_TOKEN}
   database_id: \${NOTION_DB_ID}
   sync_mode: upsert  # insert | upsert | sync`,
-    usecaseIds: ["paper-reading-assistant", "content-calendar-ai"],
+    personaIds: ["paper-reading-assistant", "content-calendar-ai"],
     i18n: {
       name_en: "Notion Sync",
       description_en: "Bi-directional Notion database sync with page creation and property updates.",
@@ -323,7 +323,7 @@ config:
   output_format: wechat  # html | wechat | juejin | zhihu
   image_handling: upload  # inline | upload | cdn
   code_highlight: true`,
-    usecaseIds: ["auto-blog-publisher", "github-star-curator"],
+    personaIds: ["auto-blog-publisher", "github-star-curator"],
     i18n: {
       name_en: "Markdown Parser",
       description_en: "Markdown parsing and conversion with multi-platform format adaptation and image processing.",
@@ -357,7 +357,7 @@ config:
     - zhihu
   confirm: true
   schedule: immediate  # immediate | scheduled`,
-    usecaseIds: ["auto-blog-publisher", "design-asset-generator"],
+    personaIds: ["auto-blog-publisher", "design-asset-generator"],
     i18n: {
       name_en: "Multi-Platform Publisher",
       description_en: "One-click publishing to 10+ platforms including WeChat, Juejin, and Zhihu.",
@@ -391,7 +391,7 @@ config:
   retry:
     max: 3
     backoff: exponential`,
-    usecaseIds: ["social-reply-bot", "code-review-assistant", "competitor-monitor"],
+    personaIds: ["social-reply-bot", "code-review-assistant", "competitor-monitor"],
     i18n: {
       name_en: "Scheduler",
       description_en: "Flexible task scheduling engine with Cron expressions and event triggers.",
@@ -414,7 +414,7 @@ export function getSkillsByIds(ids: string[]): Skill[] {
   return skills.filter((s) => ids.includes(s.id))
 }
 
-export function getUsecaseIdsForSkill(skillId: string): string[] {
+export function getPersonaIdsForSkill(skillId: string): string[] {
   const skill = getSkillById(skillId)
-  return skill?.usecaseIds || []
+  return skill?.personaIds || []
 }

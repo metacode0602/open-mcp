@@ -43,9 +43,9 @@ export function Header() {
       active: pathname === "/category/application",
     },
     {
-      href: "/usecase",
-      label: "Openclaw",
-      active: pathname === "/usecase",
+      href: "/personas",
+      label: "AI 员工",
+      active: pathname === "/personas",
     },
     {
       href: "/skills",

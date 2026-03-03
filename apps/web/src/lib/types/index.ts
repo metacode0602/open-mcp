@@ -34,6 +34,5 @@ export * from "./schema/ads";
 export * from "./schema/payments";
 
 // 其他类型
-export * from "./usecases";
 export * from "./skills";
 export * from "./personas";

@@ -1,4 +1,12 @@
-import type { AuthorInfo } from "./skills"
+import type { AuthorInfo, GithubStats } from "./skills"
+
+export interface PersonaI18nContent {
+  name_en?: string
+  description_en?: string
+  scenario_en?: string
+  steps_en?: string[]
+  effect_en?: string
+}
 
 export interface Persona {
   id: string
@@ -12,6 +20,15 @@ export interface Persona {
   features: string[]
   verified: boolean
   price: number
+  /** 可选：场景/步骤/配置/效果（吸纳原 UseCase 字段） */
+  scenario?: string
+  steps?: string[]
+  configSnippet?: string
+  effect?: string
+  difficulty?: "beginner" | "intermediate" | "advanced"
+  skillIds?: string[]
+  githubStats?: GithubStats
+  i18n?: PersonaI18nContent
 }
 
 export const personaCategories: Record<
@@ -23,6 +40,12 @@ export const personaCategories: Record<
   marketing: { label: "营销", icon: "Megaphone" },
   support: { label: "支持", icon: "Headphones" },
   operations: { label: "运营", icon: "Settings" },
+}
+
+export const difficultyLabels: Record<string, { label: string; color: string }> = {
+  beginner: { label: "入门", color: "text-emerald-400" },
+  intermediate: { label: "进阶", color: "text-amber-400" },
+  advanced: { label: "高级", color: "text-rose-400" },
 }
 
 export const personas: Persona[] = [

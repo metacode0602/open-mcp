@@ -1,10 +1,12 @@
 import { notFound } from "next/navigation"
-import { UsecaseDetail } from "../components/personas-detail"
-import { usecases, getUsecaseById } from "@/lib/types"
+import { PersonaDetail } from "../components/personas-detail"
+import { personas, getPersonaById } from "@/lib/types/personas"
+import { SiteHeader } from "../../components/site-header"
+import { SiteFooter } from "../../components/site-footer"
 import type { Metadata } from "next"
 
 export async function generateStaticParams() {
-  return usecases.map((uc) => ({ id: uc.id }))
+  return personas.map((p) => ({ id: p.id }))
 }
 
 export async function generateMetadata({
@@ -13,28 +15,28 @@ export async function generateMetadata({
   params: Promise<{ id: string }>
 }): Promise<Metadata> {
   const { id } = await params
-  const uc = getUsecaseById(id)
-  if (!uc) return { title: "案例未找到" }
+  const persona = getPersonaById(id)
+  if (!persona) return { title: "配置包未找到" }
   return {
-    title: `${uc.title} - OpenClaw Usecases`,
-    description: uc.description,
+    title: `${persona.name} - AI 员工配置包`,
+    description: persona.description,
   }
 }
 
-export default async function UsecasePage({
+export default async function PersonaPage({
   params,
 }: {
   params: Promise<{ id: string }>
 }) {
   const { id } = await params
-  const uc = getUsecaseById(id)
-  if (!uc) notFound()
+  const persona = getPersonaById(id)
+  if (!persona) notFound()
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <SiteHeader />
       <main className="flex-1">
-        <UsecaseDetail uc={uc} />
+        <PersonaDetail persona={persona} />
       </main>
       <SiteFooter />
     </div>

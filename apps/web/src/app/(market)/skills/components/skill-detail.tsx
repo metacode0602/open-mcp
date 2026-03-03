@@ -26,7 +26,7 @@ import { CopyButton } from "@/components/copy-button"
 import { PriceTag } from "../../components/price-tag"
 import { PurchaseButton } from "../../components/purchase-button"
 import { skillCategories, type Skill } from "@/lib/types"
-import { usecases } from "@/lib/types"
+import { getPersonaById, type Persona } from "@/lib/types/personas"
 
 const categoryIcons: Record<string, React.ReactNode> = {
   Database: <Database className="h-5 w-5" />,
@@ -62,8 +62,8 @@ export function SkillDetail({ skill }: { skill: Skill }) {
   const description = displayLang === "en" && skill.i18n?.description_en ? skill.i18n.description_en : skill.description
   const longDescription = displayLang === "en" && skill.i18n?.longDescription_en ? skill.i18n.longDescription_en : skill.longDescription
 
-  const relatedUsecases = skill.usecaseIds
-    ? usecases.filter((uc) => skill.usecaseIds!.includes(uc.id))
+  const relatedPersonas: Persona[] = skill.personaIds
+    ? skill.personaIds.map((id) => getPersonaById(id)).filter((p): p is Persona => p != null)
     : []
 
   const labels = {
@@ -75,13 +75,13 @@ export function SkillDetail({ skill }: { skill: Skill }) {
     viewRepo: displayLang === "en" ? "View Repo" : "查看仓库",
     install: displayLang === "en" ? "Installation" : "安装使用",
     config: displayLang === "en" ? "Configuration Example" : "配置示例",
-    relatedCases: displayLang === "en" ? "Related Cases" : "关联案例",
+    relatedCases: displayLang === "en" ? "Related Personas" : "使用该 Skill 的 AI 员工",
     overview: displayLang === "en" ? "Overview" : "详细介绍",
     submitSkill: displayLang === "en" ? "Submit Your Skill" : "提交你的 Skill",
   }
 
   return (
-    <div className="mx-auto max-w-4xl px-6 py-10">
+    <div className="mx-auto max-w-7xl px-6 py-10">
       {/* Breadcrumb */}
       <nav className="mb-8 flex items-center gap-2 text-sm text-muted-foreground">
         <Link href="/skills" className="transition-colors hover:text-foreground">
@@ -325,8 +325,8 @@ export function SkillDetail({ skill }: { skill: Skill }) {
         </section>
       )}
 
-      {/* Related Cases */}
-      {relatedUsecases.length > 0 && (
+      {/* Related Personas */}
+      {relatedPersonas.length > 0 && (
         <section className="mb-10">
           <h2 className="mb-4 flex items-center gap-2 text-xl font-semibold text-foreground">
             <span className="flex h-7 w-7 items-center justify-center rounded-md bg-primary text-xs font-bold text-primary-foreground">
@@ -335,18 +335,18 @@ export function SkillDetail({ skill }: { skill: Skill }) {
             {labels.relatedCases}
           </h2>
           <div className="grid gap-4 sm:grid-cols-2">
-            {relatedUsecases.map((uc) => (
+            {relatedPersonas.map((p) => (
               <Link
-                key={uc.id}
-                href={`/usecase/${uc.id}`}
+                key={p.id}
+                href={`/personas/${p.id}`}
                 className="group flex items-center gap-4 rounded-xl border border-border bg-card p-5 transition-all hover:border-primary/40 hover:bg-accent/50"
               >
                 <div className="flex-1">
                   <h4 className="mb-1 text-sm font-semibold text-foreground transition-colors group-hover:text-primary">
-                    {uc.title}
+                    {p.name}
                   </h4>
                   <p className="line-clamp-2 text-xs leading-relaxed text-muted-foreground">
-                    {uc.description}
+                    {p.description}
                   </p>
                 </div>
                 <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-primary" />

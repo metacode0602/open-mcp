@@ -5,6 +5,7 @@ import { ClawsourcingProcess } from "./components/clawsourcing-process"
 import { ClawsourcingPricing } from "./components/clawsourcing-pricing"
 import { ClawsourcingSecurity } from "./components/clawsourcing-security"
 import { ClawsourcingCta } from "./components/clawsourcing-cta"
+import { ClawsourcingQa } from "./components/clawsourcing-qa"
 
 export const metadata: Metadata = {
   title: "Clawsourcing - 定制 AI 员工服务 | OpenMCP",
@@ -20,7 +21,10 @@ export default function ClawsourcingPage() {
       <ClawsourcingProcess />
       <ClawsourcingPricing />
       <ClawsourcingSecurity />
+
       <ClawsourcingCta />
+
+      <ClawsourcingQa />
     </main>
   )
 }

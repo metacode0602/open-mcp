@@ -31,8 +31,6 @@ export default async function SkillPage({
   if (!skill) notFound()
 
   return (
-    <main className="flex-1">
-      <SkillDetail skill={skill} />
-    </main>
+    <SkillDetail skill={skill} />
   )
 }

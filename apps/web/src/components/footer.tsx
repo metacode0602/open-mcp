@@ -13,7 +13,7 @@ export function Footer() {
   const [isContactDialogOpen, setIsContactDialogOpen] = useState(false)
 
   return (
-    <footer className="w-full border-t py-8 sm:py-10 bg-muted/20">
+    <footer className="w-full border-t py-8 sm:py-10 bg-muted/20 my-8">
       <Container>
         <div className="grid gap-8 sm:gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
           <div className="space-y-4">
