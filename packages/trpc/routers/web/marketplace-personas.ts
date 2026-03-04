@@ -26,4 +26,10 @@ export const marketplacePersonasRouter = router({
     .query(async ({ input }) => {
       return marketplaceDataAccess.getPersonaById(input.id);
     }),
+
+  getBySlug: publicProcedure
+    .input(z.object({ slug: z.string() }))
+    .query(async ({ input }) => {
+      return marketplaceDataAccess.getPersonaBySlug(input.slug);
+    }),
 });

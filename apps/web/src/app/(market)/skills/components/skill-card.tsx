@@ -32,7 +32,7 @@ export function SkillCard({ skill }: SkillCardProps) {
 
   return (
     <Link
-      href={`/skills/${skill.id}`}
+      href={`/skills/${skill.slug ?? skill.id}`}
       className="group flex flex-col rounded-xl border border-border bg-card p-6 transition-all hover:border-primary/40 hover:bg-accent/50"
     >
       <div className="mb-4 flex items-center justify-between">

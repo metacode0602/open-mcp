@@ -1,36 +1,14 @@
-import { notFound } from "next/navigation"
+"use client"
+
+import { use } from "react"
 import { SkillDetail } from "../components/skill-detail"
-import { skills, getSkillById } from "@/lib/types"
-import type { Metadata } from "next"
 
-export async function generateStaticParams() {
-  return skills.map((s) => ({ id: s.id }))
-}
-
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ id: string }>
-}): Promise<Metadata> {
-  const { id } = await params
-  const skill = getSkillById(id)
-  if (!skill) return { title: "Skill 未找到" }
-  return {
-    title: `${skill.name} - OpenClaw Skills`,
-    description: skill.description,
-  }
-}
-
-export default async function SkillPage({
+export default function SkillSlugPage({
   params,
 }: {
   params: Promise<{ slug: string }>
 }) {
-  const { slug: id } = await params
-  const skill = getSkillById(id)
-  if (!skill) notFound()
+  const { slug } = use(params)
 
-  return (
-    <SkillDetail skill={skill} />
-  )
+  return <SkillDetail slug={slug} />
 }

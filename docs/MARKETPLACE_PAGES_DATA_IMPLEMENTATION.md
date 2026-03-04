@@ -79,8 +79,14 @@
 | `listMcpForMarket` | MCP 列表（仅列表卡用字段） | `{ type: 'client' \| 'server', categorySlug?, tagSlug?, query?, limit?, offset? }` | `{ items: McpListRow[], total: number }` |
 | `getPersonaById` | 单个 Persona 详情（含关联 Skills、MCP） | `id: string` | `PersonaWithRelations \| null` |
 | `getSkillById` | 单个 Skill 详情（含关联 MCP、被哪些 Personas 使用） | `id: string` | `SkillWithRelations \| null` |
+| `getPersonaBySlug` | 按 slug 查 Persona 详情（同上，用于详情页 URL） | `slug: string` | `PersonaWithRelations \| null` |
+| `getSkillBySlug` | 按 slug 查 Skill 详情（同上，用于详情页 URL） | `slug: string` | `SkillWithRelations \| null` |
 
 **统一过滤条件**：`apps.status = 'approved'`、`apps.publishStatus = 'online'`、`apps.deleted = false`；categorySlug/tagSlug/query 与 3.2 中列表条件一致。
+
+**详情关联数据**：为减少前端 N+1 请求，详情接口返回关联实体的**最小展示集**（仅 id、name、slug），供详情页渲染「相关 Skills / Personas / MCP」链接：
+- Persona 详情：`skills: { id, name, slug }[]`、`mcpApps: { id, name, slug }[]`（不再仅返回 skillIds/mcpAppIds）。
+- Skill 详情：`personas: { id, name, slug }[]`、`mcpApps: { id, name, slug }[]`。
 
 ### 3.2 列表查询字段最小化（提高查询效率）
 
@@ -138,16 +144,18 @@
 
 - **文件**：`packages/trpc/routers/web/marketplace-personas.ts`
 - **Procedures**：
-  - `list`：`input: { categorySlug?: string, tagSlug?: string, query?: string, limit?: number, offset?: number }`，内部调用 `marketplaceDataAccess.listMarketplaceApps({ type: 'persona', ... })`，返回列表 + total。
+  - `list`：`input: { categorySlug?: string, tagSlug?: string, query?: string, limit?: number, offset?: number }`，内部调用 `marketplaceDataAccess.listPersonasForMarket(...)`，返回列表 + total。
   - `getById`：`input: { id: string }`，调用 `marketplaceDataAccess.getPersonaById(id)`，返回详情（含关联 Skills、MCP）。
+  - `getBySlug`：`input: { slug: string }`，调用 `marketplaceDataAccess.getPersonaBySlug(slug)`，供详情页按 URL slug 拉取。
 - **权限**：均为 `publicProcedure`，市场列表与详情对未登录用户可见。
 
 ### 4.2 新增 Router：`marketplaceSkills`
 
 - **文件**：`packages/trpc/routers/web/marketplace-skills.ts`
 - **Procedures**：
-  - `list`：同上，`type: 'skill'`。
-  - `getById`：调用 `marketplaceDataAccess.getSkillById(id)`。
+  - `list`：同上，内部调用 `marketplaceDataAccess.listSkillsForMarket(...)`。
+  - `getById`：`input: { id: string }`，调用 `marketplaceDataAccess.getSkillById(id)`。
+  - `getBySlug`：`input: { slug: string }`，调用 `marketplaceDataAccess.getSkillBySlug(slug)`，供详情页按 URL slug 拉取。
 - **权限**：`publicProcedure`。
 
 ### 4.3 新增 Router：`marketplaceMcp`（与 mcpRecommendations 逻辑分离）
@@ -171,8 +179,9 @@
 ### 5.1 状态划分
 
 - **服务端状态（由 tRPC/React Query 管理）**  
-  - Persona 列表、Skill 列表、MCP 列表；Persona/Skill 详情。  
-  - 使用 `trpc.marketplacePersonas.list.useQuery`、`trpc.marketplaceSkills.list.useQuery`、`trpc.marketplaceMcp.list.useQuery`，配置合理的 `staleTime`、`refetchOnWindowFocus`。
+  - Persona 列表、Skill 列表、MCP 列表；Persona/Skill/MCP 详情。  
+  - 列表使用 `trpc.marketplacePersonas.list.useQuery`、`trpc.marketplaceSkills.list.useQuery`、`trpc.marketplaceMcp.list.useQuery`，配置合理的 `staleTime`、`refetchOnWindowFocus`。
+  - **详情由详情组件单独拉取与管理**：`PersonaDetail`、`SkillDetail` 内部分别使用 `getBySlug.useQuery`，MCP 详情页使用 `mcpApps.getBySlug.useQuery`（可在页面或 `McpDetail` 内），各组件自行处理 loading/error/空态，避免页面层与组件层状态重复。
 - **客户端 UI 状态（组件本地 state）**  
   - Personas 页 / Skills 页的「分类筛选」「搜索框」：保留在 `PersonasGrid` / `SkillGrid` 内用 `useState`；筛选与搜索在前端对当页已拉取的列表做过滤（与当前静态数据时的行为一致），减少接口参数复杂度。若后续需要服务端搜索，再扩展 `list` 的 `query` 参数即可。
 
@@ -186,6 +195,9 @@
 | **McpSections** | 改为 `trpc.marketplaceMcp.list.useQuery({ type: 'server', limit: 6 })`，与推荐逻辑分离，列表数据来自 marketplace 数据访问层。 |
 | **Personas 页** `(market)/personas/page.tsx` | 仍渲染 `PersonasGrid`；`PersonasGrid` 内使用 `trpc.marketplacePersonas.list.useQuery({ limit: 100 })`（或不分页一次拉取），用返回数据 + 本地 `selected`/`searchQuery` 做筛选与搜索后渲染。 |
 | **Skills 页** `(market)/skills/page.tsx` | 同理，`SkillGrid` 使用 `trpc.marketplaceSkills.list.useQuery`，本地筛选/搜索。 |
+| **Persona 详情页** `(market)/personas/[slug]/page.tsx` | 路由参数为 `slug`。页面仅负责布局（SiteHeader、main、SiteFooter），将 `slug` 传给 `PersonaDetail`。**状态由组件单独管理**：`PersonaDetail` 内部使用 `trpc.marketplacePersonas.getBySlug.useQuery({ slug })`，自行处理 loading/error/空态，并将 API 返回映射为前端 `Persona` 展示。 |
+| **Skill 详情页** `(market)/skills/[slug]/page.tsx` | 同上，`SkillDetail` 使用 `trpc.marketplaceSkills.getBySlug.useQuery({ slug })`，组件内管理加载/错误/空态与 DTO 映射。 |
+| **MCP 详情页** `(market)/mcp/[slug]/page.tsx` | 继续使用现有 `trpc.mcpApps.getBySlug.useQuery({ slug })`（与市场列表 `marketplaceMcp.list` 分离）。页面内管理 loading/error，将数据传给 `McpDetail`；若需与 Persona/Skill 一致，可改为由 `McpDetail` 接收 `slug` 并在组件内 useQuery。 |
 
 ### 5.3 数据类型与 DTO 映射
 
@@ -217,9 +229,14 @@
    - `PersonasGrid` / `SkillGrid`：改为对应 marketplace list useQuery，本地筛选/搜索。
    - 引入 DTO 映射：将 API 返回的 ListRow 映射为现有 `Persona`/`Skill`/卡片所需类型，保证卡片组件入参一致。
 
-4. **可选**
+4. **详情页数据访问与状态**
+   - Persona/Skill 详情页路由为 `[slug]`，使用 `getBySlug` 拉取数据。
+   - 详情组件（PersonaDetail、SkillDetail）内部使用 `getBySlug.useQuery`，**单独管理** loading/error/空态，并与列表页一样只依赖 tRPC 返回的 DTO；前端在组件内将 API 返回映射为现有 `Persona`/`Skill` 展示类型（如 category、tags、authorInfo）。
+   - 列表查询已按 3.2 只 SELECT 列表卡展示字段，保持列表查询高效；详情接口按需查全量及关联最小集（id、name、slug）。
+
+5. **可选**
    - 首页 Personas/Skills/MCP 数量徽章由 `list` 的 `total` 或单独 `count` procedure 提供。
-   - Persona/Skill 详情页改为调用 `getById`。
+   - 需要服务端 generateMetadata 时，可在服务端调用 `marketplaceDataAccess.getPersonaBySlug`/`getSkillBySlug` 或 tRPC caller 拉取标题与描述。
 
 ---
 

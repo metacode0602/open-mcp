@@ -350,14 +350,91 @@ export const marketplaceDataAccess = {
       db.select({ skillId: personaSkills.skillId }).from(personaSkills).where(eq(personaSkills.personaId, id)),
       db.select({ mcpAppId: personaMcpTools.mcpAppId }).from(personaMcpTools).where(eq(personaMcpTools.personaId, id)),
     ]);
+    const skillIds = skillLinks.map((l) => l.skillId);
+    const mcpAppIds = mcpLinks.map((l) => l.mcpAppId);
+    const [skillsMinimal, mcpAppsMinimal] = await Promise.all([
+      skillIds.length > 0
+        ? db
+            .select({ id: apps.id, name: apps.name, slug: apps.slug })
+            .from(apps)
+            .where(and(inArray(apps.id, skillIds), ...marketplaceBaseConditions))
+        : Promise.resolve([]),
+      mcpAppIds.length > 0
+        ? db
+            .select({ id: apps.id, name: apps.name, slug: apps.slug })
+            .from(apps)
+            .where(and(inArray(apps.id, mcpAppIds), ...marketplaceBaseConditions))
+        : Promise.resolve([]),
+    ]);
     return {
       ...app,
       category: app.categoryId
         ? { id: app.categoryId, name: app.categoryName!, slug: app.categorySlug! }
         : null,
       tags: tagRows,
-      skillIds: skillLinks.map((l) => l.skillId),
-      mcpAppIds: mcpLinks.map((l) => l.mcpAppId),
+      skillIds,
+      mcpAppIds,
+      skills: skillsMinimal,
+      mcpApps: mcpAppsMinimal,
+    };
+  },
+
+  getPersonaBySlug: async (slug: string) => {
+    const [app] = await db
+      .select({
+        id: apps.id,
+        slug: apps.slug,
+        name: apps.name,
+        description: apps.description,
+        descriptionZh: apps.descriptionZh,
+        features: apps.features,
+        tools: apps.tools,
+        verified: apps.verified,
+        ownerName: apps.ownerName,
+        categoryId: categories.id,
+        categoryName: categories.name,
+        categorySlug: categories.slug,
+      })
+      .from(apps)
+      .leftJoin(categories, eq(apps.categoryId, categories.id))
+      .where(and(eq(apps.slug, slug), eq(apps.type, "persona"), ...marketplaceBaseConditions));
+    if (!app) return null;
+    const id = app.id;
+    const [tagRows, skillLinks, mcpLinks] = await Promise.all([
+      db
+        .select({ id: tags.id, name: tags.name })
+        .from(appTags)
+        .innerJoin(tags, eq(appTags.tagId, tags.id))
+        .where(eq(appTags.appId, id)),
+      db.select({ skillId: personaSkills.skillId }).from(personaSkills).where(eq(personaSkills.personaId, id)),
+      db.select({ mcpAppId: personaMcpTools.mcpAppId }).from(personaMcpTools).where(eq(personaMcpTools.personaId, id)),
+    ]);
+    const skillIds = skillLinks.map((l) => l.skillId);
+    const mcpAppIds = mcpLinks.map((l) => l.mcpAppId);
+    const [skillsMinimal, mcpAppsMinimal] = await Promise.all([
+      skillIds.length > 0
+        ? db
+            .select({ id: apps.id, name: apps.name, slug: apps.slug })
+            .from(apps)
+            .where(and(inArray(apps.id, skillIds), ...marketplaceBaseConditions))
+        : Promise.resolve([]),
+      mcpAppIds.length > 0
+        ? db
+            .select({ id: apps.id, name: apps.name, slug: apps.slug })
+            .from(apps)
+            .where(and(inArray(apps.id, mcpAppIds), ...marketplaceBaseConditions))
+        : Promise.resolve([]),
+    ]);
+    return {
+      ...app,
+      category: app.categoryId
+        ? { id: app.categoryId, name: app.categoryName!, slug: app.categorySlug! }
+        : null,
+      tags: tagRows,
+      skillIds,
+      mcpAppIds,
+      skills: skillsMinimal,
+      mcpApps: mcpAppsMinimal,
     };
   },
 
@@ -391,14 +468,92 @@ export const marketplaceDataAccess = {
       db.select({ mcpAppId: skillMcpTools.mcpAppId }).from(skillMcpTools).where(eq(skillMcpTools.skillId, id)),
       db.select({ personaId: personaSkills.personaId }).from(personaSkills).where(eq(personaSkills.skillId, id)),
     ]);
+    const mcpAppIds = mcpLinks.map((l) => l.mcpAppId);
+    const personaIds = personaLinks.map((l) => l.personaId);
+    const [personasMinimal, mcpAppsMinimal] = await Promise.all([
+      personaIds.length > 0
+        ? db
+            .select({ id: apps.id, name: apps.name, slug: apps.slug })
+            .from(apps)
+            .where(and(inArray(apps.id, personaIds), ...marketplaceBaseConditions))
+        : Promise.resolve([]),
+      mcpAppIds.length > 0
+        ? db
+            .select({ id: apps.id, name: apps.name, slug: apps.slug })
+            .from(apps)
+            .where(and(inArray(apps.id, mcpAppIds), ...marketplaceBaseConditions))
+        : Promise.resolve([]),
+    ]);
     return {
       ...app,
       category: app.categoryId
         ? { id: app.categoryId, name: app.categoryName!, slug: app.categorySlug! }
         : null,
       tags: tagRows,
-      mcpAppIds: mcpLinks.map((l) => l.mcpAppId),
-      personaIds: personaLinks.map((l) => l.personaId),
+      mcpAppIds,
+      personaIds,
+      personas: personasMinimal,
+      mcpApps: mcpAppsMinimal,
+    };
+  },
+
+  getSkillBySlug: async (slug: string) => {
+    const [app] = await db
+      .select({
+        id: apps.id,
+        slug: apps.slug,
+        name: apps.name,
+        description: apps.description,
+        descriptionZh: apps.descriptionZh,
+        longDescription: apps.longDescription,
+        version: apps.version,
+        tools: apps.tools,
+        verified: apps.verified,
+        ownerName: apps.ownerName,
+        categoryId: categories.id,
+        categoryName: categories.name,
+        categorySlug: categories.slug,
+      })
+      .from(apps)
+      .leftJoin(categories, eq(apps.categoryId, categories.id))
+      .where(and(eq(apps.slug, slug), eq(apps.type, "skill"), ...marketplaceBaseConditions));
+    if (!app) return null;
+    const id = app.id;
+    const [tagRows, mcpLinks, personaLinks] = await Promise.all([
+      db
+        .select({ id: tags.id, name: tags.name })
+        .from(appTags)
+        .innerJoin(tags, eq(appTags.tagId, tags.id))
+        .where(eq(appTags.appId, id)),
+      db.select({ mcpAppId: skillMcpTools.mcpAppId }).from(skillMcpTools).where(eq(skillMcpTools.skillId, id)),
+      db.select({ personaId: personaSkills.personaId }).from(personaSkills).where(eq(personaSkills.skillId, id)),
+    ]);
+    const mcpAppIds = mcpLinks.map((l) => l.mcpAppId);
+    const personaIds = personaLinks.map((l) => l.personaId);
+    const [personasMinimal, mcpAppsMinimal] = await Promise.all([
+      personaIds.length > 0
+        ? db
+            .select({ id: apps.id, name: apps.name, slug: apps.slug })
+            .from(apps)
+            .where(and(inArray(apps.id, personaIds), ...marketplaceBaseConditions))
+        : Promise.resolve([]),
+      mcpAppIds.length > 0
+        ? db
+            .select({ id: apps.id, name: apps.name, slug: apps.slug })
+            .from(apps)
+            .where(and(inArray(apps.id, mcpAppIds), ...marketplaceBaseConditions))
+        : Promise.resolve([]),
+    ]);
+    return {
+      ...app,
+      category: app.categoryId
+        ? { id: app.categoryId, name: app.categoryName!, slug: app.categorySlug! }
+        : null,
+      tags: tagRows,
+      mcpAppIds,
+      personaIds,
+      personas: personasMinimal,
+      mcpApps: mcpAppsMinimal,
     };
   },
 };

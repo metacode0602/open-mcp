@@ -26,4 +26,10 @@ export const marketplaceSkillsRouter = router({
     .query(async ({ input }) => {
       return marketplaceDataAccess.getSkillById(input.id);
     }),
+
+  getBySlug: publicProcedure
+    .input(z.object({ slug: z.string() }))
+    .query(async ({ input }) => {
+      return marketplaceDataAccess.getSkillBySlug(input.slug);
+    }),
 });

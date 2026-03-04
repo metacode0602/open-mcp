@@ -3,6 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
+import { AlertCircle } from "lucide-react"
 import {
   ArrowLeft,
   Users,
@@ -29,6 +30,7 @@ import {
   Headphones,
   Settings,
 } from "lucide-react"
+import { Button } from "@repo/ui/components/ui/button"
 import { CopyButton } from "@/components/copy-button"
 import { PriceTag } from "../../components/price-tag"
 import { PurchaseButton } from "../../components/purchase-button"
@@ -37,7 +39,9 @@ import {
   difficultyLabels,
   type Persona,
 } from "@/lib/types/personas"
-import { getSkillsByIds, skillCategories } from "@/lib/types/skills"
+import { getSkillsByIds, skillCategories, type Skill } from "@/lib/types/skills"
+import { mapPersonaApiToPersona } from "@/lib/marketplace-dto"
+import { trpc } from "@/lib/trpc/client"
 import { cn } from "@repo/ui/lib/utils"
 
 const categoryIcons: Record<string, React.ReactNode> = {
@@ -76,8 +80,61 @@ function formatDate(dateStr: string): string {
   return d.toLocaleDateString("zh-CN")
 }
 
-export function PersonaDetail({ persona }: { persona: Persona }) {
+const PersonaDetailSkeleton = () => (
+  <div className="mx-auto max-w-4xl px-6 py-10">
+    <div className="mb-8 h-5 w-48 animate-pulse rounded bg-muted" />
+    <div className="mb-6 h-10 w-64 animate-pulse rounded bg-muted" />
+    <div className="space-y-4">
+      <div className="h-24 w-full animate-pulse rounded-xl bg-muted" />
+      <div className="h-32 w-full animate-pulse rounded-xl bg-muted" />
+    </div>
+  </div>
+)
+
+type PersonaDetailProps =
+  | { slug: string; persona?: never }
+  | { slug?: never; persona: Persona }
+
+export function PersonaDetail(props: PersonaDetailProps) {
   const [displayLang, setDisplayLang] = useState<"zh" | "en">("zh")
+
+  const { data: apiData, isLoading, error } = trpc.marketplacePersonas.getBySlug.useQuery(
+    { slug: props.slug! },
+    { enabled: !!props.slug }
+  )
+
+  const persona: Persona | null = props.persona
+    ? props.persona
+    : apiData
+      ? mapPersonaApiToPersona(apiData as Parameters<typeof mapPersonaApiToPersona>[0])
+      : null
+
+  if (props.slug) {
+    if (isLoading) return <PersonaDetailSkeleton />
+    if (error)
+      return (
+        <div className="mx-auto max-w-4xl px-6 py-16 text-center">
+          <AlertCircle className="mx-auto mb-4 h-12 w-12 text-destructive" />
+          <h2 className="mb-2 text-xl font-semibold">加载失败</h2>
+          <p className="mb-6 text-muted-foreground">{error.message}</p>
+          <Button onClick={() => window.location.reload()} variant="outline">
+            重试
+          </Button>
+        </div>
+      )
+    if (!persona)
+      return (
+        <div className="mx-auto max-w-4xl px-6 py-16 text-center">
+          <h2 className="mb-2 text-2xl font-bold">配置包不存在</h2>
+          <p className="mb-6 text-muted-foreground">未找到该配置包，可能已被删除或从未存在。</p>
+          <Button asChild>
+            <Link href="/personas">返回 AI 员工</Link>
+          </Button>
+        </div>
+      )
+  } else if (!persona) {
+    return null
+  }
 
   const cat = personaCategories[persona.category]
   const diff = persona.difficulty ? difficultyLabels[persona.difficulty] : null
@@ -105,7 +162,10 @@ export function PersonaDetail({ persona }: { persona: Persona }) {
       ? persona.i18n.effect_en
       : persona.effect)
 
-  const relatedSkills = persona.skillIds ? getSkillsByIds(persona.skillIds) : []
+  const relatedSkillsFromApi = persona.relatedSkills
+  const relatedSkillsFull = persona.skillIds ? getSkillsByIds(persona.skillIds) : []
+  const hasRelatedFromApi = relatedSkillsFromApi && relatedSkillsFromApi.length > 0
+  const relatedSkills = hasRelatedFromApi ? relatedSkillsFromApi : relatedSkillsFull
 
   const sectionLabels = {
     scenario: displayLang === "en" ? "Scenario" : "场景描述",
@@ -430,29 +490,47 @@ export function PersonaDetail({ persona }: { persona: Persona }) {
             {sectionLabels.usedSkills}
           </h2>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {relatedSkills.map((skill) => {
-              const sCat = skillCategories[skill.category]
-              return (
-                <Link
-                  key={skill.id}
-                  href={`/skills/${skill.id}`}
-                  className="group flex items-center gap-3 rounded-xl border border-border bg-card p-4 transition-all hover:border-primary/40 hover:bg-accent/50"
-                >
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                    {skillCatIcons[sCat.icon]}
-                  </div>
-                  <div className="flex-1 overflow-hidden">
-                    <p className="truncate text-sm font-semibold text-foreground transition-colors group-hover:text-primary">
-                      {skill.name}
-                    </p>
-                    <p className="truncate text-xs text-muted-foreground">
-                      {sCat.label} &middot; v{skill.version}
-                    </p>
-                  </div>
-                  <ArrowRight className="h-3.5 w-3.5 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
-                </Link>
-              )
-            })}
+            {hasRelatedFromApi
+              ? (relatedSkills as { id: string; name: string; slug: string }[]).map((skill) => (
+                  <Link
+                    key={skill.id}
+                    href={`/skills/${skill.slug}`}
+                    className="group flex items-center gap-3 rounded-xl border border-border bg-card p-4 transition-all hover:border-primary/40 hover:bg-accent/50"
+                  >
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                      <Plug className="h-4 w-4" />
+                    </div>
+                    <div className="flex-1 overflow-hidden">
+                      <p className="truncate text-sm font-semibold text-foreground transition-colors group-hover:text-primary">
+                        {skill.name}
+                      </p>
+                    </div>
+                    <ArrowRight className="h-3.5 w-3.5 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
+                  </Link>
+                ))
+              : (relatedSkills as Skill[]).map((skill) => {
+                  const sCat = skillCategories[skill.category]
+                  return (
+                    <Link
+                      key={skill.id}
+                      href={`/skills/${skill.id}`}
+                      className="group flex items-center gap-3 rounded-xl border border-border bg-card p-4 transition-all hover:border-primary/40 hover:bg-accent/50"
+                    >
+                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                        {skillCatIcons[sCat.icon]}
+                      </div>
+                      <div className="flex-1 overflow-hidden">
+                        <p className="truncate text-sm font-semibold text-foreground transition-colors group-hover:text-primary">
+                          {skill.name}
+                        </p>
+                        <p className="truncate text-xs text-muted-foreground">
+                          {sCat.label} &middot; v{skill.version}
+                        </p>
+                      </div>
+                      <ArrowRight className="h-3.5 w-3.5 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
+                    </Link>
+                  )
+                })}
           </div>
         </section>
       )}

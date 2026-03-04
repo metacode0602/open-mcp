@@ -41,7 +41,7 @@ export function PersonaCard({ persona }: PersonaCardProps) {
 
   return (
     <Link
-      href={`/personas/${persona.id}`}
+      href={`/personas/${persona.slug ?? persona.id}`}
       className="group flex flex-col rounded-xl border border-border bg-card p-6 transition-all hover:border-primary/40 hover:bg-accent/50"
     >
       <div className="mb-4 flex items-center justify-between">

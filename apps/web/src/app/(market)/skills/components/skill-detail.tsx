@@ -3,6 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
+import { AlertCircle } from "lucide-react"
 import {
   ArrowLeft,
   Database,
@@ -22,11 +23,14 @@ import {
   Tag,
   ArrowRight,
 } from "lucide-react"
+import { Button } from "@repo/ui/components/ui/button"
 import { CopyButton } from "@/components/copy-button"
 import { PriceTag } from "../../components/price-tag"
 import { PurchaseButton } from "../../components/purchase-button"
 import { skillCategories, type Skill } from "@/lib/types"
 import { getPersonaById, type Persona } from "@/lib/types/personas"
+import { mapSkillApiToSkill } from "@/lib/marketplace-dto"
+import { trpc } from "@/lib/trpc/client"
 
 const categoryIcons: Record<string, React.ReactNode> = {
   Database: <Database className="h-5 w-5" />,
@@ -52,8 +56,64 @@ function formatDate(dateStr: string): string {
   return d.toLocaleDateString("zh-CN")
 }
 
-export function SkillDetail({ skill }: { skill: Skill }) {
+const SkillDetailSkeleton = () => (
+  <div className="mx-auto max-w-7xl px-6 py-10">
+    <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_320px]">
+      <div className="space-y-6">
+        <div className="h-6 w-32 animate-pulse rounded bg-muted" />
+        <div className="h-10 w-3/4 animate-pulse rounded bg-muted" />
+        <div className="h-24 w-full animate-pulse rounded-xl bg-muted" />
+      </div>
+      <div className="space-y-6">
+        <div className="h-32 animate-pulse rounded-xl bg-muted" />
+        <div className="h-48 animate-pulse rounded-xl bg-muted" />
+      </div>
+    </div>
+  </div>
+)
+
+type SkillDetailProps = { slug: string; skill?: never } | { slug?: never; skill: Skill }
+
+export function SkillDetail(props: SkillDetailProps) {
   const [displayLang, setDisplayLang] = useState<"zh" | "en">("zh")
+
+  const { data: apiData, isLoading, error } = trpc.marketplaceSkills.getBySlug.useQuery(
+    { slug: props.slug! },
+    { enabled: !!props.slug }
+  )
+
+  const skill: Skill | null = props.skill
+    ? props.skill
+    : apiData
+      ? mapSkillApiToSkill(apiData as Parameters<typeof mapSkillApiToSkill>[0])
+      : null
+
+  if (props.slug) {
+    if (isLoading) return <SkillDetailSkeleton />
+    if (error)
+      return (
+        <div className="mx-auto max-w-7xl px-6 py-16 text-center">
+          <AlertCircle className="mx-auto mb-4 h-12 w-12 text-destructive" />
+          <h2 className="mb-2 text-xl font-semibold">加载失败</h2>
+          <p className="mb-6 text-muted-foreground">{error.message}</p>
+          <Button onClick={() => window.location.reload()} variant="outline">
+            重试
+          </Button>
+        </div>
+      )
+    if (!skill)
+      return (
+        <div className="mx-auto max-w-7xl px-6 py-16 text-center">
+          <h2 className="mb-2 text-2xl font-bold">Skill 不存在</h2>
+          <p className="mb-6 text-muted-foreground">未找到该 Skill，可能已被删除或从未存在。</p>
+          <Button asChild>
+            <Link href="/skills">返回 Skills</Link>
+          </Button>
+        </div>
+      )
+  } else if (!skill) {
+    return null
+  }
 
   const cat = skillCategories[skill.category]
   const hasEnglish = skill.i18n && skill.i18n.name_en
@@ -62,9 +122,12 @@ export function SkillDetail({ skill }: { skill: Skill }) {
   const description = displayLang === "en" && skill.i18n?.description_en ? skill.i18n.description_en : skill.description
   const longDescription = displayLang === "en" && skill.i18n?.longDescription_en ? skill.i18n.longDescription_en : skill.longDescription
 
-  const relatedPersonas: Persona[] = skill.personaIds
+  const relatedPersonasFromApi = skill.relatedPersonas
+  const relatedPersonasFull: Persona[] = skill.personaIds
     ? skill.personaIds.map((id) => getPersonaById(id)).filter((p): p is Persona => p != null)
     : []
+  const hasRelatedFromApi = relatedPersonasFromApi && relatedPersonasFromApi.length > 0
+  const relatedPersonas = hasRelatedFromApi ? relatedPersonasFromApi : relatedPersonasFull
 
   const labels = {
     back: displayLang === "en" ? "Back to Skills" : "返回 Skills 仓库",
@@ -204,23 +267,38 @@ export function SkillDetail({ skill }: { skill: Skill }) {
                 {labels.relatedCases}
               </h2>
               <div className="grid gap-4 sm:grid-cols-2">
-                {relatedPersonas.map((p) => (
-                  <Link
-                    key={p.id}
-                    href={`/personas/${p.id}`}
-                    className="group flex items-center gap-4 rounded-xl border border-border bg-card p-5 transition-all hover:border-primary/40 hover:bg-accent/50"
-                  >
-                    <div className="flex-1">
-                      <h4 className="mb-1 text-sm font-semibold text-foreground transition-colors group-hover:text-primary">
-                        {p.name}
-                      </h4>
-                      <p className="line-clamp-2 text-xs leading-relaxed text-muted-foreground">
-                        {p.description}
-                      </p>
-                    </div>
-                    <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-primary" />
-                  </Link>
-                ))}
+                {hasRelatedFromApi
+                  ? (relatedPersonas as { id: string; name: string; slug: string }[]).map((p) => (
+                      <Link
+                        key={p.id}
+                        href={`/personas/${p.slug}`}
+                        className="group flex items-center gap-4 rounded-xl border border-border bg-card p-5 transition-all hover:border-primary/40 hover:bg-accent/50"
+                      >
+                        <div className="flex-1">
+                          <h4 className="mb-1 text-sm font-semibold text-foreground transition-colors group-hover:text-primary">
+                            {p.name}
+                          </h4>
+                        </div>
+                        <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-primary" />
+                      </Link>
+                    ))
+                  : (relatedPersonas as Persona[]).map((p) => (
+                      <Link
+                        key={p.id}
+                        href={`/personas/${p.slug ?? p.id}`}
+                        className="group flex items-center gap-4 rounded-xl border border-border bg-card p-5 transition-all hover:border-primary/40 hover:bg-accent/50"
+                      >
+                        <div className="flex-1">
+                          <h4 className="mb-1 text-sm font-semibold text-foreground transition-colors group-hover:text-primary">
+                            {p.name}
+                          </h4>
+                          <p className="line-clamp-2 text-xs leading-relaxed text-muted-foreground">
+                            {p.description}
+                          </p>
+                        </div>
+                        <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-primary" />
+                      </Link>
+                    ))}
               </div>
             </section>
           )}

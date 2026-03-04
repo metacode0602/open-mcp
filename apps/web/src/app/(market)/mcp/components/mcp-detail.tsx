@@ -30,6 +30,7 @@ import { SuggestionDialog } from "@/components/suggestion-dialog"
 import { AppGitHubCard } from "@/components/web/app-github-card"
 import { AppVersionDialog } from "@/components/web/app-release-dialog"
 import { formatDate, formatNumber, getAssetUrl } from "@/lib/utils"
+import { trpc } from "@/lib/trpc/client"
 
 export type McpDetailApp = {
   id: string
@@ -78,7 +79,45 @@ const AppDetailSkeleton = () => (
   </div>
 )
 
-export function McpDetail({ app }: { app: McpDetailApp }) {
+type McpDetailProps =
+  | { slug: string; app?: never }
+  | { slug?: never; app: McpDetailApp }
+
+export function McpDetail(props: McpDetailProps) {
+  const { data: appData, isLoading, error } = trpc.mcpApps.getBySlug.useQuery(
+    { slug: props.slug! },
+    { enabled: !!props.slug }
+  )
+
+  const app: McpDetailApp | null = props.app ?? (appData as McpDetailApp | undefined) ?? null
+
+  if (props.slug) {
+    if (isLoading) return <AppDetailSkeleton />
+    if (error)
+      return (
+        <div className="mx-auto max-w-7xl px-6 py-16 text-center">
+          <AlertCircle className="mx-auto mb-4 h-12 w-12 text-destructive" />
+          <h2 className="mb-2 text-xl font-semibold">加载失败</h2>
+          <p className="mb-6 text-muted-foreground">{error.message}</p>
+          <Button onClick={() => window.location.reload()} variant="outline">
+            重试
+          </Button>
+        </div>
+      )
+    if (!app)
+      return (
+        <div className="mx-auto max-w-7xl px-6 py-16 text-center">
+          <h2 className="mb-2 text-2xl font-bold">应用不存在</h2>
+          <p className="mb-6 text-muted-foreground">找不到该应用，它可能已被删除或从未存在过。</p>
+          <Button asChild>
+            <Link href="/mcp">返回 MCP</Link>
+          </Button>
+        </div>
+      )
+  } else if (!app) {
+    return null
+  }
+
   const tagList = (app.tags ?? []).filter((t): t is { id: string; name: string } => t != null)
   const typeLabel = app.type === "client" ? "客户端" : app.type === "server" ? "服务器" : "应用"
   const backHref = app.type === "server" ? "/category/server" : app.type === "client" ? "/category/client" : "/"
