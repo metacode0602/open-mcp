@@ -198,6 +198,7 @@ export const difficultyLabels: Record<string, { label: string; color: string }> 
 //   },
 // ]
 
-// export function getPersonaById(id: string): Persona | undefined {
-//   return personas.find((p) => p.id === id)
-// }
+/** 按 ID 返回 Persona（静态数据已迁移至 API，仅保留空实现供详情页兼容） */
+export function getPersonaById(_id: string): Persona | undefined {
+  return undefined
+}

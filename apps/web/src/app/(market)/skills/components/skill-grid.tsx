@@ -4,14 +4,19 @@ import { useState, useMemo } from "react"
 import { Search } from "lucide-react"
 import { SkillCategoryFilter } from "./skill-category-filter"
 import { SkillCard } from "./skill-card"
-import { skillCategories, type SkillCategory } from "@/lib/types"
 import { trpc } from "@/lib/trpc/client"
+import { useSkillCategories } from "@/lib/use-marketplace-categories"
 import { mapSkillListRowToSkill } from "../../lib/map-marketplace"
 import { Skeleton } from "@repo/ui/components/ui/skeleton"
 
 export function SkillGrid() {
-  const [selected, setSelected] = useState<SkillCategory | "all">("all")
+  const [selected, setSelected] = useState<string | "all">("all")
   const [searchQuery, setSearchQuery] = useState("")
+  const { categories: skillCategories, categoriesList } = useSkillCategories()
+  const defaultCat =
+    categoriesList[0]
+      ? { label: categoriesList[0].name, icon: categoriesList[0].icon ?? "Wrench" }
+      : { label: "其他", icon: "Wrench" }
 
   const { data, isLoading } = trpc.marketplaceSkills.list.useQuery(
     { limit: 500 },
@@ -96,7 +101,7 @@ export function SkillGrid() {
       {filtered.length > 0 ? (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((s) => (
-            <SkillCard key={s.id} skill={s} />
+            <SkillCard key={s.id} skill={s} categories={skillCategories} defaultCat={defaultCat} />
           ))}
         </div>
       ) : (

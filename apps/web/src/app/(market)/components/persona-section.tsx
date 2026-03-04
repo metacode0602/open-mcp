@@ -11,10 +11,11 @@ import {
   Check,
   ArrowRight,
 } from "lucide-react"
-import { personaCategories, type Persona } from "@/lib/types"
+import { type Persona } from "@/lib/types"
 import { PriceTag } from "./price-tag"
 import { trpc } from "@/lib/trpc/client"
 import { mapPersonaListRowToPersona } from "../lib/map-marketplace"
+import { usePersonaCategories } from "@/lib/use-marketplace-categories"
 import { Skeleton } from "@repo/ui/components/ui/skeleton"
 import { Alert, AlertDescription, AlertTitle } from "@repo/ui/components/ui/alert"
 import { Button } from "@repo/ui/components/ui/button"
@@ -30,8 +31,16 @@ const categoryIcons: Record<string, React.ReactNode> = {
   Settings: <Settings className="h-4 w-4" />,
 }
 
-function PersonaCard({ persona }: { persona: Persona }) {
-  const cat = personaCategories[persona.category] ?? personaCategories.operations
+function PersonaCard({
+  persona,
+  categories,
+  defaultCat,
+}: {
+  persona: Persona
+  categories: Record<string, { label: string; icon: string; description?: string }>
+  defaultCat: { label: string; icon: string }
+}) {
+  const cat = categories[persona.category] ?? defaultCat
 
   return (
     <div className="group flex flex-col rounded-xl border border-border bg-card p-6 transition-all hover:border-primary/40 hover:bg-accent/50">
@@ -150,6 +159,11 @@ export function PersonaSection() {
   }
 
   const personas = (data?.items ?? []).map(mapPersonaListRowToPersona)
+  const { categories, categoriesList } = usePersonaCategories()
+  const defaultCat =
+    categoriesList[0]
+      ? { label: categoriesList[0].name, icon: categoriesList[0].icon ?? "Settings" }
+      : { label: "其他", icon: "Settings" }
 
   return (
     <section id="marketplace" className="border-border py-16">
@@ -174,7 +188,7 @@ export function PersonaSection() {
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {personas.map((persona) => (
-            <PersonaCard key={persona.id} persona={persona} />
+            <PersonaCard key={persona.id} persona={persona} categories={categories} defaultCat={defaultCat} />
           ))}
         </div>
       </div>

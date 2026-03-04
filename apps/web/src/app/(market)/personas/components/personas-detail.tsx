@@ -34,13 +34,10 @@ import { Button } from "@repo/ui/components/ui/button"
 import { CopyButton } from "@/components/copy-button"
 import { PriceTag } from "../../components/price-tag"
 import { PurchaseButton } from "../../components/purchase-button"
-import {
-  personaCategories,
-  difficultyLabels,
-  type Persona,
-} from "@/lib/types/personas"
-import { getSkillsByIds, skillCategories, type Skill } from "@/lib/types/skills"
+import { difficultyLabels, type Persona } from "@/lib/types/personas"
+import { getSkillsByIds, type Skill } from "@/lib/types/skills"
 import { mapPersonaApiToPersona } from "@/lib/marketplace-dto"
+import { usePersonaCategories, useSkillCategories } from "@/lib/use-marketplace-categories"
 import { trpc } from "@/lib/trpc/client"
 import { cn } from "@repo/ui/lib/utils"
 
@@ -97,6 +94,8 @@ type PersonaDetailProps =
 
 export function PersonaDetail(props: PersonaDetailProps) {
   const [displayLang, setDisplayLang] = useState<"zh" | "en">("zh")
+  const { categories: personaCategories } = usePersonaCategories()
+  const { categories: skillCategories } = useSkillCategories()
 
   const { data: apiData, isLoading, error } = trpc.marketplacePersonas.getBySlug.useQuery(
     { slug: props.slug! },
@@ -136,7 +135,18 @@ export function PersonaDetail(props: PersonaDetailProps) {
     return null
   }
 
-  const cat = personaCategories[persona.category]
+  const personaValues = Object.values(personaCategories)
+  const personaDefaultCat =
+    personaValues[0] != null
+      ? { label: personaValues[0].label, icon: personaValues[0].icon }
+      : { label: "其他", icon: "Settings" }
+  const skillValues = Object.values(skillCategories)
+  const skillDefaultCat =
+    skillValues[0] != null
+      ? { label: skillValues[0].label, icon: skillValues[0].icon }
+      : { label: "其他", icon: "Wrench" }
+
+  const cat = personaCategories[persona.category] ?? personaDefaultCat
   const diff = persona.difficulty ? difficultyLabels[persona.difficulty] : null
   const hasEnglish = persona.i18n && persona.i18n.name_en
 
@@ -216,7 +226,7 @@ export function PersonaDetail(props: PersonaDetailProps) {
       <div className="mb-10">
         <div className="mb-4 flex flex-wrap items-center gap-3">
           <div className="flex items-center gap-2 rounded-lg bg-primary/10 px-3 py-1.5 text-primary">
-            {categoryIcons[cat.icon]}
+            {categoryIcons[cat.icon] ?? categoryIcons.Settings}
             <span className="text-sm font-medium">{cat.label}</span>
           </div>
           {diff && (
@@ -509,7 +519,7 @@ export function PersonaDetail(props: PersonaDetailProps) {
                   </Link>
                 ))
               : (relatedSkills as Skill[]).map((skill) => {
-                  const sCat = skillCategories[skill.category]
+                  const sCat = skillCategories[skill.category] ?? skillDefaultCat
                   return (
                     <Link
                       key={skill.id}
@@ -517,7 +527,7 @@ export function PersonaDetail(props: PersonaDetailProps) {
                       className="group flex items-center gap-3 rounded-xl border border-border bg-card p-4 transition-all hover:border-primary/40 hover:bg-accent/50"
                     >
                       <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                        {skillCatIcons[sCat.icon]}
+                        {skillCatIcons[sCat.icon] ?? skillCatIcons.Wrench}
                       </div>
                       <div className="flex-1 overflow-hidden">
                         <p className="truncate text-sm font-semibold text-foreground transition-colors group-hover:text-primary">

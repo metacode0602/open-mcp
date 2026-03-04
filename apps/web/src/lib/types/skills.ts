@@ -414,9 +414,10 @@ export interface Skill {
 //   return skills.filter((s) => s.category === category)
 // }
 
-// export function getSkillsByIds(ids: string[]): Skill[] {
-//   return skills.filter((s) => ids.includes(s.id))
-// }
+/** 按 ID 列表返回 Skill（静态数据已迁移至 API，仅保留空实现供详情页兼容） */
+export function getSkillsByIds(ids: string[]): Skill[] {
+  return []
+}
 
 // export function getPersonaIdsForSkill(skillId: string): string[] {
 //   const skill = getSkillById(skillId)

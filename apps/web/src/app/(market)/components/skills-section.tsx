@@ -1,6 +1,6 @@
 "use client"
 
-import { skillCategories, type Skill } from "@/lib/types"
+import { type Skill } from "@/lib/types"
 import {
   Database,
   Brain,
@@ -16,6 +16,7 @@ import Link from "next/link"
 import { PriceTag } from "./price-tag"
 import { trpc } from "@/lib/trpc/client"
 import { mapSkillListRowToSkill } from "../lib/map-marketplace"
+import { useSkillCategories } from "@/lib/use-marketplace-categories"
 import { Skeleton } from "@repo/ui/components/ui/skeleton"
 import { Alert, AlertDescription, AlertTitle } from "@repo/ui/components/ui/alert"
 import { Button } from "@repo/ui/components/ui/button"
@@ -32,8 +33,16 @@ const categoryIcons: Record<string, React.ReactNode> = {
   Wrench: <Wrench className="h-4 w-4" />,
 }
 
-function SkillCard({ skill }: { skill: Skill }) {
-  const cat = skillCategories[skill.category] ?? skillCategories["general-tools"]
+function SkillCard({
+  skill,
+  categories,
+  defaultCat,
+}: {
+  skill: Skill
+  categories: Record<string, { label: string; icon: string; description?: string }>
+  defaultCat: { label: string; icon: string }
+}) {
+  const cat = categories[skill.category] ?? defaultCat
 
   return (
     <Link
@@ -162,6 +171,11 @@ export function SkillsSection() {
   }
 
   const skills = (data?.items ?? []).map(mapSkillListRowToSkill)
+  const { categories, categoriesList } = useSkillCategories()
+  const defaultCat =
+    categoriesList[0]
+      ? { label: categoriesList[0].name, icon: categoriesList[0].icon ?? "Wrench" }
+      : { label: "其他", icon: "Wrench" }
 
   return (
     <section id="skills" className="border-border py-16">
@@ -186,7 +200,7 @@ export function SkillsSection() {
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {skills.map((skill) => (
-            <SkillCard key={skill.id} skill={skill} />
+            <SkillCard key={skill.id} skill={skill} categories={categories} defaultCat={defaultCat} />
           ))}
         </div>
       </div>

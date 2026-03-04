@@ -2,7 +2,6 @@
 
 import { Users, Sparkles, Zap, BookOpen, LayoutGrid, Crown, Code, Megaphone, Headphones, Settings } from "lucide-react"
 import { cn } from "@repo/ui/lib/utils"
-import type { PersonaCategory } from "@/lib/types/personas"
 
 const icons: Record<string, React.ReactNode> = {
   Users: <Users className="h-4 w-4" />,
@@ -17,9 +16,9 @@ const icons: Record<string, React.ReactNode> = {
 }
 
 interface CategoryFilterProps {
-  categories: Record<PersonaCategory, { label: string; icon: string }>
-  selected: PersonaCategory | "all"
-  onSelect: (category: PersonaCategory | "all") => void
+  categories: Record<string, { label: string; icon: string; description?: string }>
+  selected: string | "all"
+  onSelect: (category: string | "all") => void
   counts: Record<string, number>
 }
 
@@ -40,8 +39,7 @@ export function CategoryFilter({ categories, selected, onSelect, counts }: Categ
         <span className="ml-1 rounded-md bg-background px-1.5 py-0.5 text-xs">{counts.all}</span>
       </button>
 
-      {(Object.entries(categories) as [PersonaCategory, { label: string; icon: string }][]).map(
-        ([key, { label, icon }]) => (
+      {Object.entries(categories).map(([key, { label, icon }]) => (
           <button
             key={key}
             onClick={() => onSelect(key)}
@@ -58,8 +56,7 @@ export function CategoryFilter({ categories, selected, onSelect, counts }: Categ
               {counts[key] || 0}
             </span>
           </button>
-        )
-      )}
+        ))}
     </div>
   )
 }

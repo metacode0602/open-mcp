@@ -2,7 +2,6 @@
 
 import { Database, Brain, Plug, FileOutput, Wrench, LayoutGrid } from "lucide-react"
 import { cn } from "@repo/ui/lib/utils"
-import type { SkillCategory } from "@/lib/types"
 
 const icons: Record<string, React.ReactNode> = {
   Database: <Database className="h-4 w-4" />,
@@ -13,9 +12,9 @@ const icons: Record<string, React.ReactNode> = {
 }
 
 interface SkillCategoryFilterProps {
-  categories: Record<SkillCategory, { label: string; icon: string; description: string }>
-  selected: SkillCategory | "all"
-  onSelect: (category: SkillCategory | "all") => void
+  categories: Record<string, { label: string; icon: string; description?: string }>
+  selected: string | "all"
+  onSelect: (category: string | "all") => void
   counts: Record<string, number>
 }
 
@@ -36,8 +35,7 @@ export function SkillCategoryFilter({ categories, selected, onSelect, counts }: 
         <span className="ml-1 rounded-md bg-background px-1.5 py-0.5 text-xs">{counts.all}</span>
       </button>
 
-      {(Object.entries(categories) as [SkillCategory, { label: string; icon: string; description: string }][]).map(
-        ([key, { label, icon }]) => (
+      {Object.entries(categories).map(([key, { label, icon }]) => (
           <button
             key={key}
             onClick={() => onSelect(key)}
@@ -54,8 +52,7 @@ export function SkillCategoryFilter({ categories, selected, onSelect, counts }: 
               {counts[key] || 0}
             </span>
           </button>
-        )
-      )}
+        ))}
     </div>
   )
 }

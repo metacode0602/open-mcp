@@ -4,14 +4,19 @@ import { useState, useMemo } from "react"
 import { Search } from "lucide-react"
 import { CategoryFilter } from "../../components/category-filter"
 import { PersonaCard } from "./personas-card"
-import { personaCategories, type PersonaCategory } from "@/lib/types/personas"
 import { trpc } from "@/lib/trpc/client"
+import { usePersonaCategories } from "@/lib/use-marketplace-categories"
 import { mapPersonaListRowToPersona } from "../../lib/map-marketplace"
 import { Skeleton } from "@repo/ui/components/ui/skeleton"
 
 export function PersonasGrid() {
-  const [selected, setSelected] = useState<PersonaCategory | "all">("all")
+  const [selected, setSelected] = useState<string | "all">("all")
   const [searchQuery, setSearchQuery] = useState("")
+  const { categories: personaCategories, categoriesList } = usePersonaCategories()
+  const defaultCat =
+    categoriesList[0]
+      ? { label: categoriesList[0].name, icon: categoriesList[0].icon ?? "Settings" }
+      : { label: "其他", icon: "Settings" }
 
   const { data, isLoading } = trpc.marketplacePersonas.list.useQuery(
     { limit: 500 },
@@ -97,7 +102,7 @@ export function PersonasGrid() {
       {filtered.length > 0 ? (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((p) => (
-            <PersonaCard key={p.id} persona={p} />
+            <PersonaCard key={p.id} persona={p} categories={personaCategories} defaultCat={defaultCat} />
           ))}
         </div>
       ) : (

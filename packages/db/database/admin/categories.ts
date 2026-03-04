@@ -165,6 +165,23 @@ export const categoriesDataAccess = {
     return [];
   },
 
+  /** 按父级 slug 获取一级子分类（仅返回 id, name, slug, icon, description），用于市场页 Skill/Persona 分类筛选 */
+  getChildrenByParentSlug: async (parentSlug: string) => {
+    const parent = await db.query.categories.findFirst({
+      where: eq(schema.categories.slug, parentSlug),
+      columns: { id: true },
+    });
+    if (!parent) return [];
+    const rows = await db.query.categories.findMany({
+      where: and(
+        eq(schema.categories.parentId, parent.id),
+        eq(schema.categories.status, "online")
+      ),
+      columns: { id: true, name: true, slug: true, icon: true, description: true },
+    });
+    return rows;
+  },
+
   // 获取分类
   getBySlug: async (slug: string) => {
     return db.query.categories.findFirst({

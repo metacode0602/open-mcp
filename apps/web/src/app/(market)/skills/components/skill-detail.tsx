@@ -27,9 +27,10 @@ import { Button } from "@repo/ui/components/ui/button"
 import { CopyButton } from "@/components/copy-button"
 import { PriceTag } from "../../components/price-tag"
 import { PurchaseButton } from "../../components/purchase-button"
-import { skillCategories, type Skill } from "@/lib/types"
+import { type Skill } from "@/lib/types"
 import { getPersonaById, type Persona } from "@/lib/types/personas"
 import { mapSkillApiToSkill } from "@/lib/marketplace-dto"
+import { useSkillCategories } from "@/lib/use-marketplace-categories"
 import { trpc } from "@/lib/trpc/client"
 
 const categoryIcons: Record<string, React.ReactNode> = {
@@ -76,6 +77,7 @@ type SkillDetailProps = { slug: string; skill?: never } | { slug?: never; skill:
 
 export function SkillDetail(props: SkillDetailProps) {
   const [displayLang, setDisplayLang] = useState<"zh" | "en">("zh")
+  const { categories: skillCategories } = useSkillCategories()
 
   const { data: apiData, isLoading, error } = trpc.marketplaceSkills.getBySlug.useQuery(
     { slug: props.slug! },
@@ -115,7 +117,12 @@ export function SkillDetail(props: SkillDetailProps) {
     return null
   }
 
-  const cat = skillCategories[skill.category]
+  const skillValues = Object.values(skillCategories)
+  const defaultCat =
+    skillValues[0] != null
+      ? { label: skillValues[0].label, icon: skillValues[0].icon }
+      : { label: "其他", icon: "Wrench" }
+  const cat = skillCategories[skill.category] ?? defaultCat
   const hasEnglish = skill.i18n && skill.i18n.name_en
 
   const name = displayLang === "en" && skill.i18n?.name_en ? skill.i18n.name_en : skill.name
@@ -161,7 +168,7 @@ export function SkillDetail(props: SkillDetailProps) {
           <div className="mb-10">
             <div className="mb-4 flex flex-wrap items-center gap-3">
               <div className="flex items-center gap-2 rounded-lg bg-primary/10 px-3 py-1.5 text-primary">
-                {categoryIcons[cat.icon]}
+                {categoryIcons[cat.icon] ?? categoryIcons.Wrench}
                 <span className="text-sm font-medium">{cat.label}</span>
               </div>
               <span className="rounded-md bg-secondary px-2.5 py-1 font-mono text-sm text-muted-foreground">

@@ -12,7 +12,6 @@ import {
   Tag,
 } from "lucide-react"
 import type { Skill } from "@/lib/types"
-import { skillCategories } from "@/lib/types"
 import { PriceTag } from "../../components/price-tag"
 
 const categoryIcons: Record<string, React.ReactNode> = {
@@ -25,10 +24,12 @@ const categoryIcons: Record<string, React.ReactNode> = {
 
 interface SkillCardProps {
   skill: Skill
+  categories: Record<string, { label: string; icon: string; description?: string }>
+  defaultCat: { label: string; icon: string }
 }
 
-export function SkillCard({ skill }: SkillCardProps) {
-  const cat = skillCategories[skill.category]
+export function SkillCard({ skill, categories, defaultCat }: SkillCardProps) {
+  const cat = categories[skill.category] ?? defaultCat
 
   return (
     <Link
@@ -38,7 +39,7 @@ export function SkillCard({ skill }: SkillCardProps) {
       <div className="mb-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
-            {categoryIcons[cat.icon]}
+            {categoryIcons[cat.icon] ?? categoryIcons.Wrench}
           </div>
           <span className="text-xs font-medium text-muted-foreground">{cat.label}</span>
         </div>
