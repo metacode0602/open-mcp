@@ -1,5 +1,5 @@
 import { createId } from "@paralleldrive/cuid2"
-import { relations } from "drizzle-orm"
+import { relations, sql } from "drizzle-orm"
 import {
   boolean,
   index,
@@ -40,6 +40,44 @@ export const activities = pgTable("activities", {
   index("activities_user_id_idx").on(table.userId),
 ]);
 
+/**
+ * 创作者表
+ */
+export const creators = pgTable(
+  'creators',
+  {
+    id: text('id')
+      .primaryKey()
+      .$defaultFn(() => createId()),
+    userId: text('user_id').notNull().unique(), // 用户ID
+    name: varchar('name', { length: 200 }).notNull(), // 作者显示名称
+    username: varchar('username', { length: 100 }).notNull().unique(), // 作者用户名，用于URL
+    avatar: text('avatar'), // 作者头像，即OSS存储地址
+    avatarUrl: text('avatar_url'), // 作者头像URL，即源头头像地址
+    description: text('description'), // 作者简介/描述
+    bio: text('bio'), // 作者详细简介，即长简介
+    website: text('website'), // 作者网站URL
+    twitter: text('twitter'), // Twitter链接
+    linkedin: text('linkedin'), // LinkedIn链接
+    github: text('github'), // GitHub链接
+    verified: boolean('verified').default(false).notNull(), // 是否已验证
+    status: varchar('status', {
+      length: 20,
+      enum: ['active', 'inactive', 'suspended'],
+    })
+      .default('active')
+      .notNull(), // 作者状态
+    payoutSettings: jsonb('payout_settings'), // 创作者收款信息（银行/支付宝/微信等），用于提现
+    metadata: jsonb('metadata'), // 额外元数据
+    createdAt: timestamp('created_at').default(sql`now()`).notNull(),
+    updatedAt: timestamp('updated_at').default(sql`now()`).notNull(),
+  },
+  (table) => [index('authors_username_idx').on(table.username), index('authors_status_idx').on(table.status)]
+)
+
+export const creatorsRelations = relations(creators, ({ one }) => ({
+  user: one(users, { fields: [creators.userId], references: [users.id] }),
+}))
 // 应用类型枚举
 
 // 应用表，每个应用只有一个分类，不采用多分类机制，
@@ -434,7 +472,7 @@ export const orders = pgTable(
   "orders",
   {
     id: text("id").primaryKey().notNull().$defaultFn(() => createId()),
-    userId: text("user_id").notNull().references(() => users.id),
+    userId: text("user_id").notNull().references(() => users.id), // 购买人ID
     appId: text("app_id").references(() => apps.id),
     appMeta: jsonb("app_meta"),
     productType: varchar("product_type", { length: 30, enum: ["persona", "skill", "creator_membership"] }).notNull(),
@@ -442,7 +480,7 @@ export const orders = pgTable(
     currency: varchar("currency", { length: 10 }).default("CNY"),
     platformFeeCents: integer("platform_fee_cents").notNull().default(0),
     creatorEarningsCents: integer("creator_earnings_cents").notNull().default(0),
-    creatorId: text("creator_id").references(() => users.id),
+    creatorId: text("creator_id").references(() => creators.id),// 创作者ID
     status: varchar("status", { length: 20, enum: ["pending", "completed", "refunded", "cancelled"] }).notNull().default("pending"),
     paidAt: timestamp("paid_at", { mode: "date" }),
     createdAt: timestamp("created_at", { mode: "date" }).defaultNow().notNull(),
@@ -708,7 +746,6 @@ export const rssItems = pgTable("rss_items", {
   uniqueIndex("rss_items_guid_idx").on(table.guid),
 ]);
 
-// 应用提交状态枚举
 
 // 用户应用提交表
 export const appSubmissions = pgTable("app_submissions", {

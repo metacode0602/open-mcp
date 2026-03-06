@@ -17,18 +17,8 @@ export const users = pgTable("users", {
   banExpires: timestamp("ban_expires"),
   createdAt: timestamp("created_at").notNull(),
   updatedAt: timestamp("updated_at").notNull(),
-
-  location: text("location"),
-  bio: text("bio"),
-  company: text("company"),
-  position: text("position"),
-  website: text("website"),
-  github: text("github"),
-  twitter: text("twitter"),
-
-  // 市场/创作者扩展：创作者身份与收款设置
+  // 市场/创作者：供前端根据是否创作者展示不同页面
   isCreator: boolean("is_creator").default(false),
-  payoutSettings: jsonb("payout_settings"), // 银行/支付宝/微信等收款信息
 });
 
 export const sessions = pgTable("sessions", {
