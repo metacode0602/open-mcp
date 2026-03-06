@@ -20,18 +20,18 @@ function toCategoriesRecord(
   return record
 }
 
-/** 市场页 Skill 分类：从 tRPC 拉取 parentId=skills 的一级子分类 */
+/** 市场页 Skill 分类：统一分类树根级分类（与 Persona 共用） */
 export function useSkillCategories() {
-  const { data: items, isLoading } = trpc.marketplaceCategories.listSkillCategories.useQuery(undefined, {
+  const { data: items, isLoading } = trpc.marketplaceCategories.listUnifiedCategories.useQuery(undefined, {
     staleTime: 5 * 60 * 1000,
   })
   const categories = useMemo(() => toCategoriesRecord(items, "Wrench"), [items])
   return { categories, categoriesList: items ?? [], isLoading }
 }
 
-/** 市场页 Persona 分类：从 tRPC 拉取 parentId=persona 的一级子分类 */
+/** 市场页 Persona 分类：统一分类树根级分类（与 Skill 共用） */
 export function usePersonaCategories() {
-  const { data: items, isLoading } = trpc.marketplaceCategories.listPersonaCategories.useQuery(undefined, {
+  const { data: items, isLoading } = trpc.marketplaceCategories.listUnifiedCategories.useQuery(undefined, {
     staleTime: 5 * 60 * 1000,
   })
   const categories = useMemo(() => toCategoriesRecord(items, "Settings"), [items])

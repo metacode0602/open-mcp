@@ -2,6 +2,7 @@ import { and, asc, desc, eq, exists, inArray, like, not, or, sql } from "drizzle
 import { db } from "../../index";
 import { zCreateAppSchema, zUpdateAppSchema, zSearchAppsSchema, zCreateRecommendationAppSchema } from "../../types";
 import { ads, appCategories, appRss, apps, appSubmissions, appTags, categories, claims, rankingRecords, recommendationApps, recommendations, relatedApps, suggestions, users, repos, tags } from "../../schema";
+import { refreshAppTagsCache } from "./app-tags-cache";
 
 // 应用程序数据访问模块
 export const appsDataAccess = {
@@ -64,6 +65,7 @@ export const appsDataAccess = {
             tagId,
           }))
         );
+        await refreshAppTagsCache(tx, app.id);
       }
 
       return app;
@@ -391,12 +393,13 @@ export const appsDataAccess = {
 
   // 添加标签，用户选择了已有标签
   addTag: async (appId: string, tagId: string) => {
-    const [tag] = await db.select().from(tags).where(and(eq(tags.id, tagId))).limit(1)
-    if (tag) {
-      const [result] = await db.insert(appTags).values({ appId, tagId }).returning();
+    return await db.transaction(async (tx) => {
+      const [tag] = await tx.select().from(tags).where(and(eq(tags.id, tagId))).limit(1);
+      if (!tag) throw new Error("参数错误，标签不存在");
+      const [result] = await tx.insert(appTags).values({ appId, tagId }).returning();
+      await refreshAppTagsCache(tx, appId);
       return result;
-    }
-    throw new Error("参数错误，标签不存在")
+    });
   },
 
   /**
@@ -410,7 +413,9 @@ export const appsDataAccess = {
     return await db.transaction(async (tx) => {
       const [tag] = await tx.insert(tags).values({ name: tagName, slug: slug, source: "admin" }).onConflictDoNothing().returning();
       if (tag && tag.id) {
-        return await tx.insert(appTags).values({ appId, tagId: tag?.id }).returning();
+        const result = await tx.insert(appTags).values({ appId, tagId: tag.id }).returning();
+        await refreshAppTagsCache(tx, appId);
+        return result;
       }
     });
   },
@@ -423,7 +428,10 @@ export const appsDataAccess = {
 
   // 移除标签
   removeTag: async (appId: string, tagId: string) => {
-    await db.delete(appTags).where(and(eq(appTags.appId, appId), eq(appTags.id, tagId)));
+    await db.transaction(async (tx) => {
+      await tx.delete(appTags).where(and(eq(appTags.appId, appId), eq(appTags.id, tagId)));
+      await refreshAppTagsCache(tx, appId);
+    });
   },
 
   // 移除分类
@@ -434,26 +442,19 @@ export const appsDataAccess = {
   // 更新标签
   updateTags: async (appId: string, tagIds: string[]) => {
     return await db.transaction(async (tx) => {
-      // 删除现有标签
-      await tx.delete(appTags)
-        .where(eq(appTags.appId, appId));
+      await tx.delete(appTags).where(eq(appTags.appId, appId));
 
-      // 添加新标签
       if (tagIds.length > 0) {
         await tx.insert(appTags).values(
-          tagIds.map(tagId => ({
-            appId,
-            tagId
-          }))
+          tagIds.map((tagId) => ({ appId, tagId }))
         );
       }
 
-      // 返回更新后的标签
+      await refreshAppTagsCache(tx, appId);
+
       return tx.query.appTags.findMany({
         where: eq(appTags.appId, appId),
-        with: {
-          tag: true
-        }
+        with: { tag: true },
       });
     });
   },

@@ -1,5 +1,6 @@
 
 // 导出所有数据访问模块
+export * from "./app-tags-cache";
 export * from "./users";
 export * from "./apps";
 export * from "./tags";

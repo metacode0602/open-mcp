@@ -80,6 +80,14 @@ export const creatorsRelations = relations(creators, ({ one }) => ({
 }))
 // 应用类型枚举
 
+/** apps.tags_cache 快照项，按 app_tags.createdAt 排序；见 docs/apps-tags-cache-implementation.md */
+export type TagsCacheItem = {
+  id: string;
+  name: string;
+  slug: string;
+  order: number;
+};
+
 // 应用表，每个应用只有一个分类，不采用多分类机制，
 export const apps = pgTable(
   "apps",
@@ -138,6 +146,10 @@ export const apps = pgTable(
     publishedAt: timestamp("published_at", { mode: "date" }), // 发布时间，即应用的发布时间
     lastAnalyzedAt: timestamp("last_analyzed_at", { mode: "date" }), // 上次分析时间
     requiresPurchase: boolean("requires_purchase").notNull().default(false), // 是否需要购买才能使用
+    priceCents: integer("price_cents"), // 价格（冗余自 app_sku_prices），默认/最低价
+    priceCurrency: varchar("price_currency", { length: 10 }), // 价格对应币种，如 CNY
+    priceKind: varchar("price_kind", { length: 30 }), // 价格类型：one_time / subscription_monthly / subscription_yearly
+    tagsCache: jsonb("tags_cache").$type<TagsCacheItem[] | null>().default(null), // 该 app 的 tag 快照，查询用冗余，与 app_tags 同步
     createdAt: timestamp("created_at", { mode: "date" }).defaultNow().notNull(), // 创建时间，即添加到数据库的时间，用于记录应用的添加时间 
     updatedAt: timestamp("updated_at", { mode: "date" }).defaultNow().notNull(), // 更新时间
   },

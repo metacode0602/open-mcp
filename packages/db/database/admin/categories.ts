@@ -1,4 +1,4 @@
-import { and, asc, desc, eq, like, ne, or, sql } from "drizzle-orm";
+import { and, asc, desc, eq, isNull, like, ne, or, sql } from "drizzle-orm";
 import { db } from "../../index";
 import * as schema from "../../schema";
 import { zCreateCategorySchema, zUpdateCategorySchema, zSearchCategoriesSchema } from "../../types";
@@ -165,7 +165,19 @@ export const categoriesDataAccess = {
     return [];
   },
 
-  /** 按父级 slug 获取一级子分类（仅返回 id, name, slug, icon, description），用于市场页 Skill/Persona 分类筛选 */
+  /** 统一分类树：获取根级分类（parentId 为空、online），全类型共用，见 TAGS_CATEGORIES_TYPE_ANALYSIS.md */
+  getRootCategories: async () => {
+    const rows = await db.query.categories.findMany({
+      where: and(
+        isNull(schema.categories.parentId),
+        eq(schema.categories.status, "online")
+      ),
+      columns: { id: true, name: true, slug: true, icon: true, description: true },
+    });
+    return rows;
+  },
+
+  /** 按父级 slug 获取一级子分类（仅返回 id, name, slug, icon, description）；不强制父级为 app type，统一分类下按业务 slug 查子节点 */
   getChildrenByParentSlug: async (parentSlug: string) => {
     const parent = await db.query.categories.findFirst({
       where: eq(schema.categories.slug, parentSlug),

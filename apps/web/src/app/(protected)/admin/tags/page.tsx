@@ -159,7 +159,7 @@ export default function AdminTagsPage() {
                     <Badge variant="outline">{tag.source}</Badge>
                   </TableCell>
                   <TableCell>
-                    <Badge variant="outline">{tag.type}</Badge>
+                    <Badge variant="outline">通用</Badge>
                   </TableCell>
                   <TableCell>
                     <Badge variant="outline">{tag?.totalApps || 0}</Badge>

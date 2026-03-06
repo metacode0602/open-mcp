@@ -1,5 +1,6 @@
 import { db } from "@repo/db";
 import { slugifyText } from "@repo/db";
+import { refreshAppTagsCache } from "@repo/db/database/admin";
 import { apps, appTags, repos, snapshots, snapshotsMonthly, snapshotsWeekly, tags } from "@repo/db/schema";
 import { and, eq, or } from "drizzle-orm";
 import fs from "fs";
@@ -245,6 +246,13 @@ async function processTopicsAsTags(tx: any, repoId: string, topics: string[] | n
           console.error(`Error creating app-tag association for app ${app.name} and tag ${finalTag.name}:`, appTagError);
           // 继续处理其他app，不中断整个流程
         }
+      }
+    }
+
+    // 同步更新每个 app 的 tags_cache
+    for (const app of relatedApps) {
+      if (app?.id) {
+        await refreshAppTagsCache(tx, app.id);
       }
     }
 

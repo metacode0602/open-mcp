@@ -7,8 +7,15 @@ import {
   personaMcpTools,
   skillMcpTools,
 } from "@repo/db/schema";
+import type { TagsCacheItem } from "@repo/db/schema";
 import { and, eq, inArray, like, or, SQL, desc } from "drizzle-orm";
 import { db } from "../../index";
+
+/** 将 apps.tags_cache 转为列表/详情所需的 { id, name }[]；null 或非数组返回 [] */
+function tagsCacheToDisplay(cache: TagsCacheItem[] | null | undefined): { id: string; name: string }[] {
+  if (!cache || !Array.isArray(cache)) return [];
+  return cache.map((t) => ({ id: t.id, name: t.name }));
+}
 
 const marketplaceBaseConditions = [
   eq(apps.status, "approved"),
@@ -77,7 +84,7 @@ function buildAppFilterConditions(params: {
   query?: string;
 }): SQL[] {
   const conditions: SQL[] = [
-    eq(apps.type, params.type),
+    eq(apps.type, params.type as (typeof apps.$inferSelect)["type"]),
     ...marketplaceBaseConditions,
   ];
   if (params.categorySlug) {
@@ -122,6 +129,7 @@ async function getAppIdsWithFilters(params: {
   return rows.map((r) => r.id);
 }
 
+/** 按 app 查 tag：不按 tags.type 筛选，标签全类型通用（见 TAGS_CATEGORIES_TYPE_ANALYSIS.md） */
 async function getTagsByAppIds(appIds: string[]): Promise<Record<string, { id: string; name: string }[]>> {
   if (appIds.length === 0) return {};
   const rows = await db
@@ -135,8 +143,10 @@ async function getTagsByAppIds(appIds: string[]): Promise<Record<string, { id: s
     .where(inArray(appTags.appId, appIds));
   const byApp: Record<string, { id: string; name: string }[]> = {};
   for (const r of rows) {
-    if (!byApp[r.appId]) byApp[r.appId] = [];
-    byApp[r.appId].push({ id: r.tagId, name: r.tagName });
+    const appId = r.appId;
+    if (!appId) continue;
+    if (!byApp[appId]) byApp[appId] = [];
+    byApp[appId].push({ id: r.tagId, name: r.tagName });
   }
   return byApp;
 }
@@ -151,7 +161,6 @@ export const marketplaceDataAccess = {
       tagSlug: params.tagSlug,
       query: params.query,
     });
-    const tagsByApp = await getTagsByAppIds(appIds);
     const total = appIds.length;
     if (appIds.length === 0) {
       return { items: [], total: 0 };
@@ -172,11 +181,15 @@ export const marketplaceDataAccess = {
         categoryId: categories.id,
         categoryName: categories.name,
         categorySlug: categories.slug,
+        tagsCache: apps.tagsCache,
       })
       .from(apps)
       .leftJoin(categories, eq(apps.categoryId, categories.id))
       .where(inArray(apps.id, ids))
       .orderBy(desc(apps.createdAt));
+    const idsWithoutCache = items.filter((r) => r.tagsCache == null).map((r) => r.id);
+    const tagsByAppFallback =
+      idsWithoutCache.length > 0 ? await getTagsByAppIds(idsWithoutCache) : {};
     const categoryById = new Map(
       items
         .filter((r) => r.categoryId)
@@ -202,7 +215,10 @@ export const marketplaceDataAccess = {
         category: row.categoryId
           ? categoryById.get(row.id) ?? null
           : null,
-        tags: tagsByApp[row.id] ?? [],
+        tags:
+          row.tagsCache != null
+            ? tagsCacheToDisplay(row.tagsCache)
+            : (tagsByAppFallback[row.id] ?? []),
       })),
       total,
     };
@@ -217,7 +233,6 @@ export const marketplaceDataAccess = {
       tagSlug: params.tagSlug,
       query: params.query,
     });
-    const tagsByApp = await getTagsByAppIds(appIds);
     const total = appIds.length;
     if (appIds.length === 0) return { items: [], total: 0 };
     const limit = params.limit ?? 100;
@@ -235,11 +250,15 @@ export const marketplaceDataAccess = {
         categoryId: categories.id,
         categoryName: categories.name,
         categorySlug: categories.slug,
+        tagsCache: apps.tagsCache,
       })
       .from(apps)
       .leftJoin(categories, eq(apps.categoryId, categories.id))
       .where(inArray(apps.id, ids))
       .orderBy(desc(apps.createdAt));
+    const idsWithoutCache = items.filter((r) => r.tagsCache == null).map((r) => r.id);
+    const tagsByAppFallback =
+      idsWithoutCache.length > 0 ? await getTagsByAppIds(idsWithoutCache) : {};
     const categoryById = new Map(
       items
         .filter((r) => r.categoryId)
@@ -264,7 +283,10 @@ export const marketplaceDataAccess = {
         category: row.categoryId
           ? categoryById.get(row.id) ?? null
           : null,
-        tags: tagsByApp[row.id] ?? [],
+        tags:
+          row.tagsCache != null
+            ? tagsCacheToDisplay(row.tagsCache)
+            : (tagsByAppFallback[row.id] ?? []),
       })),
       total,
     };
@@ -279,7 +301,6 @@ export const marketplaceDataAccess = {
       tagSlug: params.tagSlug,
       query: params.query,
     });
-    const tagsByApp = await getTagsByAppIds(appIds);
     const total = appIds.length;
     if (appIds.length === 0) return { items: [], total: 0 };
     const limit = params.limit ?? 100;
@@ -298,10 +319,14 @@ export const marketplaceDataAccess = {
         primaryLanguage: apps.primaryLanguage,
         languages: apps.languages,
         createdAt: apps.createdAt,
+        tagsCache: apps.tagsCache,
       })
       .from(apps)
       .where(inArray(apps.id, ids))
       .orderBy(desc(apps.createdAt));
+    const idsWithoutCache = items.filter((r) => r.tagsCache == null).map((r) => r.id);
+    const tagsByAppFallback =
+      idsWithoutCache.length > 0 ? await getTagsByAppIds(idsWithoutCache) : {};
     return {
       items: items.map((row) => ({
         id: row.id,
@@ -315,7 +340,10 @@ export const marketplaceDataAccess = {
         primaryLanguage: row.primaryLanguage,
         languages: row.languages,
         createdAt: row.createdAt,
-        tags: tagsByApp[row.id] ?? [],
+        tags:
+          row.tagsCache != null
+            ? tagsCacheToDisplay(row.tagsCache)
+            : (tagsByAppFallback[row.id] ?? []),
       })),
       total,
     };
@@ -336,17 +364,20 @@ export const marketplaceDataAccess = {
         categoryId: categories.id,
         categoryName: categories.name,
         categorySlug: categories.slug,
+        tagsCache: apps.tagsCache,
       })
       .from(apps)
       .leftJoin(categories, eq(apps.categoryId, categories.id))
       .where(and(eq(apps.id, id), eq(apps.type, "persona"), ...marketplaceBaseConditions));
     if (!app) return null;
-    const [tagRows, skillLinks, mcpLinks] = await Promise.all([
-      db
-        .select({ id: tags.id, name: tags.name })
-        .from(appTags)
-        .innerJoin(tags, eq(appTags.tagId, tags.id))
-        .where(eq(appTags.appId, id)),
+    const [tagRowsFallback, skillLinks, mcpLinks] = await Promise.all([
+      app.tagsCache == null
+        ? db
+            .select({ id: tags.id, name: tags.name })
+            .from(appTags)
+            .innerJoin(tags, eq(appTags.tagId, tags.id))
+            .where(eq(appTags.appId, id))
+        : Promise.resolve([]),
       db.select({ skillId: personaSkills.skillId }).from(personaSkills).where(eq(personaSkills.personaId, id)),
       db.select({ mcpAppId: personaMcpTools.mcpAppId }).from(personaMcpTools).where(eq(personaMcpTools.personaId, id)),
     ]);
@@ -366,12 +397,14 @@ export const marketplaceDataAccess = {
             .where(and(inArray(apps.id, mcpAppIds), ...marketplaceBaseConditions))
         : Promise.resolve([]),
     ]);
+    const tagsDisplay =
+      app.tagsCache != null ? tagsCacheToDisplay(app.tagsCache) : tagRowsFallback;
     return {
       ...app,
       category: app.categoryId
         ? { id: app.categoryId, name: app.categoryName!, slug: app.categorySlug! }
         : null,
-      tags: tagRows,
+      tags: tagsDisplay,
       skillIds,
       mcpAppIds,
       skills: skillsMinimal,
@@ -394,18 +427,21 @@ export const marketplaceDataAccess = {
         categoryId: categories.id,
         categoryName: categories.name,
         categorySlug: categories.slug,
+        tagsCache: apps.tagsCache,
       })
       .from(apps)
       .leftJoin(categories, eq(apps.categoryId, categories.id))
       .where(and(eq(apps.slug, slug), eq(apps.type, "persona"), ...marketplaceBaseConditions));
     if (!app) return null;
     const id = app.id;
-    const [tagRows, skillLinks, mcpLinks] = await Promise.all([
-      db
-        .select({ id: tags.id, name: tags.name })
-        .from(appTags)
-        .innerJoin(tags, eq(appTags.tagId, tags.id))
-        .where(eq(appTags.appId, id)),
+    const [tagRowsFallback, skillLinks, mcpLinks] = await Promise.all([
+      app.tagsCache == null
+        ? db
+            .select({ id: tags.id, name: tags.name })
+            .from(appTags)
+            .innerJoin(tags, eq(appTags.tagId, tags.id))
+            .where(eq(appTags.appId, id))
+        : Promise.resolve([]),
       db.select({ skillId: personaSkills.skillId }).from(personaSkills).where(eq(personaSkills.personaId, id)),
       db.select({ mcpAppId: personaMcpTools.mcpAppId }).from(personaMcpTools).where(eq(personaMcpTools.personaId, id)),
     ]);
@@ -425,12 +461,14 @@ export const marketplaceDataAccess = {
             .where(and(inArray(apps.id, mcpAppIds), ...marketplaceBaseConditions))
         : Promise.resolve([]),
     ]);
+    const tagsDisplay =
+      app.tagsCache != null ? tagsCacheToDisplay(app.tagsCache) : tagRowsFallback;
     return {
       ...app,
       category: app.categoryId
         ? { id: app.categoryId, name: app.categoryName!, slug: app.categorySlug! }
         : null,
-      tags: tagRows,
+      tags: tagsDisplay,
       skillIds,
       mcpAppIds,
       skills: skillsMinimal,
@@ -454,17 +492,20 @@ export const marketplaceDataAccess = {
         categoryId: categories.id,
         categoryName: categories.name,
         categorySlug: categories.slug,
+        tagsCache: apps.tagsCache,
       })
       .from(apps)
       .leftJoin(categories, eq(apps.categoryId, categories.id))
       .where(and(eq(apps.id, id), eq(apps.type, "skill"), ...marketplaceBaseConditions));
     if (!app) return null;
-    const [tagRows, mcpLinks, personaLinks] = await Promise.all([
-      db
-        .select({ id: tags.id, name: tags.name })
-        .from(appTags)
-        .innerJoin(tags, eq(appTags.tagId, tags.id))
-        .where(eq(appTags.appId, id)),
+    const [tagRowsFallback, mcpLinks, personaLinks] = await Promise.all([
+      app.tagsCache == null
+        ? db
+            .select({ id: tags.id, name: tags.name })
+            .from(appTags)
+            .innerJoin(tags, eq(appTags.tagId, tags.id))
+            .where(eq(appTags.appId, id))
+        : Promise.resolve([]),
       db.select({ mcpAppId: skillMcpTools.mcpAppId }).from(skillMcpTools).where(eq(skillMcpTools.skillId, id)),
       db.select({ personaId: personaSkills.personaId }).from(personaSkills).where(eq(personaSkills.skillId, id)),
     ]);
@@ -484,12 +525,14 @@ export const marketplaceDataAccess = {
             .where(and(inArray(apps.id, mcpAppIds), ...marketplaceBaseConditions))
         : Promise.resolve([]),
     ]);
+    const tagsDisplay =
+      app.tagsCache != null ? tagsCacheToDisplay(app.tagsCache) : tagRowsFallback;
     return {
       ...app,
       category: app.categoryId
         ? { id: app.categoryId, name: app.categoryName!, slug: app.categorySlug! }
         : null,
-      tags: tagRows,
+      tags: tagsDisplay,
       mcpAppIds,
       personaIds,
       personas: personasMinimal,
@@ -513,18 +556,21 @@ export const marketplaceDataAccess = {
         categoryId: categories.id,
         categoryName: categories.name,
         categorySlug: categories.slug,
+        tagsCache: apps.tagsCache,
       })
       .from(apps)
       .leftJoin(categories, eq(apps.categoryId, categories.id))
       .where(and(eq(apps.slug, slug), eq(apps.type, "skill"), ...marketplaceBaseConditions));
     if (!app) return null;
     const id = app.id;
-    const [tagRows, mcpLinks, personaLinks] = await Promise.all([
-      db
-        .select({ id: tags.id, name: tags.name })
-        .from(appTags)
-        .innerJoin(tags, eq(appTags.tagId, tags.id))
-        .where(eq(appTags.appId, id)),
+    const [tagRowsFallback, mcpLinks, personaLinks] = await Promise.all([
+      app.tagsCache == null
+        ? db
+            .select({ id: tags.id, name: tags.name })
+            .from(appTags)
+            .innerJoin(tags, eq(appTags.tagId, tags.id))
+            .where(eq(appTags.appId, id))
+        : Promise.resolve([]),
       db.select({ mcpAppId: skillMcpTools.mcpAppId }).from(skillMcpTools).where(eq(skillMcpTools.skillId, id)),
       db.select({ personaId: personaSkills.personaId }).from(personaSkills).where(eq(personaSkills.skillId, id)),
     ]);
@@ -544,12 +590,14 @@ export const marketplaceDataAccess = {
             .where(and(inArray(apps.id, mcpAppIds), ...marketplaceBaseConditions))
         : Promise.resolve([]),
     ]);
+    const tagsDisplaySlug =
+      app.tagsCache != null ? tagsCacheToDisplay(app.tagsCache) : tagRowsFallback;
     return {
       ...app,
       category: app.categoryId
         ? { id: app.categoryId, name: app.categoryName!, slug: app.categorySlug! }
         : null,
-      tags: tagRows,
+      tags: tagsDisplaySlug,
       mcpAppIds,
       personaIds,
       personas: personasMinimal,

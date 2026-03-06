@@ -162,7 +162,7 @@ export default function TagDetailPage() {
             </div>
             <div className="space-y-1">
               <p className="text-sm font-medium">类型</p>
-              <Badge variant="outline">{tag.type}</Badge>
+              <Badge variant="outline">通用</Badge>
             </div>
             <div className="space-y-1">
               <p className="text-sm font-medium">描述</p>

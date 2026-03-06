@@ -24,6 +24,7 @@ export const tagsDataAccess = {
         slug: data.slug,
         description: data.description,
         source: data.source ? data.source : "admin",
+        type: "all", // 统一分类设计：标签全类型通用，不再按 app type 区分
         deleted: false,
         createdBy: data.createdBy,
       })

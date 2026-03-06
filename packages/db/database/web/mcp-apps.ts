@@ -1,7 +1,13 @@
 import { apps, appCategories, appTags, categories, tags } from "@repo/db/schema";
+import type { TagsCacheItem } from "@repo/db/schema";
 import { and, count, eq, gte, like, SQL, inArray } from "drizzle-orm";
 import { db } from "../../index";
 import { AppType } from "../../types";
+
+function tagsCacheToTags(cache: TagsCacheItem[] | null | undefined): { id: string; name: string; slug: string }[] {
+  if (!cache || !Array.isArray(cache)) return [];
+  return cache.map((t) => ({ id: t.id, name: t.name, slug: t.slug }));
+}
 
 export const mcpAppsDataAccess = {
   getByTypeCategoryAndTag: async (params: { type: AppType; category?: string; tag?: string }) => {
@@ -88,7 +94,7 @@ export const mcpAppsDataAccess = {
       conditions.push(like(apps.name, `%${query}%`));
     }
 
-    // 首先查询应用基本信息
+    // 首先查询应用基本信息（含 tags_cache，展示用优先读缓存）
     const appsData = await db
       .selectDistinct({
         id: apps.id,
@@ -101,6 +107,7 @@ export const mcpAppsDataAccess = {
         github: apps.github,
         stars: apps.stars,
         verified: apps.verified,
+        tagsCache: apps.tagsCache,
       })
       .from(apps)
       .leftJoin(appCategories, eq(apps.id, appCategories.appId))
@@ -109,39 +116,31 @@ export const mcpAppsDataAccess = {
       .leftJoin(tags, eq(appTags.tagId, tags.id))
       .where(and(...conditions));
 
-    // 如果没有找到应用，直接返回空数组
     if (!appsData || appsData.length === 0) {
       return [];
     }
 
-    // 获取所有应用的ID
-    const appIds = appsData.map(app => app.id);
+    const appIdsWithoutCache = appsData.filter((a) => a.tagsCache == null).map((a) => a.id);
+    let tagsByAppId: Record<string, typeof tags.$inferSelect[]> = {};
+    if (appIdsWithoutCache.length > 0) {
+      const appTagsData = await db
+        .select({ appId: appTags.appId, tag: tags })
+        .from(appTags)
+        .leftJoin(tags, eq(appTags.tagId, tags.id))
+        .where(inArray(appTags.appId, appIdsWithoutCache));
+      tagsByAppId = appTagsData.reduce((acc, { appId, tag }) => {
+        if (!acc[appId]) acc[appId] = [];
+        if (tag) acc[appId].push(tag);
+        return acc;
+      }, {} as Record<string, typeof tags.$inferSelect[]>);
+    }
 
-    // 查询所有应用的标签
-    const appTagsData = await db
-      .select({
-        appId: appTags.appId,
-        tag: tags,
-      })
-      .from(appTags)
-      .leftJoin(tags, eq(appTags.tagId, tags.id))
-      .where(inArray(appTags.appId, appIds));
-
-    // 将标签数据按应用ID分组
-    const tagsByAppId = appTagsData.reduce((acc, { appId, tag }) => {
-      if (!acc[appId]) {
-        acc[appId] = [];
-      }
-      if (tag) {
-        acc[appId].push(tag);
-      }
-      return acc;
-    }, {} as Record<string, typeof tags.$inferSelect[]>);
-
-    // 合并应用信息和标签信息
-    return appsData.map(app => ({
+    return appsData.map((app) => ({
       ...app,
-      tags: tagsByAppId[app.id] || [],
+      tags:
+        app.tagsCache != null
+          ? tagsCacheToTags(app.tagsCache)
+          : (tagsByAppId[app.id] || []),
     }));
   },
 
@@ -151,39 +150,35 @@ export const mcpAppsDataAccess = {
    * @returns 应用信息
    */
   getBySlug: async (slug: string) => {
-    // 查询应用基本信息
     const appData = await db.select().from(apps).where(eq(apps.slug, slug)).limit(1);
 
     if (!appData || appData.length === 0) {
       return null;
     }
 
-    // 由于我们已经检查了 appData 不为空且长度大于0，所以 app 一定存在
     const app = appData[0]!;
 
-    // 查询应用分类
     const appCategoriesData = await db
-      .select({
-        category: categories,
-      })
+      .select({ category: categories })
       .from(appCategories)
       .leftJoin(categories, eq(appCategories.categoryId, categories.id))
       .where(eq(appCategories.appId, app.id));
 
-    // 查询应用标签
-    const appTagsData = await db
-      .select({
-        tag: tags,
-      })
-      .from(appTags)
-      .leftJoin(tags, eq(appTags.tagId, tags.id))
-      .where(eq(appTags.appId, app.id));
+    const tagsDisplay =
+      app.tagsCache != null
+        ? tagsCacheToTags(app.tagsCache)
+        : (
+            await db
+              .select({ tag: tags })
+              .from(appTags)
+              .leftJoin(tags, eq(appTags.tagId, tags.id))
+              .where(eq(appTags.appId, app.id))
+          ).map((item) => item.tag).filter(Boolean);
 
-    // 整理返回数据
     return {
       ...app,
       categories: appCategoriesData.map((item) => item.category),
-      tags: appTagsData.map((item) => item.tag),
+      tags: tagsDisplay,
     };
   },
 

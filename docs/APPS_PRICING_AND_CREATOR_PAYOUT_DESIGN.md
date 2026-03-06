@@ -18,6 +18,7 @@
 
 | 表 | 复用说明 |
 |----|----------|
+| **apps** | 已含 `requires_purchase`；并增加冗余字段 `price_cents`、`price_currency`、`price_kind`，供列表展示价格，详见 3.1「apps 表冗余展示价」。 |
 | **orders** | 已含 `appId`、`productType`、`amountCents`、`currency`、`platformFeeCents`、`creatorEarningsCents`、`creatorId`、`status`；下单与支付回调继续写此表。 |
 | **payments** | `type=marketplace_order`、`relatedId=orders.id`；支付流水与订单关联不变。 |
 | **creators** | 创作者主体；`orders.creatorId`、分成入账、提现均与创作者关联。 |
@@ -70,6 +71,20 @@
 
 - 若存在 `app_sku_prices.active = true` 且 `amount_cents > 0` → 付费商品；需有对应 entitlement 才能安装。
 - 若 `amount_cents = 0` 或 SKU 显式标记为免费 → 免费；安装时可直接授予 entitlement 或免校验（由业务决定）。
+
+**apps 表冗余展示价（列表用）**
+
+- 为减轻列表查询压力，在 **apps** 表上增加冗余字段，供列表页直接展示「起售价/默认价」，无需 join `app_skus` / `app_sku_prices`。
+- 字段约定：
+
+| 列名 | 类型 | 说明 |
+|------|------|------|
+| display_price_cents | integer, nullable | 列表展示用价格（该币种最小单位）；通常取默认 sku + 默认币种，或最低价 |
+| display_currency | varchar(10), nullable | 展示价格对应币种，如 CNY |
+| display_price_kind | varchar(30), nullable | 展示价格类型：one_time / subscription_monthly / subscription_yearly，用于前端展示「¥X」「¥X/月」等 |
+
+- **更新时机**：在创建/更新/删除 `app_sku_prices` 或上下架 `app_skus` 时，按约定规则（如默认 sku、默认币种，或同 app 下最低价）写回上述三字段；无有效可售价格时置为 NULL（列表可展示「免费」或「联系询价」）。
+- **数据源**：真实价格与多规格、多币种以 `app_skus` / `app_sku_prices` 为准；详情与下单只读 sku/prices，apps 冗余仅用于列表展示与排序。
 
 ---
 

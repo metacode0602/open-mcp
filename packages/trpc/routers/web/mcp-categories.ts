@@ -10,12 +10,12 @@ export const mcpCategoriesRouter = router({
       return categoriesDataAccess.getById(input.id);
     }),
 
-  // 获取分类
+  // 获取分类：统一分类树，不再按 type 区分（见 TAGS_CATEGORIES_TYPE_ANALYSIS.md）
   getCategories: publicProcedure
     .input(z.object({
-      type: z.enum(["client", "server", "application"]),
+      type: z.enum(["client", "server", "application"]).optional(),
     }))
-    .query(async ({ input }) => {
-      return categoriesDataAccess.getCategoriesByType(input.type);
+    .query(async () => {
+      return categoriesDataAccess.getRootCategories();
     }),
 }); 

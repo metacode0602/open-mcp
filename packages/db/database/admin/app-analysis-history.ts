@@ -1,6 +1,7 @@
 import { and, asc, desc, eq, like, or, sql } from "drizzle-orm";
 import { db } from "../../index";
 import { appAnalysisHistory, apps, appTags, tags } from "../../schema";
+import { refreshAppTagsCache } from "./app-tags-cache";
 import { zCreateAppAnalysisHistorySchema, zUpdateAppAnalysisHistorySchema, zSearchAppAnalysisHistorySchema, AppAnalysisHistoryStatus, RepositoryDetail } from "../../types";
 
 export const appAnalysisHistoryDataAccess = {
@@ -210,13 +211,13 @@ export const appAnalysisHistoryDataAccess = {
             .returning();
 
           if (tagResult.length > 0) {
-            // Create app-tag associations
             await tx.insert(appTags)
               .values(tagResult.map((tag) => ({
                 appId: result.appId,
                 tagId: tag.id,
               })))
               .onConflictDoNothing();
+            await refreshAppTagsCache(tx, result.appId);
           }
         }
 
