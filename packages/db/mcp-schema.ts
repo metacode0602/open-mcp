@@ -112,7 +112,7 @@ export const apps = pgTable(
     license: varchar("license", { length: 255 }), // 许可证
     stars: integer("stars").default(0),
     featured: boolean("featured").notNull().default(false), // 是否推荐
-    scenario: varchar("scenario", { length: 50 }), // 应用场景
+    scenario: varchar("scenario", { length: 300 }), // 应用场景
     forks: integer("forks").default(0), //  forks数量
     watchers: integer("watchers").default(0), //  watchers数量
     primaryLanguage: varchar("primary_language", { length: 200 }), // 主要语言
@@ -124,11 +124,11 @@ export const apps = pgTable(
     contributors: integer("contributors").default(0), //  contributors数量
     lastCommit: timestamp("last_commit", { mode: "date" }),
     supportedServers: text("supported_servers").array(),
-    features: text("features").array(),
+    features: text("features").array(), // 应用特点
     tools: jsonb("tools"),
     ownerId: text("owner_id"), // 应用的所有者，即声称应用的人，并且被批准了
     userId: text("user_id"), //应用的提交人，即submission 的userid
-    ownerName: varchar("owner_name", { length: 255 }),
+    ownerName: varchar("owner_name", { length: 255 }), // github仓库作者名称
     verified: boolean("verified").default(false), // 是否认证
     deleted: boolean("deleted").default(false), // 是否删除
     createdBy: varchar("created_by", { length: 255 }), // 创建人，即创建应用的人
@@ -137,6 +137,7 @@ export const apps = pgTable(
     repoId: text("repo_id"), // 仓库ID，用于关联仓库，如果为空，则表示没有仓库
     publishedAt: timestamp("published_at", { mode: "date" }), // 发布时间，即应用的发布时间
     lastAnalyzedAt: timestamp("last_analyzed_at", { mode: "date" }), // 上次分析时间
+    requiresPurchase: boolean("requires_purchase").notNull().default(false), // 是否需要购买才能使用
     createdAt: timestamp("created_at", { mode: "date" }).defaultNow().notNull(), // 创建时间，即添加到数据库的时间，用于记录应用的添加时间 
     updatedAt: timestamp("updated_at", { mode: "date" }).defaultNow().notNull(), // 更新时间
   },
@@ -478,6 +479,8 @@ export const orders = pgTable(
     productType: varchar("product_type", { length: 30, enum: ["persona", "skill", "creator_membership"] }).notNull(),
     amountCents: integer("amount_cents").notNull(),
     currency: varchar("currency", { length: 10 }).default("CNY"),
+    taxCents: integer("tax_cents").notNull().default(0),
+    paymentFeeCents: integer("payment_fee_cents").notNull().default(0),
     platformFeeCents: integer("platform_fee_cents").notNull().default(0),
     creatorEarningsCents: integer("creator_earnings_cents").notNull().default(0),
     creatorId: text("creator_id").references(() => creators.id),// 创作者ID
@@ -496,16 +499,16 @@ export const orders = pgTable(
 );
 
 /** 用户账户表（站内余额）：创作者收入先沉淀再提现 */
-export const userBalances = pgTable(
-  "user_balances",
+export const creatorBalances = pgTable(
+  "creator_balances",
   {
     id: text("id").primaryKey().notNull().$defaultFn(() => createId()),
-    userId: text("user_id").notNull().references(() => users.id),
+    creatorId: text("creator_id").notNull().references(() => creators.id),
     balanceCents: integer("balance_cents").notNull().default(0),
     currency: varchar("currency", { length: 10 }).default("CNY"),
     updatedAt: timestamp("updated_at", { mode: "date" }).defaultNow().notNull(),
   },
-  (table) => [uniqueIndex("user_balances_user_id_unique_idx").on(table.userId)]
+  (table) => [uniqueIndex("creator_balances_creator_id_currency_unique_idx").on(table.creatorId, table.currency)]
 );
 
 /** 提现记录表：创作者提现申请及处理结果 */
@@ -587,8 +590,8 @@ export const ordersRelations = relations(orders, ({ one }) => ({
   creator: one(users, { fields: [orders.creatorId], references: [users.id] }),
 }));
 
-export const userBalancesRelations = relations(userBalances, ({ one }) => ({
-  user: one(users, { fields: [userBalances.userId], references: [users.id] }),
+export const creatorBalancesRelations = relations(creatorBalances, ({ one }) => ({
+  creator: one(creators, { fields: [creatorBalances.creatorId], references: [creators.id] }),
 }));
 
 export const withdrawalsRelations = relations(withdrawals, ({ one }) => ({
