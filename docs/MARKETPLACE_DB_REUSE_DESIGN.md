@@ -311,6 +311,7 @@
      - `skill`：技能包（市场可售）；
      - `persona`：角色配置包（市场可售）。
    - 分类与标签继续用 `categories` / `tags` / `appCategories` / `appTags`；Persona/Skill 的配置与依赖放在 `apps.features`、`apps.tools`。
+   - **分类与标签的 type 策略（已决策）**：产品采用**统一分类**；**apps.type 保留**，**tags.type** 与 **categories 按 app type 区分** 逐步废弃，详见 [Tags/Categories 与 type 限制——设计分析与产品决策](./TAGS_CATEGORIES_TYPE_ANALYSIS.md)。
    - **关联表**：**`persona_skills`**（Persona 使用的 Skills）、**`persona_mcp_tools`**（Persona 使用的 MCP 工具）、**`skill_mcp_tools`**（Skill 依赖的 MCP 工具），用于页面交叉展示与「被谁使用」类查询。
 2. **订单与支付**：
    - **订单表 `orders`**：保存用户购买记录（appId、productType、金额、分成、状态）；商品类型与 `apps.type` 一致（persona / skill）。

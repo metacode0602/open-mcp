@@ -91,9 +91,9 @@ export const apps = pgTable(
     slug: varchar("slug", { length: 255 }).notNull().unique(),
     name: varchar("name", { length: 255 }).notNull(),
     categoryId: text("category_id"),  // 分类Id
-    description: text("description").notNull(),
-    descriptionZh: text("description_zh"), // 从github上拉取的readme中的内容，中文
-    longDescription: text("long_description"), //概要介绍的内容
+    description: text("description").notNull(), // 描述，即概要介绍的内容
+    descriptionZh: text("description_zh"), // 描述，即概要介绍的内容，中文
+    longDescription: text("long_description"), // 长描述，即详细介绍的内容
     readme: text("readme"), // 从github上拉取的readme中的内容
     readmeZh: text("readme_zh"), // 从github上拉取的readme中的内容，中文
     type: varchar("type", { length: 20, enum: ["client", "server", "application", "skill", "persona"] }).notNull(),
@@ -107,21 +107,21 @@ export const apps = pgTable(
     pics: text("pics").array(), // 图片列表
     website: text("website"),
     github: text("github"),
-    docs: text("docs"),
-    version: varchar("version", { length: 50 }),
-    license: varchar("license", { length: 255 }),
+    docs: text("docs"), // 文档链接，即文档的链接
+    version: varchar("version", { length: 50 }), // 版本号
+    license: varchar("license", { length: 255 }), // 许可证
     stars: integer("stars").default(0),
-    featured: boolean("featured").notNull().default(false),
-    scenario: varchar("scenario", { length: 50 }),
-    forks: integer("forks").default(0),
-    watchers: integer("watchers").default(0),
+    featured: boolean("featured").notNull().default(false), // 是否推荐
+    scenario: varchar("scenario", { length: 50 }), // 应用场景
+    forks: integer("forks").default(0), //  forks数量
+    watchers: integer("watchers").default(0), //  watchers数量
     primaryLanguage: varchar("primary_language", { length: 200 }), // 主要语言
     languages: text("languages").array(), // 语言列表
-    commits: integer("commits").default(0),
+    commits: integer("commits").default(0), //  commits数量
     releases: integer("releases").default(0),
-    issues: integer("issues").default(0),
-    pullRequests: integer("pull_requests").default(0),
-    contributors: integer("contributors").default(0),
+    issues: integer("issues").default(0), //  issues数量
+    pullRequests: integer("pull_requests").default(0), //  pullRequests数量
+    contributors: integer("contributors").default(0), //  contributors数量
     lastCommit: timestamp("last_commit", { mode: "date" }),
     supportedServers: text("supported_servers").array(),
     features: text("features").array(),
@@ -129,13 +129,13 @@ export const apps = pgTable(
     ownerId: text("owner_id"), // 应用的所有者，即声称应用的人，并且被批准了
     userId: text("user_id"), //应用的提交人，即submission 的userid
     ownerName: varchar("owner_name", { length: 255 }),
-    verified: boolean("verified").default(false),
-    deleted: boolean("deleted").default(false),
-    createdBy: varchar("created_by", { length: 255 }),
-    updatedBy: varchar("updated_by", { length: 255 }),
+    verified: boolean("verified").default(false), // 是否认证
+    deleted: boolean("deleted").default(false), // 是否删除
+    createdBy: varchar("created_by", { length: 255 }), // 创建人，即创建应用的人
+    updatedBy: varchar("updated_by", { length: 255 }), // 更新人，即更新应用的人
     repoCreatedAt: timestamp("repo_created_at", { mode: "date" }), // 仓库创建时间，即仓库在github的创建时间
     repoId: text("repo_id"), // 仓库ID，用于关联仓库，如果为空，则表示没有仓库
-    publishedAt: timestamp("published_at", { mode: "date" }),
+    publishedAt: timestamp("published_at", { mode: "date" }), // 发布时间，即应用的发布时间
     lastAnalyzedAt: timestamp("last_analyzed_at", { mode: "date" }), // 上次分析时间
     createdAt: timestamp("created_at", { mode: "date" }).defaultNow().notNull(), // 创建时间，即添加到数据库的时间，用于记录应用的添加时间 
     updatedAt: timestamp("updated_at", { mode: "date" }).defaultNow().notNull(), // 更新时间
