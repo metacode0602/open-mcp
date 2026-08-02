@@ -1,6 +1,7 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
+import { useSearchParams } from "next/navigation"
 import { Search } from "lucide-react"
 import { SkillCategoryFilter } from "./skill-category-filter"
 import { SkillCard } from "./skill-card"
@@ -10,7 +11,13 @@ import { mapSkillListRowToSkill } from "../../lib/map-marketplace"
 import { Skeleton } from "@repo/ui/components/ui/skeleton"
 
 export function SkillGrid() {
-  const [selected, setSelected] = useState<string | "all">("all")
+  const searchParams = useSearchParams()
+  const categoryFromUrl = searchParams.get("category") ?? undefined
+  const [selected, setSelected] = useState<string | "all">(categoryFromUrl || "all")
+
+  useEffect(() => {
+    if (categoryFromUrl != null) setSelected(categoryFromUrl)
+  }, [categoryFromUrl])
   const [searchQuery, setSearchQuery] = useState("")
   const { categories: skillCategories, categoriesList } = useSkillCategories()
   const defaultCat =
@@ -19,7 +26,7 @@ export function SkillGrid() {
       : { label: "其他", icon: "Wrench" }
 
   const { data, isLoading } = trpc.marketplaceSkills.list.useQuery(
-    { limit: 500 },
+    { limit: 20 },
     { refetchOnWindowFocus: false, staleTime: 60 * 1000 }
   )
 

@@ -123,6 +123,7 @@ export function SkillsSection() {
     { limit: FEATURED_SKILLS_COUNT },
     { refetchOnWindowFocus: false, staleTime: 60 * 1000 }
   )
+  const { categories, categoriesList } = useSkillCategories()
 
   if (isLoading) {
     return (
@@ -171,7 +172,6 @@ export function SkillsSection() {
   }
 
   const skills = (data?.items ?? []).map(mapSkillListRowToSkill)
-  const { categories, categoriesList } = useSkillCategories()
   const defaultCat =
     categoriesList[0]
       ? { label: categoriesList[0].name, icon: categoriesList[0].icon ?? "Wrench" }

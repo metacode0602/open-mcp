@@ -49,6 +49,7 @@ export function mapPersonaListRowToPersona(row: PersonaListRow): Persona {
 export function mapSkillListRowToSkill(row: SkillListRow): Skill {
   return {
     id: row.id,
+    slug: row.slug,
     name: row.name,
     description: row.description,
     longDescription: row.description,

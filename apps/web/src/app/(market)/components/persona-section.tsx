@@ -111,6 +111,7 @@ export function PersonaSection() {
     { limit: FEATURED_PERSONAS_COUNT },
     { refetchOnWindowFocus: false, staleTime: 60 * 1000 }
   )
+  const { categories, categoriesList } = usePersonaCategories()
 
   if (isLoading) {
     return (
@@ -159,7 +160,6 @@ export function PersonaSection() {
   }
 
   const personas = (data?.items ?? []).map(mapPersonaListRowToPersona)
-  const { categories, categoriesList } = usePersonaCategories()
   const defaultCat =
     categoriesList[0]
       ? { label: categoriesList[0].name, icon: categoriesList[0].icon ?? "Settings" }

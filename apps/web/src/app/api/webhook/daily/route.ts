@@ -528,6 +528,7 @@ function saveWebhookData(data: any, repoId: string) {
 
 /**
  * 更新或创建apps记录
+ * 对 type='skill' 的 app 仅更新统计与时间类字段，不覆盖来自 SKILL.md 的内容（readme/description/name 等）。
  */
 async function upsertApps(tx: any, repoId: string, data: z.infer<typeof RepoWebhookDataSchema>) {
   try {
@@ -541,10 +542,24 @@ async function upsertApps(tx: any, repoId: string, data: z.infer<typeof RepoWebh
       ),
     });
 
-    // 准备apps数据
-    const appData = {
+    // 统计与时间类字段（所有类型都更新）
+    const statsData = {
       stars: data.stars || 0,
       forks: data.forks || 0,
+      watchers: data.watchers_count || 0,
+      contributors: data.contributor_count || 0,
+      pullRequests: data.pull_requests_count || 0,
+      releases: data.releases_count || 0,
+      commits: data.commit_count || 0,
+      lastCommit: data.last_commit ? new Date(data.last_commit) : null,
+      lastAnalyzedAt: new Date(),
+      updatedAt: new Date(),
+      repoId: repoId,
+    };
+
+    // 非 skill 类型或新建时使用的完整 app 数据（含 readme/description 等）
+    const fullAppData = {
+      ...statsData,
       description: data.description,
       descriptionZh: data.description_zh,
       website: (data.homepage && data.homepage.trim().length > 0) ? data.homepage : null,
@@ -555,28 +570,21 @@ async function upsertApps(tx: any, repoId: string, data: z.infer<typeof RepoWebh
       defaultBranch: data.default_branch,
       repoCreatedAt: new Date(data.created_at),
       version: data.latest_release_tag_name,
-      watchers: data.watchers_count || 0,
-      contributors: data.contributor_count || 0,
-      pullRequests: data.pull_requests_count || 0,
-      releases: data.releases_count || 0,
-      commits: data.commit_count || 0,
-      lastCommit: data.last_commit ? new Date(data.last_commit) : null,
       readme: data.readme_content,
       readmeZh: data.readme_content_zh,
       banner: data.open_graph_image_oss_url || data.open_graph_image_url,
-      lastAnalyzedAt: new Date(),
       longDescription: data.long_description,
-      updatedAt: new Date(),
-      repoId: repoId, // 确保repoId被设置
     };
 
     if (existingApps.length > 0) {
       // 更新现有的apps
       const updatedApps = [];
       for (const app of existingApps) {
+        const isSkill = app.type === "skill";
+        const setData = isSkill ? statsData : fullAppData;
         const [updatedApp] = await tx
           .update(apps)
-          .set(appData)
+          .set(setData)
           .where(eq(apps.id, app.id))
           .returning();
 
@@ -586,13 +594,15 @@ async function upsertApps(tx: any, repoId: string, data: z.infer<typeof RepoWebh
         }
 
         updatedApps.push(updatedApp);
-        console.log(`Updated app: ${app.name} (${app.id}) with repo data from: ${data.full_name}`);
+        console.log(
+          `Updated app: ${app.name} (${app.id}) with repo data from: ${data.full_name}${isSkill ? " [skill: stats only]" : ""}`
+        );
       }
       return updatedApps;
     } else {
       // 创建新的app记录
       const newAppData = {
-        ...appData,
+        ...fullAppData,
         slug: slugifyText(data.name), // 生成slug
         name: data.name,
         type: 'application' as const, // 默认类型
@@ -714,7 +724,7 @@ export async function POST(request: NextRequest) {
     // 根据错误类型返回不同的状态码
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: "Data validation failed", details: error.errors },
+        { error: "Data validation failed", details: error.issues },
         { status: 400 }
       );
     }

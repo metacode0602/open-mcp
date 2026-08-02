@@ -29,9 +29,11 @@ import { PriceTag } from "../../components/price-tag"
 import { PurchaseButton } from "../../components/purchase-button"
 import { type Skill } from "@/lib/types"
 import { getPersonaById, type Persona } from "@/lib/types/personas"
-import { mapSkillApiToSkill } from "@/lib/marketplace-dto"
+import { mapSkillApiToSkill, SkillDetailApi } from "@/lib/marketplace-dto"
 import { useSkillCategories } from "@/lib/use-marketplace-categories"
 import { trpc } from "@/lib/trpc/client"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@repo/ui/components/ui/tabs"
+import { MarkdownReadonly } from "@repo/ui/components/markdown/markdown-readonly"
 
 const categoryIcons: Record<string, React.ReactNode> = {
   Database: <Database className="h-5 w-5" />,
@@ -87,7 +89,7 @@ export function SkillDetail(props: SkillDetailProps) {
   const skill: Skill | null = props.skill
     ? props.skill
     : apiData
-      ? mapSkillApiToSkill(apiData as Parameters<typeof mapSkillApiToSkill>[0])
+      ? mapSkillApiToSkill(apiData as unknown as SkillDetailApi)
       : null
 
   if (props.slug) {
@@ -126,7 +128,7 @@ export function SkillDetail(props: SkillDetailProps) {
   const hasEnglish = skill.i18n && skill.i18n.name_en
 
   const name = displayLang === "en" && skill.i18n?.name_en ? skill.i18n.name_en : skill.name
-  const description = displayLang === "en" && skill.i18n?.description_en ? skill.i18n.description_en : skill.description
+  const description = displayLang === "en" && skill.i18n?.description_en ? skill.i18n.description_en : skill.descriptionZh ?? skill.description
   const longDescription = displayLang === "en" && skill.i18n?.longDescription_en ? skill.i18n.longDescription_en : skill.longDescription
 
   const relatedPersonasFromApi = skill.relatedPersonas
@@ -146,7 +148,12 @@ export function SkillDetail(props: SkillDetailProps) {
     install: displayLang === "en" ? "Installation" : "安装使用",
     config: displayLang === "en" ? "Configuration Example" : "配置示例",
     relatedCases: displayLang === "en" ? "Related Personas" : "使用该 Skill 的 AI 员工",
-    overview: displayLang === "en" ? "Overview" : "详细介绍",
+    overview: displayLang === "en" ? "Overview" : "概览",
+    descriptionLabel: displayLang === "en" ? "Description" : "描述",
+    readme: displayLang === "en" ? "Readme" : "README",
+    longDescription: displayLang === "en" ? "Long Description" : "功能说明",
+    features: displayLang === "en" ? "Features" : "功能特性",
+    scenario: displayLang === "en" ? "Scenario" : "应用场景",
     submitSkill: displayLang === "en" ? "Submit Your Skill" : "提交你的 Skill",
   }
 
@@ -155,12 +162,23 @@ export function SkillDetail(props: SkillDetailProps) {
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_320px]">
         {/* 左侧主内容 */}
         <div className="min-w-0">
-          {/* Breadcrumb */}
-          <nav className="mb-8 flex items-center gap-2 text-sm text-muted-foreground">
+          {/* Breadcrumb: Skills -> 分类(name/slug) -> 当前 Skill */}
+          <nav className="mb-8 flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
             <Link href="/skills" className="transition-colors hover:text-foreground">
               {labels.skills}
             </Link>
-            <ChevronRight className="h-3.5 w-3.5" />
+            {skill.categoryInfo && (
+              <>
+                <ChevronRight className="h-3.5 w-3.5 shrink-0" />
+                <Link
+                  href={`/skills?category=${encodeURIComponent(skill.categoryInfo.slug)}`}
+                  className="transition-colors hover:text-foreground"
+                >
+                  {skill.categoryInfo.name}
+                </Link>
+              </>
+            )}
+            <ChevronRight className="h-3.5 w-3.5 shrink-0" />
             <span className="text-foreground">{name}</span>
           </nav>
 
@@ -202,17 +220,93 @@ export function SkillDetail(props: SkillDetailProps) {
             </div>
           </div>
 
-          {/* Overview */}
           <section className="mb-10">
             <h2 className="mb-4 flex items-center gap-2 text-xl font-semibold text-foreground">
               <span className="flex h-7 w-7 items-center justify-center rounded-md bg-primary text-xs font-bold text-primary-foreground">
                 1
               </span>
-              {labels.overview}
+              {labels.longDescription}
             </h2>
             <div className="rounded-xl border border-border bg-card p-6">
-              <p className="leading-relaxed text-muted-foreground">{longDescription}</p>
+              <MarkdownReadonly>{longDescription}</MarkdownReadonly>
             </div>
+          </section>
+
+          {/* 功能特性：来自 DB features */}
+          <section className="mb-10">
+            <h2 className="mb-4 flex items-center gap-2 text-xl font-semibold text-foreground">
+              <span className="flex h-7 w-7 items-center justify-center rounded-md bg-primary text-xs font-bold text-primary-foreground">
+                2
+              </span>
+              {labels.features}
+            </h2>
+            <div className="rounded-xl border border-border bg-card p-6">
+              {skill.features?.length ? (
+                <ul className="list-disc space-y-2 pl-5 text-muted-foreground">
+                  {skill.features.map((feature) => (
+                    <li key={feature}>{feature}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-sm text-muted-foreground">暂无功能特性说明</p>
+              )}
+            </div>
+          </section>
+
+          {/* 应用场景：来自 DB scenario */}
+          <section className="mb-10">
+            <h2 className="mb-4 flex items-center gap-2 text-xl font-semibold text-foreground">
+              <span className="flex h-7 w-7 items-center justify-center rounded-md bg-primary text-xs font-bold text-primary-foreground">
+                3
+              </span>
+              {labels.scenario}
+            </h2>
+            <div className="rounded-xl border border-border bg-card p-6">
+              <MarkdownReadonly>{skill.scenario ?? ""}</MarkdownReadonly>
+            </div>
+          </section>
+
+          {/* README 文档 */}
+          <section className="mb-10">
+            <h2 className="mb-4 flex items-center gap-2 text-xl font-semibold text-foreground">
+              <span className="flex h-7 w-7 items-center justify-center rounded-md bg-primary text-xs font-bold text-primary-foreground">
+                4
+              </span>
+              {labels.readme}
+            </h2>
+            <div className="rounded-xl border border-border bg-card p-6">
+
+              {(skill.readme ?? skill.readmeZh) ? (
+                <Tabs
+                  defaultValue={skill.readmeZh ? "readmeZh" : "readme"}
+                  className="mb-10 mt-10"
+                >
+                  <TabsList className="mb-4">
+                    {skill.readmeZh && (
+                      <TabsTrigger value="readmeZh">中文文档</TabsTrigger>
+                    )}
+                    {skill.readme && (
+                      <TabsTrigger value="readme">原文</TabsTrigger>
+                    )}
+                  </TabsList>
+                  {skill.readme && (
+                    <TabsContent value="readme" className="mt-4">
+                      <div className="prose dark:prose-invert max-w-none">
+                        <MarkdownReadonly>{skill.readme}</MarkdownReadonly>
+                      </div>
+                    </TabsContent>
+                  )}
+                  {skill.readmeZh && (
+                    <TabsContent value="readmeZh" className="mt-4">
+                      <div className="prose dark:prose-invert max-w-none">
+                        <MarkdownReadonly>{skill.readmeZh}</MarkdownReadonly>
+                      </div>
+                    </TabsContent>
+                  )}
+                </Tabs>
+              ) : null}
+            </div>
+
           </section>
 
           {/* Installation */}
@@ -276,36 +370,36 @@ export function SkillDetail(props: SkillDetailProps) {
               <div className="grid gap-4 sm:grid-cols-2">
                 {hasRelatedFromApi
                   ? (relatedPersonas as { id: string; name: string; slug: string }[]).map((p) => (
-                      <Link
-                        key={p.id}
-                        href={`/personas/${p.slug}`}
-                        className="group flex items-center gap-4 rounded-xl border border-border bg-card p-5 transition-all hover:border-primary/40 hover:bg-accent/50"
-                      >
-                        <div className="flex-1">
-                          <h4 className="mb-1 text-sm font-semibold text-foreground transition-colors group-hover:text-primary">
-                            {p.name}
-                          </h4>
-                        </div>
-                        <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-primary" />
-                      </Link>
-                    ))
+                    <Link
+                      key={p.id}
+                      href={`/personas/${p.slug}`}
+                      className="group flex items-center gap-4 rounded-xl border border-border bg-card p-5 transition-all hover:border-primary/40 hover:bg-accent/50"
+                    >
+                      <div className="flex-1">
+                        <h4 className="mb-1 text-sm font-semibold text-foreground transition-colors group-hover:text-primary">
+                          {p.name}
+                        </h4>
+                      </div>
+                      <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-primary" />
+                    </Link>
+                  ))
                   : (relatedPersonas as Persona[]).map((p) => (
-                      <Link
-                        key={p.id}
-                        href={`/personas/${p.slug ?? p.id}`}
-                        className="group flex items-center gap-4 rounded-xl border border-border bg-card p-5 transition-all hover:border-primary/40 hover:bg-accent/50"
-                      >
-                        <div className="flex-1">
-                          <h4 className="mb-1 text-sm font-semibold text-foreground transition-colors group-hover:text-primary">
-                            {p.name}
-                          </h4>
-                          <p className="line-clamp-2 text-xs leading-relaxed text-muted-foreground">
-                            {p.description}
-                          </p>
-                        </div>
-                        <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-primary" />
-                      </Link>
-                    ))}
+                    <Link
+                      key={p.id}
+                      href={`/personas/${p.slug ?? p.id}`}
+                      className="group flex items-center gap-4 rounded-xl border border-border bg-card p-5 transition-all hover:border-primary/40 hover:bg-accent/50"
+                    >
+                      <div className="flex-1">
+                        <h4 className="mb-1 text-sm font-semibold text-foreground transition-colors group-hover:text-primary">
+                          {p.name}
+                        </h4>
+                        <p className="line-clamp-2 text-xs leading-relaxed text-muted-foreground">
+                          {p.description}
+                        </p>
+                      </div>
+                      <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-primary" />
+                    </Link>
+                  ))}
               </div>
             </section>
           )}

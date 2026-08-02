@@ -46,6 +46,10 @@ export type SkillDetailApi = {
   description: string
   descriptionZh: string | null
   longDescription: string | null
+  readme: string | null
+  readmeZh: string | null
+  features: string[] | null
+  scenario: string | null
   version: string | null
   tools: unknown
   verified: boolean | null
@@ -61,7 +65,8 @@ export type SkillDetailApi = {
 export function mapPersonaApiToPersona(api: PersonaDetailApi): Persona {
   const categorySlug = api.category?.slug
   const category =
-    (categorySlug && PERSONA_CATEGORY_SLUG_MAP[categorySlug]) ?? DEFAULT_PERSONA_CATEGORY
+    (categorySlug ? PERSONA_CATEGORY_SLUG_MAP[categorySlug] : undefined) ??
+    DEFAULT_PERSONA_CATEGORY
   return {
     id: api.id,
     slug: api.slug,
@@ -83,14 +88,15 @@ export function mapPersonaApiToPersona(api: PersonaDetailApi): Persona {
 export function mapSkillApiToSkill(api: SkillDetailApi): Skill {
   const categorySlug = api.category?.slug
   const category =
-    (categorySlug && SKILL_CATEGORY_SLUG_MAP[categorySlug]) ?? DEFAULT_SKILL_CATEGORY
+    (categorySlug ? SKILL_CATEGORY_SLUG_MAP[categorySlug] : undefined) ??
+    DEFAULT_SKILL_CATEGORY
   return {
     id: api.id,
     slug: api.slug,
     name: api.name,
     description: api.description,
     longDescription: api.longDescription ?? api.description,
-    category,
+    descriptionZh: api.descriptionZh ?? "",
     version: api.version ?? "0.0.0",
     tags: api.tags.map((t) => t.name),
     author: api.ownerName ?? "",
@@ -99,5 +105,11 @@ export function mapSkillApiToSkill(api: SkillDetailApi): Skill {
     price: 0,
     personaIds: api.personaIds,
     relatedPersonas: api.personas?.length ? api.personas : undefined,
+    readme: api.readme ?? undefined,
+    readmeZh: api.readmeZh ?? undefined,
+    features: api.features ?? undefined,
+    scenario: api.scenario ?? undefined,
+    categoryInfo: api.category ?? undefined,
+    category,
   }
 }

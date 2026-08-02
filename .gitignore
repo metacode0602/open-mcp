@@ -37,3 +37,4 @@ npm-debug.log*
 .env.production
 .env.*
 apps/skills/
+apps/github-nextjs/

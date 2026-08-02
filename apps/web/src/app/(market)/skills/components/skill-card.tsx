@@ -59,7 +59,7 @@ export function SkillCard({ skill, categories, defaultCat }: SkillCardProps) {
       </h3>
 
       <p className="mb-4 flex-1 text-sm leading-relaxed text-muted-foreground">
-        {skill.description}
+        {skill.descriptionZh || skill.description}
       </p>
 
       <div className="mb-4 flex flex-wrap gap-1.5">

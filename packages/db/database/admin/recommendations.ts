@@ -1,16 +1,16 @@
-import { and, asc, desc, eq, like, or, sql } from "drizzle-orm";
+import { and, asc, desc, eq, inArray, like, or, sql } from "drizzle-orm";
 import { db } from "../../index";
-import { recommendationApps, recommendations } from "../../schema";
-import { zCreateRecommendationSchema, zUpdateRecommendationSchema, zSearchRecommendationsSchema } from "../../types";
+import { apps, recommendationApps, recommendations } from "../../schema";
+import type { CreateRecommendation, SearchRecommendations, UpdateRecommendation } from "../../types";
 
 export const recommendationDataAccess = {
   // 创建推荐
-  create: async (data: typeof zCreateRecommendationSchema._type) => {
+  create: async (data: CreateRecommendation) => {
     return await db.insert(recommendations).values(data).returning();
   },
 
   // 更新推荐
-  update: async (id: string, data: typeof zUpdateRecommendationSchema._type) => {
+  update: async (id: string, data: UpdateRecommendation) => {
     return await db
       .update(recommendations)
       .set(data)
@@ -26,7 +26,7 @@ export const recommendationDataAccess = {
   },
 
   // 搜索推荐
-  search: async (params: typeof zSearchRecommendationsSchema._type) => {
+  search: async (params: SearchRecommendations) => {
     const { query, page = 1, limit = 10, field, order, appId, type } = params;
     const offset = (page - 1) * limit;
 
@@ -95,22 +95,25 @@ export const recommendationDataAccess = {
   },
 
   getAppsByRecommendationId: async (id: string, limit: number) => {
-    return await db.query.recommendationApps.findMany({
-      where: and(eq(recommendationApps.recommendationId, id)),
-      with: {
-        app: {
-          with: {
-            tags: {
-              with: {
-                tag: true
-              }
-            }
-          }
-        }
-      },
-      orderBy: desc(recommendationApps.createdAt),
-      limit: limit
-    })
+    const rows = await db
+      .select()
+      .from(recommendationApps)
+      .where(eq(recommendationApps.recommendationId, id))
+      .orderBy(desc(recommendationApps.createdAt))
+      .limit(limit);
+
+    if (rows.length === 0) return [];
+
+    const appIds = rows.map((r) => r.appId);
+    const appsList = await db.query.apps.findMany({
+      where: inArray(apps.id, appIds),
+    });
+    const appMap = new Map(appsList.map((a) => [a.id, a]));
+
+    return rows.map((row) => ({
+      ...row,
+      app: appMap.get(row.appId) ?? null,
+    }));
   },
 
   getApps: async (id: string) => {

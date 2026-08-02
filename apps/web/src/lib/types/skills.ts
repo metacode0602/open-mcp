@@ -29,6 +29,7 @@ export interface Skill {
   slug?: string
   name: string
   description: string
+  descriptionZh?: string
   longDescription: string
   category: SkillCategory
   version: string
@@ -44,6 +45,16 @@ export interface Skill {
   i18n?: SkillI18nContent
   verified: boolean
   price?: number
+  /** 详情页用：README 原文，列表不加载 */
+  readme?: string | null
+  /** 详情页用：功能特性，列表不加载 */
+  features?: string[]
+  /** 详情页用：应用场景，列表不加载 */
+  scenario?: string
+  /** 详情页用：README 中文，列表不加载 */
+  readmeZh?: string | null
+  /** 详情页用：分类信息（name/slug 用于面包屑导航），列表仅有 category slug */
+  categoryInfo?: { id: string; name: string; slug: string } | null
 }
 
 // export const skillCategories: Record<SkillCategory, { label: string; icon: string; description: string }> = {

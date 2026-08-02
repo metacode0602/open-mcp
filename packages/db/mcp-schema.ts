@@ -1047,7 +1047,7 @@ export const snapshotsWeekly = pgTable(
     forks: integer("forks"),
     stars: integer("stars"),
     watchers: integer("watchers"),
-    openIssues: integer("open_issues"),
+    openIssues: integer("   "),
     subscribers: integer("subscribers"),
     contributors: integer("contributors"),
     pullRequests: integer("pull_requests"),

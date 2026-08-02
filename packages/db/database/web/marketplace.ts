@@ -244,6 +244,7 @@ export const marketplaceDataAccess = {
         slug: apps.slug,
         name: apps.name,
         description: apps.description,
+        descriptionZh: apps.descriptionZh,
         version: apps.version,
         verified: apps.verified,
         ownerName: apps.ownerName,
@@ -277,6 +278,7 @@ export const marketplaceDataAccess = {
         slug: row.slug,
         name: row.name,
         description: row.description,
+        descriptionZh: row.descriptionZh,
         version: row.version,
         verified: row.verified,
         ownerName: row.ownerName,
@@ -373,10 +375,10 @@ export const marketplaceDataAccess = {
     const [tagRowsFallback, skillLinks, mcpLinks] = await Promise.all([
       app.tagsCache == null
         ? db
-            .select({ id: tags.id, name: tags.name })
-            .from(appTags)
-            .innerJoin(tags, eq(appTags.tagId, tags.id))
-            .where(eq(appTags.appId, id))
+          .select({ id: tags.id, name: tags.name })
+          .from(appTags)
+          .innerJoin(tags, eq(appTags.tagId, tags.id))
+          .where(eq(appTags.appId, id))
         : Promise.resolve([]),
       db.select({ skillId: personaSkills.skillId }).from(personaSkills).where(eq(personaSkills.personaId, id)),
       db.select({ mcpAppId: personaMcpTools.mcpAppId }).from(personaMcpTools).where(eq(personaMcpTools.personaId, id)),
@@ -386,15 +388,15 @@ export const marketplaceDataAccess = {
     const [skillsMinimal, mcpAppsMinimal] = await Promise.all([
       skillIds.length > 0
         ? db
-            .select({ id: apps.id, name: apps.name, slug: apps.slug })
-            .from(apps)
-            .where(and(inArray(apps.id, skillIds), ...marketplaceBaseConditions))
+          .select({ id: apps.id, name: apps.name, slug: apps.slug })
+          .from(apps)
+          .where(and(inArray(apps.id, skillIds), ...marketplaceBaseConditions))
         : Promise.resolve([]),
       mcpAppIds.length > 0
         ? db
-            .select({ id: apps.id, name: apps.name, slug: apps.slug })
-            .from(apps)
-            .where(and(inArray(apps.id, mcpAppIds), ...marketplaceBaseConditions))
+          .select({ id: apps.id, name: apps.name, slug: apps.slug })
+          .from(apps)
+          .where(and(inArray(apps.id, mcpAppIds), ...marketplaceBaseConditions))
         : Promise.resolve([]),
     ]);
     const tagsDisplay =
@@ -437,10 +439,10 @@ export const marketplaceDataAccess = {
     const [tagRowsFallback, skillLinks, mcpLinks] = await Promise.all([
       app.tagsCache == null
         ? db
-            .select({ id: tags.id, name: tags.name })
-            .from(appTags)
-            .innerJoin(tags, eq(appTags.tagId, tags.id))
-            .where(eq(appTags.appId, id))
+          .select({ id: tags.id, name: tags.name })
+          .from(appTags)
+          .innerJoin(tags, eq(appTags.tagId, tags.id))
+          .where(eq(appTags.appId, id))
         : Promise.resolve([]),
       db.select({ skillId: personaSkills.skillId }).from(personaSkills).where(eq(personaSkills.personaId, id)),
       db.select({ mcpAppId: personaMcpTools.mcpAppId }).from(personaMcpTools).where(eq(personaMcpTools.personaId, id)),
@@ -450,15 +452,15 @@ export const marketplaceDataAccess = {
     const [skillsMinimal, mcpAppsMinimal] = await Promise.all([
       skillIds.length > 0
         ? db
-            .select({ id: apps.id, name: apps.name, slug: apps.slug })
-            .from(apps)
-            .where(and(inArray(apps.id, skillIds), ...marketplaceBaseConditions))
+          .select({ id: apps.id, name: apps.name, slug: apps.slug })
+          .from(apps)
+          .where(and(inArray(apps.id, skillIds), ...marketplaceBaseConditions))
         : Promise.resolve([]),
       mcpAppIds.length > 0
         ? db
-            .select({ id: apps.id, name: apps.name, slug: apps.slug })
-            .from(apps)
-            .where(and(inArray(apps.id, mcpAppIds), ...marketplaceBaseConditions))
+          .select({ id: apps.id, name: apps.name, slug: apps.slug })
+          .from(apps)
+          .where(and(inArray(apps.id, mcpAppIds), ...marketplaceBaseConditions))
         : Promise.resolve([]),
     ]);
     const tagsDisplay =
@@ -485,6 +487,10 @@ export const marketplaceDataAccess = {
         description: apps.description,
         descriptionZh: apps.descriptionZh,
         longDescription: apps.longDescription,
+        readme: apps.readme,
+        readmeZh: apps.readmeZh,
+        features: apps.features,
+        scenario: apps.scenario,
         version: apps.version,
         tools: apps.tools,
         verified: apps.verified,
@@ -501,10 +507,10 @@ export const marketplaceDataAccess = {
     const [tagRowsFallback, mcpLinks, personaLinks] = await Promise.all([
       app.tagsCache == null
         ? db
-            .select({ id: tags.id, name: tags.name })
-            .from(appTags)
-            .innerJoin(tags, eq(appTags.tagId, tags.id))
-            .where(eq(appTags.appId, id))
+          .select({ id: tags.id, name: tags.name })
+          .from(appTags)
+          .innerJoin(tags, eq(appTags.tagId, tags.id))
+          .where(eq(appTags.appId, id))
         : Promise.resolve([]),
       db.select({ mcpAppId: skillMcpTools.mcpAppId }).from(skillMcpTools).where(eq(skillMcpTools.skillId, id)),
       db.select({ personaId: personaSkills.personaId }).from(personaSkills).where(eq(personaSkills.skillId, id)),
@@ -514,15 +520,15 @@ export const marketplaceDataAccess = {
     const [personasMinimal, mcpAppsMinimal] = await Promise.all([
       personaIds.length > 0
         ? db
-            .select({ id: apps.id, name: apps.name, slug: apps.slug })
-            .from(apps)
-            .where(and(inArray(apps.id, personaIds), ...marketplaceBaseConditions))
+          .select({ id: apps.id, name: apps.name, slug: apps.slug })
+          .from(apps)
+          .where(and(inArray(apps.id, personaIds), ...marketplaceBaseConditions))
         : Promise.resolve([]),
       mcpAppIds.length > 0
         ? db
-            .select({ id: apps.id, name: apps.name, slug: apps.slug })
-            .from(apps)
-            .where(and(inArray(apps.id, mcpAppIds), ...marketplaceBaseConditions))
+          .select({ id: apps.id, name: apps.name, slug: apps.slug })
+          .from(apps)
+          .where(and(inArray(apps.id, mcpAppIds), ...marketplaceBaseConditions))
         : Promise.resolve([]),
     ]);
     const tagsDisplay =
@@ -549,6 +555,10 @@ export const marketplaceDataAccess = {
         description: apps.description,
         descriptionZh: apps.descriptionZh,
         longDescription: apps.longDescription,
+        readme: apps.readme,
+        readmeZh: apps.readmeZh,
+        features: apps.features,
+        scenario: apps.scenario,
         version: apps.version,
         tools: apps.tools,
         verified: apps.verified,
@@ -566,10 +576,10 @@ export const marketplaceDataAccess = {
     const [tagRowsFallback, mcpLinks, personaLinks] = await Promise.all([
       app.tagsCache == null
         ? db
-            .select({ id: tags.id, name: tags.name })
-            .from(appTags)
-            .innerJoin(tags, eq(appTags.tagId, tags.id))
-            .where(eq(appTags.appId, id))
+          .select({ id: tags.id, name: tags.name })
+          .from(appTags)
+          .innerJoin(tags, eq(appTags.tagId, tags.id))
+          .where(eq(appTags.appId, id))
         : Promise.resolve([]),
       db.select({ mcpAppId: skillMcpTools.mcpAppId }).from(skillMcpTools).where(eq(skillMcpTools.skillId, id)),
       db.select({ personaId: personaSkills.personaId }).from(personaSkills).where(eq(personaSkills.skillId, id)),
@@ -579,15 +589,15 @@ export const marketplaceDataAccess = {
     const [personasMinimal, mcpAppsMinimal] = await Promise.all([
       personaIds.length > 0
         ? db
-            .select({ id: apps.id, name: apps.name, slug: apps.slug })
-            .from(apps)
-            .where(and(inArray(apps.id, personaIds), ...marketplaceBaseConditions))
+          .select({ id: apps.id, name: apps.name, slug: apps.slug })
+          .from(apps)
+          .where(and(inArray(apps.id, personaIds), ...marketplaceBaseConditions))
         : Promise.resolve([]),
       mcpAppIds.length > 0
         ? db
-            .select({ id: apps.id, name: apps.name, slug: apps.slug })
-            .from(apps)
-            .where(and(inArray(apps.id, mcpAppIds), ...marketplaceBaseConditions))
+          .select({ id: apps.id, name: apps.name, slug: apps.slug })
+          .from(apps)
+          .where(and(inArray(apps.id, mcpAppIds), ...marketplaceBaseConditions))
         : Promise.resolve([]),
     ]);
     const tagsDisplaySlug =
